@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SpellTimerDataSet" targetNamespace="http://tempuri.org/SpellTimerDataSet.xsd" xmlns:mstns="http://tempuri.org/SpellTimerDataSet.xsd" xmlns="http://tempuri.org/SpellTimerDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SpellTimerDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="SpellTimerDataSet" msprop:Generator_UserDSName="SpellTimerDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SpellTimer" msprop:Generator_TableClassName="SpellTimerDataTable" msprop:Generator_TableVarName="tableSpellTimer" msprop:Generator_TablePropName="SpellTimer" msprop:Generator_RowDeletingName="SpellTimerRowDeleting" msprop:Generator_RowChangingName="SpellTimerRowChanging" msprop:Generator_RowEvHandlerName="SpellTimerRowChangeEventHandler" msprop:Generator_RowDeletedName="SpellTimerRowDeleted" msprop:Generator_UserTableName="SpellTimer" msprop:Generator_RowChangedName="SpellTimerRowChanged" msprop:Generator_RowEvArgName="SpellTimerRowChangeEvent" msprop:Generator_RowClassName="SpellTimerRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Panel" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="Panel" msprop:Generator_ColumnVarNameInTable="columnPanel" msprop:Generator_ColumnPropNameInTable="PanelColumn" msprop:Generator_UserColumnName="Panel" type="xs:string" default="" />
+              <xs:element name="SpellTitle" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="SpellTitle" msprop:Generator_ColumnVarNameInTable="columnSpellTitle" msprop:Generator_ColumnPropNameInTable="SpellTitleColumn" msprop:Generator_UserColumnName="SpellTitle" type="xs:string" default="" />
+              <xs:element name="Keyword" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="Keyword" msprop:Generator_ColumnVarNameInTable="columnKeyword" msprop:Generator_ColumnPropNameInTable="KeywordColumn" msprop:Generator_UserColumnName="Keyword" type="xs:string" default="" />
+              <xs:element name="RecastTime" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="RecastTime" msprop:Generator_ColumnVarNameInTable="columnRecastTime" msprop:Generator_ColumnPropNameInTable="RecastTimeColumn" msprop:Generator_UserColumnName="RecastTime" type="xs:int" default="0" />
+              <xs:element name="RepeatEnabled" msprop:nullValue="false" msprop:Generator_ColumnPropNameInRow="RepeatEnabled" msprop:Generator_ColumnVarNameInTable="columnRepeatEnabled" msprop:Generator_ColumnPropNameInTable="RepeatEnabledColumn" msprop:Generator_UserColumnName="RepeatEnabled" type="xs:boolean" default="false" />
+              <xs:element name="ProgressBarVisible" msprop:nullValue="false" msprop:Generator_ColumnPropNameInRow="ProgressBarVisible" msprop:Generator_ColumnVarNameInTable="columnProgressBarVisible" msprop:Generator_ColumnPropNameInTable="ProgressBarVisibleColumn" msprop:Generator_UserColumnName="ProgressBarVisible" type="xs:boolean" default="false" />
+              <xs:element name="MatchSound" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="MatchSound" msprop:Generator_ColumnVarNameInTable="columnMatchSound" msprop:Generator_ColumnPropNameInTable="MatchSoundColumn" msprop:Generator_UserColumnName="MatchSound" type="xs:string" default="" />
+              <xs:element name="MatchTextToSpeak" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="MatchTextToSpeak" msprop:Generator_ColumnVarNameInTable="columnMatchTextToSpeak" msprop:Generator_ColumnPropNameInTable="MatchTextToSpeakColumn" msprop:Generator_UserColumnName="MatchTextToSpeak" type="xs:string" default="" />
+              <xs:element name="OverSound" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="OverSound" msprop:Generator_ColumnVarNameInTable="columnOverSound" msprop:Generator_ColumnPropNameInTable="OverSoundColumn" msprop:Generator_UserColumnName="OverSound" type="xs:string" default="" />
+              <xs:element name="OverTextToSpeak" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="OverTextToSpeak" msprop:Generator_ColumnVarNameInTable="columnOverTextToSpeak" msprop:Generator_ColumnPropNameInTable="OverTextToSpeakColumn" msprop:Generator_UserColumnName="OverTextToSpeak" type="xs:string" default="" />
+              <xs:element name="OverTime" msprop:nullValue="0" msprop:Generator_ColumnPropNameInRow="OverTime" msprop:Generator_ColumnVarNameInTable="columnOverTime" msprop:Generator_ColumnPropNameInTable="OverTimeColumn" msprop:Generator_UserColumnName="OverTime" type="xs:int" default="0" />
+              <xs:element name="TimeupSound" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="TimeupSound" msprop:Generator_ColumnVarNameInTable="columnTimeupSound" msprop:Generator_ColumnPropNameInTable="TimeupSoundColumn" msprop:Generator_UserColumnName="TimeupSound" type="xs:string" default="" />
+              <xs:element name="TimeupTextToSpeak" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="TimeupTextToSpeak" msprop:Generator_ColumnVarNameInTable="columnTimeupTextToSpeak" msprop:Generator_ColumnPropNameInTable="TimeupTextToSpeakColumn" msprop:Generator_UserColumnName="TimeupTextToSpeak" type="xs:string" default="" />
+              <xs:element name="MatchDateTime" msprop:Generator_ColumnVarNameInTable="columnMatchDateTime" msprop:Generator_ColumnPropNameInRow="MatchDateTime" msprop:Generator_ColumnPropNameInTable="MatchDateTimeColumn" msprop:Generator_UserColumnName="MatchDateTime" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

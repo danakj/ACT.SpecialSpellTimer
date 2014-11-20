@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ACT.SpecialSpellTimer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LastUpdateDateTime" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2000-01-01</Value>
+    </Setting>
+    <Setting Name="ProgressBarSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">150, 10</Value>
+    </Setting>
+    <Setting Name="ProgressBarColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">DodgerBlue</Value>
+    </Setting>
+    <Setting Name="Font" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">メイリオ, 9.75pt</Value>
+    </Setting>
+    <Setting Name="FontColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">MediumBlue</Value>
+    </Setting>
+    <Setting Name="Opacity" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
+    <Setting Name="Panels" Type="ACT.SpecialSpellTimer.Types.PanelLocations" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RefreshInterval" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">40</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
