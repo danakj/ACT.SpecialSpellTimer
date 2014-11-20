@@ -34,6 +34,10 @@
                 pluginScreenSpace.Text = "SpecialSpellTimer";
                 this.PluginStatusLabel = pluginStatusText;
 
+                // アップデートを確認する
+                this.Update();
+
+                // 本体を開始する
                 SpellTimerCore.Default.Begin();
 
                 this.PluginStatusLabel.Text = "Plugin Started";
@@ -55,6 +59,26 @@
         {
             SpellTimerCore.Default.End();
             this.PluginStatusLabel.Text = "Plugin Exited";
+        }
+
+        /// <summary>
+        /// アップデートを行う
+        /// </summary>
+        private void Update()
+        {
+            if ((DateTime.Now - Settings.Default.LastUpdateDateTime).TotalHours >= 6d)
+            {
+                var message = UpdateChecker.Update();
+                if (!string.IsNullOrWhiteSpace(message))
+                {
+                    ActGlobals.oFormActMain.WriteExceptionLog(
+                        new Exception(),
+                        message);
+                }
+
+                Settings.Default.LastUpdateDateTime = DateTime.Now;
+                Settings.Default.Save();
+            }
         }
     }
 }

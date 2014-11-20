@@ -4,8 +4,66 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="40" d:DesignWidth="300">
     <Grid>
-            
+        <TextBlock
+            Name="SpellTitleBlurTextBlock"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="0,0,0,0"
+            Padding="1"
+            TextWrapping="NoWrap"
+            Text="SpellTitle"
+            >
+            <TextBlock.Effect>
+                <BlurEffect 
+                    Radius="6" 
+                    RenderingBias="Quality" />
+            </TextBlock.Effect>
+        </TextBlock>
+        
+        <TextBlock 
+            Name="SpellTitleTextBlock" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Margin="0,0,0,0" 
+            Padding="1"
+            TextWrapping="NoWrap"
+            Text="SpellTitle" 
+            />
+        
+        <TextBlock 
+            Name="RecastTimeBlurTextBlock" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top"
+            Margin="0,0,0,0" 
+            Padding="1"
+            TextWrapping="NoWrap"
+            Text="RecastTime" 
+            >
+            <TextBlock.Effect>
+                <BlurEffect 
+                    Radius="6" 
+                    RenderingBias="Quality" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <TextBlock 
+            Name="RecastTimeTextBlock" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top"
+            Margin="0,0,0,0" 
+            Padding="1"
+            TextWrapping="NoWrap"
+            Text="RecastTime" 
+            />
+        
+        <Canvas 
+            Name="ProgressBarCanvas"
+            Width="300"
+            Height="10" 
+            Margin="0,19,0,0" 
+            VerticalAlignment="Top" 
+            />
     </Grid>
 </UserControl>
