@@ -37,7 +37,7 @@ namespace ACT.SpecialSpellTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("180, 6")]
+        [global::System.Configuration.DefaultSettingValueAttribute("180, 8")]
         public global::System.Drawing.Size ProgressBarSize {
             get {
                 return ((global::System.Drawing.Size)(this["ProgressBarSize"]));
