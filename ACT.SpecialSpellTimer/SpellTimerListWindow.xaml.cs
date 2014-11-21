@@ -91,7 +91,7 @@
             if (Settings.Default.TimeOfHideSpell > 0.0d)
             {
                 spells =
-                    from x in this.SpellTimers
+                    from x in spells
                     where
                     (DateTime.Now - x.MatchDateTime.AddSeconds(x.RecastTime)).TotalSeconds <= Settings.Default.TimeOfHideSpell
                     select
