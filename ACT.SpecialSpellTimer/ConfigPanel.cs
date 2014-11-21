@@ -3,10 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics;
     using System.Linq;
     using System.Windows.Forms;
 
     using ACT.SpecialSpellTimer.Properties;
+    using ACT.SpecialSpellTimer.Sound;
 
     /// <summary>
     /// 設定Panel
@@ -21,6 +23,11 @@
             this.InitializeComponent();
 
             this.Load += this.ConfigPanel_Load;
+
+            this.SoundGuidanceLinkLabel.LinkClicked += (s1, e1) =>
+            {
+                Process.Start(@"https://github.com/anoyetta/ACT.TTSYukkuri/releases/latest");
+            };
         }
 
         /// <summary>
@@ -32,10 +39,54 @@
         {
             this.LoadSpellTimerTable();
 
+            // コンボボックスにアイテムを装填する
+            this.MatchSoundComboBox.DataSource = SoundController.Default.EnumlateWave();
+            this.MatchSoundComboBox.ValueMember = "FullPath";
+            this.MatchSoundComboBox.DisplayMember = "Name";
+
+            this.OverSoundComboBox.DataSource = SoundController.Default.EnumlateWave();
+            this.OverSoundComboBox.ValueMember = "FullPath";
+            this.OverSoundComboBox.DisplayMember = "Name";
+
+            this.TimeupSoundComboBox.DataSource = SoundController.Default.EnumlateWave();
+            this.TimeupSoundComboBox.ValueMember = "FullPath";
+            this.TimeupSoundComboBox.DisplayMember = "Name";
+
+            // イベントを設定する
             this.SpellTimerTreeView.AfterSelect += this.SpellTimerTreeView_AfterSelect;
             this.AddButton.Click += this.AddButton_Click;
             this.UpdateButton.Click += this.UpdateButton_Click;
             this.DeleteButton.Click += this.DeleteButton_Click;
+
+            this.Play1Button.Click += (s1, e1) =>
+            {
+                SoundController.Default.Play((string)this.MatchSoundComboBox.SelectedValue ?? string.Empty);
+            };
+
+            this.Play2Button.Click += (s1, e1) =>
+            {
+                SoundController.Default.Play((string)this.OverSoundComboBox.SelectedValue ?? string.Empty);
+            };
+
+            this.Play3Button.Click += (s1, e1) =>
+            {
+                SoundController.Default.Play((string)this.TimeupSoundComboBox.SelectedValue ?? string.Empty);
+            };
+
+            this.Speak1Button.Click += (s1, e1) =>
+            {
+                SoundController.Default.Play(this.MatchTextToSpeakTextBox.Text);
+            };
+
+            this.Speak2Button.Click += (s1, e1) =>
+            {
+                SoundController.Default.Play(this.OverTextToSpeakTextBox.Text);
+            };
+
+            this.Speak3Button.Click += (s1, e1) =>
+            {
+                SoundController.Default.Play(this.TimeupTextToSpeakTextBox.Text);
+            };
         }
 
         /// <summary>
@@ -66,6 +117,7 @@
                 var nr = SpellTimerTable.Table.NewSpellTimerRow();
                 nr.Panel = "General";
                 nr.SpellTitle = "New Spell";
+                nr.ProgressBarVisible = true;
                 nr.MatchDateTime = DateTime.MinValue;
                 SpellTimerTable.Table.AddSpellTimerRow(nr);
 

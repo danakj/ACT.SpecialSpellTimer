@@ -67,6 +67,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Sound\SoundController.cs" />
     <Compile Include="SpecialSpellTimerPlugin.cs" />
     <Compile Include="SpellTimerControl.xaml.cs">
       <DependentUpon>SpellTimerControl.xaml</DependentUpon>
@@ -87,40 +88,39 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="resources\icon\" />
-    <Folder Include="Sound\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resources\wave\alarm.wav">
+    <Content Include="resources\wav\alarm.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\wave\chime13.wav">
+    <Content Include="resources\wav\chime13.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\wave\onepoint14.wav">
+    <Content Include="resources\wav\onepoint14.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\wave\onepoint23.wav">
+    <Content Include="resources\wav\onepoint23.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\wave\onepoint24.wav">
+    <Content Include="resources\wav\onepoint24.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\wave\onepoint26.wav">
+    <Content Include="resources\wav\onepoint26.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\wave\onepoint30.wav">
+    <Content Include="resources\wav\onepoint30.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\wave\onepoint32.wav">
+    <Content Include="resources\wav\onepoint32.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\wave\onepoint33.wav">
+    <Content Include="resources\wav\onepoint33.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\wave\system46.wav">
+    <Content Include="resources\wav\system46.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\wave\system47.wav">
+    <Content Include="resources\wav\system47.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -21,7 +21,7 @@
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="RefreshInterval" Type="System.Int64" Scope="User">
-      <Value Profile="(Default)">40</Value>
+      <Value Profile="(Default)">200</Value>
     </Setting>
   </Settings>
 </SettingsFile>

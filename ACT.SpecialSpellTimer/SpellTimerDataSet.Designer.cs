@@ -342,6 +342,10 @@ namespace ACT.SpecialSpellTimer {
             
             private global::System.Data.DataColumn columnMatchDateTime;
             
+            private global::System.Data.DataColumn columnOverDone;
+            
+            private global::System.Data.DataColumn columnTimeupDone;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SpellTimerDataTable() {
@@ -489,6 +493,22 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OverDoneColumn {
+                get {
+                    return this.columnOverDone;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TimeupDoneColumn {
+                get {
+                    return this.columnTimeupDone;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -524,7 +544,23 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SpellTimerRow AddSpellTimerRow(string Panel, string SpellTitle, string Keyword, int RecastTime, bool RepeatEnabled, bool ProgressBarVisible, string MatchSound, string MatchTextToSpeak, string OverSound, string OverTextToSpeak, int OverTime, string TimeupSound, string TimeupTextToSpeak, System.DateTime MatchDateTime) {
+            public SpellTimerRow AddSpellTimerRow(
+                        string Panel, 
+                        string SpellTitle, 
+                        string Keyword, 
+                        int RecastTime, 
+                        bool RepeatEnabled, 
+                        bool ProgressBarVisible, 
+                        string MatchSound, 
+                        string MatchTextToSpeak, 
+                        string OverSound, 
+                        string OverTextToSpeak, 
+                        int OverTime, 
+                        string TimeupSound, 
+                        string TimeupTextToSpeak, 
+                        System.DateTime MatchDateTime, 
+                        bool OverDone, 
+                        bool TimeupDone) {
                 SpellTimerRow rowSpellTimerRow = ((SpellTimerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Panel,
@@ -540,7 +576,9 @@ namespace ACT.SpecialSpellTimer {
                         OverTime,
                         TimeupSound,
                         TimeupTextToSpeak,
-                        MatchDateTime};
+                        MatchDateTime,
+                        OverDone,
+                        TimeupDone};
                 rowSpellTimerRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSpellTimerRow);
                 return rowSpellTimerRow;
@@ -577,6 +615,8 @@ namespace ACT.SpecialSpellTimer {
                 this.columnTimeupSound = base.Columns["TimeupSound"];
                 this.columnTimeupTextToSpeak = base.Columns["TimeupTextToSpeak"];
                 this.columnMatchDateTime = base.Columns["MatchDateTime"];
+                this.columnOverDone = base.Columns["OverDone"];
+                this.columnTimeupDone = base.Columns["TimeupDone"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -610,6 +650,10 @@ namespace ACT.SpecialSpellTimer {
                 base.Columns.Add(this.columnTimeupTextToSpeak);
                 this.columnMatchDateTime = new global::System.Data.DataColumn("MatchDateTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMatchDateTime);
+                this.columnOverDone = new global::System.Data.DataColumn("OverDone", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOverDone);
+                this.columnTimeupDone = new global::System.Data.DataColumn("TimeupDone", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTimeupDone);
                 this.columnPanel.AllowDBNull = false;
                 this.columnPanel.DefaultValue = ((string)(""));
                 this.columnSpellTitle.AllowDBNull = false;
@@ -636,6 +680,10 @@ namespace ACT.SpecialSpellTimer {
                 this.columnTimeupSound.DefaultValue = ((string)(""));
                 this.columnTimeupTextToSpeak.AllowDBNull = false;
                 this.columnTimeupTextToSpeak.DefaultValue = ((string)(""));
+                this.columnOverDone.AllowDBNull = false;
+                this.columnOverDone.DefaultValue = ((bool)(false));
+                this.columnTimeupDone.AllowDBNull = false;
+                this.columnTimeupDone.DefaultValue = ((bool)(false));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1213,6 +1261,28 @@ namespace ACT.SpecialSpellTimer {
                 }
                 set {
                     this[this.tableSpellTimer.MatchDateTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool OverDone {
+                get {
+                    return ((bool)(this[this.tableSpellTimer.OverDoneColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.OverDoneColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool TimeupDone {
+                get {
+                    return ((bool)(this[this.tableSpellTimer.TimeupDoneColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.TimeupDoneColumn] = value;
                 }
             }
             

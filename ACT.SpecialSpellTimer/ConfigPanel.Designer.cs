@@ -75,6 +75,7 @@
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ShokikaButton = new System.Windows.Forms.Button();
+            this.SoundGuidanceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.TabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -119,6 +120,7 @@
             this.DetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DetailGroupBox.Controls.Add(this.SoundGuidanceLinkLabel);
             this.DetailGroupBox.Controls.Add(this.DeleteButton);
             this.DetailGroupBox.Controls.Add(this.UpdateButton);
             this.DetailGroupBox.Controls.Add(this.groupBox3);
@@ -556,6 +558,7 @@
             // 
             this.SpellTimerTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.SpellTimerTreeView.HideSelection = false;
             this.SpellTimerTreeView.Location = new System.Drawing.Point(6, 6);
             this.SpellTimerTreeView.Name = "SpellTimerTreeView";
             this.SpellTimerTreeView.ShowNodeToolTips = true;
@@ -583,6 +586,16 @@
             this.ShokikaButton.Text = "初期化";
             this.ShokikaButton.UseVisualStyleBackColor = true;
             this.ShokikaButton.Click += new System.EventHandler(this.ShokikaButton_Click);
+            // 
+            // SoundGuidanceLinkLabel
+            // 
+            this.SoundGuidanceLinkLabel.AutoSize = true;
+            this.SoundGuidanceLinkLabel.Location = new System.Drawing.Point(5, 492);
+            this.SoundGuidanceLinkLabel.Name = "SoundGuidanceLinkLabel";
+            this.SoundGuidanceLinkLabel.Size = new System.Drawing.Size(297, 12);
+            this.SoundGuidanceLinkLabel.TabIndex = 21;
+            this.SoundGuidanceLinkLabel.TabStop = true;
+            this.SoundGuidanceLinkLabel.Text = "※サウンドの再生には ACT.TTSYukkuri プラグインが必要です";
             // 
             // ConfigPanel
             // 
@@ -657,5 +670,6 @@
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button UpdateButton;
         private System.Windows.Forms.Button ShokikaButton;
+        private System.Windows.Forms.LinkLabel SoundGuidanceLinkLabel;
     }
 }
