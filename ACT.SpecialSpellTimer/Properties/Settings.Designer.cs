@@ -49,7 +49,7 @@ namespace ACT.SpecialSpellTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("DodgerBlue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("OrangeRed")]
         public global::System.Drawing.Color ProgressBarColor {
             get {
                 return ((global::System.Drawing.Color)(this["ProgressBarColor"]));
@@ -73,7 +73,7 @@ namespace ACT.SpecialSpellTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MediumBlue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("AliceBlue")]
         public global::System.Drawing.Color FontColor {
             get {
                 return ((global::System.Drawing.Color)(this["FontColor"]));
@@ -85,24 +85,13 @@ namespace ACT.SpecialSpellTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("40")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int Opacity {
             get {
                 return ((int)(this["Opacity"]));
             }
             set {
                 this["Opacity"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::ACT.SpecialSpellTimer.Types.PanelLocations Panels {
-            get {
-                return ((global::ACT.SpecialSpellTimer.Types.PanelLocations)(this["Panels"]));
-            }
-            set {
-                this["Panels"] = value;
             }
         }
         

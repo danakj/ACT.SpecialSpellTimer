@@ -4,65 +4,86 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="40" d:DesignWidth="300">
+             d:DesignHeight="32" d:DesignWidth="300">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
         <TextBlock
-            Name="SpellTitleBlurTextBlock"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Margin="0,0,0,0"
-            Padding="1"
-            TextWrapping="NoWrap"
-            Text="SpellTitle"
+            Grid.Column="0" Grid.Row="0"
+            HorizontalAlignment="{Binding HorizontalAlignment, ElementName=SpellTitleTextBlock, Mode=OneWay}"
+            VerticalAlignment="{Binding VerticalAlignment, ElementName=SpellTitleTextBlock, Mode=OneWay}"
+            Margin="{Binding Margin, ElementName=SpellTitleTextBlock, Mode=OneWay}"
+            Padding="{Binding Padding, ElementName=SpellTitleTextBlock, Mode=OneWay}"
+            TextWrapping="{Binding TextWrapping, ElementName=SpellTitleTextBlock, Mode=OneWay}"
+            Text="{Binding Text, ElementName=SpellTitleTextBlock, Mode=OneWay}"
+            FontFamily="{Binding FontFamily, ElementName=SpellTitleTextBlock, Mode=OneWay}"
+            FontSize="{Binding FontSize, ElementName=SpellTitleTextBlock, Mode=OneWay}"
+            FontStyle="{Binding FontStyle, ElementName=SpellTitleTextBlock, Mode=OneWay}"
+            FontWeight="{Binding FontWeight, ElementName=SpellTitleTextBlock, Mode=OneWay}" 
+            Foreground="Navy"
             >
             <TextBlock.Effect>
                 <BlurEffect 
-                    Radius="6" 
-                    RenderingBias="Quality" />
-            </TextBlock.Effect>
-        </TextBlock>
-        
-        <TextBlock 
-            Name="SpellTitleTextBlock" 
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Top"
-            Margin="0,0,0,0" 
-            Padding="1"
-            TextWrapping="NoWrap"
-            Text="SpellTitle" 
-            />
-        
-        <TextBlock 
-            Name="RecastTimeBlurTextBlock" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Top"
-            Margin="0,0,0,0" 
-            Padding="1"
-            TextWrapping="NoWrap"
-            Text="RecastTime" 
-            >
-            <TextBlock.Effect>
-                <BlurEffect 
-                    Radius="6" 
+                    Radius="3" 
                     RenderingBias="Quality" />
             </TextBlock.Effect>
         </TextBlock>
 
         <TextBlock 
+            Grid.Column="0" Grid.Row="0"
+            Name="SpellTitleTextBlock" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"
+            Margin="0,0,0,0" 
+            Padding="0"
+            TextWrapping="NoWrap"
+            Text="SpellTitle" 
+            />
+
+        <TextBlock 
+            Grid.Column="1" Grid.Row="0"
+            HorizontalAlignment="{Binding HorizontalAlignment, ElementName=RecastTimeTextBlock, Mode=OneWay}"
+            VerticalAlignment="{Binding VerticalAlignment, ElementName=RecastTimeTextBlock, Mode=OneWay}"
+            Margin="{Binding Margin, ElementName=RecastTimeTextBlock, Mode=OneWay}"
+            Padding="{Binding Padding, ElementName=RecastTimeTextBlock, Mode=OneWay}"
+            TextWrapping="{Binding TextWrapping, ElementName=RecastTimeTextBlock, Mode=OneWay}"
+            Text="{Binding Text, ElementName=RecastTimeTextBlock, Mode=OneWay}"
+            FontFamily="{Binding FontFamily, ElementName=RecastTimeTextBlock, Mode=OneWay}"
+            FontSize="{Binding FontSize, ElementName=RecastTimeTextBlock, Mode=OneWay}"
+            FontStyle="{Binding FontStyle, ElementName=RecastTimeTextBlock, Mode=OneWay}"
+            FontWeight="{Binding FontWeight, ElementName=RecastTimeTextBlock, Mode=OneWay}"
+            Foreground="Navy"
+            >
+            <TextBlock.Effect>
+                <BlurEffect 
+                    Radius="3" 
+                    RenderingBias="Quality" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <TextBlock 
+            Grid.Column="1" Grid.Row="0"
             Name="RecastTimeTextBlock" 
             HorizontalAlignment="Right" 
             VerticalAlignment="Top"
             Margin="0,0,0,0" 
-            Padding="1"
+            Padding="0"
             TextWrapping="NoWrap"
-            Text="RecastTime" 
+            Text="RecastTime"
             />
-        
+
         <Canvas 
+            Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
             Name="ProgressBarCanvas"
-            Width="300"
-            Height="10" 
-            Margin="0,19,0,0" 
+            Margin="0,0,0,10"
             VerticalAlignment="Top" 
             />
     </Grid>

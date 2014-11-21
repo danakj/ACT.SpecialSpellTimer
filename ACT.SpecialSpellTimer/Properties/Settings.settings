@@ -9,19 +9,16 @@
       <Value Profile="(Default)">150, 10</Value>
     </Setting>
     <Setting Name="ProgressBarColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">DodgerBlue</Value>
+      <Value Profile="(Default)">OrangeRed</Value>
     </Setting>
     <Setting Name="Font" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">メイリオ, 9.75pt</Value>
     </Setting>
     <Setting Name="FontColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">MediumBlue</Value>
+      <Value Profile="(Default)">AliceBlue</Value>
     </Setting>
     <Setting Name="Opacity" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">40</Value>
-    </Setting>
-    <Setting Name="Panels" Type="ACT.SpecialSpellTimer.Types.PanelLocations" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="RefreshInterval" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">40</Value>

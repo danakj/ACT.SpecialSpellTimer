@@ -41,7 +41,7 @@
 
                 r = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                    @"anoyetta\ACT\ACT.SpecialSpellTimerTable.xml");
+                    @"anoyetta\ACT\ACT.SpecialSpellTimer.Spells.xml");
 
                 return r;
             }

@@ -1,6 +1,5 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
-    using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
     using System.Windows.Shapes;
@@ -46,28 +45,20 @@
         /// </summary>
         public void Refresh()
         {
+            this.Width = Settings.Default.ProgressBarSize.Width;
+
             var tb = default(TextBlock);
             var font = Settings.Default.Font;
             var fontBrush = new SolidColorBrush(Settings.Default.FontColor.ToWPF());
-            var blurBrush = new SolidColorBrush(Colors.WhiteSmoke);
 
             // Titleを描画する
             tb = this.SpellTitleTextBlock;
-            tb.Text = this.SpellTitle;
+            tb.Text = string.IsNullOrWhiteSpace(this.SpellTitle) ? "　" : this.SpellTitle;
             tb.FontFamily = font.ToFontFamilyWPF();
             tb.FontSize = font.ToFontSizeWPF();
             tb.FontStyle = font.ToFontStyleWPF();
             tb.FontWeight = font.ToFontWeightWPF();
             tb.Foreground = fontBrush;
-
-            // Titleのブラーを描画する
-            tb = this.SpellTitleBlurTextBlock;
-            tb.Text = this.SpellTitleTextBlock.Text;
-            tb.FontFamily = this.SpellTitleTextBlock.FontFamily;
-            tb.FontSize = this.SpellTitleTextBlock.FontSize;
-            tb.FontStyle = this.SpellTitleTextBlock.FontStyle;
-            tb.FontWeight = this.SpellTitleTextBlock.FontWeight;
-            tb.Foreground = blurBrush;
 
             // リキャスト時間を描画する
             tb = this.RecastTimeTextBlock;
@@ -78,15 +69,6 @@
             tb.FontWeight = font.ToFontWeightWPF();
             tb.Foreground = fontBrush;
 
-            // リキャストのブラーを描画する
-            tb = this.RecastTimeBlurTextBlock;
-            tb.Text = this.RecastTimeTextBlock.Text;
-            tb.FontFamily = this.RecastTimeTextBlock.FontFamily;
-            tb.FontSize = this.RecastTimeTextBlock.FontSize;
-            tb.FontStyle = this.RecastTimeTextBlock.FontStyle;
-            tb.FontWeight = this.RecastTimeTextBlock.FontWeight;
-            tb.Foreground = blurBrush;
-
             // ProgressBarを描画する
             var foreBrush = new SolidColorBrush(Settings.Default.ProgressBarColor.ToWPF());
             var backBrush = new SolidColorBrush(Settings.Default.ProgressBarColor.ToWPF().ChangeBrightness(0.4d));
@@ -96,8 +78,8 @@
             foreRect.Fill = foreBrush;
             foreRect.Width = (double)(Settings.Default.ProgressBarSize.Width * this.Progress);
             foreRect.Height = Settings.Default.ProgressBarSize.Height;
-            foreRect.RadiusX = 5.0d;
-            foreRect.RadiusY = 5.0d;
+            foreRect.RadiusX = 2.0d;
+            foreRect.RadiusY = 2.0d;
             Canvas.SetLeft(foreRect, 0);
             Canvas.SetTop(foreRect, 0);
 
@@ -106,22 +88,17 @@
             backRect.Fill = backBrush;
             backRect.Width = Settings.Default.ProgressBarSize.Width;
             backRect.Height = foreRect.Height;
-            backRect.RadiusX = 5.0d;
-            backRect.RadiusY = 5.0d;
+            backRect.RadiusX = 2.0d;
+            backRect.RadiusY = 2.0d;
             Canvas.SetLeft(backRect, 0);
             Canvas.SetTop(backRect, 0);
+
+            this.ProgressBarCanvas.Width = backRect.Width;
+            this.ProgressBarCanvas.Height = backRect.Height;
 
             this.ProgressBarCanvas.Children.Clear();
             this.ProgressBarCanvas.Children.Add(backRect);
             this.ProgressBarCanvas.Children.Add(foreRect);
-
-            this.ProgressBarCanvas.Width = backRect.Width;
-            this.ProgressBarCanvas.Height = backRect.Height;
-            this.ProgressBarCanvas.Margin = new Thickness(0, this.SpellTitleTextBlock.Height, 0, 0);
-
-            // Controlのサイズを調整する
-            this.Width = this.ProgressBarCanvas.Width;
-            this.Height = this.SpellTitleTextBlock.Height + this.ProgressBarCanvas.Height + ControlVerticalMargin;
         }
     }
 }

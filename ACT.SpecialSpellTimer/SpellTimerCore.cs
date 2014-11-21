@@ -57,26 +57,8 @@
         /// </summary>
         public void Begin()
         {
-            // SpellTimerPanelを生成する
+            // Panelリストを生成する
             this.SpellTimerPanels = new List<SpellTimerListWindow>();
-            var panelNames = SpellTimerTable.Table.Select(x => x.Panel.Trim()).Distinct();
-            foreach (var name in panelNames)
-            {
-                var w = new SpellTimerListWindow()
-                {
-                    PanelName = name,
-                    SpellTimers = (
-                        from x in SpellTimerTable.Table
-                        where
-                        x.Panel.Trim() == name
-                        select
-                        x).ToArray()
-                };
-
-                this.SpellTimerPanels.Add(w);
-
-                w.Show();
-            }
 
             // ACTのログ読取りにイベントを仕込む
             ActGlobals.oFormActMain.OnLogLineRead += this.oFormActMain_OnLogLineRead;
@@ -98,6 +80,9 @@
         /// </summary>
         public void End()
         {
+            // 全てのPanelを閉じる
+            this.ClosePanels();
+
             // ACTからイベントを外す
             ActGlobals.oFormActMain.OnLogLineRead -= this.oFormActMain_OnLogLineRead;
 
@@ -112,12 +97,6 @@
             Settings.Default.Save();
             SpellTimerTable.Save();
 
-            // 全てのPanelを閉じる
-            foreach (var panel in this.SpellTimerPanels)
-            {
-                panel.Close();
-            }
-
             // instanceを消去する
             instance = null;
         }
@@ -131,62 +110,63 @@
             bool isImport,
             LogLineEventArgs logInfo)
         {
-            lock (SpellTimerTable.Table)
+            try
             {
-                try
+                // インポートならば何もしない
+                if (isImport)
                 {
-                    // インポートならば何もしない
-                    if (isImport)
+                    return;
+                }
+
+                Debug.WriteLine(
+                    logInfo.detectedTime.ToString("yyyy-MM-dd HH:mm:ss.fff") + " " +
+                    logInfo.logLine);
+
+                // プレイヤ情報を取得する
+                var player = this.GetPlayer();
+
+#if !DEBUG
+                // プレイヤ情報が取得できなければ全てのWindowを隠す
+                if (player == null)
+                {
+                    this.HidePanels();
+                    this.RefreshTimer.Interval = 1000;
+                    return;
+                }
+#endif
+
+                // タイマの間隔を標準に戻す
+                this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
+
+                // Spellリストとマッチングする
+                Parallel.ForEach(SpellTimerTable.Table, (spell) =>
+                {
+                    var keyword = spell.Keyword.Trim();
+
+                    if (!string.IsNullOrWhiteSpace(keyword))
                     {
-                        return;
-                    }
-
-                    Debug.WriteLine(
-                        logInfo.detectedTime.ToString("yyyy-MM-dd HH:mm:ss.fff") + " " +
-                        logInfo.logLine);
-
-                    // プレイヤ情報を取得する
-                    var player = this.GetPlayer();
-
-                    // プレイヤ情報が取得できなければ全てのWindowを隠す
-                    if (player == null)
-                    {
-                        foreach (var panel in this.SpellTimerPanels)
+                        // <me>代名詞を置き換える
+                        if (player != null)
                         {
-                            panel.Visibility = Visibility.Hidden;
-                        }
-
-                        this.RefreshTimer.Interval = 5000;
-                        return;
-                    }
-
-                    // Spellリストとマッチングする
-                    Parallel.ForEach(SpellTimerTable.Table, (spell) =>
-                    {
-                        var keyword = spell.Keyword.Trim();
-
-                        if (!string.IsNullOrWhiteSpace(keyword))
-                        {
-                            // <me>代名詞を置き換える
                             keyword = keyword.Replace("<me>", player.Name.Trim());
-
-                            var regex = new Regex(
-                                ".*" + keyword + ".*",
-                                RegexOptions.IgnoreCase | RegexOptions.Singleline);
-
-                            if (regex.IsMatch(logInfo.logLine.Trim()))
-                            {
-                                spell.MatchDateTime = DateTime.Now;
-                            }
                         }
-                    });
-                }
-                catch (Exception ex)
-                {
-                    ActGlobals.oFormActMain.WriteExceptionLog(
-                        ex,
-                        "ACT.SpecialSpellTimer ログの解析で例外が発生しました。");
-                }
+
+                        var regex = new Regex(
+                            ".*" + keyword + ".*",
+                            RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+                        if (regex.IsMatch(logInfo.logLine.Trim()))
+                        {
+                            spell.MatchDateTime = DateTime.Now;
+                        }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                ActGlobals.oFormActMain.WriteExceptionLog(
+                    ex,
+                    "ACT.SpecialSpellTimer ログの解析で例外が発生しました。");
             }
         }
 
@@ -197,75 +177,188 @@
         /// <param name="e">イベント引数</param>
         private void RefreshTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            lock (SpellTimerTable.Table)
+            try
             {
-                try
+                this.RefreshTimer.Stop();
+
+                // ACTが起動していない？
+                if (ActGlobals.oFormActMain == null ||
+                    !ActGlobals.oFormActMain.Visible)
                 {
-                    this.RefreshTimer.Stop();
+                    this.HidePanels();
+                    this.RefreshTimer.Interval = 1000;
+                    return;
+                }
 
-                    // ACTが起動していない？
-                    if (!ActGlobals.oFormActMain.Visible)
+#if !DEBUG
+                // FF14が起動していない？
+                if (FF14PluginHelper.GetFFXIVProcess == null)
+                {
+                    this.HidePanels();
+                    this.RefreshTimer.Interval = 1000;
+                    return;
+                }
+#endif
+
+                // タイマの間隔を標準に戻す
+                this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
+
+                // Repeat指定のSpellを更新する
+                Parallel.ForEach(SpellTimerTable.Table, (spell) =>
+                {
+                    if (spell.RepeatEnabled &&
+                        spell.MatchDateTime > DateTime.MinValue)
                     {
-                        foreach (var panel in this.SpellTimerPanels)
+                        if (DateTime.Now >= spell.MatchDateTime.AddSeconds(spell.RecastTime))
                         {
-                            panel.Visibility = Visibility.Hidden;
+                            spell.MatchDateTime = DateTime.Now;
                         }
-
-                        this.RefreshTimer.Interval = 5000;
-                        return;
                     }
+                });
 
-                    // FF14が起動していない？
-                    if (FF14PluginHelper.GetFFXIVProcess == null)
+                // Windowを表示する
+                var panelNames = SpellTimerTable.Table.Select(x => x.Panel.Trim()).Distinct();
+                foreach (var name in panelNames)
+                {
+                    ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
                     {
-                        foreach (var panel in this.SpellTimerPanels)
+                        var w = this.SpellTimerPanels.Where(x => x.PanelName == name).FirstOrDefault();
+                        if (w == null)
                         {
-                            panel.Visibility = Visibility.Hidden;
-                        }
-
-                        this.RefreshTimer.Interval = 5000;
-                        return;
-                    }
-
-                    // Repeat指定のSpellを更新する
-                    Parallel.ForEach(SpellTimerTable.Table, (spell) =>
-                    {
-                        if (spell.RepeatEnabled &&
-                            spell.MatchDateTime > DateTime.MinValue)
-                        {
-                            if (DateTime.Now >= spell.MatchDateTime.AddSeconds(spell.RecastTime))
+                            w = new SpellTimerListWindow()
                             {
-                                spell.MatchDateTime = DateTime.Now;
-                            }
-                        }
-                    });
+                                PanelName = name,
+                            };
 
-                    // Windowを表示する
-                    foreach (var panel in this.SpellTimerPanels)
-                    {
-                        panel.SpellTimers = (
+                            this.SpellTimerPanels.Add(w);
+                            w.Show();
+                        }
+
+                        w.SpellTimers = (
                             from x in SpellTimerTable.Table
                             where
-                            x.Panel == panel.Name
+                            x.Panel.Trim() == name
                             select
                             x).ToArray();
 
-                        panel.RefreshSpellTimer();
+                        w.RefreshSpellTimer();
+                    });
+                }
+
+                // タイマの間隔を初期化する
+                this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
+            }
+            catch (Exception ex)
+            {
+                ActGlobals.oFormActMain.WriteExceptionLog(
+                    ex,
+                    "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
+            }
+            finally
+            {
+                this.RefreshTimer.Start();
+            }
+        }
+
+        /// <summary>
+        /// Panelを表示する
+        /// </summary>
+        public void VisiblePanels()
+        {
+            if (this.SpellTimerPanels != null)
+            {
+                ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+                {
+                    foreach (var panel in this.SpellTimerPanels)
+                    {
+                        panel.Visibility = Visibility.Visible;
+                    }
+                });
+            }
+        }
+
+        /// <summary>
+        /// Panelを隠す
+        /// </summary>
+        public void HidePanels()
+        {
+            if (this.SpellTimerPanels != null)
+            {
+                ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+                {
+                    foreach (var panel in this.SpellTimerPanels)
+                    {
+                        panel.Visibility = Visibility.Hidden;
+                    }
+                });
+            }
+        }
+
+        /// <summary>
+        /// Panelを閉じる
+        /// </summary>
+        public void ClosePanels()
+        {
+            if (this.SpellTimerPanels != null)
+            {
+                // Panelの位置を保存する
+                foreach (var panel in this.SpellTimerPanels)
+                {
+                    var setting = PanelSettings.Default.SettingsTable
+                        .Where(x => x.PanelName == panel.Name)
+                        .FirstOrDefault();
+
+                    if (setting == null)
+                    {
+                        setting = PanelSettings.Default.SettingsTable.NewPanelSettingsRow();
+                        PanelSettings.Default.SettingsTable.AddPanelSettingsRow(setting);
                     }
 
-                    // タイマの間隔を初期化する
-                    this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
+                    setting.PanelName = panel.PanelName;
+                    setting.Left = panel.Left;
+                    setting.Top = panel.Top;
                 }
-                catch (Exception ex)
+
+                PanelSettings.Default.Save();
+
+                // Panelを閉じる
+                ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
                 {
-                    ActGlobals.oFormActMain.WriteExceptionLog(
-                        ex,
-                        "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
-                }
-                finally
+                    foreach (var panel in this.SpellTimerPanels)
+                    {
+                        panel.Close();
+                    }
+                });
+            }
+        }
+
+        /// <summary>
+        /// Panelの位置を設定する
+        /// </summary>
+        public void LayoutPanels()
+        {
+            if (this.SpellTimerPanels != null)
+            {
+                ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
                 {
-                    this.RefreshTimer.Start();
-                }
+                    foreach (var panel in this.SpellTimerPanels)
+                    {
+                        var setting = PanelSettings.Default.SettingsTable
+                            .Where(x => x.PanelName == panel.PanelName)
+                            .FirstOrDefault();
+
+                        if (setting != null)
+                        {
+                            panel.Left = setting.Left;
+                            panel.Top = setting.Top;
+                        }
+                        else
+                        {
+                            panel.Left = 10.0d;
+                            panel.Top = 10.0d;
+                        }
+                    }
+                });
             }
         }
 

@@ -37,6 +37,11 @@
                 // アップデートを確認する
                 this.Update();
 
+                // 設定Panelを追加する
+                var panel = new ConfigPanel();
+                panel.Dock = DockStyle.Fill;
+                pluginScreenSpace.Controls.Add(panel);
+
                 // 本体を開始する
                 SpellTimerCore.Default.Begin();
 
