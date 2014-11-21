@@ -202,6 +202,8 @@
                 {
                     SpellTimerTable.Table.RemoveSpellTimerRow(src);
                     SpellTimerTable.Save();
+
+                    this.DetailGroupBox.Visible = false;
                 }
             }
 

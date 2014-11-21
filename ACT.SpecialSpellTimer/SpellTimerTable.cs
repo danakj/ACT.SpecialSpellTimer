@@ -56,6 +56,8 @@
             {
                 row.MatchDateTime = DateTime.MinValue;
             }
+
+            Table.AcceptChanges();
         }
 
         /// <summary>
@@ -97,6 +99,8 @@
         public static void Save(
             string file)
         {
+            Table.AcceptChanges();
+
             var dir = Path.GetDirectoryName(file);
             if (!Directory.Exists(dir))
             {
