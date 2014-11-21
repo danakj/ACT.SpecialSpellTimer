@@ -37,7 +37,7 @@ namespace ACT.SpecialSpellTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("150, 10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("180, 6")]
         public global::System.Drawing.Size ProgressBarSize {
             get {
                 return ((global::System.Drawing.Size)(this["ProgressBarSize"]));
@@ -104,6 +104,54 @@ namespace ACT.SpecialSpellTimer.Properties {
             }
             set {
                 this["RefreshInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool OverlayVisible {
+            get {
+                return ((bool)(this["OverlayVisible"]));
+            }
+            set {
+                this["OverlayVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AutoSortEnabled {
+            get {
+                return ((bool)(this["AutoSortEnabled"]));
+            }
+            set {
+                this["AutoSortEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ClickThroughEnabled {
+            get {
+                return ((bool)(this["ClickThroughEnabled"]));
+            }
+            set {
+                this["ClickThroughEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double TimeOfHideSpell {
+            get {
+                return ((double)(this["TimeOfHideSpell"]));
+            }
+            set {
+                this["TimeOfHideSpell"] = value;
             }
         }
     }

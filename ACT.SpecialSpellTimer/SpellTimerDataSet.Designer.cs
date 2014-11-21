@@ -346,6 +346,12 @@ namespace ACT.SpecialSpellTimer {
             
             private global::System.Data.DataColumn columnTimeupDone;
             
+            private global::System.Data.DataColumn columnTimeupHide;
+            
+            private global::System.Data.DataColumn columnTargetJobId;
+            
+            private global::System.Data.DataColumn columnEnabled;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SpellTimerDataTable() {
@@ -509,6 +515,30 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TimeupHideColumn {
+                get {
+                    return this.columnTimeupHide;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TargetJobIdColumn {
+                get {
+                    return this.columnTargetJobId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EnabledColumn {
+                get {
+                    return this.columnEnabled;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -560,7 +590,10 @@ namespace ACT.SpecialSpellTimer {
                         string TimeupTextToSpeak, 
                         System.DateTime MatchDateTime, 
                         bool OverDone, 
-                        bool TimeupDone) {
+                        bool TimeupDone, 
+                        bool TimeupHide, 
+                        int TargetJobId, 
+                        bool Enabled) {
                 SpellTimerRow rowSpellTimerRow = ((SpellTimerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Panel,
@@ -578,7 +611,10 @@ namespace ACT.SpecialSpellTimer {
                         TimeupTextToSpeak,
                         MatchDateTime,
                         OverDone,
-                        TimeupDone};
+                        TimeupDone,
+                        TimeupHide,
+                        TargetJobId,
+                        Enabled};
                 rowSpellTimerRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSpellTimerRow);
                 return rowSpellTimerRow;
@@ -617,6 +653,9 @@ namespace ACT.SpecialSpellTimer {
                 this.columnMatchDateTime = base.Columns["MatchDateTime"];
                 this.columnOverDone = base.Columns["OverDone"];
                 this.columnTimeupDone = base.Columns["TimeupDone"];
+                this.columnTimeupHide = base.Columns["TimeupHide"];
+                this.columnTargetJobId = base.Columns["TargetJobId"];
+                this.columnEnabled = base.Columns["Enabled"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -654,6 +693,12 @@ namespace ACT.SpecialSpellTimer {
                 base.Columns.Add(this.columnOverDone);
                 this.columnTimeupDone = new global::System.Data.DataColumn("TimeupDone", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTimeupDone);
+                this.columnTimeupHide = new global::System.Data.DataColumn("TimeupHide", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTimeupHide);
+                this.columnTargetJobId = new global::System.Data.DataColumn("TargetJobId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTargetJobId);
+                this.columnEnabled = new global::System.Data.DataColumn("Enabled", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEnabled);
                 this.columnPanel.AllowDBNull = false;
                 this.columnPanel.DefaultValue = ((string)(""));
                 this.columnSpellTitle.AllowDBNull = false;
@@ -684,6 +729,12 @@ namespace ACT.SpecialSpellTimer {
                 this.columnOverDone.DefaultValue = ((bool)(false));
                 this.columnTimeupDone.AllowDBNull = false;
                 this.columnTimeupDone.DefaultValue = ((bool)(false));
+                this.columnTimeupHide.AllowDBNull = false;
+                this.columnTimeupHide.DefaultValue = ((bool)(false));
+                this.columnTargetJobId.AllowDBNull = false;
+                this.columnTargetJobId.DefaultValue = ((int)(0));
+                this.columnEnabled.AllowDBNull = false;
+                this.columnEnabled.DefaultValue = ((bool)(false));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1283,6 +1334,39 @@ namespace ACT.SpecialSpellTimer {
                 }
                 set {
                     this[this.tableSpellTimer.TimeupDoneColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool TimeupHide {
+                get {
+                    return ((bool)(this[this.tableSpellTimer.TimeupHideColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.TimeupHideColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int TargetJobId {
+                get {
+                    return ((int)(this[this.tableSpellTimer.TargetJobIdColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.TargetJobIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Enabled {
+                get {
+                    return ((bool)(this[this.tableSpellTimer.EnabledColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.EnabledColumn] = value;
                 }
             }
             

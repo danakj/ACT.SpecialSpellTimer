@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Linq;
 
     /// <summary>
     /// SpellTimerテーブル
@@ -27,6 +28,22 @@
                 }
 
                 return table;
+            }
+        }
+
+        /// <summary>
+        /// 有効なSpellTimerデータテーブル
+        /// </summary>
+        public static SpellTimerDataSet.SpellTimerRow[] EnabledTable
+        {
+            get
+            {
+                return (
+                    from x in Table
+                    where
+                    x.Enabled
+                    select
+                    x).ToArray();
             }
         }
 

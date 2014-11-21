@@ -31,6 +31,7 @@
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.SoundGuidanceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.UpdateButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -75,7 +76,11 @@
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ShokikaButton = new System.Windows.Forms.Button();
-            this.SoundGuidanceLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.SwitchOverlayButton = new System.Windows.Forms.Button();
+            this.FontDialog = new System.Windows.Forms.FontDialog();
+            this.ColorDialog = new System.Windows.Forms.ColorDialog();
+            this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.TabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -144,6 +149,16 @@
             this.DetailGroupBox.TabIndex = 1;
             this.DetailGroupBox.TabStop = false;
             // 
+            // SoundGuidanceLinkLabel
+            // 
+            this.SoundGuidanceLinkLabel.AutoSize = true;
+            this.SoundGuidanceLinkLabel.Location = new System.Drawing.Point(5, 492);
+            this.SoundGuidanceLinkLabel.Name = "SoundGuidanceLinkLabel";
+            this.SoundGuidanceLinkLabel.Size = new System.Drawing.Size(297, 12);
+            this.SoundGuidanceLinkLabel.TabIndex = 21;
+            this.SoundGuidanceLinkLabel.TabStop = true;
+            this.SoundGuidanceLinkLabel.Text = "※サウンドの再生には ACT.TTSYukkuri プラグインが必要です";
+            // 
             // DeleteButton
             // 
             this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -204,6 +219,7 @@
             // 
             // OverTimeNumericUpDown
             // 
+            this.OverTimeNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.OverTimeNumericUpDown.Location = new System.Drawing.Point(152, 80);
             this.OverTimeNumericUpDown.Maximum = new decimal(new int[] {
             65535,
@@ -463,6 +479,7 @@
             // 
             // RecastTimeNumericUpDown
             // 
+            this.RecastTimeNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.RecastTimeNumericUpDown.Location = new System.Drawing.Point(158, 93);
             this.RecastTimeNumericUpDown.Maximum = new decimal(new int[] {
             65535,
@@ -558,6 +575,7 @@
             // 
             this.SpellTimerTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.SpellTimerTreeView.CheckBoxes = true;
             this.SpellTimerTreeView.HideSelection = false;
             this.SpellTimerTreeView.Location = new System.Drawing.Point(6, 6);
             this.SpellTimerTreeView.Name = "SpellTimerTreeView";
@@ -567,6 +585,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.SwitchOverlayButton);
             this.tabPage2.Controls.Add(this.ShokikaButton);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -587,15 +606,37 @@
             this.ShokikaButton.UseVisualStyleBackColor = true;
             this.ShokikaButton.Click += new System.EventHandler(this.ShokikaButton_Click);
             // 
-            // SoundGuidanceLinkLabel
+            // SwitchOverlayButton
             // 
-            this.SoundGuidanceLinkLabel.AutoSize = true;
-            this.SoundGuidanceLinkLabel.Location = new System.Drawing.Point(5, 492);
-            this.SoundGuidanceLinkLabel.Name = "SoundGuidanceLinkLabel";
-            this.SoundGuidanceLinkLabel.Size = new System.Drawing.Size(297, 12);
-            this.SoundGuidanceLinkLabel.TabIndex = 21;
-            this.SoundGuidanceLinkLabel.TabStop = true;
-            this.SoundGuidanceLinkLabel.Text = "※サウンドの再生には ACT.TTSYukkuri プラグインが必要です";
+            this.SwitchOverlayButton.Location = new System.Drawing.Point(6, 6);
+            this.SwitchOverlayButton.Name = "SwitchOverlayButton";
+            this.SwitchOverlayButton.Size = new System.Drawing.Size(163, 25);
+            this.SwitchOverlayButton.TabIndex = 4;
+            this.SwitchOverlayButton.Text = "オーバーレイを表示する";
+            this.SwitchOverlayButton.UseVisualStyleBackColor = true;
+            // 
+            // FontDialog
+            // 
+            this.FontDialog.MaxSize = 20;
+            this.FontDialog.MinSize = 4;
+            this.FontDialog.ShowEffects = false;
+            // 
+            // ColorDialog
+            // 
+            this.ColorDialog.AnyColor = true;
+            this.ColorDialog.FullOpen = true;
+            // 
+            // OpenFileDialog
+            // 
+            this.OpenFileDialog.DefaultExt = "xml";
+            this.OpenFileDialog.RestoreDirectory = true;
+            this.OpenFileDialog.SupportMultiDottedExtensions = true;
+            // 
+            // SaveFileDialog
+            // 
+            this.SaveFileDialog.DefaultExt = "xml";
+            this.SaveFileDialog.RestoreDirectory = true;
+            this.SaveFileDialog.SupportMultiDottedExtensions = true;
             // 
             // ConfigPanel
             // 
@@ -671,5 +712,10 @@
         private System.Windows.Forms.Button UpdateButton;
         private System.Windows.Forms.Button ShokikaButton;
         private System.Windows.Forms.LinkLabel SoundGuidanceLinkLabel;
+        private System.Windows.Forms.Button SwitchOverlayButton;
+        private System.Windows.Forms.FontDialog FontDialog;
+        private System.Windows.Forms.ColorDialog ColorDialog;
+        private System.Windows.Forms.OpenFileDialog OpenFileDialog;
+        private System.Windows.Forms.SaveFileDialog SaveFileDialog;
     }
 }

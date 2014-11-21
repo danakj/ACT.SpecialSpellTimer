@@ -6,7 +6,7 @@
       <Value Profile="(Default)">2000-01-01</Value>
     </Setting>
     <Setting Name="ProgressBarSize" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">150, 10</Value>
+      <Value Profile="(Default)">180, 6</Value>
     </Setting>
     <Setting Name="ProgressBarColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">OrangeRed</Value>
@@ -22,6 +22,18 @@
     </Setting>
     <Setting Name="RefreshInterval" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="OverlayVisible" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AutoSortEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ClickThroughEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="TimeOfHideSpell" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

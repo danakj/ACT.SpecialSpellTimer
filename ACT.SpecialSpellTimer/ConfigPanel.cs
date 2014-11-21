@@ -89,6 +89,31 @@
             {
                 SoundController.Default.Play(this.TimeupTextToSpeakTextBox.Text);
             };
+
+            this.SpellTimerTreeView.AfterCheck += (s1, e1) =>
+            {
+                var source = e1.Node.Tag as SpellTimerDataSet.SpellTimerRow;
+                if (source != null)
+                {
+                    source.Enabled = e1.Node.Checked;
+                }
+                else
+                {
+                    foreach (TreeNode node in e1.Node.Nodes)
+                    {
+                        var sourceChild = node.Tag as SpellTimerDataSet.SpellTimerRow;
+                        if (sourceChild != null)
+                        {
+                            sourceChild.Enabled = e1.Node.Checked;
+                        }
+
+                        node.Checked = e1.Node.Checked;
+                    }
+                }
+            };
+
+            // オプションのロードメソッドを呼ぶ
+            this.LoadOption();
         }
 
         /// <summary>
@@ -121,6 +146,7 @@
                 nr.SpellTitle = "New Spell";
                 nr.ProgressBarVisible = true;
                 nr.MatchDateTime = DateTime.MinValue;
+                nr.Enabled = true;
                 SpellTimerTable.Table.AddSpellTimerRow(nr);
 
                 SpellTimerTable.Save();
@@ -280,7 +306,8 @@
                         {
                             Text = spell.SpellTitle,
                             ToolTipText = spell.Keyword,
-                            Tag = spell
+                            Checked = spell.Enabled,
+                            Tag = spell,
                         };
 
                         children.Add(nc);
@@ -289,6 +316,8 @@
                     var n = new TreeNode(
                         panelName,
                         children.ToArray());
+
+                    n.Checked = children.Any(x => x.Checked);
 
                     this.SpellTimerTreeView.Nodes.Add(n);
                 }

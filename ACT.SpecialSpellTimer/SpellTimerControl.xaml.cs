@@ -57,7 +57,9 @@
 
             // リキャスト時間を描画する
             tb = this.RecastTimeTextBlock;
-            tb.Text = this.RecastTime.ToString("N1");
+            tb.Text = this.RecastTime > 0 ?
+                this.RecastTime.ToString("N1") :
+                "Ready";
             tb.FontFamily = font.ToFontFamilyWPF();
             tb.FontSize = font.ToFontSizeWPF();
             tb.FontStyle = font.ToFontStyleWPF();

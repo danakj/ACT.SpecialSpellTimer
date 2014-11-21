@@ -79,16 +79,43 @@
             // 透明度を設定する
             this.Opacity = (100d - Settings.Default.Opacity) / 100d;
 
-            // スペルタイマコントロールのリストを生成する
-            foreach (var spell in this.SpellTimers)
-            {
-                if (!spell.ProgressBarVisible)
-                {
-                    continue;
-                }
+            // 表示対象だけに絞る
+            var spells = 
+                from x in this.SpellTimers 
+                where
+                x.ProgressBarVisible
+                select 
+                x;
 
+            // タイムアップしたものを除外する
+            if (Settings.Default.TimeOfHideSpell > 0.0d)
+            {
+                spells =
+                    from x in this.SpellTimers
+                    where
+                    (DateTime.Now - x.MatchDateTime.AddSeconds(x.RecastTime)).TotalSeconds <= Settings.Default.TimeOfHideSpell
+                    select
+                    x;
+            }
+
+            // リキャストの近いもの順でソートする
+            if (Settings.Default.AutoSortEnabled)
+            {
+                spells =
+                    from x in spells
+                    orderby
+                    x.MatchDateTime.AddSeconds(x.RecastTime)
+                    select
+                    x;
+            }
+
+            // スペルタイマコントロールのリストを生成する
+            foreach (var spell in spells)
+            {
                 var c = new SpellTimerControl();
                 c.SpellTitle = spell.SpellTitle;
+                c.RecastTime = 0;
+                c.Progress = 1.0d;
 
                 if (spell.MatchDateTime > DateTime.MinValue)
                 {

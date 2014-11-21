@@ -59,6 +59,9 @@
     <Compile Include="ConfigPanel.Designer.cs">
       <DependentUpon>ConfigPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConfigPanel.Option.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="FF14PluginHelper.cs" />
     <Compile Include="PanelSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +81,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpellTimerDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="WindowExtension.Transparent.cs" />
     <Compile Include="SpellTimerListWindow.xaml.cs">
       <DependentUpon>SpellTimerListWindow.xaml</DependentUpon>
     </Compile>
@@ -133,6 +137,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

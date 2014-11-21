@@ -139,7 +139,7 @@
                 this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
 
                 // Spellリストとマッチングする
-                foreach (var spell in SpellTimerTable.Table)
+                foreach (var spell in SpellTimerTable.EnabledTable)
                 {
                     var keyword = spell.Keyword.Trim();
 
@@ -193,7 +193,7 @@
                     var removeList = new List<SpellTimerListWindow>();
                     foreach (var panel in this.SpellTimerPanels)
                     {
-                        if (!SpellTimerTable.Table.Any(x => x.Panel == panel.PanelName))
+                        if (!SpellTimerTable.EnabledTable.Any(x => x.Panel == panel.PanelName))
                         {
                             ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
                             {
@@ -233,7 +233,7 @@
                 this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
 
                 // Spellを舐める
-                foreach (var spell in SpellTimerTable.Table)
+                foreach (var spell in SpellTimerTable.EnabledTable)
                 {
                     // Repeat対象のSpellを更新する
                     if (spell.RepeatEnabled &&
@@ -277,8 +277,15 @@
                     }
                 }
 
+                // オーバーレイが非表示？
+                if (!Settings.Default.OverlayVisible)
+                {
+                    this.HidePanels();
+                    return;
+                }
+
                 // Windowを表示する
-                var panelNames = SpellTimerTable.Table.Select(x => x.Panel.Trim()).Distinct();
+                var panelNames = SpellTimerTable.EnabledTable.Select(x => x.Panel.Trim()).Distinct();
                 foreach (var name in panelNames)
                 {
                     ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
@@ -292,11 +299,18 @@
                             };
 
                             this.SpellTimerPanels.Add(w);
+
+                            // クリックスルー？
+                            if (Settings.Default.ClickThroughEnabled)
+                            {
+                                w.ToTransparentWindow();
+                            }
+
                             w.Show();
                         }
 
                         w.SpellTimers = (
-                            from x in SpellTimerTable.Table
+                            from x in SpellTimerTable.EnabledTable
                             where
                             x.Panel.Trim() == name
                             select
@@ -305,9 +319,6 @@
                         w.RefreshSpellTimer();
                     });
                 }
-
-                // タイマの間隔を初期化する
-                this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
             }
             catch (Exception ex)
             {
