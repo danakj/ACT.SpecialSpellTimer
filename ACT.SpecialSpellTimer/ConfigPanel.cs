@@ -39,6 +39,8 @@
         {
             this.LoadSpellTimerTable();
 
+            this.DetailGroupBox.Visible = false;
+
             // コンボボックスにアイテムを装填する
             this.MatchSoundComboBox.DataSource = SoundController.Default.EnumlateWave();
             this.MatchSoundComboBox.ValueMember = "FullPath";
@@ -137,6 +139,28 @@
         {
             lock (SpellTimerTable.Table)
             {
+                if (string.IsNullOrWhiteSpace(this.PanelNameTextBox.Text))
+                {
+                    MessageBox.Show(
+                        this,
+                        "パネル名を入力してください",
+                        "ACT.SpecialSpellTimer",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(this.SpellTitleTextBox.Text))
+                {
+                    MessageBox.Show(
+                        this,
+                        "スペル名を入力してください",
+                        "ACT.SpecialSpellTimer",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
+                    return;
+                }
+
                 var src = this.DetailGroupBox.Tag as SpellTimerDataSet.SpellTimerRow;
                 if (src != null)
                 {
@@ -205,11 +229,11 @@
             var src = dataSource;
             if (src == null)
             {
-                this.DetailGroupBox.Enabled = false;
+                this.DetailGroupBox.Visible = false;
                 return;
             }
 
-            this.DetailGroupBox.Enabled = true;
+            this.DetailGroupBox.Visible = true;
 
             this.PanelNameTextBox.Text = src.Panel;
             this.SpellTitleTextBox.Text = src.SpellTitle;
