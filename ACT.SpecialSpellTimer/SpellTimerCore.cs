@@ -253,7 +253,9 @@
                         }
 
                         // ｎ秒後のSoundを再生する
-                        if (spell.OverTime > 0)
+                        if (spell.OverTime > 0 &&
+                            !spell.OverDone &&
+                            spell.MatchDateTime > DateTime.MinValue)
                         {
                             var over = spell.MatchDateTime.AddSeconds(spell.OverTime);
 
@@ -266,7 +268,9 @@
                         }
 
                         // リキャスト完了のSoundを再生する
-                        if (spell.RecastTime > 0)
+                        if (spell.RecastTime > 0 &&
+                            !spell.TimeupDone &&
+                            spell.MatchDateTime > DateTime.MinValue)
                         {
                             var recast = spell.MatchDateTime.AddSeconds(spell.RecastTime);
                             if (DateTime.Now >= recast)
