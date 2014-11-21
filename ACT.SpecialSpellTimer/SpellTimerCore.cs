@@ -139,7 +139,7 @@
                 this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
 
                 // Spellリストとマッチングする
-                foreach (var spell in SpellTimerTable.EnabledTable)
+                foreach (var spell in SpellTimerTable.EnabledTable.AsParallel())
                 {
                     var keyword = spell.Keyword.Trim();
 
@@ -233,7 +233,7 @@
                 this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
 
                 // Spellを舐める
-                foreach (var spell in SpellTimerTable.EnabledTable)
+                foreach (var spell in SpellTimerTable.EnabledTable.AsParallel())
                 {
                     // Repeat対象のSpellを更新する
                     if (spell.RepeatEnabled &&
@@ -295,6 +295,7 @@
                         {
                             w = new SpellTimerListWindow()
                             {
+                                Title = "SpecialSpellTimer - " + name,
                                 PanelName = name,
                             };
 
@@ -333,19 +334,49 @@
         }
 
         /// <summary>
+        /// Panelをアクティブ化する
+        /// </summary>
+        public void ActivatePanels()
+        {
+            if (this.SpellTimerPanels != null)
+            {
+                if (ActGlobals.oFormActMain != null &&
+                    ActGlobals.oFormActMain.Visible)
+                {
+                    ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+                    {
+                        foreach (var panel in this.SpellTimerPanels)
+                        {
+                            if (panel.Visibility == Visibility.Hidden)
+                            {
+                                panel.Visibility = Visibility.Visible;
+                            }
+
+                            panel.Activate();
+                        }
+                    });
+                }
+            }
+        }
+
+        /// <summary>
         /// Panelを表示する
         /// </summary>
         public void VisiblePanels()
         {
             if (this.SpellTimerPanels != null)
             {
-                ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+                if (ActGlobals.oFormActMain != null &&
+                    ActGlobals.oFormActMain.Visible)
                 {
-                    foreach (var panel in this.SpellTimerPanels)
+                    ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
                     {
-                        panel.Visibility = Visibility.Visible;
-                    }
-                });
+                        foreach (var panel in this.SpellTimerPanels)
+                        {
+                            panel.Visibility = Visibility.Visible;
+                        }
+                    });
+                }
             }
         }
 
@@ -356,13 +387,17 @@
         {
             if (this.SpellTimerPanels != null)
             {
-                ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+                if (ActGlobals.oFormActMain != null &&
+                    ActGlobals.oFormActMain.Visible)
                 {
-                    foreach (var panel in this.SpellTimerPanels)
+                    ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
                     {
-                        panel.Visibility = Visibility.Hidden;
-                    }
-                });
+                        foreach (var panel in this.SpellTimerPanels)
+                        {
+                            panel.Visibility = Visibility.Hidden;
+                        }
+                    });
+                }
             }
         }
 
@@ -393,6 +428,8 @@
                     {
                         panel.Close();
                     }
+
+                    this.SpellTimerPanels.Clear();
                 });
             }
         }

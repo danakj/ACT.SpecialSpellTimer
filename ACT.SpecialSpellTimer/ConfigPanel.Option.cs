@@ -24,6 +24,11 @@
                 Settings.Default.OverlayVisible = !Settings.Default.OverlayVisible;
                 Settings.Default.Save();
                 this.LoadSettingsOption();
+
+                if (Settings.Default.OverlayVisible)
+                {
+                    SpellTimerCore.Default.ActivatePanels();
+                }
             };
         }
 

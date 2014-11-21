@@ -32,7 +32,7 @@
             >
             <TextBlock.Effect>
                 <BlurEffect 
-                    Radius="3" 
+                    Radius="6" 
                     RenderingBias="Quality" />
             </TextBlock.Effect>
         </TextBlock>
@@ -64,7 +64,7 @@
             >
             <TextBlock.Effect>
                 <BlurEffect 
-                    Radius="3" 
+                    Radius="6" 
                     RenderingBias="Quality" />
             </TextBlock.Effect>
         </TextBlock>

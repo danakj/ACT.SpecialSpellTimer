@@ -148,6 +148,7 @@
             if (this.BaseGrid.Children.Count > 0)
             {
                 this.Visibility = Visibility.Visible;
+                this.Topmost = true;
             }
         }
     }
