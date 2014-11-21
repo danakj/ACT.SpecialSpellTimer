@@ -80,11 +80,11 @@
             this.Opacity = (100d - Settings.Default.Opacity) / 100d;
 
             // 表示対象だけに絞る
-            var spells = 
-                from x in this.SpellTimers 
+            var spells =
+                from x in this.SpellTimers
                 where
                 x.ProgressBarVisible
-                select 
+                select
                 x;
 
             // タイムアップしたものを除外する
