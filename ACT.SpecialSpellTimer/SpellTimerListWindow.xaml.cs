@@ -95,9 +95,18 @@
                     var nextDateTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
 
                     c.RecastTime = (nextDateTime - DateTime.Now).TotalSeconds;
+                    if (c.RecastTime < 0)
+                    {
+                        c.RecastTime = 0;
+                    }
+
                     c.Progress = spell.RecastTime != 0 ?
                         (spell.RecastTime - c.RecastTime) / spell.RecastTime :
                         1.0d;
+                    if (c.Progress > 1.0d)
+                    {
+                        c.Progress = 1.0d;
+                    }
                 }
 
                 c.Refresh();

@@ -13,11 +13,6 @@
     public partial class SpellTimerControl : UserControl
     {
         /// <summary>
-        /// Control間の縦方向のMargin
-        /// </summary>
-        private const double ControlVerticalMargin = 4.0d;
-
-        /// <summary>
         /// コンストラクタ
         /// </summary>
         public SpellTimerControl()
