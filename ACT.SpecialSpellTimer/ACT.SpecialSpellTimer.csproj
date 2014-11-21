@@ -90,9 +90,7 @@
     <Folder Include="resources\icon\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resources\wav\alarm.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="resources\wav\alarm.wav" />
     <Content Include="resources\wav\chime13.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
