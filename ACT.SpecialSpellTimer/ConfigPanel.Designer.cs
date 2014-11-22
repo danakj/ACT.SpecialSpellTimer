@@ -32,6 +32,12 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.DisplayNoNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label19 = new System.Windows.Forms.Label();
+            this.OneFontColorButton = new System.Windows.Forms.Button();
+            this.OneBarColorButton = new System.Windows.Forms.Button();
+            this.SampleLabel = new System.Windows.Forms.Label();
+            this.IsReverseCheckBox = new System.Windows.Forms.CheckBox();
             this.SoundGuidanceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.UpdateButton = new System.Windows.Forms.Button();
@@ -76,6 +82,7 @@
             this.ExportButton = new System.Windows.Forms.Button();
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.AutoSortReverseCheckBox = new System.Windows.Forms.CheckBox();
             this.TekiyoButton = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -104,13 +111,11 @@
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.IsReverseCheckBox = new System.Windows.Forms.CheckBox();
-            this.SampleLabel = new System.Windows.Forms.Label();
-            this.OneBarColorButton = new System.Windows.Forms.Button();
-            this.OneFontColorButton = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DisplayNoNumericUpDown)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OverTimeNumericUpDown)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -155,7 +160,7 @@
             // ClearAllButton
             // 
             this.ClearAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ClearAllButton.Location = new System.Drawing.Point(222, 637);
+            this.ClearAllButton.Location = new System.Drawing.Point(168, 637);
             this.ClearAllButton.Name = "ClearAllButton";
             this.ClearAllButton.Size = new System.Drawing.Size(102, 25);
             this.ClearAllButton.TabIndex = 5;
@@ -168,6 +173,9 @@
             this.DetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DetailGroupBox.Controls.Add(this.label27);
+            this.DetailGroupBox.Controls.Add(this.DisplayNoNumericUpDown);
+            this.DetailGroupBox.Controls.Add(this.label19);
             this.DetailGroupBox.Controls.Add(this.OneFontColorButton);
             this.DetailGroupBox.Controls.Add(this.OneBarColorButton);
             this.DetailGroupBox.Controls.Add(this.SampleLabel);
@@ -190,11 +198,72 @@
             this.DetailGroupBox.Controls.Add(this.label2);
             this.DetailGroupBox.Controls.Add(this.PanelNameTextBox);
             this.DetailGroupBox.Controls.Add(this.label1);
-            this.DetailGroupBox.Location = new System.Drawing.Point(481, 0);
+            this.DetailGroupBox.Location = new System.Drawing.Point(384, 0);
             this.DetailGroupBox.Name = "DetailGroupBox";
-            this.DetailGroupBox.Size = new System.Drawing.Size(699, 662);
+            this.DetailGroupBox.Size = new System.Drawing.Size(796, 662);
             this.DetailGroupBox.TabIndex = 2;
             this.DetailGroupBox.TabStop = false;
+            // 
+            // DisplayNoNumericUpDown
+            // 
+            this.DisplayNoNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.DisplayNoNumericUpDown.Location = new System.Drawing.Point(573, 43);
+            this.DisplayNoNumericUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.DisplayNoNumericUpDown.Name = "DisplayNoNumericUpDown";
+            this.DisplayNoNumericUpDown.Size = new System.Drawing.Size(68, 19);
+            this.DisplayNoNumericUpDown.TabIndex = 2;
+            this.DisplayNoNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(526, 46);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(41, 12);
+            this.label19.TabIndex = 24;
+            this.label19.Text = "表示順";
+            // 
+            // OneFontColorButton
+            // 
+            this.OneFontColorButton.Location = new System.Drawing.Point(528, 138);
+            this.OneFontColorButton.Name = "OneFontColorButton";
+            this.OneFontColorButton.Size = new System.Drawing.Size(52, 20);
+            this.OneFontColorButton.TabIndex = 9;
+            this.OneFontColorButton.Text = "Font色";
+            this.OneFontColorButton.UseVisualStyleBackColor = true;
+            // 
+            // OneBarColorButton
+            // 
+            this.OneBarColorButton.Location = new System.Drawing.Point(470, 138);
+            this.OneBarColorButton.Name = "OneBarColorButton";
+            this.OneBarColorButton.Size = new System.Drawing.Size(52, 20);
+            this.OneBarColorButton.TabIndex = 8;
+            this.OneBarColorButton.Text = "Bar色";
+            this.OneBarColorButton.UseVisualStyleBackColor = true;
+            // 
+            // SampleLabel
+            // 
+            this.SampleLabel.BackColor = System.Drawing.Color.OrangeRed;
+            this.SampleLabel.Location = new System.Drawing.Point(364, 140);
+            this.SampleLabel.Name = "SampleLabel";
+            this.SampleLabel.Size = new System.Drawing.Size(100, 16);
+            this.SampleLabel.TabIndex = 23;
+            this.SampleLabel.Text = "サンプル";
+            this.SampleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // IsReverseCheckBox
+            // 
+            this.IsReverseCheckBox.AutoSize = true;
+            this.IsReverseCheckBox.Location = new System.Drawing.Point(222, 140);
+            this.IsReverseCheckBox.Name = "IsReverseCheckBox";
+            this.IsReverseCheckBox.Size = new System.Drawing.Size(121, 16);
+            this.IsReverseCheckBox.TabIndex = 7;
+            this.IsReverseCheckBox.Text = "進行方向を逆にする";
+            this.IsReverseCheckBox.UseVisualStyleBackColor = true;
             // 
             // SoundGuidanceLinkLabel
             // 
@@ -209,20 +278,20 @@
             // DeleteButton
             // 
             this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteButton.Location = new System.Drawing.Point(591, 631);
+            this.DeleteButton.Location = new System.Drawing.Point(688, 631);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(102, 25);
-            this.DeleteButton.TabIndex = 10;
+            this.DeleteButton.TabIndex = 11;
             this.DeleteButton.Text = "削除";
             this.DeleteButton.UseVisualStyleBackColor = true;
             // 
             // UpdateButton
             // 
             this.UpdateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpdateButton.Location = new System.Drawing.Point(483, 631);
+            this.UpdateButton.Location = new System.Drawing.Point(580, 631);
             this.UpdateButton.Name = "UpdateButton";
             this.UpdateButton.Size = new System.Drawing.Size(102, 25);
-            this.UpdateButton.TabIndex = 9;
+            this.UpdateButton.TabIndex = 10;
             this.UpdateButton.Text = "更新";
             this.UpdateButton.UseVisualStyleBackColor = true;
             // 
@@ -241,7 +310,7 @@
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Location = new System.Drawing.Point(6, 272);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(687, 110);
+            this.groupBox3.Size = new System.Drawing.Size(784, 110);
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "ログにマッチしてｎ秒後に鳴らすサウンド";
@@ -302,7 +371,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OverTextToSpeakTextBox.Location = new System.Drawing.Point(152, 55);
             this.OverTextToSpeakTextBox.Name = "OverTextToSpeakTextBox";
-            this.OverTextToSpeakTextBox.Size = new System.Drawing.Size(529, 19);
+            this.OverTextToSpeakTextBox.Size = new System.Drawing.Size(626, 19);
             this.OverTextToSpeakTextBox.TabIndex = 1;
             // 
             // label11
@@ -345,7 +414,7 @@
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Location = new System.Drawing.Point(6, 388);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(687, 89);
+            this.groupBox2.Size = new System.Drawing.Size(784, 89);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "リキャスト完了時に鳴らすサウンド";
@@ -374,7 +443,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TimeupTextToSpeakTextBox.Location = new System.Drawing.Point(152, 55);
             this.TimeupTextToSpeakTextBox.Name = "TimeupTextToSpeakTextBox";
-            this.TimeupTextToSpeakTextBox.Size = new System.Drawing.Size(529, 19);
+            this.TimeupTextToSpeakTextBox.Size = new System.Drawing.Size(626, 19);
             this.TimeupTextToSpeakTextBox.TabIndex = 1;
             // 
             // label9
@@ -417,7 +486,7 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Location = new System.Drawing.Point(6, 177);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(687, 89);
+            this.groupBox1.Size = new System.Drawing.Size(784, 89);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ログにマッチした直後に鳴らすサウンド";
@@ -446,7 +515,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MatchTextToSpeakTextBox.Location = new System.Drawing.Point(152, 55);
             this.MatchTextToSpeakTextBox.Name = "MatchTextToSpeakTextBox";
-            this.MatchTextToSpeakTextBox.Size = new System.Drawing.Size(529, 19);
+            this.MatchTextToSpeakTextBox.Size = new System.Drawing.Size(626, 19);
             this.MatchTextToSpeakTextBox.TabIndex = 1;
             // 
             // label8
@@ -492,7 +561,7 @@
             this.ShowProgressBarCheckBox.Location = new System.Drawing.Point(158, 140);
             this.ShowProgressBarCheckBox.Name = "ShowProgressBarCheckBox";
             this.ShowProgressBarCheckBox.Size = new System.Drawing.Size(48, 16);
-            this.ShowProgressBarCheckBox.TabIndex = 5;
+            this.ShowProgressBarCheckBox.TabIndex = 6;
             this.ShowProgressBarCheckBox.Text = "有効";
             this.ShowProgressBarCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -502,7 +571,7 @@
             this.RepeatCheckBox.Location = new System.Drawing.Point(158, 118);
             this.RepeatCheckBox.Name = "RepeatCheckBox";
             this.RepeatCheckBox.Size = new System.Drawing.Size(48, 16);
-            this.RepeatCheckBox.TabIndex = 4;
+            this.RepeatCheckBox.TabIndex = 5;
             this.RepeatCheckBox.Text = "有効";
             this.RepeatCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -535,7 +604,7 @@
             0});
             this.RecastTimeNumericUpDown.Name = "RecastTimeNumericUpDown";
             this.RecastTimeNumericUpDown.Size = new System.Drawing.Size(68, 19);
-            this.RecastTimeNumericUpDown.TabIndex = 3;
+            this.RecastTimeNumericUpDown.TabIndex = 4;
             this.RecastTimeNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
@@ -553,8 +622,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.KeywordTextBox.Location = new System.Drawing.Point(158, 68);
             this.KeywordTextBox.Name = "KeywordTextBox";
-            this.KeywordTextBox.Size = new System.Drawing.Size(535, 19);
-            this.KeywordTextBox.TabIndex = 2;
+            this.KeywordTextBox.Size = new System.Drawing.Size(632, 19);
+            this.KeywordTextBox.TabIndex = 3;
             // 
             // SpellTitleTextBox
             // 
@@ -591,7 +660,7 @@
             // AddButton
             // 
             this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.AddButton.Location = new System.Drawing.Point(373, 637);
+            this.AddButton.Location = new System.Drawing.Point(276, 637);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(102, 25);
             this.AddButton.TabIndex = 1;
@@ -601,11 +670,11 @@
             // ImportButton
             // 
             this.ImportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ImportButton.Location = new System.Drawing.Point(114, 637);
+            this.ImportButton.Location = new System.Drawing.Point(87, 637);
             this.ImportButton.Name = "ImportButton";
-            this.ImportButton.Size = new System.Drawing.Size(102, 25);
+            this.ImportButton.Size = new System.Drawing.Size(75, 25);
             this.ImportButton.TabIndex = 4;
-            this.ImportButton.Text = "インポート";
+            this.ImportButton.Text = "Import";
             this.ImportButton.UseVisualStyleBackColor = true;
             this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
@@ -614,9 +683,9 @@
             this.ExportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ExportButton.Location = new System.Drawing.Point(6, 637);
             this.ExportButton.Name = "ExportButton";
-            this.ExportButton.Size = new System.Drawing.Size(102, 25);
+            this.ExportButton.Size = new System.Drawing.Size(75, 25);
             this.ExportButton.TabIndex = 3;
-            this.ExportButton.Text = "エクスポート";
+            this.ExportButton.Text = "Export";
             this.ExportButton.UseVisualStyleBackColor = true;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
@@ -629,11 +698,12 @@
             this.SpellTimerTreeView.Location = new System.Drawing.Point(6, 6);
             this.SpellTimerTreeView.Name = "SpellTimerTreeView";
             this.SpellTimerTreeView.ShowNodeToolTips = true;
-            this.SpellTimerTreeView.Size = new System.Drawing.Size(469, 625);
+            this.SpellTimerTreeView.Size = new System.Drawing.Size(372, 625);
             this.SpellTimerTreeView.TabIndex = 0;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.AutoSortReverseCheckBox);
             this.tabPage2.Controls.Add(this.TekiyoButton);
             this.tabPage2.Controls.Add(this.label26);
             this.tabPage2.Controls.Add(this.label25);
@@ -666,13 +736,23 @@
             this.tabPage2.Text = "オプション";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // AutoSortReverseCheckBox
+            // 
+            this.AutoSortReverseCheckBox.AutoSize = true;
+            this.AutoSortReverseCheckBox.Location = new System.Drawing.Point(271, 215);
+            this.AutoSortReverseCheckBox.Name = "AutoSortReverseCheckBox";
+            this.AutoSortReverseCheckBox.Size = new System.Drawing.Size(106, 16);
+            this.AutoSortReverseCheckBox.TabIndex = 9;
+            this.AutoSortReverseCheckBox.Text = "逆(遠い順)にする";
+            this.AutoSortReverseCheckBox.UseVisualStyleBackColor = true;
+            // 
             // TekiyoButton
             // 
             this.TekiyoButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.TekiyoButton.Location = new System.Drawing.Point(1078, 637);
             this.TekiyoButton.Name = "TekiyoButton";
             this.TekiyoButton.Size = new System.Drawing.Size(102, 25);
-            this.TekiyoButton.TabIndex = 26;
+            this.TekiyoButton.TabIndex = 12;
             this.TekiyoButton.Text = "適用する";
             this.TekiyoButton.UseVisualStyleBackColor = true;
             this.TekiyoButton.Click += new System.EventHandler(this.TekiyoButton_Click);
@@ -683,7 +763,7 @@
             this.label26.Location = new System.Drawing.Point(285, 239);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(148, 12);
-            this.label26.TabIndex = 25;
+            this.label26.TabIndex = 11;
             this.label26.Text = "※0にすると無効（消去しない）";
             // 
             // label25
@@ -715,7 +795,7 @@
             0});
             this.TimeOfHideNumericUpDown.Name = "TimeOfHideNumericUpDown";
             this.TimeOfHideNumericUpDown.Size = new System.Drawing.Size(59, 19);
-            this.TimeOfHideNumericUpDown.TabIndex = 22;
+            this.TimeOfHideNumericUpDown.TabIndex = 10;
             this.TimeOfHideNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label23
@@ -742,7 +822,7 @@
             this.AutoSortCheckBox.Location = new System.Drawing.Point(197, 215);
             this.AutoSortCheckBox.Name = "AutoSortCheckBox";
             this.AutoSortCheckBox.Size = new System.Drawing.Size(48, 16);
-            this.AutoSortCheckBox.TabIndex = 19;
+            this.AutoSortCheckBox.TabIndex = 8;
             this.AutoSortCheckBox.Text = "有効";
             this.AutoSortCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -752,7 +832,7 @@
             this.ClickThroughCheckBox.Location = new System.Drawing.Point(197, 193);
             this.ClickThroughCheckBox.Name = "ClickThroughCheckBox";
             this.ClickThroughCheckBox.Size = new System.Drawing.Size(48, 16);
-            this.ClickThroughCheckBox.TabIndex = 18;
+            this.ClickThroughCheckBox.TabIndex = 7;
             this.ClickThroughCheckBox.Text = "有効";
             this.ClickThroughCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -780,7 +860,7 @@
             this.OpacityNumericUpDown.Location = new System.Drawing.Point(197, 168);
             this.OpacityNumericUpDown.Name = "OpacityNumericUpDown";
             this.OpacityNumericUpDown.Size = new System.Drawing.Size(59, 19);
-            this.OpacityNumericUpDown.TabIndex = 15;
+            this.OpacityNumericUpDown.TabIndex = 6;
             this.OpacityNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // FontColorButton
@@ -788,7 +868,7 @@
             this.FontColorButton.Location = new System.Drawing.Point(345, 137);
             this.FontColorButton.Name = "FontColorButton";
             this.FontColorButton.Size = new System.Drawing.Size(68, 25);
-            this.FontColorButton.TabIndex = 14;
+            this.FontColorButton.TabIndex = 5;
             this.FontColorButton.Text = "Fontの色";
             this.FontColorButton.UseVisualStyleBackColor = true;
             this.FontColorButton.Click += new System.EventHandler(this.FontColorButton_Click);
@@ -798,7 +878,7 @@
             this.FontButton.Location = new System.Drawing.Point(271, 137);
             this.FontButton.Name = "FontButton";
             this.FontButton.Size = new System.Drawing.Size(68, 25);
-            this.FontButton.TabIndex = 13;
+            this.FontButton.TabIndex = 4;
             this.FontButton.Text = "Font";
             this.FontButton.UseVisualStyleBackColor = true;
             this.FontButton.Click += new System.EventHandler(this.FontButton_Click);
@@ -808,7 +888,7 @@
             this.BarColorButton.Location = new System.Drawing.Point(197, 137);
             this.BarColorButton.Name = "BarColorButton";
             this.BarColorButton.Size = new System.Drawing.Size(68, 25);
-            this.BarColorButton.TabIndex = 12;
+            this.BarColorButton.TabIndex = 3;
             this.BarColorButton.Text = "バーの色";
             this.BarColorButton.UseVisualStyleBackColor = true;
             this.BarColorButton.Click += new System.EventHandler(this.BarColorButton_Click);
@@ -852,7 +932,7 @@
             0});
             this.BarHeightNumericUpDown.Name = "BarHeightNumericUpDown";
             this.BarHeightNumericUpDown.Size = new System.Drawing.Size(59, 19);
-            this.BarHeightNumericUpDown.TabIndex = 8;
+            this.BarHeightNumericUpDown.TabIndex = 2;
             this.BarHeightNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.BarHeightNumericUpDown.Value = new decimal(new int[] {
             3,
@@ -880,7 +960,7 @@
             0});
             this.BarWidthNumericUpDown.Name = "BarWidthNumericUpDown";
             this.BarWidthNumericUpDown.Size = new System.Drawing.Size(59, 19);
-            this.BarWidthNumericUpDown.TabIndex = 6;
+            this.BarWidthNumericUpDown.TabIndex = 1;
             this.BarWidthNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.BarWidthNumericUpDown.Value = new decimal(new int[] {
             120,
@@ -902,7 +982,7 @@
             this.SwitchOverlayButton.Location = new System.Drawing.Point(6, 6);
             this.SwitchOverlayButton.Name = "SwitchOverlayButton";
             this.SwitchOverlayButton.Size = new System.Drawing.Size(163, 25);
-            this.SwitchOverlayButton.TabIndex = 4;
+            this.SwitchOverlayButton.TabIndex = 0;
             this.SwitchOverlayButton.Text = "オーバーレイを表示する";
             this.SwitchOverlayButton.UseVisualStyleBackColor = true;
             // 
@@ -912,7 +992,7 @@
             this.ShokikaButton.Location = new System.Drawing.Point(6, 637);
             this.ShokikaButton.Name = "ShokikaButton";
             this.ShokikaButton.Size = new System.Drawing.Size(102, 25);
-            this.ShokikaButton.TabIndex = 3;
+            this.ShokikaButton.TabIndex = 13;
             this.ShokikaButton.Text = "初期化";
             this.ShokikaButton.UseVisualStyleBackColor = true;
             this.ShokikaButton.Click += new System.EventHandler(this.ShokikaButton_Click);
@@ -942,43 +1022,14 @@
             this.SaveFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
             this.SaveFileDialog.RestoreDirectory = true;
             // 
-            // IsReverseCheckBox
+            // label27
             // 
-            this.IsReverseCheckBox.AutoSize = true;
-            this.IsReverseCheckBox.Location = new System.Drawing.Point(222, 140);
-            this.IsReverseCheckBox.Name = "IsReverseCheckBox";
-            this.IsReverseCheckBox.Size = new System.Drawing.Size(121, 16);
-            this.IsReverseCheckBox.TabIndex = 6;
-            this.IsReverseCheckBox.Text = "進行方向を逆にする";
-            this.IsReverseCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // SampleLabel
-            // 
-            this.SampleLabel.BackColor = System.Drawing.Color.OrangeRed;
-            this.SampleLabel.Location = new System.Drawing.Point(364, 140);
-            this.SampleLabel.Name = "SampleLabel";
-            this.SampleLabel.Size = new System.Drawing.Size(100, 16);
-            this.SampleLabel.TabIndex = 23;
-            this.SampleLabel.Text = "サンプル";
-            this.SampleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // OneBarColorButton
-            // 
-            this.OneBarColorButton.Location = new System.Drawing.Point(470, 138);
-            this.OneBarColorButton.Name = "OneBarColorButton";
-            this.OneBarColorButton.Size = new System.Drawing.Size(52, 20);
-            this.OneBarColorButton.TabIndex = 7;
-            this.OneBarColorButton.Text = "Bar色";
-            this.OneBarColorButton.UseVisualStyleBackColor = true;
-            // 
-            // OneFontColorButton
-            // 
-            this.OneFontColorButton.Location = new System.Drawing.Point(528, 138);
-            this.OneFontColorButton.Name = "OneFontColorButton";
-            this.OneFontColorButton.Size = new System.Drawing.Size(52, 20);
-            this.OneFontColorButton.TabIndex = 8;
-            this.OneFontColorButton.Text = "Font色";
-            this.OneFontColorButton.UseVisualStyleBackColor = true;
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(647, 46);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(115, 12);
+            this.label27.TabIndex = 25;
+            this.label27.Text = "※より小さいほうが優先";
             // 
             // ConfigPanel
             // 
@@ -991,6 +1042,7 @@
             this.tabPage1.ResumeLayout(false);
             this.DetailGroupBox.ResumeLayout(false);
             this.DetailGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DisplayNoNumericUpDown)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OverTimeNumericUpDown)).EndInit();
@@ -1091,5 +1143,9 @@
         private System.Windows.Forms.Button OneFontColorButton;
         private System.Windows.Forms.Button OneBarColorButton;
         private System.Windows.Forms.Label SampleLabel;
+        private System.Windows.Forms.CheckBox AutoSortReverseCheckBox;
+        private System.Windows.Forms.NumericUpDown DisplayNoNumericUpDown;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label27;
     }
 }

@@ -168,6 +168,9 @@
                 nr.BarColor = Settings.Default.ProgressBarColor.ToHTML();
                 nr.FontColor = Settings.Default.FontColor.ToHTML();
                 nr.Enabled = true;
+                nr.DisplayNo = SpellTimerTable.Table.Any() ?
+                    SpellTimerTable.Table.Max(x => x.DisplayNo) + 1 :
+                    50;
                 SpellTimerTable.Table.AddSpellTimerRow(nr);
 
                 SpellTimerTable.Save();
@@ -213,6 +216,7 @@
                 {
                     src.Panel = this.PanelNameTextBox.Text;
                     src.SpellTitle = this.SpellTitleTextBox.Text;
+                    src.DisplayNo = (int)this.DisplayNoNumericUpDown.Value;
                     src.Keyword = this.KeywordTextBox.Text;
                     src.RecastTime = (int)this.RecastTimeNumericUpDown.Value;
                     src.RepeatEnabled = this.RepeatCheckBox.Checked;
@@ -290,6 +294,7 @@
 
             this.PanelNameTextBox.Text = src.Panel;
             this.SpellTitleTextBox.Text = src.SpellTitle;
+            this.DisplayNoNumericUpDown.Value = src.DisplayNo;
             this.KeywordTextBox.Text = src.Keyword;
             this.RecastTimeNumericUpDown.Value = src.RecastTime;
             this.RepeatCheckBox.Checked = src.RepeatEnabled;
@@ -329,11 +334,15 @@
 
                 this.SpellTimerTreeView.Nodes.Clear();
 
-                var panels = SpellTimerTable.Table.Select(x => x.Panel).Distinct();
+                var panels = SpellTimerTable.Table
+                    .OrderBy(x => x.DisplayNo)
+                    .Select(x => x.Panel).Distinct();
                 foreach (var panelName in panels)
                 {
                     var children = new List<TreeNode>();
-                    var spells = SpellTimerTable.Table.Where(x => x.Panel == panelName);
+                    var spells = SpellTimerTable.Table
+                        .OrderBy(x => x.DisplayNo)
+                        .Where(x => x.Panel == panelName);
                     foreach (var spell in spells)
                     {
                         var nc = new TreeNode()

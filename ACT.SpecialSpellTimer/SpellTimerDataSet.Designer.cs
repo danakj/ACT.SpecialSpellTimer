@@ -360,6 +360,8 @@ namespace ACT.SpecialSpellTimer {
             
             private global::System.Data.DataColumn columnEnabled;
             
+            private global::System.Data.DataColumn columnDisplayNo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public SpellTimerDataTable() {
@@ -579,6 +581,14 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DisplayNoColumn {
+                get {
+                    return this.columnDisplayNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -637,7 +647,8 @@ namespace ACT.SpecialSpellTimer {
                         string BarColor, 
                         string SpellTitleReplaced, 
                         string MatchedLog, 
-                        bool Enabled) {
+                        bool Enabled, 
+                        int DisplayNo) {
                 SpellTimerRow rowSpellTimerRow = ((SpellTimerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Panel,
@@ -662,7 +673,8 @@ namespace ACT.SpecialSpellTimer {
                         BarColor,
                         SpellTitleReplaced,
                         MatchedLog,
-                        Enabled};
+                        Enabled,
+                        DisplayNo};
                 rowSpellTimerRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSpellTimerRow);
                 return rowSpellTimerRow;
@@ -708,6 +720,7 @@ namespace ACT.SpecialSpellTimer {
                 this.columnSpellTitleReplaced = base.Columns["SpellTitleReplaced"];
                 this.columnMatchedLog = base.Columns["MatchedLog"];
                 this.columnEnabled = base.Columns["Enabled"];
+                this.columnDisplayNo = base.Columns["DisplayNo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -759,6 +772,8 @@ namespace ACT.SpecialSpellTimer {
                 base.Columns.Add(this.columnMatchedLog);
                 this.columnEnabled = new global::System.Data.DataColumn("Enabled", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEnabled);
+                this.columnDisplayNo = new global::System.Data.DataColumn("DisplayNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDisplayNo);
                 this.columnPanel.AllowDBNull = false;
                 this.columnPanel.DefaultValue = ((string)(""));
                 this.columnSpellTitle.AllowDBNull = false;
@@ -803,6 +818,8 @@ namespace ACT.SpecialSpellTimer {
                 this.columnMatchedLog.DefaultValue = ((string)(""));
                 this.columnEnabled.AllowDBNull = false;
                 this.columnEnabled.DefaultValue = ((bool)(false));
+                this.columnDisplayNo.AllowDBNull = false;
+                this.columnDisplayNo.DefaultValue = ((int)(0));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1479,6 +1496,17 @@ namespace ACT.SpecialSpellTimer {
                 }
                 set {
                     this[this.tableSpellTimer.EnabledColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int DisplayNo {
+                get {
+                    return ((int)(this[this.tableSpellTimer.DisplayNoColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.DisplayNoColumn] = value;
                 }
             }
             

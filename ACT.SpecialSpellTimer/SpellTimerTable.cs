@@ -42,6 +42,8 @@
                     from x in Table
                     where
                     x.Enabled
+                    orderby
+                    x.DisplayNo
                     select
                     x).ToArray();
             }

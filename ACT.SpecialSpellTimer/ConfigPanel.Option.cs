@@ -105,6 +105,7 @@
             this.OpacityNumericUpDown.Value = Settings.Default.Opacity;
             this.ClickThroughCheckBox.Checked = Settings.Default.ClickThroughEnabled;
             this.AutoSortCheckBox.Checked = Settings.Default.AutoSortEnabled;
+            this.AutoSortReverseCheckBox.Checked = Settings.Default.AutoSortReverse;
             this.TimeOfHideNumericUpDown.Value = (decimal)Settings.Default.TimeOfHideSpell;
         }
 
@@ -122,6 +123,7 @@
             Settings.Default.Opacity = (int)this.OpacityNumericUpDown.Value;
             Settings.Default.ClickThroughEnabled = this.ClickThroughCheckBox.Checked;
             Settings.Default.AutoSortEnabled = this.AutoSortCheckBox.Checked;
+            Settings.Default.AutoSortReverse = this.AutoSortReverseCheckBox.Checked;
             Settings.Default.TimeOfHideSpell = (double)this.TimeOfHideNumericUpDown.Value;
 
             // 設定を保存する

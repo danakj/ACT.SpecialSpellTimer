@@ -101,12 +101,27 @@
             // リキャストの近いもの順でソートする
             if (Settings.Default.AutoSortEnabled)
             {
-                spells =
-                    from x in spells
-                    orderby
-                    x.MatchDateTime.AddSeconds(x.RecastTime)
-                    select
-                    x;
+                // 昇順？
+                if (!Settings.Default.AutoSortReverse)
+                {
+                    spells =
+                        from x in spells
+                        orderby
+                        x.MatchDateTime.AddSeconds(x.RecastTime),
+                        x.DisplayNo
+                        select
+                        x;
+                }
+                else
+                {
+                    spells =
+                        from x in spells
+                        orderby
+                        x.MatchDateTime.AddSeconds(x.RecastTime) descending,
+                        x.DisplayNo
+                        select
+                        x;
+                }
             }
 
             // スペルタイマコントロールのリストを生成する
