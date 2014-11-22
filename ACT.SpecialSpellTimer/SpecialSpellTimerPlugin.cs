@@ -31,7 +31,7 @@
         {
             try
             {
-                pluginScreenSpace.Text = "SpecialSpellTimer";
+                pluginScreenSpace.Text = "SpecialSpellTimer(スペスペ)";
                 this.PluginStatusLabel = pluginStatusText;
 
                 // アップデートを確認する

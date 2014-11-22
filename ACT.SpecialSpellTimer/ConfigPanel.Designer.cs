@@ -30,6 +30,7 @@
         {
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
             this.SoundGuidanceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.DeleteButton = new System.Windows.Forms.Button();
@@ -75,8 +76,30 @@
             this.ExportButton = new System.Windows.Forms.Button();
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.ShokikaButton = new System.Windows.Forms.Button();
+            this.TekiyoButton = new System.Windows.Forms.Button();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.TimeOfHideNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.AutoSortCheckBox = new System.Windows.Forms.CheckBox();
+            this.ClickThroughCheckBox = new System.Windows.Forms.CheckBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.OpacityNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.FontColorButton = new System.Windows.Forms.Button();
+            this.FontButton = new System.Windows.Forms.Button();
+            this.BarColorButton = new System.Windows.Forms.Button();
+            this.PreviewLabel = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.BarHeightNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.BarWidthNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
             this.SwitchOverlayButton = new System.Windows.Forms.Button();
+            this.ShokikaButton = new System.Windows.Forms.Button();
             this.FontDialog = new System.Windows.Forms.FontDialog();
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -90,6 +113,10 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecastTimeNumericUpDown)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarHeightNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarWidthNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // TabControl
@@ -107,6 +134,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.ClearAllButton);
             this.tabPage1.Controls.Add(this.DetailGroupBox);
             this.tabPage1.Controls.Add(this.AddButton);
             this.tabPage1.Controls.Add(this.ImportButton);
@@ -119,6 +147,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "スペシャルスペルタイマ";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // ClearAllButton
+            // 
+            this.ClearAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ClearAllButton.Location = new System.Drawing.Point(222, 637);
+            this.ClearAllButton.Name = "ClearAllButton";
+            this.ClearAllButton.Size = new System.Drawing.Size(102, 25);
+            this.ClearAllButton.TabIndex = 5;
+            this.ClearAllButton.Text = "全て削除";
+            this.ClearAllButton.UseVisualStyleBackColor = true;
+            this.ClearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
             // 
             // DetailGroupBox
             // 
@@ -560,6 +599,7 @@
             this.ImportButton.TabIndex = 4;
             this.ImportButton.Text = "インポート";
             this.ImportButton.UseVisualStyleBackColor = true;
+            this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
             // ExportButton
             // 
@@ -570,6 +610,7 @@
             this.ExportButton.TabIndex = 3;
             this.ExportButton.Text = "エクスポート";
             this.ExportButton.UseVisualStyleBackColor = true;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
             // SpellTimerTreeView
             // 
@@ -585,6 +626,28 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.TekiyoButton);
+            this.tabPage2.Controls.Add(this.label26);
+            this.tabPage2.Controls.Add(this.label25);
+            this.tabPage2.Controls.Add(this.label24);
+            this.tabPage2.Controls.Add(this.TimeOfHideNumericUpDown);
+            this.tabPage2.Controls.Add(this.label23);
+            this.tabPage2.Controls.Add(this.label22);
+            this.tabPage2.Controls.Add(this.AutoSortCheckBox);
+            this.tabPage2.Controls.Add(this.ClickThroughCheckBox);
+            this.tabPage2.Controls.Add(this.label21);
+            this.tabPage2.Controls.Add(this.label20);
+            this.tabPage2.Controls.Add(this.OpacityNumericUpDown);
+            this.tabPage2.Controls.Add(this.FontColorButton);
+            this.tabPage2.Controls.Add(this.FontButton);
+            this.tabPage2.Controls.Add(this.BarColorButton);
+            this.tabPage2.Controls.Add(this.PreviewLabel);
+            this.tabPage2.Controls.Add(this.label18);
+            this.tabPage2.Controls.Add(this.label17);
+            this.tabPage2.Controls.Add(this.BarHeightNumericUpDown);
+            this.tabPage2.Controls.Add(this.label16);
+            this.tabPage2.Controls.Add(this.BarWidthNumericUpDown);
+            this.tabPage2.Controls.Add(this.label15);
             this.tabPage2.Controls.Add(this.SwitchOverlayButton);
             this.tabPage2.Controls.Add(this.ShokikaButton);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -594,6 +657,246 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "オプション";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // TekiyoButton
+            // 
+            this.TekiyoButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TekiyoButton.Location = new System.Drawing.Point(1078, 637);
+            this.TekiyoButton.Name = "TekiyoButton";
+            this.TekiyoButton.Size = new System.Drawing.Size(102, 25);
+            this.TekiyoButton.TabIndex = 26;
+            this.TekiyoButton.Text = "適用する";
+            this.TekiyoButton.UseVisualStyleBackColor = true;
+            this.TekiyoButton.Click += new System.EventHandler(this.TekiyoButton_Click);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(285, 239);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(148, 12);
+            this.label26.TabIndex = 25;
+            this.label26.Text = "※0にすると無効（消去しない）";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(6, 239);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(135, 12);
+            this.label25.TabIndex = 24;
+            this.label25.Text = "リキャスト完了後に消去する";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(262, 239);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(17, 12);
+            this.label24.TabIndex = 23;
+            this.label24.Text = "秒";
+            // 
+            // TimeOfHideNumericUpDown
+            // 
+            this.TimeOfHideNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.TimeOfHideNumericUpDown.Location = new System.Drawing.Point(197, 237);
+            this.TimeOfHideNumericUpDown.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.TimeOfHideNumericUpDown.Name = "TimeOfHideNumericUpDown";
+            this.TimeOfHideNumericUpDown.Size = new System.Drawing.Size(59, 19);
+            this.TimeOfHideNumericUpDown.TabIndex = 22;
+            this.TimeOfHideNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(6, 216);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(171, 12);
+            this.label23.TabIndex = 21;
+            this.label23.Text = "リキャスト完了が近い順でソートする";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(6, 194);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(64, 12);
+            this.label22.TabIndex = 20;
+            this.label22.Text = "クリックスルー";
+            // 
+            // AutoSortCheckBox
+            // 
+            this.AutoSortCheckBox.AutoSize = true;
+            this.AutoSortCheckBox.Location = new System.Drawing.Point(197, 215);
+            this.AutoSortCheckBox.Name = "AutoSortCheckBox";
+            this.AutoSortCheckBox.Size = new System.Drawing.Size(48, 16);
+            this.AutoSortCheckBox.TabIndex = 19;
+            this.AutoSortCheckBox.Text = "有効";
+            this.AutoSortCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ClickThroughCheckBox
+            // 
+            this.ClickThroughCheckBox.AutoSize = true;
+            this.ClickThroughCheckBox.Location = new System.Drawing.Point(197, 193);
+            this.ClickThroughCheckBox.Name = "ClickThroughCheckBox";
+            this.ClickThroughCheckBox.Size = new System.Drawing.Size(48, 16);
+            this.ClickThroughCheckBox.TabIndex = 18;
+            this.ClickThroughCheckBox.Text = "有効";
+            this.ClickThroughCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 170);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(108, 12);
+            this.label21.TabIndex = 17;
+            this.label21.Text = "オーバーレイの透明度";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(263, 170);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(11, 12);
+            this.label20.TabIndex = 16;
+            this.label20.Text = "%";
+            // 
+            // OpacityNumericUpDown
+            // 
+            this.OpacityNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.OpacityNumericUpDown.Location = new System.Drawing.Point(197, 168);
+            this.OpacityNumericUpDown.Name = "OpacityNumericUpDown";
+            this.OpacityNumericUpDown.Size = new System.Drawing.Size(59, 19);
+            this.OpacityNumericUpDown.TabIndex = 15;
+            this.OpacityNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // FontColorButton
+            // 
+            this.FontColorButton.Location = new System.Drawing.Point(345, 137);
+            this.FontColorButton.Name = "FontColorButton";
+            this.FontColorButton.Size = new System.Drawing.Size(68, 25);
+            this.FontColorButton.TabIndex = 14;
+            this.FontColorButton.Text = "Fontの色";
+            this.FontColorButton.UseVisualStyleBackColor = true;
+            this.FontColorButton.Click += new System.EventHandler(this.FontColorButton_Click);
+            // 
+            // FontButton
+            // 
+            this.FontButton.Location = new System.Drawing.Point(271, 137);
+            this.FontButton.Name = "FontButton";
+            this.FontButton.Size = new System.Drawing.Size(68, 25);
+            this.FontButton.TabIndex = 13;
+            this.FontButton.Text = "Font";
+            this.FontButton.UseVisualStyleBackColor = true;
+            this.FontButton.Click += new System.EventHandler(this.FontButton_Click);
+            // 
+            // BarColorButton
+            // 
+            this.BarColorButton.Location = new System.Drawing.Point(197, 137);
+            this.BarColorButton.Name = "BarColorButton";
+            this.BarColorButton.Size = new System.Drawing.Size(68, 25);
+            this.BarColorButton.TabIndex = 12;
+            this.BarColorButton.Text = "バーの色";
+            this.BarColorButton.UseVisualStyleBackColor = true;
+            this.BarColorButton.Click += new System.EventHandler(this.BarColorButton_Click);
+            // 
+            // PreviewLabel
+            // 
+            this.PreviewLabel.BackColor = System.Drawing.Color.IndianRed;
+            this.PreviewLabel.Location = new System.Drawing.Point(198, 71);
+            this.PreviewLabel.Name = "PreviewLabel";
+            this.PreviewLabel.Size = new System.Drawing.Size(215, 63);
+            this.PreviewLabel.TabIndex = 11;
+            this.PreviewLabel.Text = "バーサク 90.0";
+            this.PreviewLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 71);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(113, 12);
+            this.label18.TabIndex = 10;
+            this.label18.Text = "プログレスバーの見た目";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(298, 51);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(13, 12);
+            this.label17.TabIndex = 9;
+            this.label17.Text = "H";
+            // 
+            // BarHeightNumericUpDown
+            // 
+            this.BarHeightNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.BarHeightNumericUpDown.Location = new System.Drawing.Point(317, 49);
+            this.BarHeightNumericUpDown.Maximum = new decimal(new int[] {
+            1080,
+            0,
+            0,
+            0});
+            this.BarHeightNumericUpDown.Name = "BarHeightNumericUpDown";
+            this.BarHeightNumericUpDown.Size = new System.Drawing.Size(59, 19);
+            this.BarHeightNumericUpDown.TabIndex = 8;
+            this.BarHeightNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.BarHeightNumericUpDown.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(198, 51);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(14, 12);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "W";
+            // 
+            // BarWidthNumericUpDown
+            // 
+            this.BarWidthNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.BarWidthNumericUpDown.Location = new System.Drawing.Point(218, 49);
+            this.BarWidthNumericUpDown.Maximum = new decimal(new int[] {
+            1920,
+            0,
+            0,
+            0});
+            this.BarWidthNumericUpDown.Name = "BarWidthNumericUpDown";
+            this.BarWidthNumericUpDown.Size = new System.Drawing.Size(59, 19);
+            this.BarWidthNumericUpDown.TabIndex = 6;
+            this.BarWidthNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.BarWidthNumericUpDown.Value = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 51);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(109, 12);
+            this.label15.TabIndex = 5;
+            this.label15.Text = "プログレスバーの大きさ";
+            // 
+            // SwitchOverlayButton
+            // 
+            this.SwitchOverlayButton.Location = new System.Drawing.Point(6, 6);
+            this.SwitchOverlayButton.Name = "SwitchOverlayButton";
+            this.SwitchOverlayButton.Size = new System.Drawing.Size(163, 25);
+            this.SwitchOverlayButton.TabIndex = 4;
+            this.SwitchOverlayButton.Text = "オーバーレイを表示する";
+            this.SwitchOverlayButton.UseVisualStyleBackColor = true;
             // 
             // ShokikaButton
             // 
@@ -605,15 +908,6 @@
             this.ShokikaButton.Text = "初期化";
             this.ShokikaButton.UseVisualStyleBackColor = true;
             this.ShokikaButton.Click += new System.EventHandler(this.ShokikaButton_Click);
-            // 
-            // SwitchOverlayButton
-            // 
-            this.SwitchOverlayButton.Location = new System.Drawing.Point(6, 6);
-            this.SwitchOverlayButton.Name = "SwitchOverlayButton";
-            this.SwitchOverlayButton.Size = new System.Drawing.Size(163, 25);
-            this.SwitchOverlayButton.TabIndex = 4;
-            this.SwitchOverlayButton.Text = "オーバーレイを表示する";
-            this.SwitchOverlayButton.UseVisualStyleBackColor = true;
             // 
             // FontDialog
             // 
@@ -629,14 +923,16 @@
             // OpenFileDialog
             // 
             this.OpenFileDialog.DefaultExt = "xml";
+            this.OpenFileDialog.FileName = "ACT.SpecialSpellTimer.Spells.xml";
+            this.OpenFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
             this.OpenFileDialog.RestoreDirectory = true;
-            this.OpenFileDialog.SupportMultiDottedExtensions = true;
             // 
             // SaveFileDialog
             // 
             this.SaveFileDialog.DefaultExt = "xml";
+            this.SaveFileDialog.FileName = "ACT.SpecialSpellTimer.Spells.xml";
+            this.SaveFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
             this.SaveFileDialog.RestoreDirectory = true;
-            this.SaveFileDialog.SupportMultiDottedExtensions = true;
             // 
             // ConfigPanel
             // 
@@ -658,6 +954,11 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecastTimeNumericUpDown)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarHeightNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarWidthNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -717,5 +1018,28 @@
         private System.Windows.Forms.ColorDialog ColorDialog;
         private System.Windows.Forms.OpenFileDialog OpenFileDialog;
         private System.Windows.Forms.SaveFileDialog SaveFileDialog;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.NumericUpDown TimeOfHideNumericUpDown;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.CheckBox AutoSortCheckBox;
+        private System.Windows.Forms.CheckBox ClickThroughCheckBox;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.NumericUpDown OpacityNumericUpDown;
+        private System.Windows.Forms.Button FontColorButton;
+        private System.Windows.Forms.Button FontButton;
+        private System.Windows.Forms.Button BarColorButton;
+        private System.Windows.Forms.Label PreviewLabel;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown BarHeightNumericUpDown;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.NumericUpDown BarWidthNumericUpDown;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button TekiyoButton;
+        private System.Windows.Forms.Button ClearAllButton;
     }
 }

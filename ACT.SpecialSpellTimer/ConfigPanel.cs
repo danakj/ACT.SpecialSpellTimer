@@ -329,5 +329,61 @@
                 this.SpellTimerTreeView.ResumeLayout();
             }
         }
+
+        /// <summary>
+        /// エクスポート Click
+        /// </summary>
+        /// <param name="sender">イベント発生元</param>
+        /// <param name="e">イベント引数</param>
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
+            if (this.SaveFileDialog.ShowDialog(this) != DialogResult.Cancel)
+            {
+                SpellTimerTable.Save(
+                    this.SaveFileDialog.FileName);
+            }
+        }
+
+        /// <summary>
+        /// インポート Click
+        /// </summary>
+        /// <param name="sender">イベント発生元</param>
+        /// <param name="e">イベント引数</param>
+        private void ImportButton_Click(object sender, EventArgs e)
+        {
+            if (this.OpenFileDialog.ShowDialog(this) != DialogResult.Cancel)
+            {
+                SpellTimerTable.Load(
+                    this.OpenFileDialog.FileName,
+                    false);
+
+                this.LoadSpellTimerTable();
+            }
+        }
+
+        /// <summary>
+        /// 全て削除
+        /// </summary>
+        /// <param name="sender">イベント発生元</param>
+        /// <param name="e">イベント引数</param>
+        private void ClearAllButton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(
+                this,
+                "全てのスペルを削除してよろしいですか？",
+                "ACT.SpecialSpellTimer",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                lock (SpellTimerTable.Table)
+                {
+                    this.DetailGroupBox.Visible = false;
+                    SpellTimerTable.Table.Clear();
+                }
+
+                this.LoadSpellTimerTable();
+            }
+        }
     }
 }

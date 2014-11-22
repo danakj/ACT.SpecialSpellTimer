@@ -82,19 +82,25 @@
         /// </summary>
         public static void Load()
         {
-            Load(DefaultFile);
+            Load(DefaultFile, true);
         }
 
         /// <summary>
         /// 読み込む
         /// </summary>
         /// <param name="file">ファイルパス</param>
+        /// <param name="isClear">消去してからロードする？</param>
         public static void Load(
-            string file)
+            string file,
+            bool isClear)
         {
             if (File.Exists(file))
             {
-                Table.Clear();
+                if (isClear)
+                {
+                    Table.Clear();
+                }
+
                 Table.ReadXml(file);
                 Reset();
             }
