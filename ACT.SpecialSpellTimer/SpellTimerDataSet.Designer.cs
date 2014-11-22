@@ -354,13 +354,15 @@ namespace ACT.SpecialSpellTimer {
             
             private global::System.Data.DataColumn columnBarColor;
             
+            private global::System.Data.DataColumn columnDontHide;
+            
             private global::System.Data.DataColumn columnSpellTitleReplaced;
             
             private global::System.Data.DataColumn columnMatchedLog;
             
-            private global::System.Data.DataColumn columnEnabled;
-            
             private global::System.Data.DataColumn columnDisplayNo;
+            
+            private global::System.Data.DataColumn columnEnabled;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -557,6 +559,14 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DontHideColumn {
+                get {
+                    return this.columnDontHide;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn SpellTitleReplacedColumn {
                 get {
                     return this.columnSpellTitleReplaced;
@@ -573,17 +583,17 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EnabledColumn {
+            public global::System.Data.DataColumn DisplayNoColumn {
                 get {
-                    return this.columnEnabled;
+                    return this.columnDisplayNo;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DisplayNoColumn {
+            public global::System.Data.DataColumn EnabledColumn {
                 get {
-                    return this.columnDisplayNo;
+                    return this.columnEnabled;
                 }
             }
             
@@ -645,10 +655,11 @@ namespace ACT.SpecialSpellTimer {
                         bool IsReverse, 
                         string FontColor, 
                         string BarColor, 
+                        bool DontHide, 
                         string SpellTitleReplaced, 
                         string MatchedLog, 
-                        bool Enabled, 
-                        int DisplayNo) {
+                        int DisplayNo, 
+                        bool Enabled) {
                 SpellTimerRow rowSpellTimerRow = ((SpellTimerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Panel,
@@ -671,10 +682,11 @@ namespace ACT.SpecialSpellTimer {
                         IsReverse,
                         FontColor,
                         BarColor,
+                        DontHide,
                         SpellTitleReplaced,
                         MatchedLog,
-                        Enabled,
-                        DisplayNo};
+                        DisplayNo,
+                        Enabled};
                 rowSpellTimerRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSpellTimerRow);
                 return rowSpellTimerRow;
@@ -717,10 +729,11 @@ namespace ACT.SpecialSpellTimer {
                 this.columnIsReverse = base.Columns["IsReverse"];
                 this.columnFontColor = base.Columns["FontColor"];
                 this.columnBarColor = base.Columns["BarColor"];
+                this.columnDontHide = base.Columns["DontHide"];
                 this.columnSpellTitleReplaced = base.Columns["SpellTitleReplaced"];
                 this.columnMatchedLog = base.Columns["MatchedLog"];
-                this.columnEnabled = base.Columns["Enabled"];
                 this.columnDisplayNo = base.Columns["DisplayNo"];
+                this.columnEnabled = base.Columns["Enabled"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -766,14 +779,16 @@ namespace ACT.SpecialSpellTimer {
                 base.Columns.Add(this.columnFontColor);
                 this.columnBarColor = new global::System.Data.DataColumn("BarColor", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnBarColor);
+                this.columnDontHide = new global::System.Data.DataColumn("DontHide", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDontHide);
                 this.columnSpellTitleReplaced = new global::System.Data.DataColumn("SpellTitleReplaced", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSpellTitleReplaced);
                 this.columnMatchedLog = new global::System.Data.DataColumn("MatchedLog", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMatchedLog);
-                this.columnEnabled = new global::System.Data.DataColumn("Enabled", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEnabled);
                 this.columnDisplayNo = new global::System.Data.DataColumn("DisplayNo", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDisplayNo);
+                this.columnEnabled = new global::System.Data.DataColumn("Enabled", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEnabled);
                 this.columnPanel.AllowDBNull = false;
                 this.columnPanel.DefaultValue = ((string)(""));
                 this.columnSpellTitle.AllowDBNull = false;
@@ -812,14 +827,16 @@ namespace ACT.SpecialSpellTimer {
                 this.columnFontColor.DefaultValue = ((string)(""));
                 this.columnBarColor.AllowDBNull = false;
                 this.columnBarColor.DefaultValue = ((string)(""));
+                this.columnDontHide.AllowDBNull = false;
+                this.columnDontHide.DefaultValue = ((bool)(false));
                 this.columnSpellTitleReplaced.AllowDBNull = false;
                 this.columnSpellTitleReplaced.DefaultValue = ((string)(""));
                 this.columnMatchedLog.AllowDBNull = false;
                 this.columnMatchedLog.DefaultValue = ((string)(""));
-                this.columnEnabled.AllowDBNull = false;
-                this.columnEnabled.DefaultValue = ((bool)(false));
                 this.columnDisplayNo.AllowDBNull = false;
                 this.columnDisplayNo.DefaultValue = ((int)(0));
+                this.columnEnabled.AllowDBNull = false;
+                this.columnEnabled.DefaultValue = ((bool)(false));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1468,6 +1485,17 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool DontHide {
+                get {
+                    return ((bool)(this[this.tableSpellTimer.DontHideColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.DontHideColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string SpellTitleReplaced {
                 get {
                     return ((string)(this[this.tableSpellTimer.SpellTitleReplacedColumn]));
@@ -1490,23 +1518,23 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Enabled {
-                get {
-                    return ((bool)(this[this.tableSpellTimer.EnabledColumn]));
-                }
-                set {
-                    this[this.tableSpellTimer.EnabledColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int DisplayNo {
                 get {
                     return ((int)(this[this.tableSpellTimer.DisplayNoColumn]));
                 }
                 set {
                     this[this.tableSpellTimer.DisplayNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Enabled {
+                get {
+                    return ((bool)(this[this.tableSpellTimer.EnabledColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.EnabledColumn] = value;
                 }
             }
             

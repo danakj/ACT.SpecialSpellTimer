@@ -32,6 +32,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.DontHideCheckBox = new System.Windows.Forms.CheckBox();
+            this.label27 = new System.Windows.Forms.Label();
             this.DisplayNoNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
             this.OneFontColorButton = new System.Windows.Forms.Button();
@@ -111,7 +113,6 @@
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.label27 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -162,7 +163,7 @@
             this.ClearAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ClearAllButton.Location = new System.Drawing.Point(168, 637);
             this.ClearAllButton.Name = "ClearAllButton";
-            this.ClearAllButton.Size = new System.Drawing.Size(102, 25);
+            this.ClearAllButton.Size = new System.Drawing.Size(75, 25);
             this.ClearAllButton.TabIndex = 5;
             this.ClearAllButton.Text = "全て削除";
             this.ClearAllButton.UseVisualStyleBackColor = true;
@@ -173,6 +174,7 @@
             this.DetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DetailGroupBox.Controls.Add(this.DontHideCheckBox);
             this.DetailGroupBox.Controls.Add(this.label27);
             this.DetailGroupBox.Controls.Add(this.DisplayNoNumericUpDown);
             this.DetailGroupBox.Controls.Add(this.label19);
@@ -198,11 +200,30 @@
             this.DetailGroupBox.Controls.Add(this.label2);
             this.DetailGroupBox.Controls.Add(this.PanelNameTextBox);
             this.DetailGroupBox.Controls.Add(this.label1);
-            this.DetailGroupBox.Location = new System.Drawing.Point(384, 0);
+            this.DetailGroupBox.Location = new System.Drawing.Point(330, 0);
             this.DetailGroupBox.Name = "DetailGroupBox";
-            this.DetailGroupBox.Size = new System.Drawing.Size(796, 662);
+            this.DetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.DetailGroupBox.TabIndex = 2;
             this.DetailGroupBox.TabStop = false;
+            // 
+            // DontHideCheckBox
+            // 
+            this.DontHideCheckBox.AutoSize = true;
+            this.DontHideCheckBox.Location = new System.Drawing.Point(557, 140);
+            this.DontHideCheckBox.Name = "DontHideCheckBox";
+            this.DontHideCheckBox.Size = new System.Drawing.Size(140, 16);
+            this.DontHideCheckBox.TabIndex = 26;
+            this.DontHideCheckBox.Text = "リキャスト後に消去しない";
+            this.DontHideCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(647, 46);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(115, 12);
+            this.label27.TabIndex = 25;
+            this.label27.Text = "※より小さいほうが優先";
             // 
             // DisplayNoNumericUpDown
             // 
@@ -229,7 +250,7 @@
             // 
             // OneFontColorButton
             // 
-            this.OneFontColorButton.Location = new System.Drawing.Point(528, 138);
+            this.OneFontColorButton.Location = new System.Drawing.Point(484, 137);
             this.OneFontColorButton.Name = "OneFontColorButton";
             this.OneFontColorButton.Size = new System.Drawing.Size(52, 20);
             this.OneFontColorButton.TabIndex = 9;
@@ -238,7 +259,7 @@
             // 
             // OneBarColorButton
             // 
-            this.OneBarColorButton.Location = new System.Drawing.Point(470, 138);
+            this.OneBarColorButton.Location = new System.Drawing.Point(426, 137);
             this.OneBarColorButton.Name = "OneBarColorButton";
             this.OneBarColorButton.Size = new System.Drawing.Size(52, 20);
             this.OneBarColorButton.TabIndex = 8;
@@ -248,9 +269,9 @@
             // SampleLabel
             // 
             this.SampleLabel.BackColor = System.Drawing.Color.OrangeRed;
-            this.SampleLabel.Location = new System.Drawing.Point(364, 140);
+            this.SampleLabel.Location = new System.Drawing.Point(360, 139);
             this.SampleLabel.Name = "SampleLabel";
-            this.SampleLabel.Size = new System.Drawing.Size(100, 16);
+            this.SampleLabel.Size = new System.Drawing.Size(60, 16);
             this.SampleLabel.TabIndex = 23;
             this.SampleLabel.Text = "サンプル";
             this.SampleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -278,7 +299,7 @@
             // DeleteButton
             // 
             this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteButton.Location = new System.Drawing.Point(688, 631);
+            this.DeleteButton.Location = new System.Drawing.Point(742, 631);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(102, 25);
             this.DeleteButton.TabIndex = 11;
@@ -288,7 +309,7 @@
             // UpdateButton
             // 
             this.UpdateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.UpdateButton.Location = new System.Drawing.Point(580, 631);
+            this.UpdateButton.Location = new System.Drawing.Point(634, 631);
             this.UpdateButton.Name = "UpdateButton";
             this.UpdateButton.Size = new System.Drawing.Size(102, 25);
             this.UpdateButton.TabIndex = 10;
@@ -310,7 +331,7 @@
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Location = new System.Drawing.Point(6, 272);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(784, 110);
+            this.groupBox3.Size = new System.Drawing.Size(838, 110);
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "ログにマッチしてｎ秒後に鳴らすサウンド";
@@ -371,7 +392,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OverTextToSpeakTextBox.Location = new System.Drawing.Point(152, 55);
             this.OverTextToSpeakTextBox.Name = "OverTextToSpeakTextBox";
-            this.OverTextToSpeakTextBox.Size = new System.Drawing.Size(626, 19);
+            this.OverTextToSpeakTextBox.Size = new System.Drawing.Size(680, 19);
             this.OverTextToSpeakTextBox.TabIndex = 1;
             // 
             // label11
@@ -414,7 +435,7 @@
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Location = new System.Drawing.Point(6, 388);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(784, 89);
+            this.groupBox2.Size = new System.Drawing.Size(838, 89);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "リキャスト完了時に鳴らすサウンド";
@@ -443,7 +464,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TimeupTextToSpeakTextBox.Location = new System.Drawing.Point(152, 55);
             this.TimeupTextToSpeakTextBox.Name = "TimeupTextToSpeakTextBox";
-            this.TimeupTextToSpeakTextBox.Size = new System.Drawing.Size(626, 19);
+            this.TimeupTextToSpeakTextBox.Size = new System.Drawing.Size(680, 19);
             this.TimeupTextToSpeakTextBox.TabIndex = 1;
             // 
             // label9
@@ -486,7 +507,7 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Location = new System.Drawing.Point(6, 177);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(784, 89);
+            this.groupBox1.Size = new System.Drawing.Size(838, 89);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ログにマッチした直後に鳴らすサウンド";
@@ -515,7 +536,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MatchTextToSpeakTextBox.Location = new System.Drawing.Point(152, 55);
             this.MatchTextToSpeakTextBox.Name = "MatchTextToSpeakTextBox";
-            this.MatchTextToSpeakTextBox.Size = new System.Drawing.Size(626, 19);
+            this.MatchTextToSpeakTextBox.Size = new System.Drawing.Size(680, 19);
             this.MatchTextToSpeakTextBox.TabIndex = 1;
             // 
             // label8
@@ -622,7 +643,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.KeywordTextBox.Location = new System.Drawing.Point(158, 68);
             this.KeywordTextBox.Name = "KeywordTextBox";
-            this.KeywordTextBox.Size = new System.Drawing.Size(632, 19);
+            this.KeywordTextBox.Size = new System.Drawing.Size(686, 19);
             this.KeywordTextBox.TabIndex = 3;
             // 
             // SpellTitleTextBox
@@ -660,9 +681,9 @@
             // AddButton
             // 
             this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.AddButton.Location = new System.Drawing.Point(276, 637);
+            this.AddButton.Location = new System.Drawing.Point(249, 637);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(102, 25);
+            this.AddButton.Size = new System.Drawing.Size(75, 25);
             this.AddButton.TabIndex = 1;
             this.AddButton.Text = "追加";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -698,7 +719,7 @@
             this.SpellTimerTreeView.Location = new System.Drawing.Point(6, 6);
             this.SpellTimerTreeView.Name = "SpellTimerTreeView";
             this.SpellTimerTreeView.ShowNodeToolTips = true;
-            this.SpellTimerTreeView.Size = new System.Drawing.Size(372, 625);
+            this.SpellTimerTreeView.Size = new System.Drawing.Size(318, 625);
             this.SpellTimerTreeView.TabIndex = 0;
             // 
             // tabPage2
@@ -760,7 +781,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(285, 239);
+            this.label26.Location = new System.Drawing.Point(297, 239);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(148, 12);
             this.label26.TabIndex = 11;
@@ -780,9 +801,9 @@
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(262, 239);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(17, 12);
+            this.label24.Size = new System.Drawing.Size(29, 12);
             this.label24.TabIndex = 23;
-            this.label24.Text = "秒";
+            this.label24.Text = "秒後";
             // 
             // TimeOfHideNumericUpDown
             // 
@@ -1022,15 +1043,6 @@
             this.SaveFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
             this.SaveFileDialog.RestoreDirectory = true;
             // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(647, 46);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(115, 12);
-            this.label27.TabIndex = 25;
-            this.label27.Text = "※より小さいほうが優先";
-            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1147,5 +1159,6 @@
         private System.Windows.Forms.NumericUpDown DisplayNoNumericUpDown;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.CheckBox DontHideCheckBox;
     }
 }

@@ -93,6 +93,7 @@
                 spells =
                     from x in spells
                     where
+                    x.DontHide ||
                     (DateTime.Now - x.MatchDateTime.AddSeconds(x.RecastTime)).TotalSeconds <= Settings.Default.TimeOfHideSpell
                     select
                     x;

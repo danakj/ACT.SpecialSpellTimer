@@ -161,8 +161,25 @@
             lock (SpellTimerTable.Table)
             {
                 var nr = SpellTimerTable.Table.NewSpellTimerRow();
+
                 nr.Panel = "General";
                 nr.SpellTitle = "New Spell";
+
+                // 現在選択しているノードの情報を一部コピーする
+                if (this.SpellTimerTreeView.SelectedNode != null)
+                {
+                    var baseRow = this.SpellTimerTreeView.SelectedNode.Tag != null ?
+                        this.SpellTimerTreeView.SelectedNode.Tag as SpellTimerDataSet.SpellTimerRow :
+                        this.SpellTimerTreeView.SelectedNode.Nodes[0].Tag as SpellTimerDataSet.SpellTimerRow;
+
+                    if (baseRow != null)
+                    {
+                        nr.Panel = baseRow.Panel;
+                        nr.SpellTitle = baseRow.SpellTitle + " New";
+                        nr.Keyword = baseRow.Keyword;
+                    }
+                }
+
                 nr.ProgressBarVisible = true;
                 nr.MatchDateTime = DateTime.MinValue;
                 nr.BarColor = Settings.Default.ProgressBarColor.ToHTML();
@@ -175,8 +192,35 @@
 
                 SpellTimerTable.Save();
 
-                this.ShowDetail(nr);
-                this.LoadSpellTimerTable();
+                // 新しいノードを生成する
+                var node = new TreeNode(nr.SpellTitle)
+                {
+                    Tag = nr,
+                    Checked = nr.Enabled
+                };
+
+                // 親ノードがあれば追加する
+                foreach (TreeNode item in this.SpellTimerTreeView.Nodes)
+                {
+                    if (item.Text == nr.Panel)
+                    {
+                        item.Nodes.Add(node);
+                        this.SpellTimerTreeView.SelectedNode = node;
+                        break;
+                    }
+                }
+
+                // 親ノードがなかった
+                if (this.SpellTimerTreeView.SelectedNode != node)
+                {
+                    var parentNode = new TreeNode(nr.Panel, new TreeNode[] { node })
+                    {
+                        Checked = true
+                    };
+
+                    this.SpellTimerTreeView.Nodes.Add(parentNode);
+                    this.SpellTimerTreeView.SelectedNode = node;
+                }
             }
         }
 
@@ -235,6 +279,7 @@
                     src.IsReverse = this.IsReverseCheckBox.Checked;
                     src.BarColor = this.SampleLabel.BackColor.ToHTML();
                     src.FontColor = this.SampleLabel.ForeColor.ToHTML();
+                    src.DontHide = this.DontHideCheckBox.Checked;
 
                     SpellTimerTable.Save();
                 }
@@ -318,6 +363,7 @@
                 Settings.Default.FontColor :
                 src.FontColor.FromHTML();
             this.SampleLabel.Font = Settings.Default.Font;
+            this.DontHideCheckBox.Checked = src.DontHide;
 
             // データソースをタグに突っ込んでおく
             this.DetailGroupBox.Tag = src;
