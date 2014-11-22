@@ -97,20 +97,13 @@
             var foreRect = new Rectangle();
             foreRect.Stroke = foreBrush;
             foreRect.Fill = foreBrush;
-            foreRect.Width = (double)(Settings.Default.ProgressBarSize.Width * this.Progress);
+            foreRect.Width = this.IsReverse ?
+                (double)(Settings.Default.ProgressBarSize.Width * (1.0d - this.Progress)) :
+                (double)(Settings.Default.ProgressBarSize.Width * this.Progress);
             foreRect.Height = Settings.Default.ProgressBarSize.Height;
             foreRect.RadiusX = 2.0d;
             foreRect.RadiusY = 2.0d;
-
-            if (this.IsReverse)
-            {
-                Canvas.SetLeft(foreRect, foreRect.Width);
-            }
-            else
-            {
-                Canvas.SetLeft(foreRect, 0);
-            }
-
+            Canvas.SetLeft(foreRect, 0);
             Canvas.SetTop(foreRect, 0);
 
             var backRect = new Rectangle();
