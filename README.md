@@ -1,53 +1,54 @@
 ACT.SpecialSpellTimer
 =====================
 
-ŠT—v
+æ¦‚è¦
 -------------
-Œ©‚â‚·‚³‚ð‰ü‘P‚µ‚½ƒXƒyƒ‹ƒ^ƒCƒ}[‚ð’ñ‹Ÿ‚µ‚Ü‚·
+è¦‹ã‚„ã™ã•ã‚’æ”¹å–„ã—ãŸã‚¹ãƒšãƒ«ã‚¿ã‚¤ãƒžãƒ¼ã‚’æä¾›ã—ã¾ã™
   
   
-Žg‚¢•û
+ä½¿ã„æ–¹
 --------------
 ACT.SpecialSpellTimer.dll  
-‚ðACT‚ÌƒCƒ“ƒXƒg[ƒ‹ƒfƒBƒŒƒNƒgƒŠ‚ÉƒRƒs[‚µ‚Ü‚·  
-‚»‚ÌŒãAƒvƒ‰ƒOƒCƒ“‚Æ‚µ‚ÄACT.SpecialSpellTimer.dll‚ð’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢  
+ã‚’ACTã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«ã‚³ãƒ”ãƒ¼ã—ã¾ã™  
+ãã®å¾Œã€ãƒ—ãƒ©ã‚°ã‚¤ãƒ³ã¨ã—ã¦ACT.SpecialSpellTimer.dllã‚’è¿½åŠ ã—ã¦ãã ã•ã„  
   
-1) ƒTƒEƒ“ƒh‚ª–Â‚ç‚È‚¢H  
-ƒTƒEƒ“ƒh‚ÌÄ¶‚É‚Í [ACT.TTSYukkuri](https://github.com/anoyetta/ACT.TTSYukkuri/releases/latest) ‚ª•K—v‚É‚È‚è‚Ü‚·  
+1) ã‚µã‚¦ãƒ³ãƒ‰ãŒé³´ã‚‰ãªã„ï¼Ÿ  
+ã‚µã‚¦ãƒ³ãƒ‰ã®å†ç”Ÿã«ã¯ [ACT.TTSYukkuri](https://github.com/anoyetta/ACT.TTSYukkuri/releases/latest) ãŒå¿…è¦ã«ãªã‚Šã¾ã™  
   
-2) DoT‚ÌŠJŽn‚Éƒqƒbƒg‚³‚¹‚ÄDoTŒp‘±ŽžŠÔ‚ð‰ÂŽ‹‰»‚µ‚½‚¢  
-[ƒGƒtƒFƒNƒg‚ðŽó‚¯‚½l‚Ì–¼‘O] gains the effect of ƒtƒ‰ƒNƒ`ƒƒ[ from [ƒGƒtƒFƒNƒg‚ð—^‚¦‚½l‚Ì–¼‘O]  
-ACT‚ª“f‚«o‚·ƒƒO‚É‚Íã‹L‚Ì‚æ‚¤‚È“ÆŽ©‚ÌƒƒO‚ª‚ ‚è‚Ü‚·  
-‚±‚ê‚É‘Î‚µ‚Ä³‹K•\Œ»‚ðÝ’è‚µ‚ÄAŽ©g‚ª—^‚¦‚½DoTi‚»‚Ì‘¼ƒfƒoƒt‚à‰Âj‚ÌŠJŽn‚ðŒŸo‚µ‚Ä‚­‚¾‚³‚¢  
+2) DoTã®é–‹å§‹ã«ãƒ’ãƒƒãƒˆã•ã›ã¦DoTç¶™ç¶šæ™‚é–“ã‚’å¯è¦–åŒ–ã—ãŸã„  
+[ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’å—ã‘ãŸäººã®åå‰] gains the effect of ãƒ•ãƒ©ã‚¯ãƒãƒ£ãƒ¼ from [ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’ä¸ŽãˆãŸäººã®åå‰]  
+ACTãŒåãå‡ºã™ãƒ­ã‚°ã«ã¯ä¸Šè¨˜ã®ã‚ˆã†ãªç‹¬è‡ªã®ãƒ­ã‚°ãŒã‚ã‚Šã¾ã™  
+ã“ã‚Œã«å¯¾ã—ã¦æ­£è¦è¡¨ç¾ã‚’è¨­å®šã—ã¦ã€è‡ªèº«ãŒä¸ŽãˆãŸDoTï¼ˆãã®ä»–ãƒ‡ãƒãƒ•ã‚‚å¯ï¼‰ã®é–‹å§‹ã‚’æ¤œå‡ºã—ã¦ãã ã•ã„  
   
-3) ƒQ[ƒ€“à‚ÌƒvƒŒ[ƒXƒzƒ‹ƒ_‚ÍŽg‚¦‚È‚¢‚ÌH  
-ˆê•”‚ÍŽg‚¦‚é‚æ‚¤‚É‘Î‰ž‚µ‚Ä‚¢‚Ü‚·  
-<me>     ¨ Žg‚¦‚Ü‚·  
-<0>`<8> ¨ ‘Î‰ž—\’è  
-<t>      ¨ ‘Î‰ž—\’è  
-<tt>     ¨ ‘Î‰ž—\’è  
-<ft>     ¨ ‘Î‰ž—\’è  
+3) ã‚²ãƒ¼ãƒ å†…ã®ãƒ—ãƒ¬ãƒ¼ã‚¹ãƒ›ãƒ«ãƒ€ã¯ä½¿ãˆãªã„ã®ï¼Ÿ  
+ä¸€éƒ¨ã¯ä½¿ãˆã‚‹ã‚ˆã†ã«å¯¾å¿œã—ã¦ã„ã¾ã™  
+<pre>
+&lt;me&gt;     â†’ ä½¿ãˆã¾ã™  
+&lt;0&gt;ï½ž&lt;8&gt; â†’ å¯¾å¿œäºˆå®š  
+&lt;t&gt;      â†’ å¯¾å¿œäºˆå®š  
+&lt;tt&gt;     â†’ å¯¾å¿œäºˆå®š  
+&lt;ft&gt;     â†’ å¯¾å¿œäºˆå®š  
+</pre>  
   
-  
-ÅVƒŠƒŠ[ƒX
+æœ€æ–°ãƒªãƒªãƒ¼ã‚¹
 --------------
-**[‚±‚¿‚ç‚©‚çƒ_ƒEƒ“ƒ[ƒh‚µ‚Ä‚­‚¾‚³‚¢](https://github.com/anoyetta/ACT.SpecialSpellTimer/releases/latest)**  
+**[ã“ã¡ã‚‰ã‹ã‚‰ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ã¦ãã ã•ã„](https://github.com/anoyetta/ACT.SpecialSpellTimer/releases/latest)**  
   
   
-ƒ‰ƒCƒZƒ“ƒX
+ãƒ©ã‚¤ã‚»ãƒ³ã‚¹
 --------------
-ŽOð€BSDƒ‰ƒCƒZƒ“ƒX  
+ä¸‰æ¡é …BSDãƒ©ã‚¤ã‚»ãƒ³ã‚¹  
 Copryright (c) 2014, anoyetta  
 https://github.com/anoyetta/ACT.SpecialSpellTimer/blob/master/LICENSE  
   
   
-ŽÓŽ«
+è¬è¾ž
 --------------
-EGB19xx—l  
+ãƒ»GB19xxæ§˜  
 https://github.com/GB19xx/ACT.TPMonitor  
-‚ÌFF14ƒwƒ‹ƒp[ƒNƒ‰ƒX‚ð—¬—p‚³‚¹‚Ä‚¢‚½‚¾‚«‚Ü‚µ‚½  
+ã®FF14ãƒ˜ãƒ«ãƒ‘ãƒ¼ã‚¯ãƒ©ã‚¹ã‚’æµç”¨ã•ã›ã¦ã„ãŸã ãã¾ã—ãŸ  
 
-E–‚‰¤°—l  
+ãƒ»é­”çŽ‹é­‚æ§˜  
 http://maoudamashii.jokersounds.com/  
-‰¹Šy‘fÞ‚Æ‚¢‚Á‚½‚ç–‚‰¤°B  
-“¯«‚³‚ê‚½waveƒTƒEƒ“ƒhƒtƒ@ƒCƒ‹‚Ì’˜ìŒ ‚Í–‚‰¤°‚É‹A‘®‚µ‚Ü‚·  
+éŸ³æ¥½ç´ æã¨ã„ã£ãŸã‚‰é­”çŽ‹é­‚ã€‚  
+åŒæ¢±ã•ã‚ŒãŸwaveã‚µã‚¦ãƒ³ãƒ‰ãƒ•ã‚¡ã‚¤ãƒ«ã®è‘—ä½œæ¨©ã¯é­”çŽ‹é­‚ã«å¸°å±žã—ã¾ã™  
