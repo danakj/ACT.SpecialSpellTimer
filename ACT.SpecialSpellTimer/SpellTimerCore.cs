@@ -155,7 +155,7 @@
                             spell.MatchedLog = logInfo.logLine.Trim();
 
                             // 置換したスペル名を格納する
-                            spell.SpellTitleReplaced =  regex.Replace(
+                            spell.SpellTitleReplaced = regex.Replace(
                                 logInfo.logLine.Trim(),
                                 spell.SpellTitle);
 
@@ -164,11 +164,15 @@
                             spell.TimeupDone = false;
 
                             // マッチ時点のサウンドを再生する
-                            var tts = regex.Replace(
-                                logInfo.logLine.Trim(),
-                                spell.MatchTextToSpeak);
                             this.Play(spell.MatchSound);
-                            this.Play(tts);
+
+                            if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
+                            {
+                                var tts = regex.Replace(
+                                    logInfo.logLine.Trim(),
+                                    spell.MatchTextToSpeak);
+                                this.Play(tts);
+                            }
                         }
                     }
                 }
@@ -264,9 +268,13 @@
 
                         if (DateTime.Now >= over)
                         {
-                            var tts = regex.Replace(spell.MatchedLog, spell.OverTextToSpeak);
                             this.Play(spell.OverSound);
-                            this.Play(tts);
+                            if (!string.IsNullOrWhiteSpace(spell.OverTextToSpeak))
+                            {
+                                var tts = regex.Replace(spell.MatchedLog, spell.OverTextToSpeak);
+                                this.Play(tts);
+                            }
+
                             spell.OverDone = true;
                         }
                     }
@@ -279,9 +287,13 @@
                         var recast = spell.MatchDateTime.AddSeconds(spell.RecastTime);
                         if (DateTime.Now >= recast)
                         {
-                            var tts = regex.Replace(spell.MatchedLog, spell.TimeupTextToSpeak);
                             this.Play(spell.TimeupSound);
-                            this.Play(tts);
+                            if (!string.IsNullOrWhiteSpace(spell.TimeupTextToSpeak))
+                            {
+                                var tts = regex.Replace(spell.MatchedLog, spell.TimeupTextToSpeak);
+                                this.Play(tts);
+                            }
+
                             spell.TimeupDone = true;
                         }
                     }
