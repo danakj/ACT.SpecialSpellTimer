@@ -21,6 +21,39 @@
         }
 
         /// <summary>
+        /// HTMLColorに変換する
+        /// </summary>
+        /// <param name="color">Color</param>
+        /// <returns>HTMLカラー</returns>
+        public static string ToHTML(
+            this System.Drawing.Color color)
+        {
+            return System.Drawing.ColorTranslator.ToHtml(color);
+        }
+
+        /// <summary>
+        /// HTMLからカラーに
+        /// </summary>
+        /// <param name="color">HTMLカラー</param>
+        /// <returns>カラー</returns>
+        public static System.Drawing.Color FromHTML(
+            this string color)
+        {
+            return System.Drawing.ColorTranslator.FromHtml(color);
+        }
+
+        /// <summary>
+        /// HTMLからカラーに
+        /// </summary>
+        /// <param name="color">HTMLカラー</param>
+        /// <returns>カラー</returns>
+        public static System.Windows.Media.Color FromHTMLWPF(
+            this string color)
+        {
+            return System.Drawing.ColorTranslator.FromHtml(color).ToWPF();
+        }
+
+        /// <summary>
         /// 明るさを変更する
         /// </summary>
         /// <param name="color">Color</param>

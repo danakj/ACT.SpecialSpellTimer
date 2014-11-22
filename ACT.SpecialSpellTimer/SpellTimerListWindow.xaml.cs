@@ -113,7 +113,12 @@
             foreach (var spell in spells)
             {
                 var c = new SpellTimerControl();
-                c.SpellTitle = spell.SpellTitle;
+                c.SpellTitle = string.IsNullOrWhiteSpace(spell.SpellTitleReplaced) ?
+                    spell.SpellTitle :
+                    spell.SpellTitleReplaced;
+                c.IsReverse = spell.IsReverse;
+                c.BarColor = spell.BarColor;
+                c.FontColor = spell.FontColor;
                 c.RecastTime = 0;
                 c.Progress = 1.0d;
 

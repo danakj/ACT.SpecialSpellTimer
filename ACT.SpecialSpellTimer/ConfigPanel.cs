@@ -9,6 +9,7 @@
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Sound;
+    using ACT.SpecialSpellTimer.Utility;
 
     /// <summary>
     /// 設定Panel
@@ -112,6 +113,24 @@
                 }
             };
 
+            this.OneBarColorButton.Click += (s1, e1) =>
+            {
+                this.ColorDialog.Color = this.SampleLabel.BackColor;
+                if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
+                {
+                    this.SampleLabel.BackColor = this.ColorDialog.Color;
+                }
+            };
+
+            this.OneFontColorButton.Click += (s1, e1) =>
+            {
+                this.ColorDialog.Color = this.SampleLabel.ForeColor;
+                if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
+                {
+                    this.SampleLabel.ForeColor = this.ColorDialog.Color;
+                }
+            };
+
             // オプションのロードメソッドを呼ぶ
             this.LoadOption();
         }
@@ -146,6 +165,8 @@
                 nr.SpellTitle = "New Spell";
                 nr.ProgressBarVisible = true;
                 nr.MatchDateTime = DateTime.MinValue;
+                nr.BarColor = Settings.Default.ProgressBarColor.ToHTML();
+                nr.FontColor = Settings.Default.FontColor.ToHTML();
                 nr.Enabled = true;
                 SpellTimerTable.Table.AddSpellTimerRow(nr);
 
@@ -206,6 +227,10 @@
 
                     src.TimeupSound = (string)this.TimeupSoundComboBox.SelectedValue ?? string.Empty;
                     src.TimeupTextToSpeak = this.TimeupTextToSpeakTextBox.Text;
+
+                    src.IsReverse = this.IsReverseCheckBox.Checked;
+                    src.BarColor = this.SampleLabel.BackColor.ToHTML();
+                    src.FontColor = this.SampleLabel.ForeColor.ToHTML();
 
                     SpellTimerTable.Save();
                 }
@@ -280,6 +305,15 @@
             this.TimeupSoundComboBox.SelectedValue = src.TimeupSound;
             this.TimeupTextToSpeakTextBox.Text = src.TimeupTextToSpeak;
 
+            this.IsReverseCheckBox.Checked = src.IsReverse;
+            this.SampleLabel.BackColor = string.IsNullOrWhiteSpace(src.BarColor) ?
+                Settings.Default.ProgressBarColor :
+                src.BarColor.FromHTML();
+            this.SampleLabel.ForeColor = string.IsNullOrWhiteSpace(src.FontColor) ?
+                Settings.Default.FontColor :
+                src.FontColor.FromHTML();
+            this.SampleLabel.Font = Settings.Default.Font;
+
             // データソースをタグに突っ込んでおく
             this.DetailGroupBox.Tag = src;
         }
@@ -339,8 +373,16 @@
         {
             if (this.SaveFileDialog.ShowDialog(this) != DialogResult.Cancel)
             {
-                SpellTimerTable.Save(
-                    this.SaveFileDialog.FileName);
+                var copy = SpellTimerTable.Table.Copy() as SpellTimerDataSet.SpellTimerDataTable;
+
+                foreach (var item in copy)
+                {
+                    item.SpellTitleReplaced = string.Empty;
+                    item.MatchedLog = string.Empty;
+                    item.MatchDateTime = DateTime.MinValue;
+                }
+
+                copy.WriteXml(this.SaveFileDialog.FileName);
             }
         }
 

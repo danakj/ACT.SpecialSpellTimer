@@ -348,7 +348,15 @@ namespace ACT.SpecialSpellTimer {
             
             private global::System.Data.DataColumn columnTimeupHide;
             
-            private global::System.Data.DataColumn columnTargetJobId;
+            private global::System.Data.DataColumn columnIsReverse;
+            
+            private global::System.Data.DataColumn columnFontColor;
+            
+            private global::System.Data.DataColumn columnBarColor;
+            
+            private global::System.Data.DataColumn columnSpellTitleReplaced;
+            
+            private global::System.Data.DataColumn columnMatchedLog;
             
             private global::System.Data.DataColumn columnEnabled;
             
@@ -523,9 +531,41 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn TargetJobIdColumn {
+            public global::System.Data.DataColumn IsReverseColumn {
                 get {
-                    return this.columnTargetJobId;
+                    return this.columnIsReverse;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FontColorColumn {
+                get {
+                    return this.columnFontColor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BarColorColumn {
+                get {
+                    return this.columnBarColor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SpellTitleReplacedColumn {
+                get {
+                    return this.columnSpellTitleReplaced;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MatchedLogColumn {
+                get {
+                    return this.columnMatchedLog;
                 }
             }
             
@@ -592,7 +632,11 @@ namespace ACT.SpecialSpellTimer {
                         bool OverDone, 
                         bool TimeupDone, 
                         bool TimeupHide, 
-                        int TargetJobId, 
+                        bool IsReverse, 
+                        string FontColor, 
+                        string BarColor, 
+                        string SpellTitleReplaced, 
+                        string MatchedLog, 
                         bool Enabled) {
                 SpellTimerRow rowSpellTimerRow = ((SpellTimerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -613,7 +657,11 @@ namespace ACT.SpecialSpellTimer {
                         OverDone,
                         TimeupDone,
                         TimeupHide,
-                        TargetJobId,
+                        IsReverse,
+                        FontColor,
+                        BarColor,
+                        SpellTitleReplaced,
+                        MatchedLog,
                         Enabled};
                 rowSpellTimerRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSpellTimerRow);
@@ -654,7 +702,11 @@ namespace ACT.SpecialSpellTimer {
                 this.columnOverDone = base.Columns["OverDone"];
                 this.columnTimeupDone = base.Columns["TimeupDone"];
                 this.columnTimeupHide = base.Columns["TimeupHide"];
-                this.columnTargetJobId = base.Columns["TargetJobId"];
+                this.columnIsReverse = base.Columns["IsReverse"];
+                this.columnFontColor = base.Columns["FontColor"];
+                this.columnBarColor = base.Columns["BarColor"];
+                this.columnSpellTitleReplaced = base.Columns["SpellTitleReplaced"];
+                this.columnMatchedLog = base.Columns["MatchedLog"];
                 this.columnEnabled = base.Columns["Enabled"];
             }
             
@@ -695,8 +747,16 @@ namespace ACT.SpecialSpellTimer {
                 base.Columns.Add(this.columnTimeupDone);
                 this.columnTimeupHide = new global::System.Data.DataColumn("TimeupHide", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTimeupHide);
-                this.columnTargetJobId = new global::System.Data.DataColumn("TargetJobId", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTargetJobId);
+                this.columnIsReverse = new global::System.Data.DataColumn("IsReverse", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIsReverse);
+                this.columnFontColor = new global::System.Data.DataColumn("FontColor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFontColor);
+                this.columnBarColor = new global::System.Data.DataColumn("BarColor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBarColor);
+                this.columnSpellTitleReplaced = new global::System.Data.DataColumn("SpellTitleReplaced", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSpellTitleReplaced);
+                this.columnMatchedLog = new global::System.Data.DataColumn("MatchedLog", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMatchedLog);
                 this.columnEnabled = new global::System.Data.DataColumn("Enabled", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEnabled);
                 this.columnPanel.AllowDBNull = false;
@@ -731,8 +791,16 @@ namespace ACT.SpecialSpellTimer {
                 this.columnTimeupDone.DefaultValue = ((bool)(false));
                 this.columnTimeupHide.AllowDBNull = false;
                 this.columnTimeupHide.DefaultValue = ((bool)(false));
-                this.columnTargetJobId.AllowDBNull = false;
-                this.columnTargetJobId.DefaultValue = ((int)(0));
+                this.columnIsReverse.AllowDBNull = false;
+                this.columnIsReverse.DefaultValue = ((bool)(false));
+                this.columnFontColor.AllowDBNull = false;
+                this.columnFontColor.DefaultValue = ((string)(""));
+                this.columnBarColor.AllowDBNull = false;
+                this.columnBarColor.DefaultValue = ((string)(""));
+                this.columnSpellTitleReplaced.AllowDBNull = false;
+                this.columnSpellTitleReplaced.DefaultValue = ((string)(""));
+                this.columnMatchedLog.AllowDBNull = false;
+                this.columnMatchedLog.DefaultValue = ((string)(""));
                 this.columnEnabled.AllowDBNull = false;
                 this.columnEnabled.DefaultValue = ((bool)(false));
             }
@@ -1350,12 +1418,56 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int TargetJobId {
+            public bool IsReverse {
                 get {
-                    return ((int)(this[this.tableSpellTimer.TargetJobIdColumn]));
+                    return ((bool)(this[this.tableSpellTimer.IsReverseColumn]));
                 }
                 set {
-                    this[this.tableSpellTimer.TargetJobIdColumn] = value;
+                    this[this.tableSpellTimer.IsReverseColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FontColor {
+                get {
+                    return ((string)(this[this.tableSpellTimer.FontColorColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.FontColorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string BarColor {
+                get {
+                    return ((string)(this[this.tableSpellTimer.BarColorColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.BarColorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string SpellTitleReplaced {
+                get {
+                    return ((string)(this[this.tableSpellTimer.SpellTitleReplacedColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.SpellTitleReplacedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MatchedLog {
+                get {
+                    return ((string)(this[this.tableSpellTimer.MatchedLogColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.MatchedLogColumn] = value;
                 }
             }
             

@@ -36,6 +36,21 @@
         public double Progress { get; set; }
 
         /// <summary>
+        /// プログレスバーを逆にするか？
+        /// </summary>
+        public bool IsReverse { get; set; }
+
+        /// <summary>
+        /// バーの色
+        /// </summary>
+        public string BarColor { get; set; }
+
+        /// <summary>
+        /// Fontの色
+        /// </summary>
+        public string FontColor { get; set; }
+
+        /// <summary>
         /// 描画を更新する
         /// </summary>
         public void Refresh()
@@ -45,6 +60,10 @@
             var tb = default(TextBlock);
             var font = Settings.Default.Font;
             var fontBrush = new SolidColorBrush(Settings.Default.FontColor.ToWPF());
+            if (!string.IsNullOrWhiteSpace(this.FontColor))
+            {
+                fontBrush.Color = this.FontColor.FromHTMLWPF();
+            }
 
             // Titleを描画する
             tb = this.SpellTitleTextBlock;
@@ -59,7 +78,7 @@
             tb = this.RecastTimeTextBlock;
             tb.Text = this.RecastTime > 0 ?
                 this.RecastTime.ToString("N1") :
-                "Ready";
+                this.IsReverse ? "Over" : "Ready";
             tb.FontFamily = font.ToFontFamilyWPF();
             tb.FontSize = font.ToFontSizeWPF();
             tb.FontStyle = font.ToFontStyleWPF();
@@ -68,7 +87,12 @@
 
             // ProgressBarを描画する
             var foreBrush = new SolidColorBrush(Settings.Default.ProgressBarColor.ToWPF());
-            var backBrush = new SolidColorBrush(Settings.Default.ProgressBarColor.ToWPF().ChangeBrightness(0.4d));
+            if (!string.IsNullOrWhiteSpace(this.BarColor))
+            {
+                foreBrush.Color = this.BarColor.FromHTMLWPF();
+            }
+
+            var backBrush = new SolidColorBrush(foreBrush.Color.ChangeBrightness(0.4d));
 
             var foreRect = new Rectangle();
             foreRect.Stroke = foreBrush;
@@ -77,7 +101,16 @@
             foreRect.Height = Settings.Default.ProgressBarSize.Height;
             foreRect.RadiusX = 2.0d;
             foreRect.RadiusY = 2.0d;
-            Canvas.SetLeft(foreRect, 0);
+
+            if (this.IsReverse)
+            {
+                Canvas.SetLeft(foreRect, foreRect.Width);
+            }
+            else
+            {
+                Canvas.SetLeft(foreRect, 0);
+            }
+
             Canvas.SetTop(foreRect, 0);
 
             var backRect = new Rectangle();
