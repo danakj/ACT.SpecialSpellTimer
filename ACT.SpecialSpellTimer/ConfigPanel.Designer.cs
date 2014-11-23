@@ -113,6 +113,10 @@
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.label28 = new System.Windows.Forms.Label();
+            this.RefreshIntervalNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -127,6 +131,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarHeightNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarWidthNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // TabControl
@@ -724,6 +729,10 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label30);
+            this.tabPage2.Controls.Add(this.label29);
+            this.tabPage2.Controls.Add(this.RefreshIntervalNumericUpDown);
+            this.tabPage2.Controls.Add(this.label28);
             this.tabPage2.Controls.Add(this.AutoSortReverseCheckBox);
             this.tabPage2.Controls.Add(this.TekiyoButton);
             this.tabPage2.Controls.Add(this.label26);
@@ -1043,6 +1052,57 @@
             this.SaveFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
             this.SaveFileDialog.RestoreDirectory = true;
             // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(6, 264);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(87, 12);
+            this.label28.TabIndex = 25;
+            this.label28.Text = "画面の更新間隔";
+            // 
+            // RefreshIntervalNumericUpDown
+            // 
+            this.RefreshIntervalNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.RefreshIntervalNumericUpDown.Location = new System.Drawing.Point(197, 262);
+            this.RefreshIntervalNumericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.RefreshIntervalNumericUpDown.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.RefreshIntervalNumericUpDown.Name = "RefreshIntervalNumericUpDown";
+            this.RefreshIntervalNumericUpDown.Size = new System.Drawing.Size(59, 19);
+            this.RefreshIntervalNumericUpDown.TabIndex = 26;
+            this.RefreshIntervalNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.RefreshIntervalNumericUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(262, 264);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(31, 12);
+            this.label29.TabIndex = 27;
+            this.label29.Text = "ミリ秒";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(299, 264);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(176, 12);
+            this.label30.TabIndex = 28;
+            this.label30.Text = "※スペックに合わせて設定してください";
+            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1069,6 +1129,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarHeightNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarWidthNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1160,5 +1221,9 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.CheckBox DontHideCheckBox;
+        private System.Windows.Forms.NumericUpDown RefreshIntervalNumericUpDown;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
     }
 }
