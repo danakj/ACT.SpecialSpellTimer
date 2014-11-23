@@ -5,7 +5,6 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
     using System.Timers;
     using System.Windows;
 
@@ -125,15 +124,11 @@
                 // プレイヤ情報を取得する
                 var player = this.GetPlayer();
 
-#if !DEBUG
-                // プレイヤ情報が取得できなければ全てのWindowを隠す
+                // プレイヤ情報がない？
                 if (player == null)
                 {
-                    this.HidePanels();
-                    this.RefreshTimer.Interval = 1000;
                     return;
                 }
-#endif
 
                 // タイマの間隔を標準に戻す
                 this.RefreshTimer.Interval = Settings.Default.RefreshInterval;

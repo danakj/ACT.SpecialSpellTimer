@@ -164,6 +164,9 @@
 
                 nr.Panel = "General";
                 nr.SpellTitle = "New Spell";
+                nr.ProgressBarVisible = true;
+                nr.BarColor = Settings.Default.ProgressBarColor.ToHTML();
+                nr.FontColor = Settings.Default.FontColor.ToHTML();
 
                 // 現在選択しているノードの情報を一部コピーする
                 if (this.SpellTimerTreeView.SelectedNode != null)
@@ -177,13 +180,17 @@
                         nr.Panel = baseRow.Panel;
                         nr.SpellTitle = baseRow.SpellTitle + " New";
                         nr.Keyword = baseRow.Keyword;
+                        nr.RecastTime = baseRow.RecastTime;
+                        nr.RepeatEnabled = baseRow.RepeatEnabled;
+                        nr.ProgressBarVisible = baseRow.ProgressBarVisible;
+                        nr.IsReverse = baseRow.IsReverse;
+                        nr.BarColor = baseRow.BarColor;
+                        nr.FontColor = baseRow.FontColor;
+                        nr.DontHide = baseRow.DontHide;
                     }
                 }
 
-                nr.ProgressBarVisible = true;
                 nr.MatchDateTime = DateTime.MinValue;
-                nr.BarColor = Settings.Default.ProgressBarColor.ToHTML();
-                nr.FontColor = Settings.Default.FontColor.ToHTML();
                 nr.Enabled = true;
                 nr.DisplayNo = SpellTimerTable.Table.Any() ?
                     SpellTimerTable.Table.Max(x => x.DisplayNo) + 1 :
