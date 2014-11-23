@@ -140,18 +140,18 @@
 
                     if (!string.IsNullOrWhiteSpace(keyword))
                     {
-                        if (Regex.IsMatch(
-                            logInfo.logLine.Trim(),
+                        var regex = new Regex(
                             keyword,
-                            RegexOptions.IgnoreCase | RegexOptions.Singleline))
+                            RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+                        if (regex.IsMatch(logInfo.logLine.Trim()))
                         {
                             // ヒットしたログを格納する
                             spell.MatchedLog = logInfo.logLine.Trim();
 
                             // 置換したスペル名を格納する
-                            spell.SpellTitleReplaced = Regex.Replace(
+                            spell.SpellTitleReplaced = regex.Replace(
                                 logInfo.logLine.Trim(),
-                                keyword,
                                 spell.SpellTitle);
 
                             spell.MatchDateTime = DateTime.Now;
@@ -241,6 +241,9 @@
                 foreach (var spell in SpellTimerTable.EnabledTable.AsParallel())
                 {
                     var keyword = this.MakeKeyword(spell.Keyword);
+                    var regex = new Regex(
+                        keyword,
+                        RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
                     // Repeat対象のSpellを更新する
                     if (spell.RepeatEnabled &&
@@ -266,11 +269,9 @@
                             this.Play(spell.OverSound);
                             if (!string.IsNullOrWhiteSpace(spell.OverTextToSpeak))
                             {
-                                var tts = Regex.Replace(
+                                var tts = regex.Replace(
                                     spell.MatchedLog,
-                                    keyword,
-                                    spell.OverTextToSpeak,
-                                    RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                                    spell.OverTextToSpeak);
                                 this.Play(tts);
                             }
 
@@ -289,11 +290,9 @@
                             this.Play(spell.TimeupSound);
                             if (!string.IsNullOrWhiteSpace(spell.TimeupTextToSpeak))
                             {
-                                var tts = Regex.Replace(
+                                var tts = regex.Replace(
                                     spell.MatchedLog,
-                                    keyword,
-                                    spell.TimeupTextToSpeak,
-                                    RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                                    spell.TimeupTextToSpeak);
                                 this.Play(tts);
                             }
 
