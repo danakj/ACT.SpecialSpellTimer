@@ -97,7 +97,7 @@ namespace ACT.SpecialSpellTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("250")]
         public long RefreshInterval {
             get {
                 return ((long)(this["RefreshInterval"]));

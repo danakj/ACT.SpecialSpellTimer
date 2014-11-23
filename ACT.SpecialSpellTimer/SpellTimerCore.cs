@@ -122,7 +122,7 @@
                     logInfo.logLine);
 
                 // プレイヤ情報を取得する
-                var player = this.GetPlayer();
+                var player = FF14PluginHelper.GetPlayer();
 
                 // プレイヤ情報がない？
                 if (player == null)
@@ -134,24 +134,24 @@
                 this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
 
                 // Spellリストとマッチングする
-                foreach (var spell in SpellTimerTable.EnabledTable)
+                foreach (var spell in SpellTimerTable.EnabledTable.AsParallel())
                 {
                     var keyword = this.MakeKeyword(spell.Keyword);
 
                     if (!string.IsNullOrWhiteSpace(keyword))
                     {
-                        var regex = new Regex(
+                        if (Regex.IsMatch(
+                            logInfo.logLine.Trim(),
                             keyword,
-                            RegexOptions.IgnoreCase | RegexOptions.Singleline);
-
-                        if (regex.IsMatch(logInfo.logLine.Trim()))
+                            RegexOptions.IgnoreCase | RegexOptions.Singleline))
                         {
                             // ヒットしたログを格納する
                             spell.MatchedLog = logInfo.logLine.Trim();
 
                             // 置換したスペル名を格納する
-                            spell.SpellTitleReplaced = regex.Replace(
+                            spell.SpellTitleReplaced = Regex.Replace(
                                 logInfo.logLine.Trim(),
+                                keyword,
                                 spell.SpellTitle);
 
                             spell.MatchDateTime = DateTime.Now;
@@ -163,8 +163,9 @@
 
                             if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
                             {
-                                var tts = regex.Replace(
+                                var tts = Regex.Replace(
                                     logInfo.logLine.Trim(),
+                                    keyword,
                                     spell.MatchTextToSpeak);
                                 this.Play(tts);
                             }
@@ -237,12 +238,9 @@
                 this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
 
                 // Spellを舐める
-                foreach (var spell in SpellTimerTable.EnabledTable)
+                foreach (var spell in SpellTimerTable.EnabledTable.AsParallel())
                 {
-                    // 正規表現を生成する
-                    var regex = new Regex(
-                        this.MakeKeyword(spell.Keyword),
-                        RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                    var keyword = this.MakeKeyword(spell.Keyword);
 
                     // Repeat対象のSpellを更新する
                     if (spell.RepeatEnabled &&
@@ -268,7 +266,11 @@
                             this.Play(spell.OverSound);
                             if (!string.IsNullOrWhiteSpace(spell.OverTextToSpeak))
                             {
-                                var tts = regex.Replace(spell.MatchedLog, spell.OverTextToSpeak);
+                                var tts = Regex.Replace(
+                                    spell.MatchedLog,
+                                    keyword,
+                                    spell.OverTextToSpeak,
+                                    RegexOptions.IgnoreCase | RegexOptions.Singleline);
                                 this.Play(tts);
                             }
 
@@ -287,7 +289,11 @@
                             this.Play(spell.TimeupSound);
                             if (!string.IsNullOrWhiteSpace(spell.TimeupTextToSpeak))
                             {
-                                var tts = regex.Replace(spell.MatchedLog, spell.TimeupTextToSpeak);
+                                var tts = Regex.Replace(
+                                    spell.MatchedLog,
+                                    keyword,
+                                    spell.TimeupTextToSpeak,
+                                    RegexOptions.IgnoreCase | RegexOptions.Singleline);
                                 this.Play(tts);
                             }
 
@@ -494,62 +500,6 @@
         }
 
         /// <summary>
-        /// プレイヤ情報を取得する
-        /// </summary>
-        /// <returns>プレイヤ情報</returns>
-        private Combatant GetPlayer()
-        {
-            var list = FF14PluginHelper.GetCombatantList();
-
-            if (list.Count > 0)
-            {
-                return list[0];
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// パーティの戦闘メンバリストを取得する
-        /// </summary>
-        /// <returns>パーティの戦闘メンバリスト</returns>
-        public List<Combatant> GetCombatantListParty()
-        {
-            // 総戦闘メンバリストを取得する（周囲のPC, NPC, MOB等すべて）
-            var combatListAll = FF14PluginHelper.GetCombatantList();
-
-            // パーティメンバのIDリストを取得する
-            int partyCount;
-            var partyListById = FF14PluginHelper.GetCurrentPartyList(out partyCount);
-
-            var combatListParty = new List<Combatant>();
-
-            foreach (var partyMemberId in partyListById)
-            {
-                if (partyMemberId == 0)
-                {
-                    continue;
-                }
-
-                var partyMember = (
-                    from x in combatListAll
-                    where
-                    x.ID == partyMemberId
-                    select
-                    x).FirstOrDefault();
-
-                if (partyMember != null)
-                {
-                    combatListParty.Add(partyMember);
-                }
-            }
-
-            return combatListParty;
-        }
-
-        /// <summary>
         /// 正規表現用のキーワードを生成する
         /// </summary>
         /// <param name="pattern">元のパターン</param>
@@ -559,54 +509,10 @@
         {
             var keyword = pattern.Trim();
 
-            var player = this.GetPlayer();
+            var player = FF14PluginHelper.GetPlayer();
             if (player != null)
             {
                 keyword = keyword.Replace("<me>", player.Name.Trim());
-            }
-
-            var party = this.GetCombatantListParty();
-            if (party != null)
-            {
-                if (party.Count > 0)
-                {
-                    keyword = keyword.Replace("<1>", party[0].Name.Trim());
-                }
-
-                if (party.Count > 1)
-                {
-                    keyword = keyword.Replace("<2>", party[1].Name.Trim());
-                }
-
-                if (party.Count > 2)
-                {
-                    keyword = keyword.Replace("<3>", party[2].Name.Trim());
-                }
-
-                if (party.Count > 3)
-                {
-                    keyword = keyword.Replace("<4>", party[3].Name.Trim());
-                }
-
-                if (party.Count > 4)
-                {
-                    keyword = keyword.Replace("<5>", party[4].Name.Trim());
-                }
-
-                if (party.Count > 5)
-                {
-                    keyword = keyword.Replace("<6>", party[5].Name.Trim());
-                }
-
-                if (party.Count > 6)
-                {
-                    keyword = keyword.Replace("<7>", party[6].Name.Trim());
-                }
-
-                if (party.Count > 7)
-                {
-                    keyword = keyword.Replace("<8>", party[7].Name.Trim());
-                }
             }
 
             return string.IsNullOrWhiteSpace(keyword) ?

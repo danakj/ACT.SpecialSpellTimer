@@ -8,7 +8,7 @@
 
     using Advanced_Combat_Tracker;
 
-    public static class FF14PluginHelper
+    public static partial class FF14PluginHelper
     {
         private static object lockObject = new object();
         private static object plugin;
