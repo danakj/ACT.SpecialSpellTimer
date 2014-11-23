@@ -134,7 +134,7 @@
                 this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
 
                 // Spellリストとマッチングする
-                foreach (var spell in SpellTimerTable.EnabledTable.AsParallel())
+                foreach (var spell in SpellTimerTable.EnabledTable)
                 {
                     var keyword = this.MakeKeyword(spell.Keyword);
 
@@ -237,10 +237,12 @@
                 this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
 
                 // Spellを舐める
-                foreach (var spell in SpellTimerTable.EnabledTable.AsParallel())
+                foreach (var spell in SpellTimerTable.EnabledTable)
                 {
                     // 正規表現を生成する
-                    var regex = new Regex(this.MakeKeyword(spell.Keyword));
+                    var regex = new Regex(
+                        this.MakeKeyword(spell.Keyword),
+                        RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
                     // Repeat対象のSpellを更新する
                     if (spell.RepeatEnabled &&
