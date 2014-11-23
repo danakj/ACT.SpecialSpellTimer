@@ -8,6 +8,7 @@ ACT.SpecialSpellTimer
   
 使い方
 --------------
+resources  
 ACT.SpecialSpellTimer.dll  
 をACTのインストールディレクトリにコピーします  
 その後、プラグインとしてACT.SpecialSpellTimer.dllを追加してください  
