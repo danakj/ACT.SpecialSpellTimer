@@ -6,6 +6,8 @@ ACT.SpecialSpellTimer
 見やすさを改善した特別なスペルタイマーを提供します  
 愛称は「スペスペ」  
   
+![sample](https://raw.githubusercontent.com/anoyetta/ACT.SpecialSpellTimer/master/sample.png)  
+
 使い方
 --------------
 resources  
