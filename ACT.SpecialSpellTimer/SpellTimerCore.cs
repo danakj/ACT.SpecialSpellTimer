@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Threading;
+    using System.Timers;
     using System.Windows;
 
     using ACT.SpecialSpellTimer.Properties;
@@ -42,14 +42,9 @@
         private Timer RefreshTimer;
 
         /// <summary>
-        /// 次の更新タイミング
-        /// </summary>
-        private long NextRefresh;
-
-        /// <summary>
         /// ログバッファ
         /// </summary>
-        private List<string> LogBuffer = new List<string>();
+        private LogBuffer LogBuffer;
 
         /// <summary>
         /// SpellTimerのPanelリスト
@@ -68,38 +63,41 @@
             // Panelリストを生成する
             this.SpellTimerPanels = new List<SpellTimerListWindow>();
 
-            // ACTのログ読取りにイベントを仕込む
-            ActGlobals.oFormActMain.OnLogLineRead += this.oFormActMain_OnLogLineRead;
+            // ログバッファを生成する
+            this.LogBuffer = new LogBuffer();
 
             // Refreshタイマを開始する
-            this.RefreshTimer = new Timer(new TimerCallback((state) =>
+            this.RefreshTimer = new Timer()
             {
-                try
-                {
-                    this.RefreshWindow();
-                }
-                catch (Exception ex)
-                {
-                    ActGlobals.oFormActMain.WriteExceptionLog(
-                        ex,
-                        "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
-                }
-                finally
-                {
-                    this.RefreshTimer.Change(
-                        this.NextRefresh,
-                        Timeout.Infinite);
-                }
-            }),
-            null,
-            Timeout.Infinite,
-            Timeout.Infinite);
+                AutoReset = false,
+                Interval = Settings.Default.RefreshInterval,
+                Enabled = false
+            };
 
-            this.NextRefresh = Settings.Default.RefreshInterval;
+            this.RefreshTimer.Elapsed += (s1, e1) =>
+            {
+                lock (this.RefreshTimer)
+                {
+                    try
+                    {
+                        this.RefreshTimer.Stop();
 
-            this.RefreshTimer.Change(
-                this.NextRefresh,
-                Timeout.Infinite);
+                        this.RefreshWindow();
+                    }
+                    catch (Exception ex)
+                    {
+                        ActGlobals.oFormActMain.WriteExceptionLog(
+                            ex,
+                            "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
+                    }
+                    finally
+                    {
+                        this.RefreshTimer.Start();
+                    }
+                }
+            };
+
+            this.RefreshTimer.Start();
         }
 
         /// <summary>
@@ -107,8 +105,11 @@
         /// </summary>
         public void End()
         {
-            // ACTからイベントを外す
-            ActGlobals.oFormActMain.OnLogLineRead -= this.oFormActMain_OnLogLineRead;
+            // ログバッファを開放する
+            if (this.LogBuffer != null)
+            {
+                this.LogBuffer.Dispose();
+            }
 
             // 監視を止める
             if (this.RefreshTimer != null)
@@ -126,30 +127,6 @@
 
             // instanceを消去する
             instance = null;
-        }
-
-        /// <summary>
-        /// ACT OnLogLineRead
-        /// </summary>
-        /// <param name="isImport">インポートログか？</param>
-        /// <param name="logInfo">ログ情報</param>
-        private void oFormActMain_OnLogLineRead(
-            bool isImport,
-            LogLineEventArgs logInfo)
-        {
-            if (isImport)
-            {
-                return;
-            }
-
-#if false
-            Debug.WriteLine(
-                logInfo.detectedTime.ToString("yyyy-MM-dd HH:mm:ss.fff") + " " +
-                logInfo.logLine);
-#endif
-
-            // LogLineReadはかなりの頻度で発生するためここではログを溜めておくのみとする
-            this.LogBuffer.Add(logInfo.logLine.Trim());
         }
 
         /// <summary>
@@ -188,7 +165,7 @@
                 !ActGlobals.oFormActMain.Visible)
             {
                 this.HidePanels();
-                this.NextRefresh = 1000;
+                this.RefreshTimer.Interval = 1000;
                 return;
             }
 
@@ -197,18 +174,16 @@
                 if (FF14PluginHelper.GetFFXIVProcess == null)
                 {
                     this.HidePanels();
-                    this.NextRefresh = 1000;
+                    this.RefreshTimer.Interval = 1000;
                     return;
                 }
 #endif
 
             // タイマの間隔を標準に戻す
-            this.NextRefresh = Settings.Default.RefreshInterval;
+            this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
 
             // ログを取り出す
-            var logLines = new string[0];
-            logLines = this.LogBuffer.ToArray();
-            this.LogBuffer.Clear();
+            var logLines = this.LogBuffer.GetNewLogLines();
 
             // Spellを舐める
             foreach (var spell in spellArray)
