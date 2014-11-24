@@ -3,6 +3,8 @@
     using System;
     using System.IO;
     using System.Linq;
+    using System.Collections.Generic;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// SpellTimerテーブル
@@ -38,14 +40,23 @@
         {
             get
             {
-                return (
+                var spells =
                     from x in Table
                     where
                     x.Enabled
                     orderby
                     x.DisplayNo
                     select
-                    x).ToArray();
+                    x;
+
+                var spellsRegex = new List<SpellTimerWithRegex>();
+                foreach (var spell in spells)
+                {
+                    var ns = new SpellTimerWithRegex();
+                    ns.Spell = spell;
+
+                    var newPattern = MakeKeyword(spell.Keyword);
+                }
             }
         }
 
@@ -133,6 +144,45 @@
             }
 
             Table.WriteXml(file);
+        }
+
+        /// <summary>
+        /// 正規表現用のキーワードを生成する
+        /// </summary>
+        /// <param name="pattern">元のパターン</param>
+        /// <returns>マッチ用キーワード</returns>
+        private static string MakeKeyword(
+            string pattern)
+        {
+            var keyword = pattern.Trim();
+
+            var player = FF14PluginHelper.GetPlayer();
+            if (player != null)
+            {
+                keyword = keyword.Replace("<me>", player.Name.Trim());
+            }
+
+            return string.IsNullOrWhiteSpace(keyword) ?
+                string.Empty :
+                ".*" + keyword + ".*";
+        }
+
+        /// <summary>
+        /// コンパイル済み正規表現付きのスペルタイマ行
+        /// </summary>
+        public class SpellTimerWithRegex
+        {
+            public SpellTimerDataSet.SpellTimerRow Spell { get; set; }
+
+            /// <summary>
+            /// 正規表現
+            /// </summary>
+            public Regex Regex { get; set; }
+
+            /// <summary>
+            /// 正規表現に適用したパターン
+            /// </summary>
+            public string RegexPattern { get; set; }
         }
     }
 }

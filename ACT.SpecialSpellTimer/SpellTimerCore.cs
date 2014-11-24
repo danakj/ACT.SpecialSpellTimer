@@ -2,11 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text.RegularExpressions;
     using System.Timers;
     using System.Windows;
-
     using ACT.SpecialSpellTimer.Properties;
     using Advanced_Combat_Tracker;
 
@@ -42,6 +42,11 @@
         private Timer RefreshTimer;
 
         /// <summary>
+        /// 画面更新のインターバル
+        /// </summary>
+        private double RefreshInterval;
+
+        /// <summary>
         /// ログバッファ
         /// </summary>
         private LogBuffer LogBuffer;
@@ -67,33 +72,41 @@
             this.LogBuffer = new LogBuffer();
 
             // Refreshタイマを開始する
-            this.RefreshTimer = new Timer()
+            this.RefreshInterval = Settings.Default.RefreshInterval;
+            this.RefreshTimer = new Timer(this.RefreshInterval)
             {
                 AutoReset = false,
-                Interval = Settings.Default.RefreshInterval,
                 Enabled = false
             };
 
             this.RefreshTimer.Elapsed += (s1, e1) =>
             {
-                lock (this.RefreshTimer)
-                {
-                    try
-                    {
-                        this.RefreshTimer.Stop();
+                var sw = new Stopwatch();
+                sw.Start();
 
-                        this.RefreshWindow();
-                    }
-                    catch (Exception ex)
-                    {
-                        ActGlobals.oFormActMain.WriteExceptionLog(
-                            ex,
-                            "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
-                    }
-                    finally
-                    {
-                        this.RefreshTimer.Start();
-                    }
+                Debug.WriteLine("●Refresh Start " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
+
+                try
+                {
+                    this.RefreshTimer.Stop();
+
+                    this.RefreshWindow();
+                }
+                catch (Exception ex)
+                {
+                    ActGlobals.oFormActMain.WriteExceptionLog(
+                        ex,
+                        "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
+                }
+                finally
+                {
+                    sw.Stop();
+                    Debug.WriteLine("●Refresh " + sw.ElapsedMilliseconds.ToString("N0") + "ms");
+
+                    this.RefreshTimer.AutoReset = true;
+                    this.RefreshTimer.Interval = this.RefreshInterval;
+                    this.RefreshTimer.AutoReset = false;
+                    this.RefreshTimer.Start();
                 }
             };
 
@@ -165,7 +178,7 @@
                 !ActGlobals.oFormActMain.Visible)
             {
                 this.HidePanels();
-                this.RefreshTimer.Interval = 1000;
+                this.RefreshInterval = 1000;
                 return;
             }
 
@@ -174,19 +187,19 @@
                 if (FF14PluginHelper.GetFFXIVProcess == null)
                 {
                     this.HidePanels();
-                    this.RefreshTimer.Interval = 1000;
+                    this.RefreshInterval = 1000;
                     return;
                 }
 #endif
 
             // タイマの間隔を標準に戻す
-            this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
+            this.RefreshInterval = Settings.Default.RefreshInterval;
 
             // ログを取り出す
-            var logLines = this.LogBuffer.GetNewLogLines();
+            var logLines = this.LogBuffer.GetLogLines();
 
             // Spellを舐める
-            foreach (var spell in spellArray)
+            foreach (var spell in spellArray.AsParallel())
             {
                 var keyword = this.MakeKeyword(spell.Keyword);
 
@@ -198,7 +211,7 @@
                 // キーワードに対する正規表現を生成する
                 var regex = new Regex(
                     keyword,
-                    RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                    RegexOptions.IgnoreCase);
 
                 // マッチする？
                 foreach (var logLine in logLines.AsParallel())
@@ -210,7 +223,7 @@
 
                         // 置換したスペル名を格納する
                         spell.SpellTitleReplaced = regex.Replace(
-                            logLine.Trim(),
+                            logLine,
                             spell.SpellTitle);
 
                         spell.MatchDateTime = DateTime.Now;
@@ -222,9 +235,8 @@
 
                         if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
                         {
-                            var tts = Regex.Replace(
-                                logLine.Trim(),
-                                keyword,
+                            var tts = regex.Replace(
+                                logLine,
                                 spell.MatchTextToSpeak);
                             this.Play(tts);
                         }
@@ -471,27 +483,6 @@
             string source)
         {
             ACT.SpecialSpellTimer.Sound.SoundController.Default.Play(source);
-        }
-
-        /// <summary>
-        /// 正規表現用のキーワードを生成する
-        /// </summary>
-        /// <param name="pattern">元のパターン</param>
-        /// <returns>マッチ用キーワード</returns>
-        private string MakeKeyword(
-            string pattern)
-        {
-            var keyword = pattern.Trim();
-
-            var player = FF14PluginHelper.GetPlayer();
-            if (player != null)
-            {
-                keyword = keyword.Replace("<me>", player.Name.Trim());
-            }
-
-            return string.IsNullOrWhiteSpace(keyword) ?
-                string.Empty :
-                ".*" + keyword + ".*";
         }
     }
 }
