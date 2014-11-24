@@ -278,8 +278,17 @@
                             continue;
                         }
 
+                        var keyword = spell.Keyword.Trim();
+
+                        // <me>を置換する
+                        var player = FF14PluginHelper.GetPlayer();
+                        if (player != null)
+                        {
+                            keyword = keyword.Replace("<me>", player.Name);
+                        }
+
                         // キーワードが含まれるか？
-                        if (logLine.ToUpper().Contains(spell.Keyword.ToUpper()))
+                        if (logLine.ToUpper().Contains(keyword.ToUpper()))
                         {
                             // ヒットしたログを格納する
                             spell.MatchedLog = logLine;
