@@ -5,9 +5,9 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
     using System.Timers;
     using System.Windows;
-
     using ACT.SpecialSpellTimer.Properties;
     using Advanced_Combat_Tracker;
 
@@ -202,8 +202,67 @@
             // ログを取り出す
             var logLines = this.LogBuffer.GetLogLines();
 
+            // スペルリストとマッチングする
+            this.MatchSpells(
+                spellArray,
+                logLines);
+
+            // オーバーレイが非表示？
+            if (!Settings.Default.OverlayVisible)
+            {
+                this.HidePanels();
+                return;
+            }
+
+            // Windowを表示する
+            var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
+            foreach (var name in panelNames)
+            {
+                ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
+                {
+                    var w = this.SpellTimerPanels.Where(x => x.PanelName == name).FirstOrDefault();
+                    if (w == null)
+                    {
+                        w = new SpellTimerListWindow()
+                        {
+                            Title = "SpecialSpellTimer - " + name,
+                            PanelName = name,
+                        };
+
+                        this.SpellTimerPanels.Add(w);
+
+                        // クリックスルー？
+                        if (Settings.Default.ClickThroughEnabled)
+                        {
+                            w.ToTransparentWindow();
+                        }
+
+                        w.Show();
+                    }
+
+                    w.SpellTimers = (
+                        from x in spellArray
+                        where
+                        x.Panel.Trim() == name
+                        select
+                        x).ToArray();
+
+                    w.RefreshSpellTimer();
+                });
+            }
+        }
+
+        /// <summary>
+        /// Spellをマッチングする
+        /// </summary>
+        /// <param name="spells">Spell</param>
+        /// <param name="logLines">ログ</param>
+        private void MatchSpells(
+            SpellTimerDataSet.SpellTimerRow[] spells,
+            string[] logLines)
+        {
             // Spellを舐める
-            foreach (var spell in spellArray.AsParallel())
+            foreach (var spell in spells)
             {
                 var regex = spell.Regex as Regex;
                 if (regex == null)
@@ -214,29 +273,32 @@
                 // マッチする？
                 foreach (var logLine in logLines.AsParallel())
                 {
-                    if (regex.IsMatch(logLine))
+                    lock (logLine)
                     {
-                        // ヒットしたログを格納する
-                        spell.MatchedLog = logLine;
-
-                        // 置換したスペル名を格納する
-                        spell.SpellTitleReplaced = regex.Replace(
-                            logLine,
-                            spell.SpellTitle);
-
-                        spell.MatchDateTime = DateTime.Now;
-                        spell.OverDone = false;
-                        spell.TimeupDone = false;
-
-                        // マッチ時点のサウンドを再生する
-                        this.Play(spell.MatchSound);
-
-                        if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
+                        if (regex.IsMatch(logLine))
                         {
-                            var tts = regex.Replace(
+                            // ヒットしたログを格納する
+                            spell.MatchedLog = logLine;
+
+                            // 置換したスペル名を格納する
+                            spell.SpellTitleReplaced = regex.Replace(
                                 logLine,
-                                spell.MatchTextToSpeak);
-                            this.Play(tts);
+                                spell.SpellTitle);
+
+                            spell.MatchDateTime = DateTime.Now;
+                            spell.OverDone = false;
+                            spell.TimeupDone = false;
+
+                            // マッチ時点のサウンドを再生する
+                            this.Play(spell.MatchSound);
+
+                            if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
+                            {
+                                var tts = regex.Replace(
+                                    logLine,
+                                    spell.MatchTextToSpeak);
+                                this.Play(tts);
+                            }
                         }
                     }
                 }
@@ -295,50 +357,6 @@
                         spell.TimeupDone = true;
                     }
                 }
-            }
-
-            // オーバーレイが非表示？
-            if (!Settings.Default.OverlayVisible)
-            {
-                this.HidePanels();
-                return;
-            }
-
-            // Windowを表示する
-            var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
-            foreach (var name in panelNames)
-            {
-                ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
-                {
-                    var w = this.SpellTimerPanels.Where(x => x.PanelName == name).FirstOrDefault();
-                    if (w == null)
-                    {
-                        w = new SpellTimerListWindow()
-                        {
-                            Title = "SpecialSpellTimer - " + name,
-                            PanelName = name,
-                        };
-
-                        this.SpellTimerPanels.Add(w);
-
-                        // クリックスルー？
-                        if (Settings.Default.ClickThroughEnabled)
-                        {
-                            w.ToTransparentWindow();
-                        }
-
-                        w.Show();
-                    }
-
-                    w.SpellTimers = (
-                        from x in spellArray
-                        where
-                        x.Panel.Trim() == name
-                        select
-                        x).ToArray();
-
-                    w.RefreshSpellTimer();
-                });
             }
         }
 

@@ -55,7 +55,8 @@
 
                     if (!string.IsNullOrWhiteSpace(pattern))
                     {
-                        if (spell.Regex == null ||
+                        if (spell.IsRegexNull() ||
+                            spell.Regex == null ||
                             spell.RegexPattern != pattern)
                         {
                             spell.RegexPattern = pattern;
