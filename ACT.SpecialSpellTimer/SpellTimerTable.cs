@@ -53,13 +53,21 @@
                 {
                     var pattern = MakeKeyword(spell.Keyword);
 
-                    if (spell.Regex == null ||
-                        spell.RegexPattern != pattern)
+                    if (!string.IsNullOrWhiteSpace(pattern))
                     {
-                        spell.RegexPattern = pattern;
-                        spell.Regex = new Regex(
-                            pattern,
-                            RegexOptions.IgnoreCase | RegexOptions.Compiled);
+                        if (spell.Regex == null ||
+                            spell.RegexPattern != pattern)
+                        {
+                            spell.RegexPattern = pattern;
+                            spell.Regex = new Regex(
+                                pattern,
+                                RegexOptions.Compiled);
+                        }
+                    }
+                    else
+                    {
+                        spell.RegexPattern = string.Empty;
+                        spell.Regex = null;
                     }
                 }
 
