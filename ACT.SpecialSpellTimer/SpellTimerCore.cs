@@ -43,6 +43,11 @@
         private Timer RefreshTimer;
 
         /// <summary>
+        /// ログバッファ
+        /// </summary>
+        private List<string> LogBuffer = new List<string>();
+
+        /// <summary>
         /// SpellTimerのPanelリスト
         /// </summary>
         private List<SpellTimerListWindow> SpellTimerPanels
@@ -109,6 +114,7 @@
             bool isImport,
             LogLineEventArgs logInfo)
         {
+#if false
             try
             {
                 // インポートならば何もしない
@@ -179,6 +185,20 @@
                     ex,
                     "ACT.SpecialSpellTimer ログの解析で例外が発生しました。");
             }
+#endif
+            if (isImport)
+            {
+                return;
+            }
+
+            Debug.WriteLine(
+                logInfo.detectedTime.ToString("yyyy-MM-dd HH:mm:ss.fff") + " " +
+                logInfo.logLine);
+
+            lock (this.LogBuffer)
+            {
+                this.LogBuffer.Add(logInfo.logLine.Trim());
+            }
         }
 
         /// <summary>
@@ -241,9 +261,47 @@
                 foreach (var spell in SpellTimerTable.EnabledTable.AsParallel())
                 {
                     var keyword = this.MakeKeyword(spell.Keyword);
+
+                    if (string.IsNullOrWhiteSpace(keyword))
+                    {
+                        continue;
+                    }
+
+                    // キーワードに対する正規表現を生成する
                     var regex = new Regex(
                         keyword,
                         RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+                    // マッチする？
+                    foreach (var logLine in this.LogBuffer)
+                    {
+                        if (regex.IsMatch(logLine))
+                        {
+                            // ヒットしたログを格納する
+                            spell.MatchedLog = logLine;
+
+                            // 置換したスペル名を格納する
+                            spell.SpellTitleReplaced = regex.Replace(
+                                logLine.Trim(),
+                                spell.SpellTitle);
+
+                            spell.MatchDateTime = DateTime.Now;
+                            spell.OverDone = false;
+                            spell.TimeupDone = false;
+
+                            // マッチ時点のサウンドを再生する
+                            this.Play(spell.MatchSound);
+
+                            if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
+                            {
+                                var tts = Regex.Replace(
+                                    logLine.Trim(),
+                                    keyword,
+                                    spell.MatchTextToSpeak);
+                                this.Play(tts);
+                            }
+                        }
+                    }
 
                     // Repeat対象のSpellを更新する
                     if (spell.RepeatEnabled &&
@@ -299,6 +357,12 @@
                             spell.TimeupDone = true;
                         }
                     }
+                }
+
+                // ログバッファをクリアする
+                lock (this.LogBuffer)
+                {
+                    this.LogBuffer.Clear();
                 }
 
                 // オーバーレイが非表示？
