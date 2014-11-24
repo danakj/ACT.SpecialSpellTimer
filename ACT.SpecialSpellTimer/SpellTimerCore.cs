@@ -114,78 +114,6 @@
             bool isImport,
             LogLineEventArgs logInfo)
         {
-#if false
-            try
-            {
-                // インポートならば何もしない
-                if (isImport)
-                {
-                    return;
-                }
-
-                Debug.WriteLine(
-                    logInfo.detectedTime.ToString("yyyy-MM-dd HH:mm:ss.fff") + " " +
-                    logInfo.logLine);
-
-                // プレイヤ情報を取得する
-                var player = FF14PluginHelper.GetPlayer();
-
-                // プレイヤ情報がない？
-                if (player == null)
-                {
-                    return;
-                }
-
-                // タイマの間隔を標準に戻す
-                this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
-
-                // Spellリストとマッチングする
-                foreach (var spell in SpellTimerTable.EnabledTable.AsParallel())
-                {
-                    var keyword = this.MakeKeyword(spell.Keyword);
-
-                    if (!string.IsNullOrWhiteSpace(keyword))
-                    {
-                        var regex = new Regex(
-                            keyword,
-                            RegexOptions.IgnoreCase | RegexOptions.Singleline);
-
-                        if (regex.IsMatch(logInfo.logLine.Trim()))
-                        {
-                            // ヒットしたログを格納する
-                            spell.MatchedLog = logInfo.logLine.Trim();
-
-                            // 置換したスペル名を格納する
-                            spell.SpellTitleReplaced = regex.Replace(
-                                logInfo.logLine.Trim(),
-                                spell.SpellTitle);
-
-                            spell.MatchDateTime = DateTime.Now;
-                            spell.OverDone = false;
-                            spell.TimeupDone = false;
-
-                            // マッチ時点のサウンドを再生する
-                            this.Play(spell.MatchSound);
-
-                            if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
-                            {
-                                var tts = Regex.Replace(
-                                    logInfo.logLine.Trim(),
-                                    keyword,
-                                    spell.MatchTextToSpeak);
-                                this.Play(tts);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ActGlobals.oFormActMain.WriteExceptionLog(
-                    ex,
-                    "ACT.SpecialSpellTimer ログの解析で例外が発生しました。");
-            }
-#endif
             if (isImport)
             {
                 return;
@@ -195,6 +123,7 @@
                 logInfo.detectedTime.ToString("yyyy-MM-dd HH:mm:ss.fff") + " " +
                 logInfo.logLine);
 
+            // LogLineReadはかなりの頻度で発生するためここではログを溜めておくのみとする
             lock (this.LogBuffer)
             {
                 this.LogBuffer.Add(logInfo.logLine.Trim());
@@ -212,13 +141,16 @@
             {
                 this.RefreshTimer.Stop();
 
+                // 有効なSpellリストを取得する
+                var spellArray = SpellTimerTable.EnabledTable;
+
                 // 不要なWindowを閉じる
                 if (this.SpellTimerPanels != null)
                 {
                     var removeList = new List<SpellTimerListWindow>();
                     foreach (var panel in this.SpellTimerPanels)
                     {
-                        if (!SpellTimerTable.EnabledTable.Any(x => x.Panel == panel.PanelName))
+                        if (!spellArray.Any(x => x.Panel == panel.PanelName))
                         {
                             ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
                             {
@@ -257,8 +189,16 @@
                 // タイマの間隔を標準に戻す
                 this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
 
+                // ログを取り出す
+                var logLines = new string[0];
+                lock (this.LogBuffer)
+                {
+                    logLines = this.LogBuffer.ToArray();
+                    this.LogBuffer.Clear();
+                }
+
                 // Spellを舐める
-                foreach (var spell in SpellTimerTable.EnabledTable.AsParallel())
+                foreach (var spell in spellArray.AsParallel())
                 {
                     var keyword = this.MakeKeyword(spell.Keyword);
 
@@ -273,7 +213,7 @@
                         RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
                     // マッチする？
-                    foreach (var logLine in this.LogBuffer)
+                    foreach (var logLine in logLines.AsParallel())
                     {
                         if (regex.IsMatch(logLine))
                         {
@@ -359,12 +299,6 @@
                     }
                 }
 
-                // ログバッファをクリアする
-                lock (this.LogBuffer)
-                {
-                    this.LogBuffer.Clear();
-                }
-
                 // オーバーレイが非表示？
                 if (!Settings.Default.OverlayVisible)
                 {
@@ -373,7 +307,7 @@
                 }
 
                 // Windowを表示する
-                var panelNames = SpellTimerTable.EnabledTable.Select(x => x.Panel.Trim()).Distinct();
+                var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
                 foreach (var name in panelNames)
                 {
                     ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
@@ -399,7 +333,7 @@
                         }
 
                         w.SpellTimers = (
-                            from x in SpellTimerTable.EnabledTable
+                            from x in spellArray
                             where
                             x.Panel.Trim() == name
                             select
