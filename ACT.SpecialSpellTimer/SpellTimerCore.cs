@@ -5,9 +5,9 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Threading.Tasks;
     using System.Timers;
     using System.Windows;
+
     using ACT.SpecialSpellTimer.Properties;
     using Advanced_Combat_Tracker;
 
