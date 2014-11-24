@@ -388,8 +388,9 @@
                 this.SpellTimerTreeView.Nodes.Clear();
 
                 var panels = SpellTimerTable.Table
-                    .OrderBy(x => x.DisplayNo)
-                    .Select(x => x.Panel).Distinct();
+                    .OrderBy(x => x.Panel)
+                    .Select(x => x.Panel)
+                    .Distinct();
                 foreach (var panelName in panels)
                 {
                     var children = new List<TreeNode>();

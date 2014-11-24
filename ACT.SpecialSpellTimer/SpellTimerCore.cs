@@ -2,10 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Timers;
+    using System.Threading;
     using System.Windows;
 
     using ACT.SpecialSpellTimer.Properties;
@@ -43,6 +42,11 @@
         private Timer RefreshTimer;
 
         /// <summary>
+        /// 次の更新タイミング
+        /// </summary>
+        private long NextRefresh;
+
+        /// <summary>
         /// ログバッファ
         /// </summary>
         private List<string> LogBuffer = new List<string>();
@@ -68,15 +72,34 @@
             ActGlobals.oFormActMain.OnLogLineRead += this.oFormActMain_OnLogLineRead;
 
             // Refreshタイマを開始する
-            this.RefreshTimer = new Timer()
+            this.RefreshTimer = new Timer(new TimerCallback((state) =>
             {
-                AutoReset = false,
-                Enabled = false,
-                Interval = Settings.Default.RefreshInterval
-            };
+                try
+                {
+                    this.RefreshWindow();
+                }
+                catch (Exception ex)
+                {
+                    ActGlobals.oFormActMain.WriteExceptionLog(
+                        ex,
+                        "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
+                }
+                finally
+                {
+                    this.RefreshTimer.Change(
+                        this.NextRefresh,
+                        Timeout.Infinite);
+                }
+            }),
+            null,
+            Timeout.Infinite,
+            Timeout.Infinite);
 
-            this.RefreshTimer.Elapsed += this.RefreshTimer_Elapsed;
-            this.RefreshTimer.Start();
+            this.NextRefresh = Settings.Default.RefreshInterval;
+
+            this.RefreshTimer.Change(
+                this.NextRefresh,
+                Timeout.Infinite);
         }
 
         /// <summary>
@@ -119,239 +142,218 @@
                 return;
             }
 
+#if false
             Debug.WriteLine(
                 logInfo.detectedTime.ToString("yyyy-MM-dd HH:mm:ss.fff") + " " +
                 logInfo.logLine);
+#endif
 
             // LogLineReadはかなりの頻度で発生するためここではログを溜めておくのみとする
-            lock (this.LogBuffer)
-            {
-                this.LogBuffer.Add(logInfo.logLine.Trim());
-            }
+            this.LogBuffer.Add(logInfo.logLine.Trim());
         }
 
         /// <summary>
-        /// Refreshタイマ Elapsed
+        /// Windowを更新する
         /// </summary>
-        /// <param name="sender">イベント発生元</param>
-        /// <param name="e">イベント引数</param>
-        private void RefreshTimer_Elapsed(object sender, ElapsedEventArgs e)
+        private void RefreshWindow()
         {
-            try
+            // 有効なSpellリストを取得する
+            var spellArray = SpellTimerTable.EnabledTable;
+
+            // 不要なWindowを閉じる
+            if (this.SpellTimerPanels != null)
             {
-                this.RefreshTimer.Stop();
-
-                // 有効なSpellリストを取得する
-                var spellArray = SpellTimerTable.EnabledTable;
-
-                // 不要なWindowを閉じる
-                if (this.SpellTimerPanels != null)
+                var removeList = new List<SpellTimerListWindow>();
+                foreach (var panel in this.SpellTimerPanels)
                 {
-                    var removeList = new List<SpellTimerListWindow>();
-                    foreach (var panel in this.SpellTimerPanels)
+                    if (!spellArray.Any(x => x.Panel == panel.PanelName))
                     {
-                        if (!spellArray.Any(x => x.Panel == panel.PanelName))
+                        ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
                         {
-                            ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
-                            {
-                                panel.Close();
-                            });
+                            panel.Close();
+                        });
 
-                            removeList.Add(panel);
-                        }
-                    }
-
-                    foreach (var item in removeList)
-                    {
-                        this.SpellTimerPanels.Remove(item);
+                        removeList.Add(panel);
                     }
                 }
 
-                // ACTが起動していない？
-                if (ActGlobals.oFormActMain == null ||
-                    !ActGlobals.oFormActMain.Visible)
+                foreach (var item in removeList)
                 {
-                    this.HidePanels();
-                    this.RefreshTimer.Interval = 1000;
-                    return;
+                    this.SpellTimerPanels.Remove(item);
                 }
+            }
+
+            // ACTが起動していない？
+            if (ActGlobals.oFormActMain == null ||
+                !ActGlobals.oFormActMain.Visible)
+            {
+                this.HidePanels();
+                this.NextRefresh = 1000;
+                return;
+            }
 
 #if !DEBUG
                 // FF14が起動していない？
                 if (FF14PluginHelper.GetFFXIVProcess == null)
                 {
                     this.HidePanels();
-                    this.RefreshTimer.Interval = 1000;
+                    this.NextRefresh = 1000;
                     return;
                 }
 #endif
 
-                // タイマの間隔を標準に戻す
-                this.RefreshTimer.Interval = Settings.Default.RefreshInterval;
+            // タイマの間隔を標準に戻す
+            this.NextRefresh = Settings.Default.RefreshInterval;
 
-                // ログを取り出す
-                var logLines = new string[0];
-                lock (this.LogBuffer)
+            // ログを取り出す
+            var logLines = new string[0];
+            logLines = this.LogBuffer.ToArray();
+            this.LogBuffer.Clear();
+
+            // Spellを舐める
+            foreach (var spell in spellArray)
+            {
+                var keyword = this.MakeKeyword(spell.Keyword);
+
+                if (string.IsNullOrWhiteSpace(keyword))
                 {
-                    logLines = this.LogBuffer.ToArray();
-                    this.LogBuffer.Clear();
+                    continue;
                 }
 
-                // Spellを舐める
-                foreach (var spell in spellArray.AsParallel())
+                // キーワードに対する正規表現を生成する
+                var regex = new Regex(
+                    keyword,
+                    RegexOptions.IgnoreCase | RegexOptions.Singleline);
+
+                // マッチする？
+                foreach (var logLine in logLines.AsParallel())
                 {
-                    var keyword = this.MakeKeyword(spell.Keyword);
-
-                    if (string.IsNullOrWhiteSpace(keyword))
+                    if (regex.IsMatch(logLine))
                     {
-                        continue;
-                    }
+                        // ヒットしたログを格納する
+                        spell.MatchedLog = logLine;
 
-                    // キーワードに対する正規表現を生成する
-                    var regex = new Regex(
-                        keyword,
-                        RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                        // 置換したスペル名を格納する
+                        spell.SpellTitleReplaced = regex.Replace(
+                            logLine.Trim(),
+                            spell.SpellTitle);
 
-                    // マッチする？
-                    foreach (var logLine in logLines.AsParallel())
-                    {
-                        if (regex.IsMatch(logLine))
+                        spell.MatchDateTime = DateTime.Now;
+                        spell.OverDone = false;
+                        spell.TimeupDone = false;
+
+                        // マッチ時点のサウンドを再生する
+                        this.Play(spell.MatchSound);
+
+                        if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
                         {
-                            // ヒットしたログを格納する
-                            spell.MatchedLog = logLine;
-
-                            // 置換したスペル名を格納する
-                            spell.SpellTitleReplaced = regex.Replace(
+                            var tts = Regex.Replace(
                                 logLine.Trim(),
-                                spell.SpellTitle);
-
-                            spell.MatchDateTime = DateTime.Now;
-                            spell.OverDone = false;
-                            spell.TimeupDone = false;
-
-                            // マッチ時点のサウンドを再生する
-                            this.Play(spell.MatchSound);
-
-                            if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
-                            {
-                                var tts = Regex.Replace(
-                                    logLine.Trim(),
-                                    keyword,
-                                    spell.MatchTextToSpeak);
-                                this.Play(tts);
-                            }
-                        }
-                    }
-
-                    // Repeat対象のSpellを更新する
-                    if (spell.RepeatEnabled &&
-                        spell.MatchDateTime > DateTime.MinValue)
-                    {
-                        if (DateTime.Now >= spell.MatchDateTime.AddSeconds(spell.RecastTime))
-                        {
-                            spell.MatchDateTime = DateTime.Now;
-                            spell.OverDone = false;
-                            spell.TimeupDone = false;
-                        }
-                    }
-
-                    // ｎ秒後のSoundを再生する
-                    if (spell.OverTime > 0 &&
-                        !spell.OverDone &&
-                        spell.MatchDateTime > DateTime.MinValue)
-                    {
-                        var over = spell.MatchDateTime.AddSeconds(spell.OverTime);
-
-                        if (DateTime.Now >= over)
-                        {
-                            this.Play(spell.OverSound);
-                            if (!string.IsNullOrWhiteSpace(spell.OverTextToSpeak))
-                            {
-                                var tts = regex.Replace(
-                                    spell.MatchedLog,
-                                    spell.OverTextToSpeak);
-                                this.Play(tts);
-                            }
-
-                            spell.OverDone = true;
-                        }
-                    }
-
-                    // リキャスト完了のSoundを再生する
-                    if (spell.RecastTime > 0 &&
-                        !spell.TimeupDone &&
-                        spell.MatchDateTime > DateTime.MinValue)
-                    {
-                        var recast = spell.MatchDateTime.AddSeconds(spell.RecastTime);
-                        if (DateTime.Now >= recast)
-                        {
-                            this.Play(spell.TimeupSound);
-                            if (!string.IsNullOrWhiteSpace(spell.TimeupTextToSpeak))
-                            {
-                                var tts = regex.Replace(
-                                    spell.MatchedLog,
-                                    spell.TimeupTextToSpeak);
-                                this.Play(tts);
-                            }
-
-                            spell.TimeupDone = true;
+                                keyword,
+                                spell.MatchTextToSpeak);
+                            this.Play(tts);
                         }
                     }
                 }
 
-                // オーバーレイが非表示？
-                if (!Settings.Default.OverlayVisible)
+                // Repeat対象のSpellを更新する
+                if (spell.RepeatEnabled &&
+                    spell.MatchDateTime > DateTime.MinValue)
                 {
-                    this.HidePanels();
-                    return;
+                    if (DateTime.Now >= spell.MatchDateTime.AddSeconds(spell.RecastTime))
+                    {
+                        spell.MatchDateTime = DateTime.Now;
+                        spell.OverDone = false;
+                        spell.TimeupDone = false;
+                    }
                 }
 
-                // Windowを表示する
-                var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
-                foreach (var name in panelNames)
+                // ｎ秒後のSoundを再生する
+                if (spell.OverTime > 0 &&
+                    !spell.OverDone &&
+                    spell.MatchDateTime > DateTime.MinValue)
                 {
-                    ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
+                    var over = spell.MatchDateTime.AddSeconds(spell.OverTime);
+
+                    if (DateTime.Now >= over)
                     {
-                        var w = this.SpellTimerPanels.Where(x => x.PanelName == name).FirstOrDefault();
-                        if (w == null)
+                        this.Play(spell.OverSound);
+                        if (!string.IsNullOrWhiteSpace(spell.OverTextToSpeak))
                         {
-                            w = new SpellTimerListWindow()
-                            {
-                                Title = "SpecialSpellTimer - " + name,
-                                PanelName = name,
-                            };
-
-                            this.SpellTimerPanels.Add(w);
-
-                            // クリックスルー？
-                            if (Settings.Default.ClickThroughEnabled)
-                            {
-                                w.ToTransparentWindow();
-                            }
-
-                            w.Show();
+                            var tts = regex.Replace(
+                                spell.MatchedLog,
+                                spell.OverTextToSpeak);
+                            this.Play(tts);
                         }
 
-                        w.SpellTimers = (
-                            from x in spellArray
-                            where
-                            x.Panel.Trim() == name
-                            select
-                            x).ToArray();
+                        spell.OverDone = true;
+                    }
+                }
 
-                        w.RefreshSpellTimer();
-                    });
+                // リキャスト完了のSoundを再生する
+                if (spell.RecastTime > 0 &&
+                    !spell.TimeupDone &&
+                    spell.MatchDateTime > DateTime.MinValue)
+                {
+                    var recast = spell.MatchDateTime.AddSeconds(spell.RecastTime);
+                    if (DateTime.Now >= recast)
+                    {
+                        this.Play(spell.TimeupSound);
+                        if (!string.IsNullOrWhiteSpace(spell.TimeupTextToSpeak))
+                        {
+                            var tts = regex.Replace(
+                                spell.MatchedLog,
+                                spell.TimeupTextToSpeak);
+                            this.Play(tts);
+                        }
+
+                        spell.TimeupDone = true;
+                    }
                 }
             }
-            catch (Exception ex)
+
+            // オーバーレイが非表示？
+            if (!Settings.Default.OverlayVisible)
             {
-                ActGlobals.oFormActMain.WriteExceptionLog(
-                    ex,
-                    "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
+                this.HidePanels();
+                return;
             }
-            finally
+
+            // Windowを表示する
+            var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
+            foreach (var name in panelNames)
             {
-                this.RefreshTimer.Start();
+                ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
+                {
+                    var w = this.SpellTimerPanels.Where(x => x.PanelName == name).FirstOrDefault();
+                    if (w == null)
+                    {
+                        w = new SpellTimerListWindow()
+                        {
+                            Title = "SpecialSpellTimer - " + name,
+                            PanelName = name,
+                        };
+
+                        this.SpellTimerPanels.Add(w);
+
+                        // クリックスルー？
+                        if (Settings.Default.ClickThroughEnabled)
+                        {
+                            w.ToTransparentWindow();
+                        }
+
+                        w.Show();
+                    }
+
+                    w.SpellTimers = (
+                        from x in spellArray
+                        where
+                        x.Panel.Trim() == name
+                        select
+                        x).ToArray();
+
+                    w.RefreshSpellTimer();
+                });
             }
         }
 
@@ -365,7 +367,7 @@
                 if (ActGlobals.oFormActMain != null &&
                     ActGlobals.oFormActMain.Visible)
                 {
-                    ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+                    ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
                     {
                         foreach (var panel in this.SpellTimerPanels)
                         {
@@ -391,7 +393,7 @@
                 if (ActGlobals.oFormActMain != null &&
                     ActGlobals.oFormActMain.Visible)
                 {
-                    ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+                    ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
                     {
                         foreach (var panel in this.SpellTimerPanels)
                         {
@@ -412,7 +414,7 @@
                 if (ActGlobals.oFormActMain != null &&
                     ActGlobals.oFormActMain.Visible)
                 {
-                    ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+                    ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
                     {
                         foreach (var panel in this.SpellTimerPanels)
                         {
@@ -444,7 +446,7 @@
                 PanelSettings.Default.Save();
 
                 // Panelを閉じる
-                ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+                ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
                 {
                     foreach (var panel in this.SpellTimerPanels)
                     {
@@ -463,7 +465,7 @@
         {
             if (this.SpellTimerPanels != null)
             {
-                ActGlobals.oFormActMain.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate
+                ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
                 {
                     foreach (var panel in this.SpellTimerPanels)
                     {
