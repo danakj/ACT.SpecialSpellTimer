@@ -180,6 +180,7 @@
                         nr.Panel = baseRow.Panel;
                         nr.SpellTitle = baseRow.SpellTitle + " New";
                         nr.Keyword = baseRow.Keyword;
+                        nr.RegexEnabled = baseRow.RegexEnabled;
                         nr.RecastTime = baseRow.RecastTime;
                         nr.RepeatEnabled = baseRow.RepeatEnabled;
                         nr.ProgressBarVisible = baseRow.ProgressBarVisible;
@@ -271,6 +272,7 @@
                     src.SpellTitle = this.SpellTitleTextBox.Text;
                     src.DisplayNo = (int)this.DisplayNoNumericUpDown.Value;
                     src.Keyword = this.KeywordTextBox.Text;
+                    src.RegexEnabled = this.RegexEnabledCheckBox.Checked;
                     src.RecastTime = (int)this.RecastTimeNumericUpDown.Value;
                     src.RepeatEnabled = this.RepeatCheckBox.Checked;
                     src.ProgressBarVisible = this.ShowProgressBarCheckBox.Checked;
@@ -350,6 +352,7 @@
             this.SpellTitleTextBox.Text = src.SpellTitle;
             this.DisplayNoNumericUpDown.Value = src.DisplayNo;
             this.KeywordTextBox.Text = src.Keyword;
+            this.RegexEnabledCheckBox.Checked = src.RegexEnabled;
             this.RecastTimeNumericUpDown.Value = src.RecastTime;
             this.RepeatCheckBox.Checked = src.RepeatEnabled;
             this.ShowProgressBarCheckBox.Checked = src.ProgressBarVisible;

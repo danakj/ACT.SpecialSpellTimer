@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ClearAllButton = new System.Windows.Forms.Button();
@@ -70,7 +71,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.ShowProgressBarCheckBox = new System.Windows.Forms.CheckBox();
             this.RepeatCheckBox = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.RecastTimeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
@@ -84,6 +84,10 @@
             this.ExportButton = new System.Windows.Forms.Button();
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.RefreshIntervalNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label28 = new System.Windows.Forms.Label();
             this.AutoSortReverseCheckBox = new System.Windows.Forms.CheckBox();
             this.TekiyoButton = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
@@ -113,10 +117,9 @@
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.label28 = new System.Windows.Forms.Label();
-            this.RefreshIntervalNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
+            this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.TabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -127,11 +130,11 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecastTimeNumericUpDown)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarHeightNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarWidthNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // TabControl
@@ -169,7 +172,7 @@
             this.ClearAllButton.Location = new System.Drawing.Point(168, 637);
             this.ClearAllButton.Name = "ClearAllButton";
             this.ClearAllButton.Size = new System.Drawing.Size(75, 25);
-            this.ClearAllButton.TabIndex = 5;
+            this.ClearAllButton.TabIndex = 4;
             this.ClearAllButton.Text = "全て削除";
             this.ClearAllButton.UseVisualStyleBackColor = true;
             this.ClearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
@@ -179,6 +182,8 @@
             this.DetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DetailGroupBox.Controls.Add(this.label5);
+            this.DetailGroupBox.Controls.Add(this.RegexEnabledCheckBox);
             this.DetailGroupBox.Controls.Add(this.DontHideCheckBox);
             this.DetailGroupBox.Controls.Add(this.label27);
             this.DetailGroupBox.Controls.Add(this.DisplayNoNumericUpDown);
@@ -196,7 +201,6 @@
             this.DetailGroupBox.Controls.Add(this.label6);
             this.DetailGroupBox.Controls.Add(this.ShowProgressBarCheckBox);
             this.DetailGroupBox.Controls.Add(this.RepeatCheckBox);
-            this.DetailGroupBox.Controls.Add(this.label5);
             this.DetailGroupBox.Controls.Add(this.label4);
             this.DetailGroupBox.Controls.Add(this.RecastTimeNumericUpDown);
             this.DetailGroupBox.Controls.Add(this.label3);
@@ -208,7 +212,7 @@
             this.DetailGroupBox.Location = new System.Drawing.Point(330, 0);
             this.DetailGroupBox.Name = "DetailGroupBox";
             this.DetailGroupBox.Size = new System.Drawing.Size(850, 662);
-            this.DetailGroupBox.TabIndex = 2;
+            this.DetailGroupBox.TabIndex = 5;
             this.DetailGroupBox.TabStop = false;
             // 
             // DontHideCheckBox
@@ -217,7 +221,7 @@
             this.DontHideCheckBox.Location = new System.Drawing.Point(557, 140);
             this.DontHideCheckBox.Name = "DontHideCheckBox";
             this.DontHideCheckBox.Size = new System.Drawing.Size(140, 16);
-            this.DontHideCheckBox.TabIndex = 26;
+            this.DontHideCheckBox.TabIndex = 11;
             this.DontHideCheckBox.Text = "リキャスト後に消去しない";
             this.DontHideCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -258,7 +262,7 @@
             this.OneFontColorButton.Location = new System.Drawing.Point(484, 137);
             this.OneFontColorButton.Name = "OneFontColorButton";
             this.OneFontColorButton.Size = new System.Drawing.Size(52, 20);
-            this.OneFontColorButton.TabIndex = 9;
+            this.OneFontColorButton.TabIndex = 10;
             this.OneFontColorButton.Text = "Font色";
             this.OneFontColorButton.UseVisualStyleBackColor = true;
             // 
@@ -267,7 +271,7 @@
             this.OneBarColorButton.Location = new System.Drawing.Point(426, 137);
             this.OneBarColorButton.Name = "OneBarColorButton";
             this.OneBarColorButton.Size = new System.Drawing.Size(52, 20);
-            this.OneBarColorButton.TabIndex = 8;
+            this.OneBarColorButton.TabIndex = 9;
             this.OneBarColorButton.Text = "Bar色";
             this.OneBarColorButton.UseVisualStyleBackColor = true;
             // 
@@ -287,7 +291,7 @@
             this.IsReverseCheckBox.Location = new System.Drawing.Point(222, 140);
             this.IsReverseCheckBox.Name = "IsReverseCheckBox";
             this.IsReverseCheckBox.Size = new System.Drawing.Size(121, 16);
-            this.IsReverseCheckBox.TabIndex = 7;
+            this.IsReverseCheckBox.TabIndex = 8;
             this.IsReverseCheckBox.Text = "進行方向を逆にする";
             this.IsReverseCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -307,7 +311,7 @@
             this.DeleteButton.Location = new System.Drawing.Point(742, 631);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(102, 25);
-            this.DeleteButton.TabIndex = 11;
+            this.DeleteButton.TabIndex = 13;
             this.DeleteButton.Text = "削除";
             this.DeleteButton.UseVisualStyleBackColor = true;
             // 
@@ -317,7 +321,7 @@
             this.UpdateButton.Location = new System.Drawing.Point(634, 631);
             this.UpdateButton.Name = "UpdateButton";
             this.UpdateButton.Size = new System.Drawing.Size(102, 25);
-            this.UpdateButton.TabIndex = 10;
+            this.UpdateButton.TabIndex = 12;
             this.UpdateButton.Text = "更新";
             this.UpdateButton.UseVisualStyleBackColor = true;
             // 
@@ -587,33 +591,24 @@
             this.ShowProgressBarCheckBox.Location = new System.Drawing.Point(158, 140);
             this.ShowProgressBarCheckBox.Name = "ShowProgressBarCheckBox";
             this.ShowProgressBarCheckBox.Size = new System.Drawing.Size(48, 16);
-            this.ShowProgressBarCheckBox.TabIndex = 6;
+            this.ShowProgressBarCheckBox.TabIndex = 7;
             this.ShowProgressBarCheckBox.Text = "有効";
             this.ShowProgressBarCheckBox.UseVisualStyleBackColor = true;
             // 
             // RepeatCheckBox
             // 
             this.RepeatCheckBox.AutoSize = true;
-            this.RepeatCheckBox.Location = new System.Drawing.Point(158, 118);
+            this.RepeatCheckBox.Location = new System.Drawing.Point(234, 116);
             this.RepeatCheckBox.Name = "RepeatCheckBox";
-            this.RepeatCheckBox.Size = new System.Drawing.Size(48, 16);
-            this.RepeatCheckBox.TabIndex = 5;
-            this.RepeatCheckBox.Text = "有効";
+            this.RepeatCheckBox.Size = new System.Drawing.Size(129, 16);
+            this.RepeatCheckBox.TabIndex = 6;
+            this.RepeatCheckBox.Text = "リキャスト後に繰り返す";
             this.RepeatCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 119);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(110, 12);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "リキャスト後に繰り返す";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 97);
+            this.label4.Location = new System.Drawing.Point(6, 117);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(130, 12);
             this.label4.TabIndex = 7;
@@ -622,7 +617,7 @@
             // RecastTimeNumericUpDown
             // 
             this.RecastTimeNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.RecastTimeNumericUpDown.Location = new System.Drawing.Point(158, 93);
+            this.RecastTimeNumericUpDown.Location = new System.Drawing.Point(158, 115);
             this.RecastTimeNumericUpDown.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -630,7 +625,7 @@
             0});
             this.RecastTimeNumericUpDown.Name = "RecastTimeNumericUpDown";
             this.RecastTimeNumericUpDown.Size = new System.Drawing.Size(68, 19);
-            this.RecastTimeNumericUpDown.TabIndex = 4;
+            this.RecastTimeNumericUpDown.TabIndex = 5;
             this.RecastTimeNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
@@ -650,6 +645,7 @@
             this.KeywordTextBox.Name = "KeywordTextBox";
             this.KeywordTextBox.Size = new System.Drawing.Size(686, 19);
             this.KeywordTextBox.TabIndex = 3;
+            this.ToolTip.SetToolTip(this.KeywordTextBox, "ログに対して部分一致でマッチングします\r\n例)\r\nマッチングワード : は「凍てつく剣」の構え\r\nログ : シヴァは「凍てつく剣」の構え。\r\n→ マッチします");
             // 
             // SpellTitleTextBox
             // 
@@ -699,7 +695,7 @@
             this.ImportButton.Location = new System.Drawing.Point(87, 637);
             this.ImportButton.Name = "ImportButton";
             this.ImportButton.Size = new System.Drawing.Size(75, 25);
-            this.ImportButton.TabIndex = 4;
+            this.ImportButton.TabIndex = 3;
             this.ImportButton.Text = "Import";
             this.ImportButton.UseVisualStyleBackColor = true;
             this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
@@ -710,7 +706,7 @@
             this.ExportButton.Location = new System.Drawing.Point(6, 637);
             this.ExportButton.Name = "ExportButton";
             this.ExportButton.Size = new System.Drawing.Size(75, 25);
-            this.ExportButton.TabIndex = 3;
+            this.ExportButton.TabIndex = 2;
             this.ExportButton.Text = "Export";
             this.ExportButton.UseVisualStyleBackColor = true;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
@@ -765,6 +761,57 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "オプション";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(299, 264);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(176, 12);
+            this.label30.TabIndex = 28;
+            this.label30.Text = "※スペックに合わせて設定してください";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(262, 264);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(31, 12);
+            this.label29.TabIndex = 27;
+            this.label29.Text = "ミリ秒";
+            // 
+            // RefreshIntervalNumericUpDown
+            // 
+            this.RefreshIntervalNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.RefreshIntervalNumericUpDown.Location = new System.Drawing.Point(197, 262);
+            this.RefreshIntervalNumericUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.RefreshIntervalNumericUpDown.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.RefreshIntervalNumericUpDown.Name = "RefreshIntervalNumericUpDown";
+            this.RefreshIntervalNumericUpDown.Size = new System.Drawing.Size(59, 19);
+            this.RefreshIntervalNumericUpDown.TabIndex = 26;
+            this.RefreshIntervalNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.RefreshIntervalNumericUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(6, 264);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(87, 12);
+            this.label28.TabIndex = 25;
+            this.label28.Text = "画面の更新間隔";
             // 
             // AutoSortReverseCheckBox
             // 
@@ -1052,56 +1099,30 @@
             this.SaveFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
             this.SaveFileDialog.RestoreDirectory = true;
             // 
-            // label28
+            // RegexEnabledCheckBox
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(6, 264);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(87, 12);
-            this.label28.TabIndex = 25;
-            this.label28.Text = "画面の更新間隔";
+            this.RegexEnabledCheckBox.AutoSize = true;
+            this.RegexEnabledCheckBox.Location = new System.Drawing.Point(158, 94);
+            this.RegexEnabledCheckBox.Name = "RegexEnabledCheckBox";
+            this.RegexEnabledCheckBox.Size = new System.Drawing.Size(133, 16);
+            this.RegexEnabledCheckBox.TabIndex = 4;
+            this.RegexEnabledCheckBox.Text = "正規表現を有効にする";
+            this.ToolTip.SetToolTip(this.RegexEnabledCheckBox, "正規表現が無効でも部分一致は既定で有効となっています\r\n正規表現OFFでの部分一致のほうがパフォーマンスは向上します");
+            this.RegexEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
-            // RefreshIntervalNumericUpDown
+            // label5
             // 
-            this.RefreshIntervalNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.RefreshIntervalNumericUpDown.Location = new System.Drawing.Point(197, 262);
-            this.RefreshIntervalNumericUpDown.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.RefreshIntervalNumericUpDown.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.RefreshIntervalNumericUpDown.Name = "RefreshIntervalNumericUpDown";
-            this.RefreshIntervalNumericUpDown.Size = new System.Drawing.Size(59, 19);
-            this.RefreshIntervalNumericUpDown.TabIndex = 26;
-            this.RefreshIntervalNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.RefreshIntervalNumericUpDown.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(297, 95);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(294, 12);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "※正規表現は高負荷です。必要な場合のみONにしてください";
             // 
-            // label29
+            // ToolTip
             // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(262, 264);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(31, 12);
-            this.label29.TabIndex = 27;
-            this.label29.Text = "ミリ秒";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(299, 264);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(176, 12);
-            this.label30.TabIndex = 28;
-            this.label30.Text = "※スペックに合わせて設定してください";
+            this.ToolTip.IsBalloon = true;
             // 
             // ConfigPanel
             // 
@@ -1125,11 +1146,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.RecastTimeNumericUpDown)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarHeightNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarWidthNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1153,7 +1174,6 @@
         private System.Windows.Forms.NumericUpDown RecastTimeNumericUpDown;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox RepeatCheckBox;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox ShowProgressBarCheckBox;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1225,5 +1245,8 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.CheckBox RegexEnabledCheckBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolTip ToolTip;
     }
 }

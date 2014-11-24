@@ -265,40 +265,65 @@
             foreach (var spell in spells)
             {
                 var regex = spell.Regex as Regex;
-                if (regex == null)
-                {
-                    return;
-                }
 
                 // マッチする？
-                foreach (var logLine in logLines.AsParallel())
+                foreach (var logLine in logLines)
                 {
-                    lock (logLine)
+                    // 正規表現が無効？
+                    if (!spell.RegexEnabled ||
+                        regex == null)
                     {
-                        if (regex.IsMatch(logLine))
+                        if (string.IsNullOrWhiteSpace(spell.Keyword))
+                        {
+                            continue;
+                        }
+
+                        // キーワードが含まれるか？
+                        if (logLine.ToUpper().Contains(spell.Keyword.ToUpper()))
                         {
                             // ヒットしたログを格納する
                             spell.MatchedLog = logLine;
 
-                            // 置換したスペル名を格納する
-                            spell.SpellTitleReplaced = regex.Replace(
-                                logLine,
-                                spell.SpellTitle);
-
+                            spell.SpellTitleReplaced = spell.SpellTitle;
                             spell.MatchDateTime = DateTime.Now;
                             spell.OverDone = false;
                             spell.TimeupDone = false;
 
                             // マッチ時点のサウンドを再生する
                             this.Play(spell.MatchSound);
+                            this.Play(spell.MatchTextToSpeak);
+                        }
 
-                            if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
-                            {
-                                var tts = regex.Replace(
-                                    logLine,
-                                    spell.MatchTextToSpeak);
-                                this.Play(tts);
-                            }
+                        continue;
+                    }
+
+                    if (regex == null)
+                    {
+                        continue;
+                    }
+
+                    // 正規表現でマッチングする
+                    if (regex.IsMatch(logLine))
+                    {
+                        // ヒットしたログを格納する
+                        spell.MatchedLog = logLine;
+
+                        // 置換したスペル名を格納する
+                        spell.SpellTitleReplaced = regex.Replace(
+                            logLine,
+                            spell.SpellTitle);
+
+                        spell.MatchDateTime = DateTime.Now;
+                        spell.OverDone = false;
+                        spell.TimeupDone = false;
+
+                        // マッチ時点のサウンドを再生する
+                        this.Play(spell.MatchSound);
+
+                        if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
+                        {
+                            var tts = regex.Replace(logLine, spell.MatchTextToSpeak);
+                            this.Play(tts);
                         }
                     }
                 }
@@ -327,9 +352,9 @@
                         this.Play(spell.OverSound);
                         if (!string.IsNullOrWhiteSpace(spell.OverTextToSpeak))
                         {
-                            var tts = regex.Replace(
-                                spell.MatchedLog,
-                                spell.OverTextToSpeak);
+                            var tts = spell.RegexEnabled && regex != null ?
+                                regex.Replace(spell.MatchedLog, spell.OverTextToSpeak) :
+                                spell.OverTextToSpeak;
                             this.Play(tts);
                         }
 
@@ -348,9 +373,9 @@
                         this.Play(spell.TimeupSound);
                         if (!string.IsNullOrWhiteSpace(spell.TimeupTextToSpeak))
                         {
-                            var tts = regex.Replace(
-                                spell.MatchedLog,
-                                spell.TimeupTextToSpeak);
+                            var tts = spell.RegexEnabled && regex != null ?
+                                regex.Replace(spell.MatchedLog, spell.TimeupTextToSpeak) :
+                                spell.TimeupTextToSpeak;
                             this.Play(tts);
                         }
 

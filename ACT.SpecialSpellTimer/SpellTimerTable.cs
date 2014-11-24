@@ -51,6 +51,13 @@
                 // コンパイル済みの正規表現をセットする
                 foreach (var spell in spells)
                 {
+                    if (!spell.RegexEnabled)
+                    {
+                        spell.RegexPattern = string.Empty;
+                        spell.Regex = null;
+                        continue;
+                    }
+
                     var pattern = MakeKeyword(spell.Keyword);
 
                     if (!string.IsNullOrWhiteSpace(pattern))

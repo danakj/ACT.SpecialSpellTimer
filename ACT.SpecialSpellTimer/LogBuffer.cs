@@ -43,9 +43,7 @@
             lock (this.buffer)
             {
                 var t = this.buffer.ToArray();
-
-                this.Clear();
-
+                this.buffer.Clear();
                 return t;
             }
         }
