@@ -306,11 +306,6 @@
                         continue;
                     }
 
-                    if (regex == null)
-                    {
-                        continue;
-                    }
-
                     // 正規表現でマッチングする
                     if (regex.IsMatch(logLine))
                     {
