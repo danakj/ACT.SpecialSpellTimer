@@ -1,11 +1,10 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using Advanced_Combat_Tracker;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+
+    using Advanced_Combat_Tracker;
 
     /// <summary>
     /// ログのバッファ

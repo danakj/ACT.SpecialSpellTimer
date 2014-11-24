@@ -3,7 +3,6 @@
     using System;
     using System.IO;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -49,14 +48,22 @@
                     select
                     x;
 
-                var spellsRegex = new List<SpellTimerWithRegex>();
+                // コンパイル済みの正規表現をセットする
                 foreach (var spell in spells)
                 {
-                    var ns = new SpellTimerWithRegex();
-                    ns.Spell = spell;
+                    var pattern = MakeKeyword(spell.Keyword);
 
-                    var newPattern = MakeKeyword(spell.Keyword);
+                    if (spell.Regex == null ||
+                        spell.RegexPattern != pattern)
+                    {
+                        spell.RegexPattern = pattern;
+                        spell.Regex = new Regex(
+                            pattern,
+                            RegexOptions.IgnoreCase | RegexOptions.Compiled);
+                    }
                 }
+
+                return spells.ToArray();
             }
         }
 
@@ -85,6 +92,8 @@
             foreach (var row in Table)
             {
                 row.MatchDateTime = DateTime.MinValue;
+                row.Regex = null;
+                row.RegexPattern = string.Empty;
             }
 
             Table.AcceptChanges();
@@ -137,13 +146,25 @@
         {
             Table.AcceptChanges();
 
+            var copy = Table as SpellTimerDataSet.SpellTimerDataTable;
+
             var dir = Path.GetDirectoryName(file);
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
             }
 
-            Table.WriteXml(file);
+            foreach (var item in copy)
+            {
+                item.SpellTitleReplaced = string.Empty;
+                item.MatchedLog = string.Empty;
+                item.MatchDateTime = DateTime.MinValue;
+                item.Regex = null;
+                item.RegexPattern = string.Empty;
+            }
+
+            copy.AcceptChanges();
+            copy.WriteXml(file);
         }
 
         /// <summary>
@@ -165,24 +186,6 @@
             return string.IsNullOrWhiteSpace(keyword) ?
                 string.Empty :
                 ".*" + keyword + ".*";
-        }
-
-        /// <summary>
-        /// コンパイル済み正規表現付きのスペルタイマ行
-        /// </summary>
-        public class SpellTimerWithRegex
-        {
-            public SpellTimerDataSet.SpellTimerRow Spell { get; set; }
-
-            /// <summary>
-            /// 正規表現
-            /// </summary>
-            public Regex Regex { get; set; }
-
-            /// <summary>
-            /// 正規表現に適用したパターン
-            /// </summary>
-            public string RegexPattern { get; set; }
         }
     }
 }

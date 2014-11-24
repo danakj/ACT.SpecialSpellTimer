@@ -195,6 +195,8 @@
                 nr.DisplayNo = SpellTimerTable.Table.Any() ?
                     SpellTimerTable.Table.Max(x => x.DisplayNo) + 1 :
                     50;
+                nr.Regex = null;
+                nr.RegexPattern = string.Empty;
                 SpellTimerTable.Table.AddSpellTimerRow(nr);
 
                 SpellTimerTable.Save();
@@ -436,16 +438,8 @@
         {
             if (this.SaveFileDialog.ShowDialog(this) != DialogResult.Cancel)
             {
-                var copy = SpellTimerTable.Table.Copy() as SpellTimerDataSet.SpellTimerDataTable;
-
-                foreach (var item in copy)
-                {
-                    item.SpellTitleReplaced = string.Empty;
-                    item.MatchedLog = string.Empty;
-                    item.MatchDateTime = DateTime.MinValue;
-                }
-
-                copy.WriteXml(this.SaveFileDialog.FileName);
+                SpellTimerTable.Save(
+                    this.SaveFileDialog.FileName);
             }
         }
 

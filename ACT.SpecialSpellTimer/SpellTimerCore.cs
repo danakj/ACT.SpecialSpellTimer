@@ -7,6 +7,7 @@
     using System.Text.RegularExpressions;
     using System.Timers;
     using System.Windows;
+
     using ACT.SpecialSpellTimer.Properties;
     using Advanced_Combat_Tracker;
 
@@ -81,32 +82,35 @@
 
             this.RefreshTimer.Elapsed += (s1, e1) =>
             {
-                var sw = new Stopwatch();
-                sw.Start();
-
-                Debug.WriteLine("●Refresh Start " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
-
-                try
+                lock (this.RefreshTimer)
                 {
-                    this.RefreshTimer.Stop();
+                    var sw = new Stopwatch();
+                    sw.Start();
 
-                    this.RefreshWindow();
-                }
-                catch (Exception ex)
-                {
-                    ActGlobals.oFormActMain.WriteExceptionLog(
-                        ex,
-                        "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
-                }
-                finally
-                {
-                    sw.Stop();
-                    Debug.WriteLine("●Refresh " + sw.ElapsedMilliseconds.ToString("N0") + "ms");
+                    Debug.WriteLine("●Refresh Start " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
 
-                    this.RefreshTimer.AutoReset = true;
-                    this.RefreshTimer.Interval = this.RefreshInterval;
-                    this.RefreshTimer.AutoReset = false;
-                    this.RefreshTimer.Start();
+                    try
+                    {
+                        this.RefreshTimer.Stop();
+
+                        this.RefreshWindow();
+                    }
+                    catch (Exception ex)
+                    {
+                        ActGlobals.oFormActMain.WriteExceptionLog(
+                            ex,
+                            "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
+                    }
+                    finally
+                    {
+                        sw.Stop();
+                        Debug.WriteLine("●Refresh " + sw.ElapsedMilliseconds.ToString("N0") + "ms");
+
+                        this.RefreshTimer.AutoReset = true;
+                        this.RefreshTimer.Interval = this.RefreshInterval;
+                        this.RefreshTimer.AutoReset = false;
+                        this.RefreshTimer.Start();
+                    }
                 }
             };
 
@@ -201,17 +205,11 @@
             // Spellを舐める
             foreach (var spell in spellArray.AsParallel())
             {
-                var keyword = this.MakeKeyword(spell.Keyword);
-
-                if (string.IsNullOrWhiteSpace(keyword))
+                var regex = spell.Regex as Regex;
+                if (regex == null)
                 {
-                    continue;
+                    return;
                 }
-
-                // キーワードに対する正規表現を生成する
-                var regex = new Regex(
-                    keyword,
-                    RegexOptions.IgnoreCase);
 
                 // マッチする？
                 foreach (var logLine in logLines.AsParallel())
