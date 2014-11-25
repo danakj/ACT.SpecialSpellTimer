@@ -1347,6 +1347,8 @@ namespace ACT.SpecialSpellTimer {
             
             private global::System.Data.DataColumn columnDelay;
             
+            private global::System.Data.DataColumn columnDisplayTime;
+            
             private global::System.Data.DataColumn columnMatchSound;
             
             private global::System.Data.DataColumn columnMatchTextToSpeak;
@@ -1469,6 +1471,14 @@ namespace ACT.SpecialSpellTimer {
             public global::System.Data.DataColumn DelayColumn {
                 get {
                     return this.columnDelay;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DisplayTimeColumn {
+                get {
+                    return this.columnDisplayTime;
                 }
             }
             
@@ -1684,6 +1694,7 @@ namespace ACT.SpecialSpellTimer {
                         string KeywordToHide, 
                         string Message, 
                         long Delay, 
+                        long DisplayTime, 
                         string MatchSound, 
                         string MatchTextToSpeak, 
                         string DelaySound, 
@@ -1713,6 +1724,7 @@ namespace ACT.SpecialSpellTimer {
                         KeywordToHide,
                         Message,
                         Delay,
+                        DisplayTime,
                         MatchSound,
                         MatchTextToSpeak,
                         DelaySound,
@@ -1762,6 +1774,7 @@ namespace ACT.SpecialSpellTimer {
                 this.columnKeywordToHide = base.Columns["KeywordToHide"];
                 this.columnMessage = base.Columns["Message"];
                 this.columnDelay = base.Columns["Delay"];
+                this.columnDisplayTime = base.Columns["DisplayTime"];
                 this.columnMatchSound = base.Columns["MatchSound"];
                 this.columnMatchTextToSpeak = base.Columns["MatchTextToSpeak"];
                 this.columnDelaySound = base.Columns["DelaySound"];
@@ -1800,6 +1813,8 @@ namespace ACT.SpecialSpellTimer {
                 base.Columns.Add(this.columnMessage);
                 this.columnDelay = new global::System.Data.DataColumn("Delay", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDelay);
+                this.columnDisplayTime = new global::System.Data.DataColumn("DisplayTime", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDisplayTime);
                 this.columnMatchSound = new global::System.Data.DataColumn("MatchSound", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMatchSound);
                 this.columnMatchTextToSpeak = new global::System.Data.DataColumn("MatchTextToSpeak", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1854,6 +1869,9 @@ namespace ACT.SpecialSpellTimer {
                 this.columnMessage.DefaultValue = ((string)(""));
                 this.columnDelay.AllowDBNull = false;
                 this.columnDelay.DefaultValue = ((long)(0));
+                this.columnDisplayTime.AllowDBNull = false;
+                this.columnDisplayTime.Caption = "DelayAutoHide";
+                this.columnDisplayTime.DefaultValue = ((long)(0));
                 this.columnMatchSound.AllowDBNull = false;
                 this.columnMatchSound.DefaultValue = ((string)(""));
                 this.columnMatchTextToSpeak.AllowDBNull = false;
@@ -2500,6 +2518,17 @@ namespace ACT.SpecialSpellTimer {
                 }
                 set {
                     this[this.tableOnePointTelop.DelayColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public long DisplayTime {
+                get {
+                    return ((long)(this[this.tableOnePointTelop.DisplayTimeColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.DisplayTimeColumn] = value;
                 }
             }
             

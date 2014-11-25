@@ -171,6 +171,7 @@
                 OnePointTelopTable.Default.Table.Max(x => x.ID) + 1 :
                 1;
             nr.Title = "New Telop";
+            nr.DisplayTime = 3;
             nr.BackColor = Color.Transparent.ToHTML();
             nr.FontColor = Settings.Default.FontColor.ToHTML();
             nr.FontFamily = Settings.Default.Font.Name;
@@ -194,6 +195,7 @@
                     nr.KeywordToHide = baseRow.KeywordToHide;
                     nr.RegexEnabled = baseRow.RegexEnabled;
                     nr.Delay = baseRow.Delay;
+                    nr.DisplayTime = baseRow.DisplayTime;
                     nr.BackColor = baseRow.BackColor;
                     nr.FontColor = baseRow.FontColor;
                     nr.FontFamily = baseRow.FontFamily;
@@ -252,6 +254,8 @@
                 src.Message = this.TelopMessageTextBox.Text;
                 src.Keyword = this.TelopKeywordTextBox.Text;
                 src.KeywordToHide = this.TelopKeywordToHideTextBox.Text;
+                src.Delay = (long)this.TelopDelayNumericUpDown.Value;
+                src.DisplayTime = (long)this.DisplayTimeNumericUpDown.Value;
                 src.RegexEnabled = this.TelopRegexEnabledCheckBox.Checked;
                 src.BackColor = this.TelopSampleLabel.BackColor.ToHTML();
                 src.FontColor = this.TelopSampleLabel.ForeColor.ToHTML();
@@ -325,6 +329,8 @@
             this.TelopMessageTextBox.Text = src.Message;
             this.TelopKeywordTextBox.Text = src.Keyword;
             this.TelopKeywordToHideTextBox.Text = src.KeywordToHide;
+            this.TelopDelayNumericUpDown.Value = src.Delay;
+            this.DisplayTimeNumericUpDown.Value = src.DisplayTime;
             this.TelopRegexEnabledCheckBox.Checked = src.RegexEnabled;
 
             this.TelopSampleLabel.BackColor = src.BackColor.FromHTML();

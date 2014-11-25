@@ -86,6 +86,7 @@
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.OnPointTelopTabPage = new System.Windows.Forms.TabPage();
             this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.label36 = new System.Windows.Forms.Label();
             this.TelopTopNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label35 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
@@ -165,7 +166,9 @@
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.label36 = new System.Windows.Forms.Label();
+            this.DisplayTimeNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -188,6 +191,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarHeightNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarWidthNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DisplayTimeNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // TabControl
@@ -807,6 +811,9 @@
             this.TelopDetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TelopDetailGroupBox.Controls.Add(this.label40);
+            this.TelopDetailGroupBox.Controls.Add(this.label39);
+            this.TelopDetailGroupBox.Controls.Add(this.DisplayTimeNumericUpDown);
             this.TelopDetailGroupBox.Controls.Add(this.label36);
             this.TelopDetailGroupBox.Controls.Add(this.TelopTopNumericUpDown);
             this.TelopDetailGroupBox.Controls.Add(this.label35);
@@ -839,6 +846,15 @@
             this.TelopDetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.TelopDetailGroupBox.TabIndex = 5;
             this.TelopDetailGroupBox.TabStop = false;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(528, 46);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(138, 12);
+            this.label36.TabIndex = 39;
+            this.label36.Text = "「, (カンマ)」で改行になります";
             // 
             // TelopTopNumericUpDown
             // 
@@ -912,7 +928,7 @@
             this.TelopKeywordToHideTextBox.Name = "TelopKeywordToHideTextBox";
             this.TelopKeywordToHideTextBox.Size = new System.Drawing.Size(686, 19);
             this.TelopKeywordToHideTextBox.TabIndex = 3;
-            this.ToolTip.SetToolTip(this.TelopKeywordToHideTextBox, "非表示の指定がない場合はテロップは1秒で消えます");
+            this.ToolTip.SetToolTip(this.TelopKeywordToHideTextBox, "非表示のマッチングワードを設定するとマッチするまではテロップが消えなくなります");
             // 
             // TelopBackColorTranceparentCheckBox
             // 
@@ -1151,9 +1167,9 @@
             this.label44.AutoSize = true;
             this.label44.Location = new System.Drawing.Point(6, 146);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(113, 12);
+            this.label44.Size = new System.Drawing.Size(93, 12);
             this.label44.TabIndex = 7;
-            this.label44.Text = "表示までのディレイ(秒)";
+            this.label44.Text = "表示までのディレイ";
             // 
             // TelopDelayNumericUpDown
             // 
@@ -1662,14 +1678,47 @@
             // 
             this.ToolTip.IsBalloon = true;
             // 
-            // label36
+            // DisplayTimeNumericUpDown
             // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(528, 46);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(138, 12);
-            this.label36.TabIndex = 39;
-            this.label36.Text = "「, (カンマ)」で改行になります";
+            this.DisplayTimeNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.DisplayTimeNumericUpDown.Location = new System.Drawing.Point(285, 144);
+            this.DisplayTimeNumericUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.DisplayTimeNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.DisplayTimeNumericUpDown.Name = "DisplayTimeNumericUpDown";
+            this.DisplayTimeNumericUpDown.Size = new System.Drawing.Size(68, 19);
+            this.DisplayTimeNumericUpDown.TabIndex = 40;
+            this.DisplayTimeNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.DisplayTimeNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(232, 146);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(47, 12);
+            this.label39.TabIndex = 41;
+            this.label39.Text = "秒後から";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(359, 146);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(72, 12);
+            this.label40.TabIndex = 42;
+            this.label40.Text = "秒間表示する";
             // 
             // ConfigPanel
             // 
@@ -1708,6 +1757,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarHeightNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BarWidthNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DisplayTimeNumericUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1851,5 +1901,8 @@
         private System.Windows.Forms.NumericUpDown TelopLeftNumericUpDown;
         private System.Windows.Forms.Button SwitchTelopButton;
         private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.NumericUpDown DisplayTimeNumericUpDown;
     }
 }

@@ -207,7 +207,7 @@
                 if (telop.MatchDateTime > DateTime.MinValue)
                 {
                     if (telop.MatchDateTime.AddSeconds(telop.Delay) <= DateTime.Now &&
-                        DateTime.Now <= telop.MatchDateTime.AddSeconds(telop.Delay + 1))
+                        DateTime.Now <= telop.MatchDateTime.AddSeconds(telop.Delay + telop.DisplayTime))
                     {
                         w.Visibility = Visibility.Visible;
                     }
