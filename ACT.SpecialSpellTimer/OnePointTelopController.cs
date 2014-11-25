@@ -186,14 +186,12 @@
                             w.Visibility = Visibility.Hidden;
                             telop.MatchDateTime = DateTime.MinValue;
                         }
-                        else
-                        {
-                            if (isForceHide)
-                            {
-                                w.Visibility = Visibility.Hidden;
-                                telop.MatchDateTime = DateTime.MinValue;
-                            }
-                        }
+                    }
+
+                    if (isForceHide)
+                    {
+                        w.Visibility = Visibility.Hidden;
+                        telop.MatchDateTime = DateTime.MinValue;
                     }
                 }
                 else
