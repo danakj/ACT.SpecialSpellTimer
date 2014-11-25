@@ -273,12 +273,12 @@
                     if (!spell.RegexEnabled ||
                         regex == null)
                     {
-                        if (string.IsNullOrWhiteSpace(spell.Keyword))
+                        var keyword = spell.Keyword.Trim();
+
+                        if (string.IsNullOrWhiteSpace(keyword))
                         {
                             continue;
                         }
-
-                        var keyword = spell.Keyword.Trim();
 
                         // <me>を置換する
                         var player = FF14PluginHelper.GetPlayer();
@@ -288,7 +288,8 @@
                         }
 
                         // キーワードが含まれるか？
-                        if (logLine.ToUpper().Contains(keyword.ToUpper()))
+                        if (logLine.ToUpper().Contains(
+                            keyword.ToUpper()))
                         {
                             // ヒットしたログを格納する
                             spell.MatchedLog = logLine;
