@@ -126,6 +126,7 @@
             if (this.LogBuffer != null)
             {
                 this.LogBuffer.Dispose();
+                this.LogBuffer = null;
             }
 
             // 監視を止める
@@ -187,13 +188,13 @@
             }
 
 #if !DEBUG
-                // FF14が起動していない？
-                if (FF14PluginHelper.GetFFXIVProcess == null)
-                {
-                    this.HidePanels();
-                    this.RefreshInterval = 1000;
-                    return;
-                }
+            // FF14が起動していない？
+            if (FF14PluginHelper.GetFFXIVProcess == null)
+            {
+                this.HidePanels();
+                this.RefreshInterval = 1000;
+                return;
+            }
 #endif
 
             // タイマの間隔を標準に戻す

@@ -80,6 +80,8 @@
         /// </summary>
         public void Save()
         {
+            this.settingsTable.AcceptChanges();
+
             var dir = Path.GetDirectoryName(this.DefaultFile);
 
             if (!Directory.Exists(dir))

@@ -62,8 +62,19 @@
         /// </summary>
         void IActPluginV1.DeInitPlugin()
         {
-            SpellTimerCore.Default.End();
-            this.PluginStatusLabel.Text = "Plugin Exited";
+            try
+            {
+                SpellTimerCore.Default.End();
+                this.PluginStatusLabel.Text = "Plugin Exited";
+            }
+            catch (Exception ex)
+            {
+                ActGlobals.oFormActMain.WriteExceptionLog(
+                    ex,
+                    "ACT.SpecialSpellTimer プラグインの終了で例外が発生しました。");
+
+                this.PluginStatusLabel.Text = "Plugin Exited Error";
+            }
         }
 
         /// <summary>
