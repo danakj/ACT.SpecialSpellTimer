@@ -181,11 +181,8 @@
                     }
                     else
                     {
-                        if (string.IsNullOrWhiteSpace(telop.KeywordToHide))
-                        {
-                            w.Visibility = Visibility.Hidden;
-                            telop.MatchDateTime = DateTime.MinValue;
-                        }
+                        w.Visibility = Visibility.Hidden;
+                        telop.MatchDateTime = DateTime.MinValue;
                     }
 
                     if (isForceHide)
