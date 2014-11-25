@@ -394,6 +394,7 @@
                             this.Play(tts);
                         }
 
+                        spell.MatchDateTime = DateTime.MinValue;
                         spell.TimeupDone = true;
                     }
                 }
