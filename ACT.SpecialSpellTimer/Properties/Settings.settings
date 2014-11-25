@@ -21,7 +21,7 @@
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="RefreshInterval" Type="System.Int64" Scope="User">
-      <Value Profile="(Default)">80</Value>
+      <Value Profile="(Default)">200</Value>
     </Setting>
     <Setting Name="OverlayVisible" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -37,6 +37,9 @@
     </Setting>
     <Setting Name="AutoSortReverse" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="TelopAlwaysVisible" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

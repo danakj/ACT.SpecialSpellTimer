@@ -59,12 +59,20 @@
     <Compile Include="ConfigPanel.Designer.cs">
       <DependentUpon>ConfigPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConfigPanel.OnePointTelop.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ConfigPanel.Option.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="FF14PluginHelper.cs" />
     <Compile Include="FF14PluginHelper.Extension.cs" />
     <Compile Include="LogBuffer.cs" />
+    <Compile Include="OnePointTelopController.cs" />
+    <Compile Include="OnePointTelopTable.cs" />
+    <Compile Include="OnePointTelopWindow.xaml.cs">
+      <DependentUpon>OnePointTelopWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PanelSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -83,6 +91,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpellTimerDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Utility\ActInvoker.cs" />
     <Compile Include="WindowExtension.Transparent.cs" />
     <Compile Include="SpellTimerListWindow.xaml.cs">
       <DependentUpon>SpellTimerListWindow.xaml</DependentUpon>
@@ -129,6 +138,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="OnePointTelopWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SpellTimerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

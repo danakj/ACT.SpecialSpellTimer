@@ -127,22 +127,9 @@
 
             // オプションのロードメソッドを呼ぶ
             this.LoadOption();
-        }
 
-        /// <summary>
-        /// 初期化 Button
-        /// </summary>
-        /// <param name="sender">イベント発生元</param>
-        /// <param name="e">イベント引数</param>
-        private void ShokikaButton_Click(object sender, EventArgs e)
-        {
-            Settings.Default.Reset();
-            Settings.Default.Save();
-
-            PanelSettings.Default.SettingsTable.Clear();
-            PanelSettings.Default.Save();
-
-            SpellTimerCore.Default.LayoutPanels();
+            // ワンポイントテロップのロードメソッドを呼ぶ
+            this.LoadOnePointTelop();
         }
 
         /// <summary>
@@ -200,6 +187,7 @@
                 var node = new TreeNode(nr.SpellTitle)
                 {
                     Tag = nr,
+                    ToolTipText = nr.Keyword,
                     Checked = nr.Enabled
                 };
 

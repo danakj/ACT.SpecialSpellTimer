@@ -29,6 +29,38 @@
                     SpellTimerCore.Default.ActivatePanels();
                 }
             };
+
+            this.SwitchTelopButton.Click += (s1, e1) =>
+            {
+                Settings.Default.TelopAlwaysVisible = !Settings.Default.TelopAlwaysVisible;
+                Settings.Default.Save();
+                this.LoadSettingsOption();
+            };
+        }
+
+        /// <summary>
+        /// 初期化 Button
+        /// </summary>
+        /// <param name="sender">イベント発生元</param>
+        /// <param name="e">イベント引数</param>
+        private void ShokikaButton_Click(object sender, EventArgs e)
+        {
+            Settings.Default.Reset();
+            Settings.Default.Save();
+
+            PanelSettings.Default.SettingsTable.Clear();
+            PanelSettings.Default.Save();
+
+            foreach (var telop in OnePointTelopTable.Default.Table)
+            {
+                telop.Left = 10.0d;
+                telop.Top = 10.0d;
+            }
+
+            OnePointTelopTable.Default.Save();
+
+            this.LoadSettingsOption();
+            SpellTimerCore.Default.LayoutPanels();
         }
 
         /// <summary>
@@ -90,11 +122,20 @@
         {
             if (Settings.Default.OverlayVisible)
             {
-                this.SwitchOverlayButton.Text = "オーバーレイを隠す";
+                this.SwitchOverlayButton.Text = "スペルリストを隠す";
             }
             else
             {
-                this.SwitchOverlayButton.Text = "オーバーレイを表示する";
+                this.SwitchOverlayButton.Text = "スペルリストを表示する";
+            }
+
+            if (Settings.Default.TelopAlwaysVisible)
+            {
+                this.SwitchTelopButton.Text = "テロップの設定に従う";
+            }
+            else
+            {
+                this.SwitchTelopButton.Text = "テロップを常に表示する";
             }
 
             this.BarWidthNumericUpDown.Value = Settings.Default.ProgressBarSize.Width;
@@ -133,6 +174,7 @@
 
             // Windowを一旦すべて閉じる
             SpellTimerCore.Default.ClosePanels();
+            OnePointTelopController.CloseTelops();
         }
     }
 }

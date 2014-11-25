@@ -6,45 +6,68 @@
     using System.Text.RegularExpressions;
 
     /// <summary>
-    /// SpellTimerテーブル
+    /// ワンポイントテレロップ設定テーブル
     /// </summary>
-    public static class SpellTimerTable
+    public class OnePointTelopTable
     {
         /// <summary>
-        /// SpellTimerデータテーブル
+        /// シングルトンinstance
         /// </summary>
-        private static SpellTimerDataSet.SpellTimerDataTable table;
+        private static OnePointTelopTable instance;
 
         /// <summary>
-        /// SpellTimerデータテーブル
+        /// シングルトンinstance
         /// </summary>
-        public static SpellTimerDataSet.SpellTimerDataTable Table
+        public static OnePointTelopTable Default
         {
             get
             {
-                if (table == null)
+                if (instance == null)
                 {
-                    table = new SpellTimerDataSet.SpellTimerDataTable();
-                    Load();
+                    instance = new OnePointTelopTable();
                 }
 
-                return table;
+                return instance;
             }
         }
 
         /// <summary>
-        /// 有効なSpellTimerデータテーブル
+        /// データテーブル
         /// </summary>
-        public static SpellTimerDataSet.SpellTimerRow[] EnabledTable
+        private SpellTimerDataSet.OnePointTelopDataTable table = new SpellTimerDataSet.OnePointTelopDataTable();
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public OnePointTelopTable()
+        {
+            this.Load();
+        }
+
+        /// <summary>
+        /// 生のテーブル
+        /// </summary>
+        public SpellTimerDataSet.OnePointTelopDataTable Table
+        {
+            get
+            {
+                return this.table;
+            }
+        }
+
+        /// <summary>
+        /// 有効なエントリのリスト
+        /// </summary>
+        public SpellTimerDataSet.OnePointTelopRow[] EnabledTable
         {
             get
             {
                 var spells =
-                    from x in Table
+                    from x in this.table
                     where
                     x.Enabled
                     orderby
-                    x.DisplayNo
+                    x.MatchDateTime ascending
                     select
                     x;
 
@@ -55,10 +78,12 @@
                     {
                         spell.RegexPattern = string.Empty;
                         spell.Regex = null;
+                        spell.RegexPatternToHide = string.Empty;
+                        spell.RegexToHide = null;
                         continue;
                     }
 
-                    var pattern = MakeKeyword(spell.Keyword);
+                    var pattern = SpellTimerTable.MakeKeyword(spell.Keyword);
 
                     if (!string.IsNullOrWhiteSpace(pattern))
                     {
@@ -77,16 +102,37 @@
                         spell.RegexPattern = string.Empty;
                         spell.Regex = null;
                     }
+
+                    var patternToHide = SpellTimerTable.MakeKeyword(spell.KeywordToHide);
+
+                    if (!string.IsNullOrWhiteSpace(patternToHide))
+                    {
+                        if (spell.IsRegexToHideNull() ||
+                            spell.RegexToHide == null ||
+                            spell.RegexPatternToHide != patternToHide)
+                        {
+                            spell.RegexPatternToHide = patternToHide;
+                            spell.RegexToHide = new Regex(
+                                patternToHide,
+                                RegexOptions.Compiled);
+                        }
+                    }
+                    else
+                    {
+                        spell.RegexPatternToHide = string.Empty;
+                        spell.RegexToHide = null;
+                    }
                 }
 
                 return spells.ToArray();
             }
         }
 
+
         /// <summary>
         /// デフォルトのファイル
         /// </summary>
-        public static string DefaultFile
+        public string DefaultFile
         {
             get
             {
@@ -94,41 +140,41 @@
 
                 r = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                    @"anoyetta\ACT\ACT.SpecialSpellTimer.Spells.xml");
+                    @"anoyetta\ACT\ACT.SpecialSpellTimer.Telops.xml");
 
                 return r;
             }
         }
 
         /// <summary>
-        /// カウントをリセットする
+        /// マッチ状態をリセットする
         /// </summary>
-        public static void Reset()
+        public void Reset()
         {
-            foreach (var row in Table)
+            foreach (var row in this.table)
             {
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;
             }
 
-            Table.AcceptChanges();
+            this.table.AcceptChanges();
         }
 
         /// <summary>
-        /// 読み込む
+        /// Load
         /// </summary>
-        public static void Load()
+        public void Load()
         {
-            Load(DefaultFile, true);
+            this.Load(this.DefaultFile, true);
         }
 
         /// <summary>
-        /// 読み込む
+        /// Load
         /// </summary>
-        /// <param name="file">ファイルパス</param>
-        /// <param name="isClear">消去してからロードする？</param>
-        public static void Load(
+        /// <param name="file">ファイル</param>
+        /// <param name="isClear">クリアしてから取り込むか？</param>
+        public void Load(
             string file,
             bool isClear)
         {
@@ -136,33 +182,31 @@
             {
                 if (isClear)
                 {
-                    Table.Clear();
+                    this.table.Clear();
                 }
 
-                Table.ReadXml(file);
-                Reset();
+                this.table.ReadXml(file);
             }
         }
 
         /// <summary>
-        /// 保存する
+        /// Save
         /// </summary>
-        public static void Save()
+        public void Save()
         {
-            Save(DefaultFile);
+            this.Save(this.DefaultFile);
         }
 
         /// <summary>
-        /// 保存する
+        /// Save
         /// </summary>
-        /// <param name="file">ファイルパス</param>
-
-        public static void Save(
+        /// <param name="file">ファイル</param>
+        public void Save(
             string file)
         {
-            Table.AcceptChanges();
+            this.table.AcceptChanges();
 
-            var copy = Table as SpellTimerDataSet.SpellTimerDataTable;
+            var copy = this.table as SpellTimerDataSet.OnePointTelopDataTable;
 
             var dir = Path.GetDirectoryName(file);
             if (!Directory.Exists(dir))
@@ -172,7 +216,7 @@
 
             foreach (var item in copy)
             {
-                item.SpellTitleReplaced = string.Empty;
+                item.MessageReplaced = string.Empty;
                 item.MatchedLog = string.Empty;
                 item.MatchDateTime = DateTime.MinValue;
                 item.Regex = null;
@@ -181,27 +225,6 @@
 
             copy.AcceptChanges();
             copy.WriteXml(file);
-        }
-
-        /// <summary>
-        /// 正規表現用のキーワードを生成する
-        /// </summary>
-        /// <param name="pattern">元のパターン</param>
-        /// <returns>マッチ用キーワード</returns>
-        public static string MakeKeyword(
-            string pattern)
-        {
-            var keyword = pattern.Trim();
-
-            var player = FF14PluginHelper.GetPlayer();
-            if (player != null)
-            {
-                keyword = keyword.Replace("<me>", player.Name.Trim());
-            }
-
-            return string.IsNullOrWhiteSpace(keyword) ?
-                string.Empty :
-                ".*" + keyword + ".*";
         }
     }
 }

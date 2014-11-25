@@ -5,10 +5,10 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Timers;
     using System.Windows;
 
     using ACT.SpecialSpellTimer.Properties;
+    using ACT.SpecialSpellTimer.Utility;
     using Advanced_Combat_Tracker;
 
     /// <summary>
@@ -16,6 +16,11 @@
     /// </summary>
     public class SpellTimerCore
     {
+        /// <summary>
+        /// ロックオブジェクト
+        /// </summary>
+        private static object lockObject = new object();
+
         /// <summary>
         /// シングルトンinstance
         /// </summary>
@@ -40,7 +45,7 @@
         /// <summary>
         /// Refreshタイマ
         /// </summary>
-        private Timer RefreshTimer;
+        private System.Windows.Forms.Timer RefreshTimer;
 
         /// <summary>
         /// 画面更新のインターバル
@@ -74,42 +79,40 @@
 
             // Refreshタイマを開始する
             this.RefreshInterval = Settings.Default.RefreshInterval;
-            this.RefreshTimer = new Timer(this.RefreshInterval)
+            this.RefreshTimer = new System.Windows.Forms.Timer()
             {
-                AutoReset = false,
-                Enabled = false
+                Interval = (int)this.RefreshInterval
             };
 
-            this.RefreshTimer.Elapsed += (s1, e1) =>
+            this.RefreshTimer.Tick += (s1, e1) =>
             {
-                lock (this.RefreshTimer)
+                lock (lockObject)
                 {
-                    var sw = new Stopwatch();
-                    sw.Start();
-
+#if DEBUG
+                    var sw = Stopwatch.StartNew();
                     Debug.WriteLine("●Refresh Start " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
-
+#endif
                     try
                     {
-                        this.RefreshTimer.Stop();
-
-                        this.RefreshWindow();
+                        if (this.RefreshTimer != null &&
+                            this.RefreshTimer.Enabled)
+                        {
+                            this.RefreshWindow();
+                        }
                     }
                     catch (Exception ex)
                     {
                         ActGlobals.oFormActMain.WriteExceptionLog(
-                            ex,
-                            "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
+                        ex,
+                        "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
                     }
                     finally
                     {
+#if DEBUG
                         sw.Stop();
                         Debug.WriteLine("●Refresh " + sw.ElapsedMilliseconds.ToString("N0") + "ms");
-
-                        this.RefreshTimer.AutoReset = true;
-                        this.RefreshTimer.Interval = this.RefreshInterval;
-                        this.RefreshTimer.AutoReset = false;
-                        this.RefreshTimer.Start();
+#endif
+                        this.RefreshTimer.Interval = (int)this.RefreshInterval;
                     }
                 }
             };
@@ -129,21 +132,27 @@
                 this.LogBuffer = null;
             }
 
-            // 監視を止める
-            if (this.RefreshTimer != null)
+            lock (lockObject)
             {
-                this.RefreshTimer.Dispose();
-                this.RefreshTimer = null;
+                // 監視を開放する
+                if (this.RefreshTimer != null)
+                {
+                    this.RefreshTimer.Stop();
+                    this.RefreshTimer.Dispose();
+                    this.RefreshTimer = null;
+                }
             }
 
             // 全てのPanelを閉じる
             this.ClosePanels();
+            OnePointTelopController.CloseTelops();
 
             // 設定を保存する
             Settings.Default.Save();
             SpellTimerTable.Save();
+            OnePointTelopTable.Default.Save();
 
-            // instanceを消去する
+            // instanceを初期化する
             instance = null;
         }
 
@@ -163,11 +172,7 @@
                 {
                     if (!spellArray.Any(x => x.Panel == panel.PanelName))
                     {
-                        ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
-                        {
-                            panel.Close();
-                        });
-
+                        ActInvoker.Invoke(() => panel.Close());
                         removeList.Add(panel);
                     }
                 }
@@ -203,6 +208,10 @@
             // ログを取り出す
             var logLines = this.LogBuffer.GetLogLines();
 
+            // テロップとマッチングする
+            OnePointTelopController.Match(
+                logLines);
+
             // スペルリストとマッチングする
             this.MatchSpells(
                 spellArray,
@@ -219,7 +228,7 @@
             var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
             foreach (var name in panelNames)
             {
-                ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
+                ActInvoker.Invoke(() =>
                 {
                     var w = this.SpellTimerPanels.Where(x => x.PanelName == name).FirstOrDefault();
                     if (w == null)
@@ -398,22 +407,18 @@
         {
             if (this.SpellTimerPanels != null)
             {
-                if (ActGlobals.oFormActMain != null &&
-                    ActGlobals.oFormActMain.Visible)
+                ActInvoker.Invoke(() =>
                 {
-                    ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
+                    foreach (var panel in this.SpellTimerPanels)
                     {
-                        foreach (var panel in this.SpellTimerPanels)
+                        if (panel.Visibility == Visibility.Hidden)
                         {
-                            if (panel.Visibility == Visibility.Hidden)
-                            {
-                                panel.Visibility = Visibility.Visible;
-                            }
-
-                            panel.Activate();
+                            panel.Visibility = Visibility.Visible;
                         }
-                    });
-                }
+
+                        panel.Activate();
+                    }
+                });
             }
         }
 
@@ -424,17 +429,13 @@
         {
             if (this.SpellTimerPanels != null)
             {
-                if (ActGlobals.oFormActMain != null &&
-                    ActGlobals.oFormActMain.Visible)
+                ActInvoker.Invoke(() =>
                 {
-                    ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
+                    foreach (var panel in this.SpellTimerPanels)
                     {
-                        foreach (var panel in this.SpellTimerPanels)
-                        {
-                            panel.Visibility = Visibility.Visible;
-                        }
-                    });
-                }
+                        panel.Visibility = Visibility.Visible;
+                    }
+                });
             }
         }
 
@@ -445,17 +446,13 @@
         {
             if (this.SpellTimerPanels != null)
             {
-                if (ActGlobals.oFormActMain != null &&
-                    ActGlobals.oFormActMain.Visible)
+                ActInvoker.Invoke(() =>
                 {
-                    ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
+                    foreach (var panel in this.SpellTimerPanels)
                     {
-                        foreach (var panel in this.SpellTimerPanels)
-                        {
-                            panel.Visibility = Visibility.Hidden;
-                        }
-                    });
-                }
+                        panel.Visibility = Visibility.Hidden;
+                    }
+                });
             }
         }
 
@@ -479,8 +476,7 @@
 
                 PanelSettings.Default.Save();
 
-                // Panelを閉じる
-                ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
+                ActInvoker.Invoke(() =>
                 {
                     foreach (var panel in this.SpellTimerPanels)
                     {
@@ -499,7 +495,7 @@
         {
             if (this.SpellTimerPanels != null)
             {
-                ActGlobals.oFormActMain.Invoke((System.Windows.Forms.MethodInvoker)delegate
+                ActInvoker.Invoke(() =>
                 {
                     foreach (var panel in this.SpellTimerPanels)
                     {

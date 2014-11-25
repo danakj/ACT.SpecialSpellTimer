@@ -5,8 +5,8 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Windows.Forms;
 
+    using ACT.SpecialSpellTimer.Utility;
     using Advanced_Combat_Tracker;
 
     /// <summary>
@@ -153,32 +153,18 @@
                         // ファイルが存在する？
                         if (File.Exists(source))
                         {
-                            if (ActGlobals.oFormActMain.InvokeRequired)
-                            {
-                                ActGlobals.oFormActMain.Invoke((MethodInvoker)delegate
-                                {
-                                    ActGlobals.oFormActMain.PlaySound(source);
-                                });
-                            }
-                            else
+                            ActInvoker.Invoke(() =>
                             {
                                 ActGlobals.oFormActMain.PlaySound(source);
-                            }
+                            });
                         }
                     }
                     else
                     {
-                        if (ActGlobals.oFormActMain.InvokeRequired)
-                        {
-                            ActGlobals.oFormActMain.Invoke((MethodInvoker)delegate
-                            {
-                                ActGlobals.oFormActMain.TTS(source);
-                            });
-                        }
-                        else
+                        ActInvoker.Invoke(() =>
                         {
                             ActGlobals.oFormActMain.TTS(source);
-                        }
+                        });
                     }
                 }
             }

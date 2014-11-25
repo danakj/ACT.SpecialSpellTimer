@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.TabControl = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.SpecialSpellTabPage = new System.Windows.Forms.TabPage();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -84,7 +84,53 @@
             this.ImportButton = new System.Windows.Forms.Button();
             this.ExportButton = new System.Windows.Forms.Button();
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.OnPointTelopTabPage = new System.Windows.Forms.TabPage();
+            this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.TelopTopNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.TelopLeftNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.TelopKeywordToHideTextBox = new System.Windows.Forms.TextBox();
+            this.TelopBackColorTranceparentCheckBox = new System.Windows.Forms.CheckBox();
+            this.TelopFontColorButton = new System.Windows.Forms.Button();
+            this.TelopFontButton = new System.Windows.Forms.Button();
+            this.TelopBackColorButton = new System.Windows.Forms.Button();
+            this.TelopSampleLabel = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.TelopRegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
+            this.TelopDeleteButton = new System.Windows.Forms.Button();
+            this.TelopUpdateButton = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.TelopSpeak2Button = new System.Windows.Forms.Button();
+            this.TelopPlay2Button = new System.Windows.Forms.Button();
+            this.TelopDelayTTSTextBox = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.TelopDelaySoundComboBox = new System.Windows.Forms.ComboBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.TelopSpeak1Button = new System.Windows.Forms.Button();
+            this.TelopPlay1Button = new System.Windows.Forms.Button();
+            this.TelopMatchTTSTextBox = new System.Windows.Forms.TextBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.TelopMatchSoundComboBox = new System.Windows.Forms.ComboBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.TelopDelayNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label45 = new System.Windows.Forms.Label();
+            this.TelopKeywordTextBox = new System.Windows.Forms.TextBox();
+            this.TelopMessageTextBox = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.TelopTitleTextBox = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.TelopClearAllButton = new System.Windows.Forms.Button();
+            this.TelopAddButton = new System.Windows.Forms.Button();
+            this.TelopImportButton = new System.Windows.Forms.Button();
+            this.TelopExportButton = new System.Windows.Forms.Button();
+            this.TelopTreeView = new System.Windows.Forms.TreeView();
+            this.OptionTabPage = new System.Windows.Forms.TabPage();
+            this.SwitchTelopButton = new System.Windows.Forms.Button();
             this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.RefreshIntervalNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -119,8 +165,9 @@
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.label36 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.SpecialSpellTabPage.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DisplayNoNumericUpDown)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -128,7 +175,14 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecastTimeNumericUpDown)).BeginInit();
-            this.tabPage2.SuspendLayout();
+            this.OnPointTelopTabPage.SuspendLayout();
+            this.TelopDetailGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TelopTopNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TelopLeftNumericUpDown)).BeginInit();
+            this.groupBox5.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TelopDelayNumericUpDown)).BeginInit();
+            this.OptionTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).BeginInit();
@@ -141,29 +195,30 @@
             this.TabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TabControl.Controls.Add(this.tabPage1);
-            this.TabControl.Controls.Add(this.tabPage2);
+            this.TabControl.Controls.Add(this.SpecialSpellTabPage);
+            this.TabControl.Controls.Add(this.OnPointTelopTabPage);
+            this.TabControl.Controls.Add(this.OptionTabPage);
             this.TabControl.Location = new System.Drawing.Point(3, 3);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.Size = new System.Drawing.Size(1194, 694);
             this.TabControl.TabIndex = 0;
             // 
-            // tabPage1
+            // SpecialSpellTabPage
             // 
-            this.tabPage1.Controls.Add(this.ClearAllButton);
-            this.tabPage1.Controls.Add(this.DetailGroupBox);
-            this.tabPage1.Controls.Add(this.AddButton);
-            this.tabPage1.Controls.Add(this.ImportButton);
-            this.tabPage1.Controls.Add(this.ExportButton);
-            this.tabPage1.Controls.Add(this.SpellTimerTreeView);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1186, 668);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "スペシャルスペルタイマ";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.SpecialSpellTabPage.Controls.Add(this.ClearAllButton);
+            this.SpecialSpellTabPage.Controls.Add(this.DetailGroupBox);
+            this.SpecialSpellTabPage.Controls.Add(this.AddButton);
+            this.SpecialSpellTabPage.Controls.Add(this.ImportButton);
+            this.SpecialSpellTabPage.Controls.Add(this.ExportButton);
+            this.SpecialSpellTabPage.Controls.Add(this.SpellTimerTreeView);
+            this.SpecialSpellTabPage.Location = new System.Drawing.Point(4, 22);
+            this.SpecialSpellTabPage.Name = "SpecialSpellTabPage";
+            this.SpecialSpellTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.SpecialSpellTabPage.Size = new System.Drawing.Size(1186, 668);
+            this.SpecialSpellTabPage.TabIndex = 0;
+            this.SpecialSpellTabPage.Text = "スペシャルスペルタイマ";
+            this.SpecialSpellTabPage.UseVisualStyleBackColor = true;
             // 
             // ClearAllButton
             // 
@@ -732,44 +787,539 @@
             this.SpellTimerTreeView.Size = new System.Drawing.Size(318, 625);
             this.SpellTimerTreeView.TabIndex = 0;
             // 
-            // tabPage2
+            // OnPointTelopTabPage
             // 
-            this.tabPage2.Controls.Add(this.label30);
-            this.tabPage2.Controls.Add(this.label29);
-            this.tabPage2.Controls.Add(this.RefreshIntervalNumericUpDown);
-            this.tabPage2.Controls.Add(this.label28);
-            this.tabPage2.Controls.Add(this.AutoSortReverseCheckBox);
-            this.tabPage2.Controls.Add(this.TekiyoButton);
-            this.tabPage2.Controls.Add(this.label26);
-            this.tabPage2.Controls.Add(this.label25);
-            this.tabPage2.Controls.Add(this.label24);
-            this.tabPage2.Controls.Add(this.TimeOfHideNumericUpDown);
-            this.tabPage2.Controls.Add(this.label23);
-            this.tabPage2.Controls.Add(this.label22);
-            this.tabPage2.Controls.Add(this.AutoSortCheckBox);
-            this.tabPage2.Controls.Add(this.ClickThroughCheckBox);
-            this.tabPage2.Controls.Add(this.label21);
-            this.tabPage2.Controls.Add(this.label20);
-            this.tabPage2.Controls.Add(this.OpacityNumericUpDown);
-            this.tabPage2.Controls.Add(this.FontColorButton);
-            this.tabPage2.Controls.Add(this.FontButton);
-            this.tabPage2.Controls.Add(this.BarColorButton);
-            this.tabPage2.Controls.Add(this.PreviewLabel);
-            this.tabPage2.Controls.Add(this.label18);
-            this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.BarHeightNumericUpDown);
-            this.tabPage2.Controls.Add(this.label16);
-            this.tabPage2.Controls.Add(this.BarWidthNumericUpDown);
-            this.tabPage2.Controls.Add(this.label15);
-            this.tabPage2.Controls.Add(this.SwitchOverlayButton);
-            this.tabPage2.Controls.Add(this.ShokikaButton);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1186, 668);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "オプション";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.OnPointTelopTabPage.Controls.Add(this.TelopDetailGroupBox);
+            this.OnPointTelopTabPage.Controls.Add(this.TelopClearAllButton);
+            this.OnPointTelopTabPage.Controls.Add(this.TelopAddButton);
+            this.OnPointTelopTabPage.Controls.Add(this.TelopImportButton);
+            this.OnPointTelopTabPage.Controls.Add(this.TelopExportButton);
+            this.OnPointTelopTabPage.Controls.Add(this.TelopTreeView);
+            this.OnPointTelopTabPage.Location = new System.Drawing.Point(4, 22);
+            this.OnPointTelopTabPage.Name = "OnPointTelopTabPage";
+            this.OnPointTelopTabPage.Size = new System.Drawing.Size(1186, 668);
+            this.OnPointTelopTabPage.TabIndex = 2;
+            this.OnPointTelopTabPage.Text = "ワンポイントテロップ";
+            this.OnPointTelopTabPage.UseVisualStyleBackColor = true;
+            // 
+            // TelopDetailGroupBox
+            // 
+            this.TelopDetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TelopDetailGroupBox.Controls.Add(this.label36);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopTopNumericUpDown);
+            this.TelopDetailGroupBox.Controls.Add(this.label35);
+            this.TelopDetailGroupBox.Controls.Add(this.label34);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopLeftNumericUpDown);
+            this.TelopDetailGroupBox.Controls.Add(this.label33);
+            this.TelopDetailGroupBox.Controls.Add(this.label32);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopKeywordToHideTextBox);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopBackColorTranceparentCheckBox);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopFontColorButton);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopFontButton);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopBackColorButton);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopSampleLabel);
+            this.TelopDetailGroupBox.Controls.Add(this.label31);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopRegexEnabledCheckBox);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopDeleteButton);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopUpdateButton);
+            this.TelopDetailGroupBox.Controls.Add(this.groupBox5);
+            this.TelopDetailGroupBox.Controls.Add(this.groupBox7);
+            this.TelopDetailGroupBox.Controls.Add(this.label44);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopDelayNumericUpDown);
+            this.TelopDetailGroupBox.Controls.Add(this.label45);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopKeywordTextBox);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopMessageTextBox);
+            this.TelopDetailGroupBox.Controls.Add(this.label46);
+            this.TelopDetailGroupBox.Controls.Add(this.TelopTitleTextBox);
+            this.TelopDetailGroupBox.Controls.Add(this.label47);
+            this.TelopDetailGroupBox.Location = new System.Drawing.Point(330, 0);
+            this.TelopDetailGroupBox.Name = "TelopDetailGroupBox";
+            this.TelopDetailGroupBox.Size = new System.Drawing.Size(850, 662);
+            this.TelopDetailGroupBox.TabIndex = 5;
+            this.TelopDetailGroupBox.TabStop = false;
+            // 
+            // TelopTopNumericUpDown
+            // 
+            this.TelopTopNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.TelopTopNumericUpDown.Location = new System.Drawing.Point(529, 201);
+            this.TelopTopNumericUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.TelopTopNumericUpDown.Name = "TelopTopNumericUpDown";
+            this.TelopTopNumericUpDown.Size = new System.Drawing.Size(68, 19);
+            this.TelopTopNumericUpDown.TabIndex = 38;
+            this.TelopTopNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(512, 203);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(12, 12);
+            this.label35.TabIndex = 37;
+            this.label35.Text = "Y";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(511, 179);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(12, 12);
+            this.label34.TabIndex = 36;
+            this.label34.Text = "X";
+            // 
+            // TelopLeftNumericUpDown
+            // 
+            this.TelopLeftNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.TelopLeftNumericUpDown.Location = new System.Drawing.Point(529, 176);
+            this.TelopLeftNumericUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.TelopLeftNumericUpDown.Name = "TelopLeftNumericUpDown";
+            this.TelopLeftNumericUpDown.Size = new System.Drawing.Size(68, 19);
+            this.TelopLeftNumericUpDown.TabIndex = 35;
+            this.TelopLeftNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(476, 180);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(29, 12);
+            this.label33.TabIndex = 34;
+            this.label33.Text = "位置";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(6, 96);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(140, 12);
+            this.label32.TabIndex = 33;
+            this.label32.Text = "非表示にするマッチングワード";
+            // 
+            // TelopKeywordToHideTextBox
+            // 
+            this.TelopKeywordToHideTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TelopKeywordToHideTextBox.Location = new System.Drawing.Point(158, 93);
+            this.TelopKeywordToHideTextBox.Name = "TelopKeywordToHideTextBox";
+            this.TelopKeywordToHideTextBox.Size = new System.Drawing.Size(686, 19);
+            this.TelopKeywordToHideTextBox.TabIndex = 3;
+            this.ToolTip.SetToolTip(this.TelopKeywordToHideTextBox, "非表示の指定がない場合はテロップは1秒で消えます");
+            // 
+            // TelopBackColorTranceparentCheckBox
+            // 
+            this.TelopBackColorTranceparentCheckBox.AutoSize = true;
+            this.TelopBackColorTranceparentCheckBox.Location = new System.Drawing.Point(394, 179);
+            this.TelopBackColorTranceparentCheckBox.Name = "TelopBackColorTranceparentCheckBox";
+            this.TelopBackColorTranceparentCheckBox.Size = new System.Drawing.Size(76, 16);
+            this.TelopBackColorTranceparentCheckBox.TabIndex = 7;
+            this.TelopBackColorTranceparentCheckBox.Text = "透明にする";
+            this.TelopBackColorTranceparentCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // TelopFontColorButton
+            // 
+            this.TelopFontColorButton.Location = new System.Drawing.Point(336, 228);
+            this.TelopFontColorButton.Name = "TelopFontColorButton";
+            this.TelopFontColorButton.Size = new System.Drawing.Size(52, 20);
+            this.TelopFontColorButton.TabIndex = 9;
+            this.TelopFontColorButton.Text = "Font色";
+            this.TelopFontColorButton.UseVisualStyleBackColor = true;
+            // 
+            // TelopFontButton
+            // 
+            this.TelopFontButton.Location = new System.Drawing.Point(336, 202);
+            this.TelopFontButton.Name = "TelopFontButton";
+            this.TelopFontButton.Size = new System.Drawing.Size(52, 20);
+            this.TelopFontButton.TabIndex = 8;
+            this.TelopFontButton.Text = "Font";
+            this.TelopFontButton.UseVisualStyleBackColor = true;
+            // 
+            // TelopBackColorButton
+            // 
+            this.TelopBackColorButton.Location = new System.Drawing.Point(336, 176);
+            this.TelopBackColorButton.Name = "TelopBackColorButton";
+            this.TelopBackColorButton.Size = new System.Drawing.Size(52, 20);
+            this.TelopBackColorButton.TabIndex = 6;
+            this.TelopBackColorButton.Text = "背景色";
+            this.TelopBackColorButton.UseVisualStyleBackColor = true;
+            // 
+            // TelopSampleLabel
+            // 
+            this.TelopSampleLabel.BackColor = System.Drawing.Color.Red;
+            this.TelopSampleLabel.Location = new System.Drawing.Point(158, 176);
+            this.TelopSampleLabel.Name = "TelopSampleLabel";
+            this.TelopSampleLabel.Size = new System.Drawing.Size(172, 72);
+            this.TelopSampleLabel.TabIndex = 27;
+            this.TelopSampleLabel.Text = "サンプルテロップ";
+            this.TelopSampleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.ForeColor = System.Drawing.Color.Red;
+            this.label31.Location = new System.Drawing.Point(297, 121);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(294, 12);
+            this.label31.TabIndex = 26;
+            this.label31.Text = "※正規表現は高負荷です。必要な場合のみONにしてください";
+            // 
+            // TelopRegexEnabledCheckBox
+            // 
+            this.TelopRegexEnabledCheckBox.AutoSize = true;
+            this.TelopRegexEnabledCheckBox.Location = new System.Drawing.Point(158, 120);
+            this.TelopRegexEnabledCheckBox.Name = "TelopRegexEnabledCheckBox";
+            this.TelopRegexEnabledCheckBox.Size = new System.Drawing.Size(133, 16);
+            this.TelopRegexEnabledCheckBox.TabIndex = 4;
+            this.TelopRegexEnabledCheckBox.Text = "正規表現を有効にする";
+            this.ToolTip.SetToolTip(this.TelopRegexEnabledCheckBox, "正規表現が無効でも部分一致は既定で有効となっています\r\n正規表現OFFでの部分一致のほうがパフォーマンスは向上します");
+            this.TelopRegexEnabledCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // TelopDeleteButton
+            // 
+            this.TelopDeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TelopDeleteButton.Location = new System.Drawing.Point(742, 631);
+            this.TelopDeleteButton.Name = "TelopDeleteButton";
+            this.TelopDeleteButton.Size = new System.Drawing.Size(102, 25);
+            this.TelopDeleteButton.TabIndex = 11;
+            this.TelopDeleteButton.Text = "削除";
+            this.TelopDeleteButton.UseVisualStyleBackColor = true;
+            // 
+            // TelopUpdateButton
+            // 
+            this.TelopUpdateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TelopUpdateButton.Location = new System.Drawing.Point(634, 631);
+            this.TelopUpdateButton.Name = "TelopUpdateButton";
+            this.TelopUpdateButton.Size = new System.Drawing.Size(102, 25);
+            this.TelopUpdateButton.TabIndex = 10;
+            this.TelopUpdateButton.Text = "更新";
+            this.TelopUpdateButton.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.TelopSpeak2Button);
+            this.groupBox5.Controls.Add(this.TelopPlay2Button);
+            this.groupBox5.Controls.Add(this.TelopDelayTTSTextBox);
+            this.groupBox5.Controls.Add(this.label37);
+            this.groupBox5.Controls.Add(this.TelopDelaySoundComboBox);
+            this.groupBox5.Controls.Add(this.label38);
+            this.groupBox5.Location = new System.Drawing.Point(6, 360);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(838, 89);
+            this.groupBox5.TabIndex = 20;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "ディレイ後に鳴らすサウンド";
+            // 
+            // TelopSpeak2Button
+            // 
+            this.TelopSpeak2Button.Location = new System.Drawing.Point(113, 55);
+            this.TelopSpeak2Button.Name = "TelopSpeak2Button";
+            this.TelopSpeak2Button.Size = new System.Drawing.Size(33, 20);
+            this.TelopSpeak2Button.TabIndex = 3;
+            this.TelopSpeak2Button.Text = "▶";
+            this.TelopSpeak2Button.UseVisualStyleBackColor = true;
+            // 
+            // TelopPlay2Button
+            // 
+            this.TelopPlay2Button.Location = new System.Drawing.Point(113, 29);
+            this.TelopPlay2Button.Name = "TelopPlay2Button";
+            this.TelopPlay2Button.Size = new System.Drawing.Size(33, 20);
+            this.TelopPlay2Button.TabIndex = 1;
+            this.TelopPlay2Button.Text = "♪";
+            this.TelopPlay2Button.UseVisualStyleBackColor = true;
+            // 
+            // TelopDelayTTSTextBox
+            // 
+            this.TelopDelayTTSTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TelopDelayTTSTextBox.Location = new System.Drawing.Point(152, 55);
+            this.TelopDelayTTSTextBox.Name = "TelopDelayTTSTextBox";
+            this.TelopDelayTTSTextBox.Size = new System.Drawing.Size(680, 19);
+            this.TelopDelayTTSTextBox.TabIndex = 1;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(6, 58);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(72, 12);
+            this.label37.TabIndex = 15;
+            this.label37.Text = "TextToSpeak";
+            // 
+            // TelopDelaySoundComboBox
+            // 
+            this.TelopDelaySoundComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TelopDelaySoundComboBox.FormattingEnabled = true;
+            this.TelopDelaySoundComboBox.Location = new System.Drawing.Point(152, 29);
+            this.TelopDelaySoundComboBox.MaxDropDownItems = 16;
+            this.TelopDelaySoundComboBox.Name = "TelopDelaySoundComboBox";
+            this.TelopDelaySoundComboBox.Size = new System.Drawing.Size(243, 20);
+            this.TelopDelaySoundComboBox.TabIndex = 0;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(6, 32);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(31, 12);
+            this.label38.TabIndex = 13;
+            this.label38.Text = "wave";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox7.Controls.Add(this.TelopSpeak1Button);
+            this.groupBox7.Controls.Add(this.TelopPlay1Button);
+            this.groupBox7.Controls.Add(this.TelopMatchTTSTextBox);
+            this.groupBox7.Controls.Add(this.label41);
+            this.groupBox7.Controls.Add(this.TelopMatchSoundComboBox);
+            this.groupBox7.Controls.Add(this.label42);
+            this.groupBox7.Location = new System.Drawing.Point(6, 265);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(838, 89);
+            this.groupBox7.TabIndex = 12;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "ログにマッチした直後に鳴らすサウンド";
+            // 
+            // TelopSpeak1Button
+            // 
+            this.TelopSpeak1Button.Location = new System.Drawing.Point(113, 55);
+            this.TelopSpeak1Button.Name = "TelopSpeak1Button";
+            this.TelopSpeak1Button.Size = new System.Drawing.Size(33, 20);
+            this.TelopSpeak1Button.TabIndex = 3;
+            this.TelopSpeak1Button.Text = "▶";
+            this.TelopSpeak1Button.UseVisualStyleBackColor = true;
+            // 
+            // TelopPlay1Button
+            // 
+            this.TelopPlay1Button.Location = new System.Drawing.Point(113, 29);
+            this.TelopPlay1Button.Name = "TelopPlay1Button";
+            this.TelopPlay1Button.Size = new System.Drawing.Size(33, 20);
+            this.TelopPlay1Button.TabIndex = 1;
+            this.TelopPlay1Button.Text = "♪";
+            this.TelopPlay1Button.UseVisualStyleBackColor = true;
+            // 
+            // TelopMatchTTSTextBox
+            // 
+            this.TelopMatchTTSTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TelopMatchTTSTextBox.Location = new System.Drawing.Point(152, 55);
+            this.TelopMatchTTSTextBox.Name = "TelopMatchTTSTextBox";
+            this.TelopMatchTTSTextBox.Size = new System.Drawing.Size(680, 19);
+            this.TelopMatchTTSTextBox.TabIndex = 1;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(6, 58);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(72, 12);
+            this.label41.TabIndex = 15;
+            this.label41.Text = "TextToSpeak";
+            // 
+            // TelopMatchSoundComboBox
+            // 
+            this.TelopMatchSoundComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TelopMatchSoundComboBox.FormattingEnabled = true;
+            this.TelopMatchSoundComboBox.Location = new System.Drawing.Point(152, 29);
+            this.TelopMatchSoundComboBox.MaxDropDownItems = 16;
+            this.TelopMatchSoundComboBox.Name = "TelopMatchSoundComboBox";
+            this.TelopMatchSoundComboBox.Size = new System.Drawing.Size(243, 20);
+            this.TelopMatchSoundComboBox.TabIndex = 0;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(6, 32);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(31, 12);
+            this.label42.TabIndex = 13;
+            this.label42.Text = "wave";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(6, 146);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(113, 12);
+            this.label44.TabIndex = 7;
+            this.label44.Text = "表示までのディレイ(秒)";
+            // 
+            // TelopDelayNumericUpDown
+            // 
+            this.TelopDelayNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.TelopDelayNumericUpDown.Location = new System.Drawing.Point(158, 144);
+            this.TelopDelayNumericUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.TelopDelayNumericUpDown.Name = "TelopDelayNumericUpDown";
+            this.TelopDelayNumericUpDown.Size = new System.Drawing.Size(68, 19);
+            this.TelopDelayNumericUpDown.TabIndex = 5;
+            this.TelopDelayNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(6, 71);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(134, 12);
+            this.label45.TabIndex = 5;
+            this.label45.Text = "ログに対するマッチングワード";
+            // 
+            // TelopKeywordTextBox
+            // 
+            this.TelopKeywordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TelopKeywordTextBox.Location = new System.Drawing.Point(158, 68);
+            this.TelopKeywordTextBox.Name = "TelopKeywordTextBox";
+            this.TelopKeywordTextBox.Size = new System.Drawing.Size(686, 19);
+            this.TelopKeywordTextBox.TabIndex = 2;
+            this.ToolTip.SetToolTip(this.TelopKeywordTextBox, "ログに対して部分一致でマッチングします\r\n例)\r\nマッチングワード : は「凍てつく剣」の構え\r\nログ : シヴァは「凍てつく剣」の構え。\r\n→ マッチします");
+            // 
+            // TelopMessageTextBox
+            // 
+            this.TelopMessageTextBox.Location = new System.Drawing.Point(158, 43);
+            this.TelopMessageTextBox.Name = "TelopMessageTextBox";
+            this.TelopMessageTextBox.Size = new System.Drawing.Size(364, 19);
+            this.TelopMessageTextBox.TabIndex = 1;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(6, 46);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(136, 12);
+            this.label46.TabIndex = 2;
+            this.label46.Text = "テロップに表示するメッセージ";
+            // 
+            // TelopTitleTextBox
+            // 
+            this.TelopTitleTextBox.Location = new System.Drawing.Point(158, 18);
+            this.TelopTitleTextBox.Name = "TelopTitleTextBox";
+            this.TelopTitleTextBox.Size = new System.Drawing.Size(364, 19);
+            this.TelopTitleTextBox.TabIndex = 0;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(6, 21);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(73, 12);
+            this.label47.TabIndex = 0;
+            this.label47.Text = "テロップの名前";
+            // 
+            // TelopClearAllButton
+            // 
+            this.TelopClearAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TelopClearAllButton.Location = new System.Drawing.Point(168, 637);
+            this.TelopClearAllButton.Name = "TelopClearAllButton";
+            this.TelopClearAllButton.Size = new System.Drawing.Size(75, 25);
+            this.TelopClearAllButton.TabIndex = 4;
+            this.TelopClearAllButton.Text = "全て削除";
+            this.TelopClearAllButton.UseVisualStyleBackColor = true;
+            // 
+            // TelopAddButton
+            // 
+            this.TelopAddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TelopAddButton.Location = new System.Drawing.Point(249, 637);
+            this.TelopAddButton.Name = "TelopAddButton";
+            this.TelopAddButton.Size = new System.Drawing.Size(75, 25);
+            this.TelopAddButton.TabIndex = 1;
+            this.TelopAddButton.Text = "追加";
+            this.TelopAddButton.UseVisualStyleBackColor = true;
+            // 
+            // TelopImportButton
+            // 
+            this.TelopImportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TelopImportButton.Location = new System.Drawing.Point(87, 637);
+            this.TelopImportButton.Name = "TelopImportButton";
+            this.TelopImportButton.Size = new System.Drawing.Size(75, 25);
+            this.TelopImportButton.TabIndex = 3;
+            this.TelopImportButton.Text = "Import";
+            this.TelopImportButton.UseVisualStyleBackColor = true;
+            // 
+            // TelopExportButton
+            // 
+            this.TelopExportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TelopExportButton.Location = new System.Drawing.Point(6, 637);
+            this.TelopExportButton.Name = "TelopExportButton";
+            this.TelopExportButton.Size = new System.Drawing.Size(75, 25);
+            this.TelopExportButton.TabIndex = 2;
+            this.TelopExportButton.Text = "Export";
+            this.TelopExportButton.UseVisualStyleBackColor = true;
+            // 
+            // TelopTreeView
+            // 
+            this.TelopTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.TelopTreeView.CheckBoxes = true;
+            this.TelopTreeView.HideSelection = false;
+            this.TelopTreeView.Location = new System.Drawing.Point(6, 6);
+            this.TelopTreeView.Name = "TelopTreeView";
+            this.TelopTreeView.ShowNodeToolTips = true;
+            this.TelopTreeView.Size = new System.Drawing.Size(318, 625);
+            this.TelopTreeView.TabIndex = 0;
+            // 
+            // OptionTabPage
+            // 
+            this.OptionTabPage.Controls.Add(this.SwitchTelopButton);
+            this.OptionTabPage.Controls.Add(this.label30);
+            this.OptionTabPage.Controls.Add(this.label29);
+            this.OptionTabPage.Controls.Add(this.RefreshIntervalNumericUpDown);
+            this.OptionTabPage.Controls.Add(this.label28);
+            this.OptionTabPage.Controls.Add(this.AutoSortReverseCheckBox);
+            this.OptionTabPage.Controls.Add(this.TekiyoButton);
+            this.OptionTabPage.Controls.Add(this.label26);
+            this.OptionTabPage.Controls.Add(this.label25);
+            this.OptionTabPage.Controls.Add(this.label24);
+            this.OptionTabPage.Controls.Add(this.TimeOfHideNumericUpDown);
+            this.OptionTabPage.Controls.Add(this.label23);
+            this.OptionTabPage.Controls.Add(this.label22);
+            this.OptionTabPage.Controls.Add(this.AutoSortCheckBox);
+            this.OptionTabPage.Controls.Add(this.ClickThroughCheckBox);
+            this.OptionTabPage.Controls.Add(this.label21);
+            this.OptionTabPage.Controls.Add(this.label20);
+            this.OptionTabPage.Controls.Add(this.OpacityNumericUpDown);
+            this.OptionTabPage.Controls.Add(this.FontColorButton);
+            this.OptionTabPage.Controls.Add(this.FontButton);
+            this.OptionTabPage.Controls.Add(this.BarColorButton);
+            this.OptionTabPage.Controls.Add(this.PreviewLabel);
+            this.OptionTabPage.Controls.Add(this.label18);
+            this.OptionTabPage.Controls.Add(this.label17);
+            this.OptionTabPage.Controls.Add(this.BarHeightNumericUpDown);
+            this.OptionTabPage.Controls.Add(this.label16);
+            this.OptionTabPage.Controls.Add(this.BarWidthNumericUpDown);
+            this.OptionTabPage.Controls.Add(this.label15);
+            this.OptionTabPage.Controls.Add(this.SwitchOverlayButton);
+            this.OptionTabPage.Controls.Add(this.ShokikaButton);
+            this.OptionTabPage.Location = new System.Drawing.Point(4, 22);
+            this.OptionTabPage.Name = "OptionTabPage";
+            this.OptionTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.OptionTabPage.Size = new System.Drawing.Size(1186, 668);
+            this.OptionTabPage.TabIndex = 1;
+            this.OptionTabPage.Text = "オプション";
+            this.OptionTabPage.UseVisualStyleBackColor = true;
+            // 
+            // SwitchTelopButton
+            // 
+            this.SwitchTelopButton.Location = new System.Drawing.Point(175, 6);
+            this.SwitchTelopButton.Name = "SwitchTelopButton";
+            this.SwitchTelopButton.Size = new System.Drawing.Size(163, 25);
+            this.SwitchTelopButton.TabIndex = 29;
+            this.SwitchTelopButton.Text = "テロップを常に表示する";
+            this.SwitchTelopButton.UseVisualStyleBackColor = true;
             // 
             // label30
             // 
@@ -1069,7 +1619,7 @@
             this.SwitchOverlayButton.Name = "SwitchOverlayButton";
             this.SwitchOverlayButton.Size = new System.Drawing.Size(163, 25);
             this.SwitchOverlayButton.TabIndex = 0;
-            this.SwitchOverlayButton.Text = "オーバーレイを表示する";
+            this.SwitchOverlayButton.Text = "スペルを表示する";
             this.SwitchOverlayButton.UseVisualStyleBackColor = true;
             // 
             // ShokikaButton
@@ -1112,6 +1662,15 @@
             // 
             this.ToolTip.IsBalloon = true;
             // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(528, 46);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(138, 12);
+            this.label36.TabIndex = 39;
+            this.label36.Text = "「, (カンマ)」で改行になります";
+            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1120,7 +1679,7 @@
             this.Name = "ConfigPanel";
             this.Size = new System.Drawing.Size(1200, 700);
             this.TabControl.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.SpecialSpellTabPage.ResumeLayout(false);
             this.DetailGroupBox.ResumeLayout(false);
             this.DetailGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DisplayNoNumericUpDown)).EndInit();
@@ -1132,8 +1691,18 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecastTimeNumericUpDown)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.OnPointTelopTabPage.ResumeLayout(false);
+            this.TelopDetailGroupBox.ResumeLayout(false);
+            this.TelopDetailGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TelopTopNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TelopLeftNumericUpDown)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TelopDelayNumericUpDown)).EndInit();
+            this.OptionTabPage.ResumeLayout(false);
+            this.OptionTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).EndInit();
@@ -1146,8 +1715,8 @@
         #endregion
 
         private System.Windows.Forms.TabControl TabControl;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage SpecialSpellTabPage;
+        private System.Windows.Forms.TabPage OptionTabPage;
         private System.Windows.Forms.TreeView SpellTimerTreeView;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button ImportButton;
@@ -1235,5 +1804,52 @@
         private System.Windows.Forms.CheckBox RegexEnabledCheckBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolTip ToolTip;
+        private System.Windows.Forms.TabPage OnPointTelopTabPage;
+        private System.Windows.Forms.Button TelopClearAllButton;
+        private System.Windows.Forms.Button TelopAddButton;
+        private System.Windows.Forms.Button TelopImportButton;
+        private System.Windows.Forms.Button TelopExportButton;
+        private System.Windows.Forms.TreeView TelopTreeView;
+        private System.Windows.Forms.GroupBox TelopDetailGroupBox;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.CheckBox TelopRegexEnabledCheckBox;
+        private System.Windows.Forms.Button TelopDeleteButton;
+        private System.Windows.Forms.Button TelopUpdateButton;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button TelopSpeak2Button;
+        private System.Windows.Forms.Button TelopPlay2Button;
+        private System.Windows.Forms.TextBox TelopDelayTTSTextBox;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.ComboBox TelopDelaySoundComboBox;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Button TelopSpeak1Button;
+        private System.Windows.Forms.Button TelopPlay1Button;
+        private System.Windows.Forms.TextBox TelopMatchTTSTextBox;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.ComboBox TelopMatchSoundComboBox;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.NumericUpDown TelopDelayNumericUpDown;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox TelopKeywordTextBox;
+        private System.Windows.Forms.TextBox TelopMessageTextBox;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.TextBox TelopTitleTextBox;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label TelopSampleLabel;
+        private System.Windows.Forms.Button TelopFontColorButton;
+        private System.Windows.Forms.Button TelopFontButton;
+        private System.Windows.Forms.Button TelopBackColorButton;
+        private System.Windows.Forms.CheckBox TelopBackColorTranceparentCheckBox;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox TelopKeywordToHideTextBox;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.NumericUpDown TelopTopNumericUpDown;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.NumericUpDown TelopLeftNumericUpDown;
+        private System.Windows.Forms.Button SwitchTelopButton;
+        private System.Windows.Forms.Label label36;
     }
 }

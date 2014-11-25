@@ -28,6 +28,8 @@ namespace ACT.SpecialSpellTimer {
         
         private PanelSettingsDataTable tablePanelSettings;
         
+        private OnePointTelopDataTable tableOnePointTelop;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -61,6 +63,9 @@ namespace ACT.SpecialSpellTimer {
                 }
                 if ((ds.Tables["PanelSettings"] != null)) {
                     base.Tables.Add(new PanelSettingsDataTable(ds.Tables["PanelSettings"]));
+                }
+                if ((ds.Tables["OnePointTelop"] != null)) {
+                    base.Tables.Add(new OnePointTelopDataTable(ds.Tables["OnePointTelop"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -97,6 +102,16 @@ namespace ACT.SpecialSpellTimer {
         public PanelSettingsDataTable PanelSettings {
             get {
                 return this.tablePanelSettings;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public OnePointTelopDataTable OnePointTelop {
+            get {
+                return this.tableOnePointTelop;
             }
         }
         
@@ -173,6 +188,9 @@ namespace ACT.SpecialSpellTimer {
                 if ((ds.Tables["PanelSettings"] != null)) {
                     base.Tables.Add(new PanelSettingsDataTable(ds.Tables["PanelSettings"]));
                 }
+                if ((ds.Tables["OnePointTelop"] != null)) {
+                    base.Tables.Add(new OnePointTelopDataTable(ds.Tables["OnePointTelop"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -218,6 +236,12 @@ namespace ACT.SpecialSpellTimer {
                     this.tablePanelSettings.InitVars();
                 }
             }
+            this.tableOnePointTelop = ((OnePointTelopDataTable)(base.Tables["OnePointTelop"]));
+            if ((initTable == true)) {
+                if ((this.tableOnePointTelop != null)) {
+                    this.tableOnePointTelop.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -232,6 +256,8 @@ namespace ACT.SpecialSpellTimer {
             base.Tables.Add(this.tableSpellTimer);
             this.tablePanelSettings = new PanelSettingsDataTable();
             base.Tables.Add(this.tablePanelSettings);
+            this.tableOnePointTelop = new OnePointTelopDataTable();
+            base.Tables.Add(this.tableOnePointTelop);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -243,6 +269,12 @@ namespace ACT.SpecialSpellTimer {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializePanelSettings() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeOnePointTelop() {
             return false;
         }
         
@@ -306,6 +338,9 @@ namespace ACT.SpecialSpellTimer {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void PanelSettingsRowChangeEventHandler(object sender, PanelSettingsRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void OnePointTelopRowChangeEventHandler(object sender, OnePointTelopRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1294,6 +1329,696 @@ namespace ACT.SpecialSpellTimer {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class OnePointTelopDataTable : global::System.Data.TypedTableBase<OnePointTelopRow> {
+            
+            private global::System.Data.DataColumn columnID;
+            
+            private global::System.Data.DataColumn columnTitle;
+            
+            private global::System.Data.DataColumn columnKeyword;
+            
+            private global::System.Data.DataColumn columnKeywordToHide;
+            
+            private global::System.Data.DataColumn columnMessage;
+            
+            private global::System.Data.DataColumn columnDelay;
+            
+            private global::System.Data.DataColumn columnMatchSound;
+            
+            private global::System.Data.DataColumn columnMatchTextToSpeak;
+            
+            private global::System.Data.DataColumn columnDelaySound;
+            
+            private global::System.Data.DataColumn columnDelayTextToSpeak;
+            
+            private global::System.Data.DataColumn columnDelayed;
+            
+            private global::System.Data.DataColumn columnBackColor;
+            
+            private global::System.Data.DataColumn columnFontFamily;
+            
+            private global::System.Data.DataColumn columnFontSize;
+            
+            private global::System.Data.DataColumn columnFontStyle;
+            
+            private global::System.Data.DataColumn columnFontColor;
+            
+            private global::System.Data.DataColumn columnMatchDateTime;
+            
+            private global::System.Data.DataColumn columnMatchedLog;
+            
+            private global::System.Data.DataColumn columnMessageReplaced;
+            
+            private global::System.Data.DataColumn columnRegex;
+            
+            private global::System.Data.DataColumn columnRegexToHide;
+            
+            private global::System.Data.DataColumn columnRegexPattern;
+            
+            private global::System.Data.DataColumn columnRegexPatternToHide;
+            
+            private global::System.Data.DataColumn columnRegexEnabled;
+            
+            private global::System.Data.DataColumn columnLeft;
+            
+            private global::System.Data.DataColumn columnTop;
+            
+            private global::System.Data.DataColumn columnEnabled;
+            
+            private static System.DateTime columnMatchDateTime_defaultValue = global::System.DateTime.Parse("0001-01-01T00:00:00");
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OnePointTelopDataTable() {
+                this.TableName = "OnePointTelop";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal OnePointTelopDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected OnePointTelopDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDColumn {
+                get {
+                    return this.columnID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TitleColumn {
+                get {
+                    return this.columnTitle;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn KeywordColumn {
+                get {
+                    return this.columnKeyword;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn KeywordToHideColumn {
+                get {
+                    return this.columnKeywordToHide;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MessageColumn {
+                get {
+                    return this.columnMessage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DelayColumn {
+                get {
+                    return this.columnDelay;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MatchSoundColumn {
+                get {
+                    return this.columnMatchSound;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MatchTextToSpeakColumn {
+                get {
+                    return this.columnMatchTextToSpeak;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DelaySoundColumn {
+                get {
+                    return this.columnDelaySound;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DelayTextToSpeakColumn {
+                get {
+                    return this.columnDelayTextToSpeak;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DelayedColumn {
+                get {
+                    return this.columnDelayed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn BackColorColumn {
+                get {
+                    return this.columnBackColor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FontFamilyColumn {
+                get {
+                    return this.columnFontFamily;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FontSizeColumn {
+                get {
+                    return this.columnFontSize;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FontStyleColumn {
+                get {
+                    return this.columnFontStyle;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FontColorColumn {
+                get {
+                    return this.columnFontColor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MatchDateTimeColumn {
+                get {
+                    return this.columnMatchDateTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MatchedLogColumn {
+                get {
+                    return this.columnMatchedLog;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MessageReplacedColumn {
+                get {
+                    return this.columnMessageReplaced;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RegexColumn {
+                get {
+                    return this.columnRegex;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RegexToHideColumn {
+                get {
+                    return this.columnRegexToHide;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RegexPatternColumn {
+                get {
+                    return this.columnRegexPattern;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RegexPatternToHideColumn {
+                get {
+                    return this.columnRegexPatternToHide;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RegexEnabledColumn {
+                get {
+                    return this.columnRegexEnabled;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn LeftColumn {
+                get {
+                    return this.columnLeft;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TopColumn {
+                get {
+                    return this.columnTop;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EnabledColumn {
+                get {
+                    return this.columnEnabled;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OnePointTelopRow this[int index] {
+                get {
+                    return ((OnePointTelopRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event OnePointTelopRowChangeEventHandler OnePointTelopRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event OnePointTelopRowChangeEventHandler OnePointTelopRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event OnePointTelopRowChangeEventHandler OnePointTelopRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event OnePointTelopRowChangeEventHandler OnePointTelopRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddOnePointTelopRow(OnePointTelopRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OnePointTelopRow AddOnePointTelopRow(
+                        long ID, 
+                        string Title, 
+                        string Keyword, 
+                        string KeywordToHide, 
+                        string Message, 
+                        long Delay, 
+                        string MatchSound, 
+                        string MatchTextToSpeak, 
+                        string DelaySound, 
+                        string DelayTextToSpeak, 
+                        bool Delayed, 
+                        string BackColor, 
+                        string FontFamily, 
+                        float FontSize, 
+                        int FontStyle, 
+                        string FontColor, 
+                        System.DateTime MatchDateTime, 
+                        string MatchedLog, 
+                        string MessageReplaced, 
+                        object Regex, 
+                        object RegexToHide, 
+                        string RegexPattern, 
+                        string RegexPatternToHide, 
+                        bool RegexEnabled, 
+                        double Left, 
+                        double Top, 
+                        bool Enabled) {
+                OnePointTelopRow rowOnePointTelopRow = ((OnePointTelopRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ID,
+                        Title,
+                        Keyword,
+                        KeywordToHide,
+                        Message,
+                        Delay,
+                        MatchSound,
+                        MatchTextToSpeak,
+                        DelaySound,
+                        DelayTextToSpeak,
+                        Delayed,
+                        BackColor,
+                        FontFamily,
+                        FontSize,
+                        FontStyle,
+                        FontColor,
+                        MatchDateTime,
+                        MatchedLog,
+                        MessageReplaced,
+                        Regex,
+                        RegexToHide,
+                        RegexPattern,
+                        RegexPatternToHide,
+                        RegexEnabled,
+                        Left,
+                        Top,
+                        Enabled};
+                rowOnePointTelopRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowOnePointTelopRow);
+                return rowOnePointTelopRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                OnePointTelopDataTable cln = ((OnePointTelopDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new OnePointTelopDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnID = base.Columns["ID"];
+                this.columnTitle = base.Columns["Title"];
+                this.columnKeyword = base.Columns["Keyword"];
+                this.columnKeywordToHide = base.Columns["KeywordToHide"];
+                this.columnMessage = base.Columns["Message"];
+                this.columnDelay = base.Columns["Delay"];
+                this.columnMatchSound = base.Columns["MatchSound"];
+                this.columnMatchTextToSpeak = base.Columns["MatchTextToSpeak"];
+                this.columnDelaySound = base.Columns["DelaySound"];
+                this.columnDelayTextToSpeak = base.Columns["DelayTextToSpeak"];
+                this.columnDelayed = base.Columns["Delayed"];
+                this.columnBackColor = base.Columns["BackColor"];
+                this.columnFontFamily = base.Columns["FontFamily"];
+                this.columnFontSize = base.Columns["FontSize"];
+                this.columnFontStyle = base.Columns["FontStyle"];
+                this.columnFontColor = base.Columns["FontColor"];
+                this.columnMatchDateTime = base.Columns["MatchDateTime"];
+                this.columnMatchedLog = base.Columns["MatchedLog"];
+                this.columnMessageReplaced = base.Columns["MessageReplaced"];
+                this.columnRegex = base.Columns["Regex"];
+                this.columnRegexToHide = base.Columns["RegexToHide"];
+                this.columnRegexPattern = base.Columns["RegexPattern"];
+                this.columnRegexPatternToHide = base.Columns["RegexPatternToHide"];
+                this.columnRegexEnabled = base.Columns["RegexEnabled"];
+                this.columnLeft = base.Columns["Left"];
+                this.columnTop = base.Columns["Top"];
+                this.columnEnabled = base.Columns["Enabled"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnID = new global::System.Data.DataColumn("ID", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID);
+                this.columnTitle = new global::System.Data.DataColumn("Title", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTitle);
+                this.columnKeyword = new global::System.Data.DataColumn("Keyword", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnKeyword);
+                this.columnKeywordToHide = new global::System.Data.DataColumn("KeywordToHide", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnKeywordToHide);
+                this.columnMessage = new global::System.Data.DataColumn("Message", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMessage);
+                this.columnDelay = new global::System.Data.DataColumn("Delay", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDelay);
+                this.columnMatchSound = new global::System.Data.DataColumn("MatchSound", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMatchSound);
+                this.columnMatchTextToSpeak = new global::System.Data.DataColumn("MatchTextToSpeak", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMatchTextToSpeak);
+                this.columnDelaySound = new global::System.Data.DataColumn("DelaySound", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDelaySound);
+                this.columnDelayTextToSpeak = new global::System.Data.DataColumn("DelayTextToSpeak", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDelayTextToSpeak);
+                this.columnDelayed = new global::System.Data.DataColumn("Delayed", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDelayed);
+                this.columnBackColor = new global::System.Data.DataColumn("BackColor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBackColor);
+                this.columnFontFamily = new global::System.Data.DataColumn("FontFamily", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFontFamily);
+                this.columnFontSize = new global::System.Data.DataColumn("FontSize", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFontSize);
+                this.columnFontStyle = new global::System.Data.DataColumn("FontStyle", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFontStyle);
+                this.columnFontColor = new global::System.Data.DataColumn("FontColor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFontColor);
+                this.columnMatchDateTime = new global::System.Data.DataColumn("MatchDateTime", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMatchDateTime);
+                this.columnMatchedLog = new global::System.Data.DataColumn("MatchedLog", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMatchedLog);
+                this.columnMessageReplaced = new global::System.Data.DataColumn("MessageReplaced", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMessageReplaced);
+                this.columnRegex = new global::System.Data.DataColumn("Regex", typeof(object), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRegex);
+                this.columnRegexToHide = new global::System.Data.DataColumn("RegexToHide", typeof(object), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRegexToHide);
+                this.columnRegexPattern = new global::System.Data.DataColumn("RegexPattern", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRegexPattern);
+                this.columnRegexPatternToHide = new global::System.Data.DataColumn("RegexPatternToHide", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRegexPatternToHide);
+                this.columnRegexEnabled = new global::System.Data.DataColumn("RegexEnabled", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRegexEnabled);
+                this.columnLeft = new global::System.Data.DataColumn("Left", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLeft);
+                this.columnTop = new global::System.Data.DataColumn("Top", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTop);
+                this.columnEnabled = new global::System.Data.DataColumn("Enabled", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEnabled);
+                this.columnID.AllowDBNull = false;
+                this.columnID.DefaultValue = ((long)(0));
+                this.columnTitle.AllowDBNull = false;
+                this.columnTitle.DefaultValue = ((string)(""));
+                this.columnKeyword.AllowDBNull = false;
+                this.columnKeyword.DefaultValue = ((string)(""));
+                this.columnKeywordToHide.AllowDBNull = false;
+                this.columnKeywordToHide.DefaultValue = ((string)(""));
+                this.columnMessage.AllowDBNull = false;
+                this.columnMessage.DefaultValue = ((string)(""));
+                this.columnDelay.AllowDBNull = false;
+                this.columnDelay.DefaultValue = ((long)(0));
+                this.columnMatchSound.AllowDBNull = false;
+                this.columnMatchSound.DefaultValue = ((string)(""));
+                this.columnMatchTextToSpeak.AllowDBNull = false;
+                this.columnMatchTextToSpeak.DefaultValue = ((string)(""));
+                this.columnDelaySound.AllowDBNull = false;
+                this.columnDelaySound.DefaultValue = ((string)(""));
+                this.columnDelayTextToSpeak.AllowDBNull = false;
+                this.columnDelayTextToSpeak.DefaultValue = ((string)(""));
+                this.columnDelayed.AllowDBNull = false;
+                this.columnDelayed.DefaultValue = ((bool)(false));
+                this.columnBackColor.AllowDBNull = false;
+                this.columnBackColor.DefaultValue = ((string)(""));
+                this.columnFontFamily.AllowDBNull = false;
+                this.columnFontFamily.DefaultValue = ((string)(""));
+                this.columnFontSize.AllowDBNull = false;
+                this.columnFontSize.DefaultValue = ((float)(0F));
+                this.columnFontStyle.AllowDBNull = false;
+                this.columnFontStyle.DefaultValue = ((int)(0));
+                this.columnFontColor.AllowDBNull = false;
+                this.columnFontColor.DefaultValue = ((string)(""));
+                this.columnMatchDateTime.AllowDBNull = false;
+                this.columnMatchDateTime.DefaultValue = ((System.DateTime)(OnePointTelopDataTable.columnMatchDateTime_defaultValue));
+                this.columnMatchedLog.AllowDBNull = false;
+                this.columnMatchedLog.DefaultValue = ((string)(""));
+                this.columnMessageReplaced.AllowDBNull = false;
+                this.columnMessageReplaced.DefaultValue = ((string)(""));
+                this.columnRegexToHide.Caption = "Regex";
+                this.columnRegexPattern.AllowDBNull = false;
+                this.columnRegexPattern.DefaultValue = ((string)(""));
+                this.columnRegexPatternToHide.AllowDBNull = false;
+                this.columnRegexPatternToHide.Caption = "RegexPattern";
+                this.columnRegexPatternToHide.DefaultValue = ((string)(""));
+                this.columnRegexEnabled.DefaultValue = ((bool)(false));
+                this.columnLeft.AllowDBNull = false;
+                this.columnLeft.DefaultValue = ((double)(0D));
+                this.columnTop.AllowDBNull = false;
+                this.columnTop.DefaultValue = ((double)(0D));
+                this.columnEnabled.DefaultValue = ((bool)(false));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OnePointTelopRow NewOnePointTelopRow() {
+                return ((OnePointTelopRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new OnePointTelopRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(OnePointTelopRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.OnePointTelopRowChanged != null)) {
+                    this.OnePointTelopRowChanged(this, new OnePointTelopRowChangeEvent(((OnePointTelopRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.OnePointTelopRowChanging != null)) {
+                    this.OnePointTelopRowChanging(this, new OnePointTelopRowChangeEvent(((OnePointTelopRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.OnePointTelopRowDeleted != null)) {
+                    this.OnePointTelopRowDeleted(this, new OnePointTelopRowChangeEvent(((OnePointTelopRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.OnePointTelopRowDeleting != null)) {
+                    this.OnePointTelopRowDeleting(this, new OnePointTelopRowChangeEvent(((OnePointTelopRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveOnePointTelopRow(OnePointTelopRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                SpellTimerDataSet ds = new SpellTimerDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "OnePointTelopDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class SpellTimerRow : global::System.Data.DataRow {
@@ -1699,6 +2424,386 @@ namespace ACT.SpecialSpellTimer {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class OnePointTelopRow : global::System.Data.DataRow {
+            
+            private OnePointTelopDataTable tableOnePointTelop;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal OnePointTelopRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableOnePointTelop = ((OnePointTelopDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public long ID {
+                get {
+                    return ((long)(this[this.tableOnePointTelop.IDColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Title {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.TitleColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.TitleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Keyword {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.KeywordColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.KeywordColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string KeywordToHide {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.KeywordToHideColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.KeywordToHideColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Message {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.MessageColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.MessageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public long Delay {
+                get {
+                    return ((long)(this[this.tableOnePointTelop.DelayColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.DelayColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MatchSound {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.MatchSoundColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.MatchSoundColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MatchTextToSpeak {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.MatchTextToSpeakColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.MatchTextToSpeakColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DelaySound {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.DelaySoundColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.DelaySoundColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DelayTextToSpeak {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.DelayTextToSpeakColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.DelayTextToSpeakColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Delayed {
+                get {
+                    return ((bool)(this[this.tableOnePointTelop.DelayedColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.DelayedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string BackColor {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.BackColorColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.BackColorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FontFamily {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.FontFamilyColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.FontFamilyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public float FontSize {
+                get {
+                    return ((float)(this[this.tableOnePointTelop.FontSizeColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.FontSizeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int FontStyle {
+                get {
+                    return ((int)(this[this.tableOnePointTelop.FontStyleColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.FontStyleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FontColor {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.FontColorColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.FontColorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime MatchDateTime {
+                get {
+                    return ((global::System.DateTime)(this[this.tableOnePointTelop.MatchDateTimeColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.MatchDateTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MatchedLog {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.MatchedLogColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.MatchedLogColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string MessageReplaced {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.MessageReplacedColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.MessageReplacedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public object Regex {
+                get {
+                    if (this.IsRegexNull()) {
+                        return null;
+                    }
+                    else {
+                        return ((object)(this[this.tableOnePointTelop.RegexColumn]));
+                    }
+                }
+                set {
+                    this[this.tableOnePointTelop.RegexColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public object RegexToHide {
+                get {
+                    if (this.IsRegexToHideNull()) {
+                        return null;
+                    }
+                    else {
+                        return ((object)(this[this.tableOnePointTelop.RegexToHideColumn]));
+                    }
+                }
+                set {
+                    this[this.tableOnePointTelop.RegexToHideColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string RegexPattern {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.RegexPatternColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.RegexPatternColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string RegexPatternToHide {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.RegexPatternToHideColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.RegexPatternToHideColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool RegexEnabled {
+                get {
+                    if (this.IsRegexEnabledNull()) {
+                        return false;
+                    }
+                    else {
+                        return ((bool)(this[this.tableOnePointTelop.RegexEnabledColumn]));
+                    }
+                }
+                set {
+                    this[this.tableOnePointTelop.RegexEnabledColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Left {
+                get {
+                    return ((double)(this[this.tableOnePointTelop.LeftColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.LeftColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Top {
+                get {
+                    return ((double)(this[this.tableOnePointTelop.TopColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.TopColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Enabled {
+                get {
+                    if (this.IsEnabledNull()) {
+                        return false;
+                    }
+                    else {
+                        return ((bool)(this[this.tableOnePointTelop.EnabledColumn]));
+                    }
+                }
+                set {
+                    this[this.tableOnePointTelop.EnabledColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRegexNull() {
+                return this.IsNull(this.tableOnePointTelop.RegexColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRegexNull() {
+                this[this.tableOnePointTelop.RegexColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRegexToHideNull() {
+                return this.IsNull(this.tableOnePointTelop.RegexToHideColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRegexToHideNull() {
+                this[this.tableOnePointTelop.RegexToHideColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRegexEnabledNull() {
+                return this.IsNull(this.tableOnePointTelop.RegexEnabledColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRegexEnabledNull() {
+                this[this.tableOnePointTelop.RegexEnabledColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEnabledNull() {
+                return this.IsNull(this.tableOnePointTelop.EnabledColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEnabledNull() {
+                this[this.tableOnePointTelop.EnabledColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1752,6 +2857,40 @@ namespace ACT.SpecialSpellTimer {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PanelSettingsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class OnePointTelopRowChangeEvent : global::System.EventArgs {
+            
+            private OnePointTelopRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OnePointTelopRowChangeEvent(OnePointTelopRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public OnePointTelopRow Row {
                 get {
                     return this.eventRow;
                 }

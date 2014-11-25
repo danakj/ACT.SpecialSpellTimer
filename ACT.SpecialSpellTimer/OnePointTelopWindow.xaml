@@ -1,0 +1,36 @@
+﻿<Window x:Class="ACT.SpecialSpellTimer.OnePointTelopWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="OnePointTelopWindow" SizeToContent="WidthAndHeight"
+        AllowsTransparency="True" WindowStyle="None" Opacity="1" Background="{x:Null}">
+    <Grid>
+        <TextBlock
+            HorizontalAlignment="{Binding HorizontalAlignment, ElementName=MessageTextBlock, Mode=OneWay}"
+            VerticalAlignment="{Binding VerticalAlignment, ElementName=MessageTextBlock, Mode=OneWay}"
+            Margin="{Binding Margin, ElementName=MessageTextBlock, Mode=OneWay}"
+            Padding="{Binding Padding, ElementName=MessageTextBlock, Mode=OneWay}"
+            TextWrapping="{Binding TextWrapping, ElementName=MessageTextBlock, Mode=OneWay}"
+            Text="{Binding Text, ElementName=MessageTextBlock, Mode=OneWay}"
+            FontFamily="{Binding FontFamily, ElementName=MessageTextBlock, Mode=OneWay}"
+            FontSize="{Binding FontSize, ElementName=MessageTextBlock, Mode=OneWay}"
+            FontStyle="{Binding FontStyle, ElementName=MessageTextBlock, Mode=OneWay}"
+            FontWeight="{Binding FontWeight, ElementName=MessageTextBlock, Mode=OneWay}" 
+            Foreground="Navy"
+            >
+            <TextBlock.Effect>
+                <BlurEffect 
+                    Radius="6" 
+                    RenderingBias="Quality" />
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <TextBlock 
+            Name="MessageTextBlock" 
+            Margin="0,0,0,0" 
+            Padding="6"
+            TextWrapping="Wrap"
+            Text="メッセージ" 
+            />
+
+    </Grid>
+</Window>
