@@ -107,9 +107,11 @@
         {
             foreach (var row in Table)
             {
+                row.BeginEdit();
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;
+                row.EndEdit();
             }
 
             Table.AcceptChanges();
@@ -172,11 +174,13 @@
 
             foreach (var item in copy)
             {
+                item.BeginEdit();
                 item.SpellTitleReplaced = string.Empty;
                 item.MatchedLog = string.Empty;
                 item.MatchDateTime = DateTime.MinValue;
                 item.Regex = null;
                 item.RegexPattern = string.Empty;
+                item.EndEdit();
             }
 
             copy.AcceptChanges();
