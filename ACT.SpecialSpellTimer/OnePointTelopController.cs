@@ -56,6 +56,8 @@
 
             foreach (var telop in telops)
             {
+                telop.BeginEdit();
+
                 var regex = telop.Regex as Regex;
                 var regexToHide = telop.RegexToHide as Regex;
                 var isForceHide = false;
@@ -198,6 +200,8 @@
                 {
                     w.Visibility = Visibility.Hidden;
                 }
+
+                telop.EndEdit();
             }   // end loop telops
         }
     }

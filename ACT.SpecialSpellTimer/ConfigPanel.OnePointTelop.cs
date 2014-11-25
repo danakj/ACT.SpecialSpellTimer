@@ -154,6 +154,7 @@
                     OnePointTelopTable.Default.Table.Clear();
                 }
 
+                OnePointTelopController.CloseTelops();
                 this.LoadTelopTable();
             }
         }
@@ -250,6 +251,7 @@
             var src = this.TelopDetailGroupBox.Tag as SpellTimerDataSet.OnePointTelopRow;
             if (src != null)
             {
+                src.BeginEdit();
                 src.Title = this.TelopTitleTextBox.Text;
                 src.Message = this.TelopMessageTextBox.Text;
                 src.Keyword = this.TelopKeywordTextBox.Text;
@@ -264,11 +266,12 @@
                 src.FontStyle = (int)this.TelopSampleLabel.Font.Style;
                 src.Left = (double)this.TelopLeftNumericUpDown.Value;
                 src.Top = (double)this.TelopTopNumericUpDown.Value;
-                src.MatchSound = this.TelopMatchSoundComboBox.Text;
+                src.MatchSound = (string)this.TelopMatchSoundComboBox.SelectedValue;
                 src.MatchTextToSpeak = this.TelopMatchTTSTextBox.Text;
-                src.DelaySound = this.TelopDelaySoundComboBox.Text;
+                src.DelaySound = (string)this.TelopDelaySoundComboBox.SelectedValue;
                 src.DelayTextToSpeak = this.TelopDelayTTSTextBox.Text;
 
+                src.EndEdit();
                 OnePointTelopTable.Default.Save();
                 this.LoadTelopTable();
 
@@ -301,6 +304,8 @@
                 {
                     OnePointTelopTable.Default.Table.RemoveOnePointTelopRow(src);
                     OnePointTelopTable.Default.Save();
+
+                    OnePointTelopController.CloseTelops();
 
                     this.TelopDetailGroupBox.Visible = false;
                 }

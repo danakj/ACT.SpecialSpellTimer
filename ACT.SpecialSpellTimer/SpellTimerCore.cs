@@ -274,6 +274,8 @@
             // Spellを舐める
             foreach (var spell in spells)
             {
+                spell.BeginEdit();
+
                 var regex = spell.Regex as Regex;
 
                 // マッチする？
@@ -398,6 +400,8 @@
                         spell.TimeupDone = true;
                     }
                 }
+
+                spell.EndEdit();
             }
         }
 
