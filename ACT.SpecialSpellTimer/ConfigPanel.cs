@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Diagnostics;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -24,11 +23,6 @@
             this.InitializeComponent();
 
             this.Load += this.ConfigPanel_Load;
-
-            this.SoundGuidanceLinkLabel.LinkClicked += (s1, e1) =>
-            {
-                Process.Start(@"https://github.com/anoyetta/ACT.TTSYukkuri/releases/latest");
-            };
         }
 
         /// <summary>

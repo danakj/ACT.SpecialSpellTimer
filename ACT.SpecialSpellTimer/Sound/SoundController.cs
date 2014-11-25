@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Windows.Forms;
 
     using Advanced_Combat_Tracker;
 
@@ -46,9 +47,9 @@
         private object ttsYukkuriPlugin;
 
         /// <summary>
-        /// Sound再生が有効かどうか？
+        /// ゆっくりが有効かどうか？
         /// </summary>
-        public bool EnableSound
+        public bool EnabledYukkuri
         {
             get
             {
@@ -130,7 +131,12 @@
         {
             try
             {
-                if (this.EnableSound)
+                if (string.IsNullOrWhiteSpace(source))
+                {
+                    return;
+                }
+
+                if (this.EnabledYukkuri)
                 {
                     var speak = this.ttsYukkuriPlugin.GetType().InvokeMember(
                         "Speak",
@@ -138,6 +144,42 @@
                         null,
                         this.ttsYukkuriPlugin,
                         new object[] { source });
+                }
+                else
+                {
+                    // wav？
+                    if (source.EndsWith(".wav"))
+                    {
+                        // ファイルが存在する？
+                        if (File.Exists(source))
+                        {
+                            if (ActGlobals.oFormActMain.InvokeRequired)
+                            {
+                                ActGlobals.oFormActMain.Invoke((MethodInvoker)delegate
+                                {
+                                    ActGlobals.oFormActMain.PlaySound(source);
+                                });
+                            }
+                            else
+                            {
+                                ActGlobals.oFormActMain.PlaySound(source);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (ActGlobals.oFormActMain.InvokeRequired)
+                        {
+                            ActGlobals.oFormActMain.Invoke((MethodInvoker)delegate
+                            {
+                                ActGlobals.oFormActMain.TTS(source);
+                            });
+                        }
+                        else
+                        {
+                            ActGlobals.oFormActMain.TTS(source);
+                        }
+                    }
                 }
             }
             catch (Exception ex)

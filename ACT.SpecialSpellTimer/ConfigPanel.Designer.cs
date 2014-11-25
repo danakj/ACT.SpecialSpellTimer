@@ -33,6 +33,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.DontHideCheckBox = new System.Windows.Forms.CheckBox();
             this.label27 = new System.Windows.Forms.Label();
             this.DisplayNoNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -41,7 +43,6 @@
             this.OneBarColorButton = new System.Windows.Forms.Button();
             this.SampleLabel = new System.Windows.Forms.Label();
             this.IsReverseCheckBox = new System.Windows.Forms.CheckBox();
-            this.SoundGuidanceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.UpdateButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -117,8 +118,6 @@
             this.ColorDialog = new System.Windows.Forms.ColorDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.TabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -192,7 +191,6 @@
             this.DetailGroupBox.Controls.Add(this.OneBarColorButton);
             this.DetailGroupBox.Controls.Add(this.SampleLabel);
             this.DetailGroupBox.Controls.Add(this.IsReverseCheckBox);
-            this.DetailGroupBox.Controls.Add(this.SoundGuidanceLinkLabel);
             this.DetailGroupBox.Controls.Add(this.DeleteButton);
             this.DetailGroupBox.Controls.Add(this.UpdateButton);
             this.DetailGroupBox.Controls.Add(this.groupBox3);
@@ -214,6 +212,27 @@
             this.DetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.DetailGroupBox.TabIndex = 5;
             this.DetailGroupBox.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(297, 95);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(294, 12);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "※正規表現は高負荷です。必要な場合のみONにしてください";
+            // 
+            // RegexEnabledCheckBox
+            // 
+            this.RegexEnabledCheckBox.AutoSize = true;
+            this.RegexEnabledCheckBox.Location = new System.Drawing.Point(158, 94);
+            this.RegexEnabledCheckBox.Name = "RegexEnabledCheckBox";
+            this.RegexEnabledCheckBox.Size = new System.Drawing.Size(133, 16);
+            this.RegexEnabledCheckBox.TabIndex = 4;
+            this.RegexEnabledCheckBox.Text = "正規表現を有効にする";
+            this.ToolTip.SetToolTip(this.RegexEnabledCheckBox, "正規表現が無効でも部分一致は既定で有効となっています\r\n正規表現OFFでの部分一致のほうがパフォーマンスは向上します");
+            this.RegexEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // DontHideCheckBox
             // 
@@ -294,16 +313,6 @@
             this.IsReverseCheckBox.TabIndex = 8;
             this.IsReverseCheckBox.Text = "進行方向を逆にする";
             this.IsReverseCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // SoundGuidanceLinkLabel
-            // 
-            this.SoundGuidanceLinkLabel.AutoSize = true;
-            this.SoundGuidanceLinkLabel.Location = new System.Drawing.Point(5, 492);
-            this.SoundGuidanceLinkLabel.Name = "SoundGuidanceLinkLabel";
-            this.SoundGuidanceLinkLabel.Size = new System.Drawing.Size(297, 12);
-            this.SoundGuidanceLinkLabel.TabIndex = 21;
-            this.SoundGuidanceLinkLabel.TabStop = true;
-            this.SoundGuidanceLinkLabel.Text = "※サウンドの再生には ACT.TTSYukkuri プラグインが必要です";
             // 
             // DeleteButton
             // 
@@ -1099,27 +1108,6 @@
             this.SaveFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
             this.SaveFileDialog.RestoreDirectory = true;
             // 
-            // RegexEnabledCheckBox
-            // 
-            this.RegexEnabledCheckBox.AutoSize = true;
-            this.RegexEnabledCheckBox.Location = new System.Drawing.Point(158, 94);
-            this.RegexEnabledCheckBox.Name = "RegexEnabledCheckBox";
-            this.RegexEnabledCheckBox.Size = new System.Drawing.Size(133, 16);
-            this.RegexEnabledCheckBox.TabIndex = 4;
-            this.RegexEnabledCheckBox.Text = "正規表現を有効にする";
-            this.ToolTip.SetToolTip(this.RegexEnabledCheckBox, "正規表現が無効でも部分一致は既定で有効となっています\r\n正規表現OFFでの部分一致のほうがパフォーマンスは向上します");
-            this.RegexEnabledCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(297, 95);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(294, 12);
-            this.label5.TabIndex = 26;
-            this.label5.Text = "※正規表現は高負荷です。必要な場合のみONにしてください";
-            // 
             // ToolTip
             // 
             this.ToolTip.IsBalloon = true;
@@ -1203,7 +1191,6 @@
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button UpdateButton;
         private System.Windows.Forms.Button ShokikaButton;
-        private System.Windows.Forms.LinkLabel SoundGuidanceLinkLabel;
         private System.Windows.Forms.Button SwitchOverlayButton;
         private System.Windows.Forms.FontDialog FontDialog;
         private System.Windows.Forms.ColorDialog ColorDialog;
