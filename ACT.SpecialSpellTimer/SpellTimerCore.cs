@@ -170,6 +170,27 @@
                 var removeList = new List<SpellTimerListWindow>();
                 foreach (var panel in this.SpellTimerPanels)
                 {
+                    // パネルの位置を保存する
+                    var setting = (
+                        from x in PanelSettings.Default.SettingsTable
+                        where
+                        x.PanelName == panel.PanelName
+                        select
+                        x).FirstOrDefault();
+
+                    if (setting == null)
+                    {
+                        setting = PanelSettings.Default.SettingsTable.NewPanelSettingsRow();
+                        PanelSettings.Default.SettingsTable.AddPanelSettingsRow(setting);
+                    }
+
+                    setting.PanelName = panel.PanelName;
+                    setting.Left = panel.Left;
+                    setting.Top = panel.Top;
+
+                    PanelSettings.Default.Save();
+
+                    // スペルリストに存在しないパネルを閉じる
                     if (!spellArray.Any(x => x.Panel == panel.PanelName))
                     {
                         ActInvoker.Invoke(() => panel.Close());
@@ -469,14 +490,24 @@
             if (this.SpellTimerPanels != null)
             {
                 // Panelの位置を保存する
-                PanelSettings.Default.SettingsTable.Clear();
                 foreach (var panel in this.SpellTimerPanels)
                 {
-                    var setting = PanelSettings.Default.SettingsTable.NewPanelSettingsRow();
+                    var setting = (
+                        from x in PanelSettings.Default.SettingsTable
+                        where
+                        x.PanelName == panel.PanelName
+                        select
+                        x).FirstOrDefault();
+
+                    if (setting == null)
+                    {
+                        setting = PanelSettings.Default.SettingsTable.NewPanelSettingsRow();
+                        PanelSettings.Default.SettingsTable.AddPanelSettingsRow(setting);
+                    }
+
                     setting.PanelName = panel.PanelName;
                     setting.Left = panel.Left;
                     setting.Top = panel.Top;
-                    PanelSettings.Default.SettingsTable.AddPanelSettingsRow(setting);
                 }
 
                 PanelSettings.Default.Save();
