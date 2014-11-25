@@ -21,57 +21,24 @@
         private static List<OnePointTelopWindow> telopWindowList = new List<OnePointTelopWindow>();
 
         /// <summary>
-        /// ダミーオーナーWindow
-        /// </summary>
-        private static Window owner;
-
-
-        /// <summary>
-        /// ダミーオーナーWindow
-        /// </summary>
-        private static Window Owner
-        {
-            get
-            {
-                if (owner == null)
-                {
-                    ActInvoker.Invoke(() =>
-                    {
-                        owner = new Window();
-                        owner.WindowStyle = WindowStyle.ToolWindow;
-                        owner.ShowInTaskbar = false;
-                        owner.Left = -100;
-                        owner.Top = 0;
-                        owner.Width = 0;
-                        owner.Height = 0;
-                        owner.Show();
-                    });
-                }
-
-                return owner;
-            }
-        }
-
-        /// <summary>
         /// テロップを閉じる
         /// </summary>
         public static void CloseTelops()
         {
-            if (owner != null)
+            if (telopWindowList != null)
             {
                 foreach (var telop in telopWindowList)
                 {
                     telop.DataSource.Left = telop.Left;
                     telop.DataSource.Top = telop.Top;
+
+                    ActInvoker.Invoke(() =>
+                    {
+                        telop.Close();
+                    });
                 }
 
                 OnePointTelopTable.Default.Save();
-
-                ActInvoker.Invoke(() =>
-                {
-                    owner.Close();
-                    owner = null;
-                });
 
                 telopWindowList.Clear();
             }
@@ -180,7 +147,6 @@
                 {
                     w = new OnePointTelopWindow()
                     {
-                        Owner = Owner,
                         DataSource = telop
                     };
 
@@ -216,12 +182,14 @@
                         if (string.IsNullOrWhiteSpace(telop.KeywordToHide))
                         {
                             w.Visibility = Visibility.Hidden;
+                            telop.MatchDateTime = DateTime.MinValue;
                         }
                         else
                         {
                             if (isForceHide)
                             {
                                 w.Visibility = Visibility.Hidden;
+                                telop.MatchDateTime = DateTime.MinValue;
                             }
                         }
                     }
