@@ -1,7 +1,7 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System.Text.RegularExpressions;
-
+    using ACT.SpecialSpellTimer.Sound;
     using ACT.SpecialSpellTimer.Utility;
 
     /// <summary>
@@ -13,7 +13,7 @@
         /// コマンド解析用の正規表現
         /// </summary>
         private static Regex regexCommand = new Regex(
-            @".*/spespe (?<command>.*) (?<target>.*)( (?<windowname>"".*"") (?<value>.*))*",
+            @".*/spespe (?<command>refresh|changeenabled) (?<target>spells|telops)( (?<windowname>"".*"") (?<value>.*))*",
             RegexOptions.Compiled |
             RegexOptions.IgnoreCase);
 
@@ -56,48 +56,63 @@
                         {
                             case "spells":
                                 SpellTimerCore.Default.ClosePanels();
+                                SoundController.Default.Play("リフレッシュ'スペル。");
                                 break;
 
                             case "telops":
                                 OnePointTelopController.CloseTelops();
+                                SoundController.Default.Play("リフレッシュ'テロップ。");
                                 break;
                         }
 
                         break;
 
                     case "changeenabled":
+                        var changed = false;
                         switch (target)
                         {
                             case "spells":
                                 foreach (var spell in SpellTimerTable.Table)
                                 {
-                                    if (spell.Panel.Trim() == windowname.Trim() ||
-                                        spell.SpellTitle.Trim() == windowname.Trim())
+                                    if (spell.Panel.Trim().ToLower() == windowname.Trim().ToLower() ||
+                                        spell.SpellTitle.Trim().ToLower() == windowname.Trim().ToLower())
                                     {
+                                        changed = true;
                                         spell.Enabled = value;
                                     }
                                 }
 
-                                ActInvoker.Invoke(() =>
+                                if (changed)
                                 {
-                                    SpecialSpellTimerPlugin.ConfigPanel.LoadSpellTimerTable();
-                                });
+                                    ActInvoker.Invoke(() =>
+                                    {
+                                        SpecialSpellTimerPlugin.ConfigPanel.LoadSpellTimerTable();
+                                    });
+
+                                    SoundController.Default.Play("チェインジ'スペル。");
+                                }
 
                                 break;
 
                             case "telops":
                                 foreach (var telop in OnePointTelopTable.Default.Table)
                                 {
-                                    if (telop.Title.Trim() == windowname.Trim())
+                                    if (telop.Title.Trim().ToLower() == windowname.Trim().ToLower())
                                     {
+                                        changed = true;
                                         telop.Enabled = value;
                                     }
                                 }
 
-                                ActInvoker.Invoke(() =>
+                                if (changed)
                                 {
-                                    SpecialSpellTimerPlugin.ConfigPanel.LoadTelopTable();
-                                });
+                                    ActInvoker.Invoke(() =>
+                                    {
+                                        SpecialSpellTimerPlugin.ConfigPanel.LoadTelopTable();
+                                    });
+
+                                    SoundController.Default.Play("チェインジ'テロップ。");
+                                }
 
                                 break;
                         }
