@@ -71,8 +71,8 @@
                             case "spells":
                                 foreach (var spell in SpellTimerTable.Table)
                                 {
-                                    if (spell.Panel.Trim() == target.Trim() ||
-                                        spell.SpellTitle.Trim() == target.Trim())
+                                    if (spell.Panel.Trim() == windowname.Trim() ||
+                                        spell.SpellTitle.Trim() == windowname.Trim())
                                     {
                                         spell.Enabled = value;
                                     }
@@ -88,7 +88,7 @@
                             case "telops":
                                 foreach (var telop in OnePointTelopTable.Default.Table)
                                 {
-                                    if (telop.Title.Trim() == target.Trim())
+                                    if (telop.Title.Trim() == windowname.Trim())
                                     {
                                         telop.Enabled = value;
                                     }
