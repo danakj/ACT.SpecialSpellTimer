@@ -13,7 +13,7 @@
         /// コマンド解析用の正規表現
         /// </summary>
         private static Regex regexCommand = new Regex(
-            @".*/spespe (?<command>refresh|changeenabled) (?<target>spells|telops)( (?<windowname>"".*"") (?<value>.*))*",
+            @".*/spespe (?<command>refresh|changeenabled) (?<target>spells|telops)( (?<windowname>"".*""|all) (?<value>.*))*",
             RegexOptions.Compiled |
             RegexOptions.IgnoreCase);
 
@@ -75,7 +75,8 @@
                                 foreach (var spell in SpellTimerTable.Table)
                                 {
                                     if (spell.Panel.Trim().ToLower() == windowname.Trim().ToLower() ||
-                                        spell.SpellTitle.Trim().ToLower() == windowname.Trim().ToLower())
+                                        spell.SpellTitle.Trim().ToLower() == windowname.Trim().ToLower() ||
+                                        windowname.Trim().ToLower() == "all")
                                     {
                                         changed = true;
                                         spell.Enabled = value;
@@ -97,7 +98,8 @@
                             case "telops":
                                 foreach (var telop in OnePointTelopTable.Default.Table)
                                 {
-                                    if (telop.Title.Trim().ToLower() == windowname.Trim().ToLower())
+                                    if (telop.Title.Trim().ToLower() == windowname.Trim().ToLower() ||
+                                        windowname.Trim().ToLower() == "all")
                                     {
                                         changed = true;
                                         telop.Enabled = value;
