@@ -122,20 +122,28 @@
         {
             if (Settings.Default.OverlayVisible)
             {
-                this.SwitchOverlayButton.Text = "スペルリストを隠す";
+                this.SwitchOverlayButton.Text = 
+                    "スペルリストの表示スイッチ" + Environment.NewLine +
+                    "現在の状態 -> ON";
             }
             else
             {
-                this.SwitchOverlayButton.Text = "スペルリストを表示する";
+                this.SwitchOverlayButton.Text =
+                    "スペルリストの表示スイッチ" + Environment.NewLine +
+                    "現在の状態 -> OFF";
             }
 
             if (Settings.Default.TelopAlwaysVisible)
             {
-                this.SwitchTelopButton.Text = "テロップの設定に従う";
+                this.SwitchTelopButton.Text = 
+                    "テロップの表示スイッチ" + Environment.NewLine +
+                    "現在の状態 -> 常に表示(位置調整向け)";
             }
             else
             {
-                this.SwitchTelopButton.Text = "テロップを常に表示する";
+                this.SwitchTelopButton.Text =
+                    "テロップの表示スイッチ" + Environment.NewLine +
+                    "現在の状態 -> 通常";
             }
 
             this.BarWidthNumericUpDown.Value = Settings.Default.ProgressBarSize.Width;

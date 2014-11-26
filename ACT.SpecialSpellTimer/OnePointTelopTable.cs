@@ -154,11 +154,13 @@
             foreach (var row in this.table)
             {
                 row.BeginEdit();
+
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;
                 row.RegexToHide = null;
                 row.RegexPatternToHide = string.Empty;
+
                 row.EndEdit();
             }
 
@@ -221,6 +223,7 @@
             foreach (var item in copy)
             {
                 item.BeginEdit();
+
                 item.MessageReplaced = string.Empty;
                 item.MatchedLog = string.Empty;
                 item.MatchDateTime = DateTime.MinValue;
@@ -228,6 +231,7 @@
                 item.RegexPattern = string.Empty;
                 item.RegexToHide = null;
                 item.RegexPatternToHide = string.Empty;
+
                 item.EndEdit();
             }
 

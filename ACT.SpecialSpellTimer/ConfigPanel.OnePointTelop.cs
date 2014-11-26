@@ -91,11 +91,16 @@
 
             this.TelopFontButton.Click += (s1, e1) =>
             {
+                var maxSizeBack = this.FontDialog.MaxSize;
+
+                this.FontDialog.MaxSize = 0;
                 this.FontDialog.Font = this.TelopSampleLabel.Font;
                 if (this.FontDialog.ShowDialog(this) != DialogResult.Cancel)
                 {
                     this.TelopSampleLabel.Font = this.FontDialog.Font;
                 }
+
+                this.FontDialog.MaxSize = maxSizeBack;
             };
 
             this.TelopFontColorButton.Click += (s1, e1) =>

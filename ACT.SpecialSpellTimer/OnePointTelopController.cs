@@ -166,6 +166,14 @@
 
                 w.Refresh();
 
+                // telopの位置を保存する
+                if (DateTime.Now.Second == 0)
+                {
+                    telop.Left = w.Left;
+                    telop.Top = w.Top;
+                    OnePointTelopTable.Default.Save();
+                }
+
                 if (Settings.Default.TelopAlwaysVisible)
                 {
                     w.Visibility = Visibility.Visible;

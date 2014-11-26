@@ -188,7 +188,11 @@
                     setting.Left = panel.Left;
                     setting.Top = panel.Top;
 
-                    PanelSettings.Default.Save();
+                    // 毎分0秒の時保存する
+                    if (DateTime.Now.Second == 0)
+                    {
+                        PanelSettings.Default.Save();
+                    }
 
                     // スペルリストに存在しないパネルを閉じる
                     if (!spellArray.Any(x => x.Panel == panel.PanelName))
