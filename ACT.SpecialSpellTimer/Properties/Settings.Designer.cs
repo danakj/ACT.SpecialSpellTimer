@@ -178,5 +178,17 @@ namespace ACT.SpecialSpellTimer.Properties {
                 this["TelopAlwaysVisible"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnabledPartyMemberPlaceholder {
+            get {
+                return ((bool)(this["EnabledPartyMemberPlaceholder"]));
+            }
+            set {
+                this["EnabledPartyMemberPlaceholder"] = value;
+            }
+        }
     }
 }

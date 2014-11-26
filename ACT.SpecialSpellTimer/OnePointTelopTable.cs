@@ -4,6 +4,7 @@
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
+    using ACT.SpecialSpellTimer.Sound;
 
     /// <summary>
     /// ワンポイントテレロップ設定テーブル
@@ -151,15 +152,25 @@
         /// </summary>
         public void Reset()
         {
+            var id = 0L;
             foreach (var row in this.table)
             {
                 row.BeginEdit();
 
+                id++;
+                row.ID = id;
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;
                 row.RegexToHide = null;
                 row.RegexPatternToHide = string.Empty;
+
+                row.MatchSound = !string.IsNullOrWhiteSpace(row.MatchSound) ?
+                    Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.MatchSound)) :
+                    string.Empty;
+                row.DelaySound = !string.IsNullOrWhiteSpace(row.DelaySound) ?
+                    Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.DelaySound)) :
+                    string.Empty;
 
                 row.EndEdit();
             }
@@ -192,6 +203,7 @@
                 }
 
                 this.table.ReadXml(file);
+                this.Reset();
             }
         }
 
@@ -231,6 +243,13 @@
                 item.RegexPattern = string.Empty;
                 item.RegexToHide = null;
                 item.RegexPatternToHide = string.Empty;
+
+                item.MatchSound = !string.IsNullOrWhiteSpace(item.MatchSound) ?
+                    Path.GetFileName(item.MatchSound) :
+                    string.Empty;
+                item.DelaySound = !string.IsNullOrWhiteSpace(item.DelaySound) ?
+                    Path.GetFileName(item.DelaySound) :
+                    string.Empty;
 
                 item.EndEdit();
             }

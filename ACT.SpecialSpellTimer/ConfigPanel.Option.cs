@@ -157,6 +157,7 @@
             this.AutoSortReverseCheckBox.Checked = Settings.Default.AutoSortReverse;
             this.TimeOfHideNumericUpDown.Value = (decimal)Settings.Default.TimeOfHideSpell;
             this.RefreshIntervalNumericUpDown.Value = Settings.Default.RefreshInterval;
+            this.EnabledPTPlaceholderCheckBox.Checked = Settings.Default.EnabledPartyMemberPlaceholder;
         }
 
         /// <summary>
@@ -176,6 +177,7 @@
             Settings.Default.AutoSortReverse = this.AutoSortReverseCheckBox.Checked;
             Settings.Default.TimeOfHideSpell = (double)this.TimeOfHideNumericUpDown.Value;
             Settings.Default.RefreshInterval = (long)this.RefreshIntervalNumericUpDown.Value;
+            Settings.Default.EnabledPartyMemberPlaceholder = this.EnabledPTPlaceholderCheckBox.Checked;
 
             // 設定を保存する
             Settings.Default.Save();

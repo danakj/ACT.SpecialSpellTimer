@@ -421,6 +421,7 @@
         /// <param name="e">イベント引数</param>
         private void ExportButton_Click(object sender, EventArgs e)
         {
+            this.SaveFileDialog.FileName = "ACT.SpecialSpellTimer.Spells.xml";
             if (this.SaveFileDialog.ShowDialog(this) != DialogResult.Cancel)
             {
                 SpellTimerTable.Save(
@@ -435,6 +436,7 @@
         /// <param name="e">イベント引数</param>
         private void ImportButton_Click(object sender, EventArgs e)
         {
+            this.OpenFileDialog.FileName = "ACT.SpecialSpellTimer.Spells.xml";
             if (this.OpenFileDialog.ShowDialog(this) != DialogResult.Cancel)
             {
                 SpellTimerTable.Load(

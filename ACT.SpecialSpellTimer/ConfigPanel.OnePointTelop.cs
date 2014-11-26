@@ -127,6 +127,12 @@
         /// <param name="e">イベント引数</param>
         private void TelopExportButton_Click(object sender, EventArgs e)
         {
+            this.SaveFileDialog.FileName = "ACT.SpecialSpellTimer.Telops.xml";
+            if (this.SaveFileDialog.ShowDialog(this) != DialogResult.Cancel)
+            {
+                OnePointTelopTable.Default.Save(
+                    this.SaveFileDialog.FileName);
+            }
         }
 
         /// <summary>
@@ -136,6 +142,15 @@
         /// <param name="e">イベント引数</param>
         private void TelopImportButton_Click(object sender, EventArgs e)
         {
+            this.OpenFileDialog.FileName = "ACT.SpecialSpellTimer.Telops.xml";
+            if (this.OpenFileDialog.ShowDialog(this) != DialogResult.Cancel)
+            {
+                OnePointTelopTable.Default.Load(
+                    this.OpenFileDialog.FileName,
+                    false);
+
+                this.LoadTelopTable();
+            }
         }
 
         /// <summary>

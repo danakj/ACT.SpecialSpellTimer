@@ -58,6 +58,19 @@
             }
         }
 
+        public string WaveDirectory
+        {
+            get
+            {
+                // ACTのパスを取得する
+                var baseDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+
+                return Path.Combine(
+                    baseDir,
+                    @"resources\wav");
+            }
+        }
+
         /// <summary>
         /// Waveファイルを列挙する
         /// </summary>
@@ -73,16 +86,9 @@
                 FullPath = string.Empty
             });
 
-            // ACTのパスを取得する
-            var baseDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-
-            var waveDir = Path.Combine(
-                baseDir,
-                @"resources\wav");
-
-            if (Directory.Exists(waveDir))
+            if (Directory.Exists(this.WaveDirectory))
             {
-                foreach (var wave in Directory.GetFiles(waveDir, "*.wav")
+                foreach (var wave in Directory.GetFiles(this.WaveDirectory, "*.wav")
                     .OrderBy(x => x)
                     .ToArray())
                 {

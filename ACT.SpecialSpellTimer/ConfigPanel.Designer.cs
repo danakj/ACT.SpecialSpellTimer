@@ -134,6 +134,8 @@
             this.TelopExportButton = new System.Windows.Forms.Button();
             this.TelopTreeView = new System.Windows.Forms.TreeView();
             this.OptionTabPage = new System.Windows.Forms.TabPage();
+            this.EnabledPTPlaceholderCheckBox = new System.Windows.Forms.CheckBox();
+            this.label43 = new System.Windows.Forms.Label();
             this.SwitchTelopButton = new System.Windows.Forms.Button();
             this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
@@ -169,6 +171,7 @@
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.label48 = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -218,7 +221,7 @@
             this.SpecialSpellTabPage.Controls.Add(this.SpellTimerTreeView);
             this.SpecialSpellTabPage.Location = new System.Drawing.Point(4, 22);
             this.SpecialSpellTabPage.Name = "SpecialSpellTabPage";
-            this.SpecialSpellTabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.SpecialSpellTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.SpecialSpellTabPage.Size = new System.Drawing.Size(1186, 668);
             this.SpecialSpellTabPage.TabIndex = 0;
             this.SpecialSpellTabPage.Text = "スペシャルスペルタイマ";
@@ -902,6 +905,11 @@
             0,
             0,
             0});
+            this.TelopTopNumericUpDown.Minimum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            -2147483648});
             this.TelopTopNumericUpDown.Name = "TelopTopNumericUpDown";
             this.TelopTopNumericUpDown.Size = new System.Drawing.Size(68, 19);
             this.TelopTopNumericUpDown.TabIndex = 38;
@@ -934,6 +942,11 @@
             0,
             0,
             0});
+            this.TelopLeftNumericUpDown.Minimum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            -2147483648});
             this.TelopLeftNumericUpDown.Name = "TelopLeftNumericUpDown";
             this.TelopLeftNumericUpDown.Size = new System.Drawing.Size(68, 19);
             this.TelopLeftNumericUpDown.TabIndex = 35;
@@ -1326,6 +1339,9 @@
             // 
             // OptionTabPage
             // 
+            this.OptionTabPage.Controls.Add(this.label48);
+            this.OptionTabPage.Controls.Add(this.EnabledPTPlaceholderCheckBox);
+            this.OptionTabPage.Controls.Add(this.label43);
             this.OptionTabPage.Controls.Add(this.SwitchTelopButton);
             this.OptionTabPage.Controls.Add(this.label30);
             this.OptionTabPage.Controls.Add(this.label29);
@@ -1358,11 +1374,30 @@
             this.OptionTabPage.Controls.Add(this.ShokikaButton);
             this.OptionTabPage.Location = new System.Drawing.Point(4, 22);
             this.OptionTabPage.Name = "OptionTabPage";
-            this.OptionTabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.OptionTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.OptionTabPage.Size = new System.Drawing.Size(1186, 668);
             this.OptionTabPage.TabIndex = 1;
             this.OptionTabPage.Text = "オプション";
             this.OptionTabPage.UseVisualStyleBackColor = true;
+            // 
+            // EnabledPTPlaceholderCheckBox
+            // 
+            this.EnabledPTPlaceholderCheckBox.AutoSize = true;
+            this.EnabledPTPlaceholderCheckBox.Location = new System.Drawing.Point(197, 307);
+            this.EnabledPTPlaceholderCheckBox.Name = "EnabledPTPlaceholderCheckBox";
+            this.EnabledPTPlaceholderCheckBox.Size = new System.Drawing.Size(48, 16);
+            this.EnabledPTPlaceholderCheckBox.TabIndex = 31;
+            this.EnabledPTPlaceholderCheckBox.Text = "有効";
+            this.EnabledPTPlaceholderCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(6, 308);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(153, 12);
+            this.label43.TabIndex = 30;
+            this.label43.Text = "PTメンバの代名詞を有効にする";
             // 
             // SwitchTelopButton
             // 
@@ -1714,6 +1749,15 @@
             // 
             this.ToolTip.IsBalloon = true;
             // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(251, 308);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(343, 12);
+            this.label48.TabIndex = 32;
+            this.label48.Text = "※<2>～<8>が使用可能になりますが、名前でのマッチは出来なくなります";
+            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1898,5 +1942,8 @@
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.NumericUpDown DisplayTimeNumericUpDown;
+        private System.Windows.Forms.CheckBox EnabledPTPlaceholderCheckBox;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label48;
     }
 }

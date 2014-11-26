@@ -1,6 +1,8 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// FF14Pluginヘルパーの拡張部分
@@ -49,6 +51,44 @@
             }
 
             return player;
+        }
+
+        /// <summary>
+        /// パーティの戦闘メンバリストを取得する
+        /// </summary>
+        /// <returns>パーティの戦闘メンバリスト</returns>
+        public static List<Combatant> GetCombatantListParty()
+        {
+            // 総戦闘メンバリストを取得する（周囲のPC, NPC, MOB等すべて）
+            var combatListAll = FF14PluginHelper.GetCombatantList();
+
+            // パーティメンバのIDリストを取得する
+            int partyCount;
+            var partyListById = FF14PluginHelper.GetCurrentPartyList(out partyCount);
+
+            var combatListParty = new List<Combatant>();
+
+            foreach (var partyMemberId in partyListById)
+            {
+                if (partyMemberId == 0)
+                {
+                    continue;
+                }
+
+                var partyMember = (
+                    from x in combatListAll
+                    where
+                    x.ID == partyMemberId
+                    select
+                    x).FirstOrDefault();
+
+                if (partyMember != null)
+                {
+                    combatListParty.Add(partyMember);
+                }
+            }
+
+            return combatListParty;
         }
     }
 }
