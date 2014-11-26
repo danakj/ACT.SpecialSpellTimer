@@ -71,16 +71,19 @@
                             telop.Keyword.Trim().Replace("<me>", player.Name) :
                             telop.Keyword.Trim();
 
-                        if (log.ToUpper().Contains(
-                            keyword.ToUpper()))
+                        if (!string.IsNullOrWhiteSpace(keyword))
                         {
-                            telop.MessageReplaced = telop.Message;
-                            telop.MatchDateTime = DateTime.Now;
-                            telop.Delayed = false;
-                            telop.MatchedLog = log;
+                            if (log.ToUpper().Contains(
+                                keyword.ToUpper()))
+                            {
+                                telop.MessageReplaced = telop.Message;
+                                telop.MatchDateTime = DateTime.Now;
+                                telop.Delayed = false;
+                                telop.MatchedLog = log;
 
-                            SoundController.Default.Play(telop.MatchSound);
-                            SoundController.Default.Play(telop.MatchTextToSpeak);
+                                SoundController.Default.Play(telop.MatchSound);
+                                SoundController.Default.Play(telop.MatchTextToSpeak);
+                            }
                         }
                     }
 
@@ -110,10 +113,13 @@
                             telop.KeywordToHide.Trim().Replace("<me>", player.Name) :
                             telop.KeywordToHide.Trim();
 
-                        if (log.ToUpper().Contains(
-                            keyword.ToUpper()))
+                        if (!string.IsNullOrWhiteSpace(keyword))
                         {
-                            isForceHide = true;
+                            if (log.ToUpper().Contains(
+                                keyword.ToUpper()))
+                            {
+                                isForceHide = true;
+                            }
                         }
                     }
 
@@ -138,7 +144,7 @@
                         telop.Delayed = true;
                         SoundController.Default.Play(telop.DelaySound);
                         var tts = regex != null && !string.IsNullOrWhiteSpace(telop.DelayTextToSpeak) ?
-                            regex.Replace(telop.MatchedLog, telop.MatchTextToSpeak) :
+                            regex.Replace(telop.MatchedLog, telop.DelayTextToSpeak) :
                             telop.DelayTextToSpeak;
                         SoundController.Default.Play(tts);
                     }
