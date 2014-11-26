@@ -27,6 +27,12 @@
         {
             foreach (var log in logLines)
             {
+                // 正規表現の前にキーワードがなければ抜けてしまう
+                if (!log.ToLower().Contains("/spespe"))
+                {
+                    continue;
+                }
+
                 var match = regexCommand.Match(log);
                 if (!match.Success)
                 {
