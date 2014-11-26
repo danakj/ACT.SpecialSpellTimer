@@ -242,6 +242,10 @@
                 spellArray,
                 logLines);
 
+            // コマンドとマッチングする
+            TextCommandController.MatchCommand(
+                logLines);
+
             // オーバーレイが非表示？
             if (!Settings.Default.OverlayVisible)
             {

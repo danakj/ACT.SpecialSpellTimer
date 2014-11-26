@@ -315,6 +315,57 @@
         }
 
         /// <summary>
+        /// スペルタイマテーブルを読み込む
+        /// </summary>
+        public void LoadSpellTimerTable()
+        {
+            try
+            {
+                this.SpellTimerTreeView.SuspendLayout();
+
+                this.SpellTimerTreeView.Nodes.Clear();
+
+                var panels = SpellTimerTable.Table
+                    .OrderBy(x => x.Panel)
+                    .Select(x => x.Panel)
+                    .Distinct();
+                foreach (var panelName in panels)
+                {
+                    var children = new List<TreeNode>();
+                    var spells = SpellTimerTable.Table
+                        .OrderBy(x => x.DisplayNo)
+                        .Where(x => x.Panel == panelName);
+                    foreach (var spell in spells)
+                    {
+                        var nc = new TreeNode()
+                        {
+                            Text = spell.SpellTitle,
+                            ToolTipText = spell.Keyword,
+                            Checked = spell.Enabled,
+                            Tag = spell,
+                        };
+
+                        children.Add(nc);
+                    }
+
+                    var n = new TreeNode(
+                        panelName,
+                        children.ToArray());
+
+                    n.Checked = children.Any(x => x.Checked);
+
+                    this.SpellTimerTreeView.Nodes.Add(n);
+                }
+
+                this.SpellTimerTreeView.ExpandAll();
+            }
+            finally
+            {
+                this.SpellTimerTreeView.ResumeLayout();
+            }
+        }
+
+        /// <summary>
         /// 詳細を表示する
         /// </summary>
         /// <param name="dataSource"></param>
@@ -361,57 +412,6 @@
 
             // データソースをタグに突っ込んでおく
             this.DetailGroupBox.Tag = src;
-        }
-
-        /// <summary>
-        /// スペルタイマテーブルを読み込む
-        /// </summary>
-        private void LoadSpellTimerTable()
-        {
-            try
-            {
-                this.SpellTimerTreeView.SuspendLayout();
-
-                this.SpellTimerTreeView.Nodes.Clear();
-
-                var panels = SpellTimerTable.Table
-                    .OrderBy(x => x.Panel)
-                    .Select(x => x.Panel)
-                    .Distinct();
-                foreach (var panelName in panels)
-                {
-                    var children = new List<TreeNode>();
-                    var spells = SpellTimerTable.Table
-                        .OrderBy(x => x.DisplayNo)
-                        .Where(x => x.Panel == panelName);
-                    foreach (var spell in spells)
-                    {
-                        var nc = new TreeNode()
-                        {
-                            Text = spell.SpellTitle,
-                            ToolTipText = spell.Keyword,
-                            Checked = spell.Enabled,
-                            Tag = spell,
-                        };
-
-                        children.Add(nc);
-                    }
-
-                    var n = new TreeNode(
-                        panelName,
-                        children.ToArray());
-
-                    n.Checked = children.Any(x => x.Checked);
-
-                    this.SpellTimerTreeView.Nodes.Add(n);
-                }
-
-                this.SpellTimerTreeView.ExpandAll();
-            }
-            finally
-            {
-                this.SpellTimerTreeView.ResumeLayout();
-            }
         }
 
         /// <summary>

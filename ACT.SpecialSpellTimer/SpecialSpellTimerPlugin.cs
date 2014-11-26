@@ -12,6 +12,11 @@
     public class SpecialSpellTimerPlugin : IActPluginV1
     {
         /// <summary>
+        /// 設定パネル
+        /// </summary>
+        public static ConfigPanel ConfigPanel { get; private set; }
+
+        /// <summary>
         /// プラグインステータス表示ラベル
         /// </summary>
         private Label PluginStatusLabel
@@ -38,9 +43,9 @@
                 this.Update();
 
                 // 設定Panelを追加する
-                var panel = new ConfigPanel();
-                panel.Dock = DockStyle.Fill;
-                pluginScreenSpace.Controls.Add(panel);
+                ConfigPanel = new ConfigPanel();
+                ConfigPanel.Dock = DockStyle.Fill;
+                pluginScreenSpace.Controls.Add(ConfigPanel);
 
                 // 本体を開始する
                 SpellTimerCore.Default.Begin();

@@ -1,0 +1,5 @@
+/spespe refresh spells
+/spespe refresh telops
+/spespe changeenabled spells "サンプルパネル" true
+/spespe changeenabled spells "サンプルスペル" true
+/spespe changeenabled telops "サンプルテロップ" true

@@ -257,6 +257,7 @@
             if (src != null)
             {
                 src.BeginEdit();
+
                 src.Title = this.TelopTitleTextBox.Text;
                 src.Message = this.TelopMessageTextBox.Text;
                 src.Keyword = this.TelopKeywordTextBox.Text;
@@ -320,6 +321,38 @@
         }
 
         /// <summary>
+        /// テロップテーブルをツリーにロードする
+        /// </summary>
+        public void LoadTelopTable()
+        {
+            try
+            {
+                this.TelopTreeView.SuspendLayout();
+
+                this.TelopTreeView.Nodes.Clear();
+
+                var telops = OnePointTelopTable.Default.Table.OrderBy(x => x.Title);
+                foreach (var telop in telops)
+                {
+                    var n = new TreeNode();
+
+                    n.Tag = telop;
+                    n.Text = telop.Title;
+                    n.ToolTipText = telop.Message;
+                    n.Checked = telop.Enabled;
+
+                    this.TelopTreeView.Nodes.Add(n);
+                }
+
+                this.TelopTreeView.ExpandAll();
+            }
+            finally
+            {
+                this.TelopTreeView.ResumeLayout();
+            }
+        }
+
+        /// <summary>
         /// 詳細を表示する
         /// </summary>
         /// <param name="dataSource"></param>
@@ -365,38 +398,6 @@
 
             // データソースをタグに突っ込んでおく
             this.TelopDetailGroupBox.Tag = src;
-        }
-
-        /// <summary>
-        /// テロップテーブルをツリーにロードする
-        /// </summary>
-        private void LoadTelopTable()
-        {
-            try
-            {
-                this.TelopTreeView.SuspendLayout();
-
-                this.TelopTreeView.Nodes.Clear();
-
-                var telops = OnePointTelopTable.Default.Table.OrderBy(x => x.Title);
-                foreach (var telop in telops)
-                {
-                    var n = new TreeNode();
-
-                    n.Tag = telop;
-                    n.Text = telop.Title;
-                    n.ToolTipText = telop.Message;
-                    n.Checked = telop.Enabled;
-
-                    this.TelopTreeView.Nodes.Add(n);
-                }
-
-                this.TelopTreeView.ExpandAll();
-            }
-            finally
-            {
-                this.TelopTreeView.ResumeLayout();
-            }
         }
     }
 }

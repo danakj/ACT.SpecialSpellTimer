@@ -91,6 +91,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpellTimerDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="TextCommandController.cs" />
     <Compile Include="Utility\ActInvoker.cs" />
     <Compile Include="WindowExtension.Transparent.cs" />
     <Compile Include="SpellTimerListWindow.xaml.cs">
