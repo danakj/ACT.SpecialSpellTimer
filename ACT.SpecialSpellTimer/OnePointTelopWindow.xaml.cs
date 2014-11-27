@@ -1,8 +1,10 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System;
+    using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Interop;
     using System.Windows.Media;
     using System.Windows.Shapes;
     using System.Windows.Threading;
@@ -190,5 +192,25 @@
                 this.MessageTextBlock.Visibility = Visibility.Visible;
             }
         }
+
+        #region フォーカスを奪わない対策
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        private const int GWL_EXSTYLE = -20;
+        private const int WS_EX_NOACTIVATE = 0x08000000;
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            WindowInteropHelper helper = new WindowInteropHelper(this);
+            SetWindowLong(helper.Handle, GWL_EXSTYLE, GetWindowLong(helper.Handle, GWL_EXSTYLE) | WS_EX_NOACTIVATE);
+        }
+
+        #endregion
     }
 }
