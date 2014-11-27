@@ -5,7 +5,7 @@
     using System.Windows.Controls;
     using System.Windows.Media;
     using System.Windows.Shapes;
-
+    using System.Windows.Threading;
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
 
@@ -20,6 +20,8 @@
         public OnePointTelopWindow()
         {
             this.InitializeComponent();
+
+            this.MessageTextBlock.Text = string.Empty;
 
             this.ShowInTaskbar = false;
             this.Topmost = true;
@@ -128,21 +130,25 @@
 
                     if (progress > 0.0d)
                     {
-                        var barRect = new Rectangle();
-                        barRect.Stroke = brush;
-                        barRect.Fill = brush;
-                        barRect.Width = this.Width * progress;
-                        barRect.Height = Settings.Default.ProgressBarSize.Height;
-                        barRect.RadiusX = 2.0d;
-                        barRect.RadiusY = 2.0d;
-                        Canvas.SetLeft(barRect, 0);
-                        Canvas.SetTop(barRect, 0);
+                        Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            var barRect = new Rectangle();
+                            barRect.Stroke = brush;
+                            barRect.Fill = brush;
+                            barRect.Width = this.MessageTextBlock.ActualWidth * progress;
+                            barRect.Height = Settings.Default.ProgressBarSize.Height;
+                            barRect.RadiusX = 2.0d;
+                            barRect.RadiusY = 2.0d;
+                            Canvas.SetLeft(barRect, 0);
+                            Canvas.SetTop(barRect, 0);
 
-                        this.ProgressBarCanvas.Width = barRect.Width;
-                        this.ProgressBarCanvas.Height = barRect.Height;
+                            this.ProgressBarCanvas.Width = barRect.Width;
+                            this.ProgressBarCanvas.Height = barRect.Height;
 
-                        this.ProgressBarCanvas.Children.Clear();
-                        this.ProgressBarCanvas.Children.Add(barRect);
+                            this.ProgressBarCanvas.Children.Clear();
+                            this.ProgressBarCanvas.Children.Add(barRect);
+                        }),
+                        DispatcherPriority.Loaded);
 
                         this.ProgressBarCanvas.Visibility = Visibility.Visible;
                     }
