@@ -177,7 +177,7 @@
         {
             Table.AcceptChanges();
 
-            var copy = Table as SpellTimerDataSet.SpellTimerDataTable;
+            var copy = Table.Copy() as SpellTimerDataSet.SpellTimerDataTable;
 
             var dir = Path.GetDirectoryName(file);
             if (!Directory.Exists(dir))

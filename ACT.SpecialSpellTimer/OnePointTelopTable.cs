@@ -4,6 +4,7 @@
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
+
     using ACT.SpecialSpellTimer.Sound;
 
     /// <summary>
@@ -224,7 +225,7 @@
         {
             this.table.AcceptChanges();
 
-            var copy = this.table as SpellTimerDataSet.OnePointTelopDataTable;
+            var copy = this.table.Copy() as SpellTimerDataSet.OnePointTelopDataTable;
 
             var dir = Path.GetDirectoryName(file);
             if (!Directory.Exists(dir))

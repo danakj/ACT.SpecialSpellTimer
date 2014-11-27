@@ -76,7 +76,17 @@
                             if (log.ToUpper().Contains(
                                 keyword.ToUpper()))
                             {
-                                telop.MessageReplaced = telop.Message;
+                                if (!telop.AddMessageEnabled)
+                                {
+                                    telop.MessageReplaced = telop.Message;
+                                }
+                                else
+                                {
+                                    telop.MessageReplaced += string.IsNullOrWhiteSpace(telop.MessageReplaced) ?
+                                        telop.Message :
+                                        Environment.NewLine + telop.Message;
+                                }
+
                                 telop.MatchDateTime = DateTime.Now;
                                 telop.Delayed = false;
                                 telop.MatchedLog = log;
@@ -92,7 +102,17 @@
                     {
                         if (regex.IsMatch(log))
                         {
-                            telop.MessageReplaced = regex.Replace(log, telop.Message);
+                            if (!telop.AddMessageEnabled)
+                            {
+                                telop.MessageReplaced = regex.Replace(log, telop.Message);
+                            }
+                            else
+                            {
+                                telop.MessageReplaced += string.IsNullOrWhiteSpace(telop.MessageReplaced) ?
+                                    regex.Replace(log, telop.Message) :
+                                    Environment.NewLine + regex.Replace(log, telop.Message);
+                            }
+
                             telop.MatchDateTime = DateTime.Now;
                             telop.Delayed = false;
                             telop.MatchedLog = log;
@@ -150,6 +170,19 @@
                     }
                 }
 
+                // カウントダウンプレースホルダを置換する
+                var count = (
+                    telop.MatchDateTime.AddSeconds(telop.Delay + telop.DisplayTime) -
+                    DateTime.Now).TotalSeconds;
+                if (count < 0.0d)
+                {
+                    count = 0.0d;
+                }
+
+                telop.MessageReplaced = telop.MessageReplaced.Replace(
+                    "{COUNT}",
+                    count.ToString("N1"));
+
                 var w = telopWindowList.Where(x => x.DataSource.ID == telop.ID).FirstOrDefault();
                 if (w == null)
                 {
@@ -182,7 +215,11 @@
 
                 if (Settings.Default.TelopAlwaysVisible)
                 {
-                    w.Visibility = Visibility.Visible;
+                    if (w.Visibility != Visibility.Visible)
+                    {
+                        w.Visibility = Visibility.Visible;
+                    }
+
                     continue;
                 }
 
@@ -191,23 +228,29 @@
                     if (telop.MatchDateTime.AddSeconds(telop.Delay) <= DateTime.Now &&
                         DateTime.Now <= telop.MatchDateTime.AddSeconds(telop.Delay + telop.DisplayTime))
                     {
-                        w.Visibility = Visibility.Visible;
+                        if (w.Visibility != Visibility.Visible)
+                        {
+                            w.Visibility = Visibility.Visible;
+                        }
                     }
                     else
                     {
                         w.Visibility = Visibility.Hidden;
                         telop.MatchDateTime = DateTime.MinValue;
+                        telop.MessageReplaced = string.Empty;
                     }
 
                     if (isForceHide)
                     {
                         w.Visibility = Visibility.Hidden;
                         telop.MatchDateTime = DateTime.MinValue;
+                        telop.MessageReplaced = string.Empty;
                     }
                 }
                 else
                 {
                     w.Visibility = Visibility.Hidden;
+                    telop.MessageReplaced = string.Empty;
                 }
 
                 telop.EndEdit();

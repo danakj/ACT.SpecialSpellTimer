@@ -190,5 +190,17 @@ namespace ACT.SpecialSpellTimer.Properties {
                 this["EnabledPartyMemberPlaceholder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public double PlayerInfoRefreshInterval {
+            get {
+                return ((double)(this["PlayerInfoRefreshInterval"]));
+            }
+            set {
+                this["PlayerInfoRefreshInterval"] = value;
+            }
+        }
     }
 }

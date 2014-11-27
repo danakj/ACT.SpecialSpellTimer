@@ -13,7 +13,7 @@
         /// コマンド解析用の正規表現
         /// </summary>
         private static Regex regexCommand = new Regex(
-            @".*/spespe (?<command>refresh|changeenabled) (?<target>spells|telops)( (?<windowname>"".*""|all) (?<value>.*))*",
+            @".*/spespe (?<command>refresh|changeenabled) (?<target>spells|telops|me)( (?<windowname>"".*""|all) (?<value>.*))*",
             RegexOptions.Compiled |
             RegexOptions.IgnoreCase);
 
@@ -62,6 +62,11 @@
                             case "telops":
                                 OnePointTelopController.CloseTelops();
                                 SoundController.Default.Play("リフレッシュ'テロップ。");
+                                break;
+
+                            case "me":
+                                FF14PluginHelper.RefreshPlayer();
+                                SoundController.Default.Play("リフレッシュ'ミー。");
                                 break;
                         }
 

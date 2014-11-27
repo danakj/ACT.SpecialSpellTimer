@@ -1349,6 +1349,10 @@ namespace ACT.SpecialSpellTimer {
             
             private global::System.Data.DataColumn columnDisplayTime;
             
+            private global::System.Data.DataColumn columnAddMessageEnabled;
+            
+            private global::System.Data.DataColumn columnProgressBarEnabled;
+            
             private global::System.Data.DataColumn columnMatchSound;
             
             private global::System.Data.DataColumn columnMatchTextToSpeak;
@@ -1479,6 +1483,22 @@ namespace ACT.SpecialSpellTimer {
             public global::System.Data.DataColumn DisplayTimeColumn {
                 get {
                     return this.columnDisplayTime;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AddMessageEnabledColumn {
+                get {
+                    return this.columnAddMessageEnabled;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProgressBarEnabledColumn {
+                get {
+                    return this.columnProgressBarEnabled;
                 }
             }
             
@@ -1695,6 +1715,8 @@ namespace ACT.SpecialSpellTimer {
                         string Message, 
                         long Delay, 
                         long DisplayTime, 
+                        bool AddMessageEnabled, 
+                        bool ProgressBarEnabled, 
                         string MatchSound, 
                         string MatchTextToSpeak, 
                         string DelaySound, 
@@ -1725,6 +1747,8 @@ namespace ACT.SpecialSpellTimer {
                         Message,
                         Delay,
                         DisplayTime,
+                        AddMessageEnabled,
+                        ProgressBarEnabled,
                         MatchSound,
                         MatchTextToSpeak,
                         DelaySound,
@@ -1775,6 +1799,8 @@ namespace ACT.SpecialSpellTimer {
                 this.columnMessage = base.Columns["Message"];
                 this.columnDelay = base.Columns["Delay"];
                 this.columnDisplayTime = base.Columns["DisplayTime"];
+                this.columnAddMessageEnabled = base.Columns["AddMessageEnabled"];
+                this.columnProgressBarEnabled = base.Columns["ProgressBarEnabled"];
                 this.columnMatchSound = base.Columns["MatchSound"];
                 this.columnMatchTextToSpeak = base.Columns["MatchTextToSpeak"];
                 this.columnDelaySound = base.Columns["DelaySound"];
@@ -1815,6 +1841,10 @@ namespace ACT.SpecialSpellTimer {
                 base.Columns.Add(this.columnDelay);
                 this.columnDisplayTime = new global::System.Data.DataColumn("DisplayTime", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDisplayTime);
+                this.columnAddMessageEnabled = new global::System.Data.DataColumn("AddMessageEnabled", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAddMessageEnabled);
+                this.columnProgressBarEnabled = new global::System.Data.DataColumn("ProgressBarEnabled", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProgressBarEnabled);
                 this.columnMatchSound = new global::System.Data.DataColumn("MatchSound", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMatchSound);
                 this.columnMatchTextToSpeak = new global::System.Data.DataColumn("MatchTextToSpeak", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1872,6 +1902,10 @@ namespace ACT.SpecialSpellTimer {
                 this.columnDisplayTime.AllowDBNull = false;
                 this.columnDisplayTime.Caption = "DelayAutoHide";
                 this.columnDisplayTime.DefaultValue = ((long)(0));
+                this.columnAddMessageEnabled.AllowDBNull = false;
+                this.columnAddMessageEnabled.DefaultValue = ((bool)(false));
+                this.columnProgressBarEnabled.AllowDBNull = false;
+                this.columnProgressBarEnabled.DefaultValue = ((bool)(false));
                 this.columnMatchSound.AllowDBNull = false;
                 this.columnMatchSound.DefaultValue = ((string)(""));
                 this.columnMatchTextToSpeak.AllowDBNull = false;
@@ -2529,6 +2563,28 @@ namespace ACT.SpecialSpellTimer {
                 }
                 set {
                     this[this.tableOnePointTelop.DisplayTimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool AddMessageEnabled {
+                get {
+                    return ((bool)(this[this.tableOnePointTelop.AddMessageEnabledColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.AddMessageEnabledColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool ProgressBarEnabled {
+                get {
+                    return ((bool)(this[this.tableOnePointTelop.ProgressBarEnabledColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.ProgressBarEnabledColumn] = value;
                 }
             }
             

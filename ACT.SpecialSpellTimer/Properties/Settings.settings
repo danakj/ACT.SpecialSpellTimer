@@ -44,5 +44,8 @@
     <Setting Name="EnabledPartyMemberPlaceholder" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="PlayerInfoRefreshInterval" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

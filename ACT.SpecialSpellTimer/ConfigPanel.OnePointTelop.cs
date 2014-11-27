@@ -217,6 +217,8 @@
                     nr.RegexEnabled = baseRow.RegexEnabled;
                     nr.Delay = baseRow.Delay;
                     nr.DisplayTime = baseRow.DisplayTime;
+                    nr.AddMessageEnabled = baseRow.AddMessageEnabled;
+                    nr.ProgressBarEnabled = baseRow.ProgressBarEnabled;
                     nr.BackColor = baseRow.BackColor;
                     nr.FontColor = baseRow.FontColor;
                     nr.FontFamily = baseRow.FontFamily;
@@ -277,9 +279,11 @@
                 src.Message = this.TelopMessageTextBox.Text;
                 src.Keyword = this.TelopKeywordTextBox.Text;
                 src.KeywordToHide = this.TelopKeywordToHideTextBox.Text;
+                src.RegexEnabled = this.TelopRegexEnabledCheckBox.Checked;
                 src.Delay = (long)this.TelopDelayNumericUpDown.Value;
                 src.DisplayTime = (long)this.DisplayTimeNumericUpDown.Value;
-                src.RegexEnabled = this.TelopRegexEnabledCheckBox.Checked;
+                src.AddMessageEnabled = this.EnabledAddMessageCheckBox.Checked;
+                src.ProgressBarEnabled = this.TelopProgressBarEnabledCheckBox.Checked;
                 src.BackColor = this.TelopSampleLabel.BackColor.ToHTML();
                 src.FontColor = this.TelopSampleLabel.ForeColor.ToHTML();
                 src.FontFamily = this.TelopSampleLabel.Font.Name;
@@ -287,9 +291,9 @@
                 src.FontStyle = (int)this.TelopSampleLabel.Font.Style;
                 src.Left = (double)this.TelopLeftNumericUpDown.Value;
                 src.Top = (double)this.TelopTopNumericUpDown.Value;
-                src.MatchSound = (string)this.TelopMatchSoundComboBox.SelectedValue;
+                src.MatchSound = (string)this.TelopMatchSoundComboBox.SelectedValue ?? string.Empty;
                 src.MatchTextToSpeak = this.TelopMatchTTSTextBox.Text;
-                src.DelaySound = (string)this.TelopDelaySoundComboBox.SelectedValue;
+                src.DelaySound = (string)this.TelopDelaySoundComboBox.SelectedValue ?? string.Empty;
                 src.DelayTextToSpeak = this.TelopDelayTTSTextBox.Text;
 
                 src.EndEdit();
@@ -387,9 +391,11 @@
             this.TelopMessageTextBox.Text = src.Message;
             this.TelopKeywordTextBox.Text = src.Keyword;
             this.TelopKeywordToHideTextBox.Text = src.KeywordToHide;
+            this.TelopRegexEnabledCheckBox.Checked = src.RegexEnabled;
             this.TelopDelayNumericUpDown.Value = src.Delay;
             this.DisplayTimeNumericUpDown.Value = src.DisplayTime;
-            this.TelopRegexEnabledCheckBox.Checked = src.RegexEnabled;
+            this.EnabledAddMessageCheckBox.Checked = src.AddMessageEnabled;
+            this.TelopProgressBarEnabledCheckBox.Checked = src.ProgressBarEnabled;
 
             this.TelopSampleLabel.BackColor = src.BackColor.FromHTML();
             this.TelopSampleLabel.ForeColor = src.FontColor.FromHTML();

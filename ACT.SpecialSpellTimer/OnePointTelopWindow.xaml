@@ -4,7 +4,17 @@
         Title="OnePointTelopWindow" SizeToContent="WidthAndHeight"
         AllowsTransparency="True" WindowStyle="None" Opacity="1" Background="{x:Null}">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
         <TextBlock
+            Grid.Column="0" Grid.Row="0"
             HorizontalAlignment="{Binding HorizontalAlignment, ElementName=MessageTextBlock, Mode=OneWay}"
             VerticalAlignment="{Binding VerticalAlignment, ElementName=MessageTextBlock, Mode=OneWay}"
             Margin="{Binding Margin, ElementName=MessageTextBlock, Mode=OneWay}"
@@ -15,6 +25,7 @@
             FontSize="{Binding FontSize, ElementName=MessageTextBlock, Mode=OneWay}"
             FontStyle="{Binding FontStyle, ElementName=MessageTextBlock, Mode=OneWay}"
             FontWeight="{Binding FontWeight, ElementName=MessageTextBlock, Mode=OneWay}" 
+            Visibility="{Binding Visibility, ElementName=MessageTextBlock, Mode=OneWay}"
             Foreground="Navy"
             >
             <TextBlock.Effect>
@@ -25,6 +36,7 @@
         </TextBlock>
 
         <TextBlock 
+            Grid.Column="0" Grid.Row="0"
             Name="MessageTextBlock" 
             Margin="0,0,0,0" 
             Padding="6"
@@ -32,5 +44,11 @@
             Text="メッセージ" 
             />
 
+        <Canvas 
+            Grid.Column="0" Grid.Row="1"
+            Name="ProgressBarCanvas"
+            Margin="0,0,0,0"
+            VerticalAlignment="Top" 
+            />
     </Grid>
 </Window>

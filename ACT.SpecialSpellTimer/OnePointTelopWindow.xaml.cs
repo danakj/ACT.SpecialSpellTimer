@@ -2,7 +2,9 @@
 {
     using System;
     using System.Windows;
+    using System.Windows.Controls;
     using System.Windows.Media;
+    using System.Windows.Shapes;
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
@@ -62,24 +64,94 @@
                 return;
             }
 
-            // 透明度を設定する
-            this.Opacity = (100d - Settings.Default.Opacity) / 100d;
+            try
+            {
+                this.MessageTextBlock.Visibility = Visibility.Hidden;
+                this.ProgressBarCanvas.Visibility = Visibility.Visible;
 
-            this.MessageTextBlock.Text = !Settings.Default.TelopAlwaysVisible ?
-                this.DataSource.MessageReplaced.Replace(",", Environment.NewLine) :
-                this.DataSource.Message.Replace(",", Environment.NewLine);
+                // 透明度を設定する
+                this.Opacity = (100d - Settings.Default.Opacity) / 100d;
 
-            var font = new System.Drawing.Font(
-                this.DataSource.FontFamily,
-                this.DataSource.FontSize,
-                (System.Drawing.FontStyle)this.DataSource.FontStyle);
+                this.MessageTextBlock.Text = !Settings.Default.TelopAlwaysVisible ?
+                    this.DataSource.MessageReplaced.Replace(",", Environment.NewLine) :
+                    this.DataSource.Message.Replace(",", Environment.NewLine).Replace("{COUNT}", "0.0");
 
-            this.MessageTextBlock.FontFamily = font.ToFontFamilyWPF();
-            this.MessageTextBlock.FontSize = font.ToFontSizeWPF();
-            this.MessageTextBlock.FontStyle = font.ToFontStyleWPF();
-            this.MessageTextBlock.FontWeight = font.ToFontWeightWPF();
-            this.MessageTextBlock.Foreground = new SolidColorBrush(this.DataSource.FontColor.FromHTML().ToWPF());
-            this.MessageTextBlock.Background = new SolidColorBrush(this.DataSource.BackColor.FromHTML().ToWPF());
+                var font = new System.Drawing.Font(
+                    this.DataSource.FontFamily,
+                    this.DataSource.FontSize,
+                    (System.Drawing.FontStyle)this.DataSource.FontStyle);
+
+                this.MessageTextBlock.FontFamily = font.ToFontFamilyWPF();
+                this.MessageTextBlock.FontSize = font.ToFontSizeWPF();
+                this.MessageTextBlock.FontStyle = font.ToFontStyleWPF();
+                this.MessageTextBlock.FontWeight = font.ToFontWeightWPF();
+                this.MessageTextBlock.Foreground = new SolidColorBrush(this.DataSource.FontColor.FromHTML().ToWPF());
+                this.MessageTextBlock.Background = new SolidColorBrush(this.DataSource.BackColor.FromHTML().ToWPF());
+
+                // プログレスバーを表示する？
+                if (this.DataSource.ProgressBarEnabled &&
+                    this.DataSource.DisplayTime > 0)
+                {
+                    // Fontの80%の明るさで描画する
+                    var brush = new SolidColorBrush(this.DataSource
+                        .FontColor
+                        .FromHTML()
+                        .ToWPF()
+                        .ChangeBrightness(0.8d));
+
+                    // 残り表示時間の率を算出する
+                    var progress = 1.0d;
+                    if (this.DataSource.MatchDateTime > DateTime.MinValue)
+                    {
+                        // 表示の残り時間を求める
+                        var displayTimeRemain = (
+                            this.DataSource.MatchDateTime.AddSeconds(this.DataSource.Delay + this.DataSource.DisplayTime) -
+                            DateTime.Now).TotalSeconds;
+
+                        if (displayTimeRemain < 0.0d)
+                        {
+                            displayTimeRemain = 0.0d;
+                        }
+
+                        // 率を求める
+                        if (this.DataSource.DisplayTime > 0)
+                        {
+                            progress = displayTimeRemain / this.DataSource.DisplayTime;
+                        }
+                    }
+
+                    // 常に表示するときは100%表示
+                    if (Settings.Default.TelopAlwaysVisible)
+                    {
+                        progress = 1.0d;
+                    }
+
+                    if (progress > 0.0d)
+                    {
+                        var barRect = new Rectangle();
+                        barRect.Stroke = brush;
+                        barRect.Fill = brush;
+                        barRect.Width = this.Width * progress;
+                        barRect.Height = Settings.Default.ProgressBarSize.Height;
+                        barRect.RadiusX = 2.0d;
+                        barRect.RadiusY = 2.0d;
+                        Canvas.SetLeft(barRect, 0);
+                        Canvas.SetTop(barRect, 0);
+
+                        this.ProgressBarCanvas.Width = barRect.Width;
+                        this.ProgressBarCanvas.Height = barRect.Height;
+
+                        this.ProgressBarCanvas.Children.Clear();
+                        this.ProgressBarCanvas.Children.Add(barRect);
+
+                        this.ProgressBarCanvas.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            finally
+            {
+                this.MessageTextBlock.Visibility = Visibility.Visible;
+            }
         }
     }
 }

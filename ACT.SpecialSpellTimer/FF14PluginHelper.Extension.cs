@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using ACT.SpecialSpellTimer.Properties;
+
     /// <summary>
     /// FF14Pluginヘルパーの拡張部分
     /// </summary>
@@ -17,7 +19,7 @@
         /// <summary>
         /// プレイヤー情報を最後に取得した日時
         /// </summary>
-        private static DateTime lastPlayerDateTime;
+        private static DateTime lastPlayerDateTime = DateTime.MinValue;
 
         /// <summary>
         /// プレイヤー情報を取得する
@@ -25,32 +27,28 @@
         /// <returns>プレイヤー情報</returns>
         public static Combatant GetPlayer()
         {
-            if (player == null)
+            // 3分以上経過した？
+            if (player == null ||
+                lastPlayerDateTime <= DateTime.MinValue ||
+                (DateTime.Now - lastPlayerDateTime).TotalMinutes >= Settings.Default.PlayerInfoRefreshInterval)
             {
-                var list = FF14PluginHelper.GetCombatantList();
-
-                if (list.Count > 0)
-                {
-                    player = list[0];
-                    lastPlayerDateTime = DateTime.Now;
-                }
-            }
-            else
-            {
-                // 3分以上経過した？
-                if ((DateTime.Now - lastPlayerDateTime).TotalMinutes >= 3.0d)
-                {
-                    var list = FF14PluginHelper.GetCombatantList();
-
-                    if (list.Count > 0)
-                    {
-                        player = list[0];
-                        lastPlayerDateTime = DateTime.Now;
-                    }
-                }
+                RefreshPlayer();
             }
 
             return player;
+        }
+
+        /// <summary>
+        /// プレイヤ情報をリフレッシュする
+        /// </summary>
+        public static void RefreshPlayer()
+        {
+            var list = FF14PluginHelper.GetCombatantList();
+            if (list.Count > 0)
+            {
+                player = list[0];
+                lastPlayerDateTime = DateTime.Now;
+            }
         }
 
         /// <summary>
