@@ -1,23 +1,23 @@
 /spespe refresh spells
-ƒXƒyƒŠƒXƒgƒpƒlƒ‹‚ðˆê“x•Â‚¶‚ÄƒŠƒtƒŒƒbƒVƒ…‚·‚é
+ã‚¹ãƒšãƒªã‚¹ãƒˆãƒ‘ãƒãƒ«ã‚’ä¸€åº¦é–‰ã˜ã¦ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ã™ã‚‹
 
 /spespe refresh telops
-ƒeƒƒbƒv‚ðˆê“x•Â‚¶‚ÄƒŠƒtƒŒƒbƒVƒ…‚·‚é
+ãƒ†ãƒ­ãƒƒãƒ—ã‚’ä¸€åº¦é–‰ã˜ã¦ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ã™ã‚‹
 
 /spespe refresh me
-ƒLƒƒƒbƒVƒ…‚³‚ê‚½ƒvƒŒƒCƒ„–¼‚ðÄŽæ“¾‚µ‚ÄƒLƒƒƒbƒVƒ…‚ðXV‚·‚é
+ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã•ã‚ŒãŸãƒ—ãƒ¬ã‚¤ãƒ¤åã‚’å†å–å¾—ã—ã¦ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’æ›´æ–°ã™ã‚‹
 
-/spespe changeenabled spells "ƒTƒ“ƒvƒ‹ƒpƒlƒ‹" true
-Žw’è‚µ‚½ƒpƒlƒ‹‚ÌƒXƒyƒ‹‚ð—LŒø‚É‚·‚éBfalse‚Å–³Œø
+/spespe changeenabled spells "ã‚µãƒ³ãƒ—ãƒ«ãƒ‘ãƒãƒ«" true
+æŒ‡å®šã—ãŸãƒ‘ãƒãƒ«ã®ã‚¹ãƒšãƒ«ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã€‚falseã§ç„¡åŠ¹
 
-/spespe changeenabled spells "ƒTƒ“ƒvƒ‹ƒXƒyƒ‹" true
-Žw’è‚µ‚½ƒXƒyƒ‹‚ð—LŒø‚É‚·‚éBfalse‚Å–³Œø
+/spespe changeenabled spells "ã‚µãƒ³ãƒ—ãƒ«ã‚¹ãƒšãƒ«" true
+æŒ‡å®šã—ãŸã‚¹ãƒšãƒ«ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã€‚falseã§ç„¡åŠ¹
 
-/spespe changeenabled telops "ƒTƒ“ƒvƒ‹ƒeƒƒbƒv" true
-Žw’è‚µ‚½ƒeƒƒbƒv‚ð—LŒø‚É‚·‚éBfalse‚Å–³Œø
+/spespe changeenabled telops "ã‚µãƒ³ãƒ—ãƒ«ãƒ†ãƒ­ãƒƒãƒ—" true
+æŒ‡å®šã—ãŸãƒ†ãƒ­ãƒƒãƒ—ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã€‚falseã§ç„¡åŠ¹
 
 /spespe changeenabled spells all true
-‘S‚Ä‚ÌƒXƒyƒ‹‚ð—LŒø‚É‚·‚éBfalse‚Å–³Œø
+å…¨ã¦ã®ã‚¹ãƒšãƒ«ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã€‚falseã§ç„¡åŠ¹
 
 /spespe changeenabled telops all true
-‘S‚Ä‚Ìƒeƒƒbƒv‚ð—LŒø‚É‚·‚éBfalse‚Å–³Œø
+å…¨ã¦ã®ãƒ†ãƒ­ãƒƒãƒ—ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã€‚falseã§ç„¡åŠ¹
