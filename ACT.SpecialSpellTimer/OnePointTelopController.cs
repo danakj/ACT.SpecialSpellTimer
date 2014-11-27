@@ -188,6 +188,7 @@
                 {
                     w = new OnePointTelopWindow()
                     {
+                        Title = "OnePointTelop - " + telop.Title,
                         DataSource = telop
                     };
 
