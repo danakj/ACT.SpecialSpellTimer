@@ -93,6 +93,7 @@
     </Compile>
     <Compile Include="TextCommandController.cs" />
     <Compile Include="Utility\ActInvoker.cs" />
+    <Compile Include="WindowExtension.Visibility.cs" />
     <Compile Include="WindowExtension.Transparent.cs" />
     <Compile Include="SpellTimerListWindow.xaml.cs">
       <DependentUpon>SpellTimerListWindow.xaml</DependentUpon>

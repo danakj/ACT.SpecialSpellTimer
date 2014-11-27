@@ -186,7 +186,6 @@
 
                     w.Opacity = 0;
                     w.Show();
-                    w.Visibility = Visibility.Hidden;
 
                     telopWindowList.Add(w);
                 }
@@ -203,11 +202,7 @@
 
                 if (Settings.Default.TelopAlwaysVisible)
                 {
-                    if (w.Visibility != Visibility.Visible)
-                    {
-                        w.Visibility = Visibility.Visible;
-                    }
-
+                    w.ShowOverlay();
                     continue;
                 }
 
@@ -216,28 +211,25 @@
                     if (telop.MatchDateTime.AddSeconds(telop.Delay) <= DateTime.Now &&
                         DateTime.Now <= telop.MatchDateTime.AddSeconds(telop.Delay + telop.DisplayTime))
                     {
-                        if (w.Visibility != Visibility.Visible)
-                        {
-                            w.Visibility = Visibility.Visible;
-                        }
+                        w.ShowOverlay();
                     }
                     else
                     {
-                        w.Visibility = Visibility.Hidden;
+                        w.HideOverlay();
                         telop.MatchDateTime = DateTime.MinValue;
                         telop.MessageReplaced = string.Empty;
                     }
 
                     if (isForceHide)
                     {
-                        w.Visibility = Visibility.Hidden;
+                        w.HideOverlay();
                         telop.MatchDateTime = DateTime.MinValue;
                         telop.MessageReplaced = string.Empty;
                     }
                 }
                 else
                 {
-                    w.Visibility = Visibility.Hidden;
+                    w.HideOverlay();
                     telop.MessageReplaced = string.Empty;
                 }
 

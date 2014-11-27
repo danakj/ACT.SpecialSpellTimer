@@ -8,7 +8,7 @@
     /// <summary>
     /// Windowの拡張メソッド
     /// </summary>
-    public static class WindowExtension
+    public static partial class WindowExtension
     {
         public const int WS_EX_TRANSPARENT = 0x00000020;
         public const int GWL_EXSTYLE = (-20);

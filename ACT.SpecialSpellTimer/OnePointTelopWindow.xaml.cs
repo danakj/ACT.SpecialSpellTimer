@@ -65,7 +65,7 @@
         {
             if (this.DataSource == null)
             {
-                this.Visibility = Visibility.Hidden;
+                this.HideOverlay();
                 return;
             }
 
@@ -78,9 +78,6 @@
                 {
                     this.ProgressBarCanvas.Children.Clear();
                 }
-
-                // 透明度を設定する
-                this.Opacity = (100d - Settings.Default.Opacity) / 100d;
 
                 var message = Settings.Default.TelopAlwaysVisible ?
                     this.DataSource.Message.Replace(",", Environment.NewLine) :

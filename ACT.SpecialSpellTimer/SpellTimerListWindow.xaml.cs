@@ -72,14 +72,11 @@
             if (this.SpellTimers == null ||
                 !this.SpellTimers.Any(x => x.ProgressBarVisible))
             {
-                this.Visibility = Visibility.Hidden;
+                this.HideOverlay();
                 return;
             }
 
             this.Width = Settings.Default.ProgressBarSize.Width;
-
-            // 透明度を設定する
-            this.Opacity = (100d - Settings.Default.Opacity) / 100d;
 
             // 表示対象だけに絞る
             var spells =
@@ -170,7 +167,7 @@
 
             if (this.BaseGrid.Children.Count > 0)
             {
-                this.Visibility = Visibility.Visible;
+                this.ShowOverlay();
                 this.Topmost = true;
             }
         }
