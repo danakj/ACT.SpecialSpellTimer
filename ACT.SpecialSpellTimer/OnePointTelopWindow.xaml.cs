@@ -74,6 +74,11 @@
                 this.MessageTextBlock.Visibility = Visibility.Hidden;
                 this.ProgressBarCanvas.Visibility = Visibility.Hidden;
 
+                if (!this.DataSource.ProgressBarEnabled)
+                {
+                    this.ProgressBarCanvas.Children.Clear();
+                }
+
                 // 透明度を設定する
                 this.Opacity = (100d - Settings.Default.Opacity) / 100d;
 
@@ -96,7 +101,10 @@
                     count = 0.0d;
                 }
 
-                this.MessageTextBlock.Text = message.Replace("{COUNT}", count.ToString("N1"));
+                var countAsText = count.ToString("N1");
+                var displayTimeAsText = this.DataSource.DisplayTime.ToString("N1");
+                countAsText = countAsText.PadLeft(displayTimeAsText.Length, '0');
+                this.MessageTextBlock.Text = message.Replace("{COUNT}", countAsText);
 
                 var font = new System.Drawing.Font(
                     this.DataSource.FontFamily,
