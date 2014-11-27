@@ -70,14 +70,31 @@
             try
             {
                 this.MessageTextBlock.Visibility = Visibility.Hidden;
-                this.ProgressBarCanvas.Visibility = Visibility.Visible;
+                this.ProgressBarCanvas.Visibility = Visibility.Hidden;
 
                 // 透明度を設定する
                 this.Opacity = (100d - Settings.Default.Opacity) / 100d;
 
-                this.MessageTextBlock.Text = !Settings.Default.TelopAlwaysVisible ?
-                    this.DataSource.MessageReplaced.Replace(",", Environment.NewLine) :
-                    this.DataSource.Message.Replace(",", Environment.NewLine).Replace("{COUNT}", "0.0");
+                var message = Settings.Default.TelopAlwaysVisible ?
+                    this.DataSource.Message.Replace(",", Environment.NewLine) :
+                    this.DataSource.MessageReplaced.Replace(",", Environment.NewLine);
+
+                // カウントダウンプレースホルダを置換する
+                var count = (
+                    this.DataSource.MatchDateTime.AddSeconds(DataSource.Delay + DataSource.DisplayTime) -
+                    DateTime.Now).TotalSeconds;
+
+                if (count < 0.0d)
+                {
+                    count = 0.0d;
+                }
+
+                if (Settings.Default.TelopAlwaysVisible)
+                {
+                    count = 0.0d;
+                }
+
+                this.MessageTextBlock.Text = message.Replace("{COUNT}", count.ToString("N1"));
 
                 var font = new System.Drawing.Font(
                     this.DataSource.FontFamily,
@@ -95,13 +112,6 @@
                 if (this.DataSource.ProgressBarEnabled &&
                     this.DataSource.DisplayTime > 0)
                 {
-                    // Fontの80%の明るさで描画する
-                    var brush = new SolidColorBrush(this.DataSource
-                        .FontColor
-                        .FromHTML()
-                        .ToWPF()
-                        .ChangeBrightness(0.8d));
-
                     // 残り表示時間の率を算出する
                     var progress = 1.0d;
                     if (this.DataSource.MatchDateTime > DateTime.MinValue)
@@ -131,6 +141,15 @@
 
                     if (progress > 0.0d)
                     {
+                        // Fontの95%の明るさで描画する
+                        var brush = new SolidColorBrush(this.DataSource
+                            .FontColor
+                            .FromHTML()
+                            .ToWPF()
+                            .ChangeBrightness(0.95d));
+
+                        var backBrush = new SolidColorBrush(brush.Color.ChangeBrightness(0.4d));
+
                         Dispatcher.BeginInvoke(new Action(() =>
                         {
                             var barRect = new Rectangle();
@@ -143,10 +162,21 @@
                             Canvas.SetLeft(barRect, 0);
                             Canvas.SetTop(barRect, 0);
 
-                            this.ProgressBarCanvas.Width = barRect.Width;
-                            this.ProgressBarCanvas.Height = barRect.Height;
+                            var backRect = new Rectangle();
+                            backRect.Stroke = backBrush;
+                            backRect.Fill = backBrush;
+                            backRect.Width = this.MessageTextBlock.ActualWidth;
+                            backRect.Height = Settings.Default.ProgressBarSize.Height;
+                            backRect.RadiusX = 2.0d;
+                            backRect.RadiusY = 2.0d;
+                            Canvas.SetLeft(backRect, 0);
+                            Canvas.SetTop(backRect, 0);
+
+                            this.ProgressBarCanvas.Width = backRect.Width;
+                            this.ProgressBarCanvas.Height = backRect.Height;
 
                             this.ProgressBarCanvas.Children.Clear();
+                            this.ProgressBarCanvas.Children.Add(backRect);
                             this.ProgressBarCanvas.Children.Add(barRect);
                         }),
                         DispatcherPriority.Loaded);

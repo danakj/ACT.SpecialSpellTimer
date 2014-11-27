@@ -170,19 +170,6 @@
                     }
                 }
 
-                // カウントダウンプレースホルダを置換する
-                var count = (
-                    telop.MatchDateTime.AddSeconds(telop.Delay + telop.DisplayTime) -
-                    DateTime.Now).TotalSeconds;
-                if (count < 0.0d)
-                {
-                    count = 0.0d;
-                }
-
-                telop.MessageReplaced = telop.MessageReplaced.Replace(
-                    "{COUNT}",
-                    count.ToString("N1"));
-
                 var w = telopWindowList.Where(x => x.DataSource.ID == telop.ID).FirstOrDefault();
                 if (w == null)
                 {
