@@ -36,6 +36,25 @@
                 Settings.Default.Save();
                 this.LoadSettingsOption();
             };
+
+            Action action = new Action(() =>
+            {
+                if (Settings.Default.OverlayVisible)
+                {
+                    this.SwitchOverlayButton.Text =
+                        "スペルリストの表示スイッチ" + Environment.NewLine +
+                        "現在の状態 -> ON";
+                }
+                else
+                {
+                    this.SwitchOverlayButton.Text =
+                        "スペルリストの表示スイッチ" + Environment.NewLine +
+                        "現在の状態 -> OFF";
+                }
+            });
+
+            this.OptionTabPage.MouseHover += (s1, e1) => action();
+            this.SwitchOverlayButton.MouseHover += (s1, e1) => action();
         }
 
         /// <summary>
@@ -122,7 +141,7 @@
         {
             if (Settings.Default.OverlayVisible)
             {
-                this.SwitchOverlayButton.Text = 
+                this.SwitchOverlayButton.Text =
                     "スペルリストの表示スイッチ" + Environment.NewLine +
                     "現在の状態 -> ON";
             }
@@ -135,7 +154,7 @@
 
             if (Settings.Default.TelopAlwaysVisible)
             {
-                this.SwitchTelopButton.Text = 
+                this.SwitchTelopButton.Text =
                     "テロップの表示スイッチ" + Environment.NewLine +
                     "現在の状態 -> 常に表示(位置調整向け)";
             }

@@ -1,6 +1,7 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System;
+    using System.Drawing;
     using System.Windows.Forms;
 
     using ACT.SpecialSpellTimer.Properties;
@@ -15,6 +16,11 @@
         /// 設定パネル
         /// </summary>
         public static ConfigPanel ConfigPanel { get; private set; }
+
+        /// <summary>
+        /// 表示切り替えボタン
+        /// </summary>
+        private static Button SwitchVisibleButton { get; set; }
 
         /// <summary>
         /// プラグインステータス表示ラベル
@@ -50,6 +56,7 @@
                 // 本体を開始する
                 SpellTimerCore.Default.Begin();
 
+                this.SetSwitchVisibleButton();
                 this.PluginStatusLabel.Text = "Plugin Started";
             }
             catch (Exception ex)
@@ -70,6 +77,7 @@
             try
             {
                 SpellTimerCore.Default.End();
+                this.RemoveSwitchVisibleButton();
                 this.PluginStatusLabel.Text = "Plugin Exited";
             }
             catch (Exception ex)
@@ -80,6 +88,59 @@
 
                 this.PluginStatusLabel.Text = "Plugin Exited Error";
             }
+        }
+
+        /// <summary>
+        /// 表示切り替えボタンを配置する
+        /// </summary>
+        private void SetSwitchVisibleButton()
+        {
+            SwitchVisibleButton = new Button();
+            SwitchVisibleButton.Name = "SpecialSpellTimerSwitchVisibleButton";
+            SwitchVisibleButton.Size = new Size(90, 24);
+            SwitchVisibleButton.Text = "スペスペ";
+            SwitchVisibleButton.TextAlign = ContentAlignment.MiddleCenter;
+            SwitchVisibleButton.UseVisualStyleBackColor = true;
+            SwitchVisibleButton.Click += (s, e1) =>
+            {
+                Settings.Default.OverlayVisible = !Settings.Default.OverlayVisible;
+                Settings.Default.Save();
+
+                if (Settings.Default.OverlayVisible)
+                {
+                    SpellTimerCore.Default.ActivatePanels();
+                }
+            };
+
+            ActGlobals.oFormActMain.Resize += this.oFormActMain_Resize;
+            ActGlobals.oFormActMain.Controls.Add(SwitchVisibleButton);
+            ActGlobals.oFormActMain.Controls.SetChildIndex(SwitchVisibleButton, 1);
+
+            this.oFormActMain_Resize(this, null);
+        }
+
+        /// <summary>
+        /// 表示切り替えボタンを除去する
+        /// </summary>
+        private void RemoveSwitchVisibleButton()
+        {
+            if (SwitchVisibleButton != null)
+            {
+                ActGlobals.oFormActMain.Resize -= this.oFormActMain_Resize;
+                ActGlobals.oFormActMain.Controls.Remove(SwitchVisibleButton);
+            }
+        }
+
+        /// <summary>
+        /// ACTメインフォーム Resize
+        /// </summary>
+        /// <param name="sender">イベント発生元</param>
+        /// <param name="e">イベント引数</param>
+        private void oFormActMain_Resize(object sender, EventArgs e)
+        {
+            SwitchVisibleButton.Location = new Point(
+                ActGlobals.oFormActMain.Width - 533,
+                0);
         }
 
         /// <summary>

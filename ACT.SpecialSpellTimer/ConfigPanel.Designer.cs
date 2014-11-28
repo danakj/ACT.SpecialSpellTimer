@@ -87,6 +87,7 @@
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.OnPointTelopTabPage = new System.Windows.Forms.TabPage();
             this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.TelopSelectJobButton = new System.Windows.Forms.Button();
             this.TelopProgressBarEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.EnabledAddMessageCheckBox = new System.Windows.Forms.CheckBox();
             this.label40 = new System.Windows.Forms.Label();
@@ -175,7 +176,6 @@
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.TelopSelectJobButton = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -867,6 +867,16 @@
             this.TelopDetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.TelopDetailGroupBox.TabIndex = 5;
             this.TelopDetailGroupBox.TabStop = false;
+            // 
+            // TelopSelectJobButton
+            // 
+            this.TelopSelectJobButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TelopSelectJobButton.Location = new System.Drawing.Point(6, 631);
+            this.TelopSelectJobButton.Name = "TelopSelectJobButton";
+            this.TelopSelectJobButton.Size = new System.Drawing.Size(144, 25);
+            this.TelopSelectJobButton.TabIndex = 45;
+            this.TelopSelectJobButton.Text = "ジョブを限定する";
+            this.TelopSelectJobButton.UseVisualStyleBackColor = true;
             // 
             // TelopProgressBarEnabledCheckBox
             // 
@@ -1797,16 +1807,6 @@
             // 
             this.ToolTip.IsBalloon = true;
             // 
-            // TelopSelectJobButton
-            // 
-            this.TelopSelectJobButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.TelopSelectJobButton.Location = new System.Drawing.Point(6, 631);
-            this.TelopSelectJobButton.Name = "TelopSelectJobButton";
-            this.TelopSelectJobButton.Size = new System.Drawing.Size(144, 25);
-            this.TelopSelectJobButton.TabIndex = 45;
-            this.TelopSelectJobButton.Text = "ジョブを限定する";
-            this.TelopSelectJobButton.UseVisualStyleBackColor = true;
-            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1897,7 +1897,6 @@
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button UpdateButton;
         private System.Windows.Forms.Button ShokikaButton;
-        private System.Windows.Forms.Button SwitchOverlayButton;
         private System.Windows.Forms.FontDialog FontDialog;
         private System.Windows.Forms.ColorDialog ColorDialog;
         private System.Windows.Forms.OpenFileDialog OpenFileDialog;
@@ -1998,5 +1997,6 @@
         private System.Windows.Forms.CheckBox TelopProgressBarEnabledCheckBox;
         private System.Windows.Forms.Button SelectJobButton;
         private System.Windows.Forms.Button TelopSelectJobButton;
+        internal System.Windows.Forms.Button SwitchOverlayButton;
     }
 }
