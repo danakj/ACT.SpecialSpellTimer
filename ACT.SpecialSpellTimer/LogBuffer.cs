@@ -13,14 +13,19 @@
     public class LogBuffer : IDisposable
     {
         /// <summary>
+        /// パーティメンバ
+        /// </summary>
+        private static List<string> ptmember = new List<string>();
+
+        /// <summary>
         /// 内部バッファ
         /// </summary>
         private List<string> buffer = new List<string>();
 
         /// <summary>
-        /// パーティメンバ
+        /// 前のゾーン名
         /// </summary>
-        private List<string> ptmember = new List<string>();
+        private string previousZoneName;
 
         /// <summary>
         /// コンストラクタ
@@ -28,8 +33,6 @@
         public LogBuffer()
         {
             ActGlobals.oFormActMain.OnLogLineRead += this.oFormActMain_OnLogLineRead;
-            ActGlobals.oFormActMain.OnCombatStart += this.oFormActMain_OnCombatStart;
-            ActGlobals.oFormActMain.OnCombatEnd += this.oFormActMain_OnCombatEnd;
         }
 
         /// <summary>
@@ -38,8 +41,6 @@
         public void Dispose()
         {
             ActGlobals.oFormActMain.OnLogLineRead -= this.oFormActMain_OnLogLineRead;
-            ActGlobals.oFormActMain.OnCombatStart -= this.oFormActMain_OnCombatStart;
-            ActGlobals.oFormActMain.OnCombatEnd -= this.oFormActMain_OnCombatEnd;
             this.Clear();
         }
 
@@ -52,7 +53,8 @@
         {
             lock (this.buffer)
             {
-                if (!Settings.Default.EnabledPartyMemberPlaceholder)
+                if (!Settings.Default.EnabledPartyMemberPlaceholder ||
+                    ptmember.Count <= 1)
                 {
                     var logLines = this.buffer.ToArray();
                     this.buffer.Clear();
@@ -65,10 +67,10 @@
                 {
                     var logLineReplaced = logLine;
 
-                    for (int i = 1; i < this.ptmember.Count; i++)
+                    for (int i = 1; i < ptmember.Count; i++)
                     {
                         logLineReplaced = logLineReplaced.Replace(
-                            this.ptmember[i],
+                            ptmember[i],
                             "<" + (i + 1).ToString() + ">");
                     }
 
@@ -88,6 +90,7 @@
             lock (this.buffer)
             {
                 this.buffer.Clear();
+                ptmember.Clear();
                 Debug.WriteLine("Logをクリアしました");
             }
         }
@@ -108,51 +111,47 @@
 
             lock (this.buffer)
             {
+                if (ActGlobals.oFormActMain.CurrentZone != this.previousZoneName)
+                {
+                    this.ZoneChanged();
+                }
+
+                this.previousZoneName = ActGlobals.oFormActMain.CurrentZone;
+
                 this.buffer.Add(logInfo.logLine.Trim());
             }
         }
 
         /// <summary>
-        /// 戦闘がスタートした
+        /// ゾーンが変わった？
         /// </summary>
-        /// <param name="isImport">Importか？</param>
-        /// <param name="encounterInfo">遭遇情報</param>
-        private void oFormActMain_OnCombatStart(bool isImport, CombatToggleEventArgs encounterInfo)
+        private void ZoneChanged()
         {
-            if (isImport)
-            {
-                return;
-            }
-
             // プレイヤ情報を更新する
             FF14PluginHelper.RefreshPlayer();
 
-            // PTメンバの名前を記録しておく
-            if (Settings.Default.EnabledPartyMemberPlaceholder)
-            {
-                this.ptmember.Clear();
-
-                var partyList = FF14PluginHelper.GetCombatantListParty();
-                foreach (var member in partyList)
-                {
-                    this.ptmember.Add(member.Name.Trim());
-                }
-            }
+            RefreshPTList();
         }
 
         /// <summary>
-        /// 戦闘がエンドした
+        /// パーティリストを更新する
         /// </summary>
-        /// <param name="isImport">Importか？</param>
-        /// <param name="encounterInfo">遭遇情報</param>
-        private void oFormActMain_OnCombatEnd(bool isImport, CombatToggleEventArgs encounterInfo)
+        public static void RefreshPTList()
         {
-            if (isImport)
-            {
-                return;
-            }
+            ptmember.Clear();
 
-            this.ptmember.Clear();
+            if (Settings.Default.EnabledPartyMemberPlaceholder)
+            {
+                // PTメンバの名前を記録しておく
+                if (Settings.Default.EnabledPartyMemberPlaceholder)
+                {
+                    var partyList = FF14PluginHelper.GetCombatantListParty();
+                    foreach (var member in partyList)
+                    {
+                        ptmember.Add(member.Name.Trim());
+                    }
+                }
+            }
         }
     }
 }

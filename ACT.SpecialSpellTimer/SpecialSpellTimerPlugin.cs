@@ -106,6 +106,9 @@
                 Settings.Default.OverlayVisible = !Settings.Default.OverlayVisible;
                 Settings.Default.Save();
 
+                FF14PluginHelper.RefreshPlayer();
+                LogBuffer.RefreshPTList();
+
                 if (Settings.Default.OverlayVisible)
                 {
                     SpellTimerCore.Default.ActivatePanels();
