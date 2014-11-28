@@ -40,7 +40,7 @@ FF14の内部からテキストコマンドで一部の機能を制御できま�
 の書式でコマンドを発行してください  
 
 例) 全てのスペルを無効にする  
-/spespe changeenabled spells all false  
+/e /spespe changeenabled spells all false  
   
 <table>
 <tr>
