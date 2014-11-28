@@ -16,7 +16,8 @@
         public static void ShowOverlay(
             this Window x)
         {
-            x.Opacity = (100d - Settings.Default.Opacity) / 100d;
+            var targetOpacity = (100d - Settings.Default.Opacity) / 100d;
+            x.Opacity = targetOpacity;
         }
 
         /// <summary>

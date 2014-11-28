@@ -88,7 +88,6 @@
             lock (this.buffer)
             {
                 this.buffer.Clear();
-
                 Debug.WriteLine("Logをクリアしました");
             }
         }
