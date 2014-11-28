@@ -84,7 +84,7 @@
                 if (partyMember != null)
                 {
                     combatListParty.Add(partyMember);
-                    Debug.WriteLine("<" + combatListParty.Count().ToString() + "> : " + partyMember.Name);
+                    Debug.WriteLine("<" + combatListParty.Count().ToString() + "> " + partyMember.Name);
                 }
             }
 

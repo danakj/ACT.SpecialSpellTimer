@@ -45,6 +45,40 @@
         }
 
         /// <summary>
+        /// テロップを隠す
+        /// </summary>
+        public static void HideTelops()
+        {
+            if (telopWindowList != null)
+            {
+                ActInvoker.Invoke(() =>
+                {
+                    foreach (var telop in telopWindowList)
+                    {
+                        telop.HideOverlay();
+                    }
+                });
+            }
+        }
+
+        /// <summary>
+        /// テロップをActive化する
+        /// </summary>
+        public static void ActivateTelops()
+        {
+            if (telopWindowList != null)
+            {
+                ActInvoker.Invoke(() =>
+                {
+                    foreach (var telop in telopWindowList)
+                    {
+                        telop.Activate();
+                    }
+                });
+            }
+        }
+
+        /// <summary>
         /// ログとマッチングする
         /// </summary>
         /// <param name="logLines">ログ行</param>
@@ -200,7 +234,8 @@
                     OnePointTelopTable.Default.Save();
                 }
 
-                if (Settings.Default.TelopAlwaysVisible)
+                if (Settings.Default.OverlayVisible &&
+                    Settings.Default.TelopAlwaysVisible)
                 {
                     w.ShowOverlay();
                     continue;

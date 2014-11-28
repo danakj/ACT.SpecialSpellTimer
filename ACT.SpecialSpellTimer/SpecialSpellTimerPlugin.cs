@@ -112,6 +112,7 @@
                 if (Settings.Default.OverlayVisible)
                 {
                     SpellTimerCore.Default.ActivatePanels();
+                    OnePointTelopController.ActivateTelops();
                 }
             };
 

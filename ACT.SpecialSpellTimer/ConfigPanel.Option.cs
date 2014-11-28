@@ -27,6 +27,7 @@
                 if (Settings.Default.OverlayVisible)
                 {
                     SpellTimerCore.Default.ActivatePanels();
+                    OnePointTelopController.ActivateTelops();
                 }
             };
 
@@ -42,13 +43,13 @@
                 if (Settings.Default.OverlayVisible)
                 {
                     this.SwitchOverlayButton.Text =
-                        "スペルリストの表示スイッチ" + Environment.NewLine +
+                        "オーバーレイの表示スイッチ" + Environment.NewLine +
                         "現在の状態 -> ON";
                 }
                 else
                 {
                     this.SwitchOverlayButton.Text =
-                        "スペルリストの表示スイッチ" + Environment.NewLine +
+                        "オーバーレイの表示スイッチ" + Environment.NewLine +
                         "現在の状態 -> OFF";
                 }
             });
@@ -142,13 +143,13 @@
             if (Settings.Default.OverlayVisible)
             {
                 this.SwitchOverlayButton.Text =
-                    "スペルリストの表示スイッチ" + Environment.NewLine +
+                    "オーバーレイの表示スイッチ" + Environment.NewLine +
                     "現在の状態 -> ON";
             }
             else
             {
                 this.SwitchOverlayButton.Text =
-                    "スペルリストの表示スイッチ" + Environment.NewLine +
+                    "オーバーレイの表示スイッチ" + Environment.NewLine +
                     "現在の状態 -> OFF";
             }
 

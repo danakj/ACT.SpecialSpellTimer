@@ -97,53 +97,62 @@
                 // コンパイル済みの正規表現をセットする
                 foreach (var spell in spellsFilteredJob)
                 {
-                    if (!spell.RegexEnabled)
+                    try
                     {
-                        spell.RegexPattern = string.Empty;
-                        spell.Regex = null;
-                        spell.RegexPatternToHide = string.Empty;
-                        spell.RegexToHide = null;
-                        continue;
-                    }
+                        spell.BeginEdit();
 
-                    var pattern = SpellTimerTable.MakeKeyword(spell.Keyword);
-
-                    if (!string.IsNullOrWhiteSpace(pattern))
-                    {
-                        if (spell.IsRegexNull() ||
-                            spell.Regex == null ||
-                            spell.RegexPattern != pattern)
+                        if (!spell.RegexEnabled)
                         {
-                            spell.RegexPattern = pattern;
-                            spell.Regex = new Regex(
-                                pattern,
-                                RegexOptions.Compiled);
+                            spell.RegexPattern = string.Empty;
+                            spell.Regex = null;
+                            spell.RegexPatternToHide = string.Empty;
+                            spell.RegexToHide = null;
+                            continue;
+                        }
+
+                        var pattern = SpellTimerTable.MakeKeyword(spell.Keyword);
+
+                        if (!string.IsNullOrWhiteSpace(pattern))
+                        {
+                            if (spell.IsRegexNull() ||
+                                spell.Regex == null ||
+                                spell.RegexPattern != pattern)
+                            {
+                                spell.RegexPattern = pattern;
+                                spell.Regex = new Regex(
+                                    pattern,
+                                    RegexOptions.Compiled);
+                            }
+                        }
+                        else
+                        {
+                            spell.RegexPattern = string.Empty;
+                            spell.Regex = null;
+                        }
+
+                        var patternToHide = SpellTimerTable.MakeKeyword(spell.KeywordToHide);
+
+                        if (!string.IsNullOrWhiteSpace(patternToHide))
+                        {
+                            if (spell.IsRegexToHideNull() ||
+                                spell.RegexToHide == null ||
+                                spell.RegexPatternToHide != patternToHide)
+                            {
+                                spell.RegexPatternToHide = patternToHide;
+                                spell.RegexToHide = new Regex(
+                                    patternToHide,
+                                    RegexOptions.Compiled);
+                            }
+                        }
+                        else
+                        {
+                            spell.RegexPatternToHide = string.Empty;
+                            spell.RegexToHide = null;
                         }
                     }
-                    else
+                    finally
                     {
-                        spell.RegexPattern = string.Empty;
-                        spell.Regex = null;
-                    }
-
-                    var patternToHide = SpellTimerTable.MakeKeyword(spell.KeywordToHide);
-
-                    if (!string.IsNullOrWhiteSpace(patternToHide))
-                    {
-                        if (spell.IsRegexToHideNull() ||
-                            spell.RegexToHide == null ||
-                            spell.RegexPatternToHide != patternToHide)
-                        {
-                            spell.RegexPatternToHide = patternToHide;
-                            spell.RegexToHide = new Regex(
-                                patternToHide,
-                                RegexOptions.Compiled);
-                        }
-                    }
-                    else
-                    {
-                        spell.RegexPatternToHide = string.Empty;
-                        spell.RegexToHide = null;
+                        spell.EndEdit();
                     }
                 }
 

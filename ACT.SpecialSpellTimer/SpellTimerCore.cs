@@ -88,7 +88,7 @@
             {
                 lock (lockObject)
                 {
-#if DEBUG
+#if false
                     var sw = Stopwatch.StartNew();
                     Debug.WriteLine("●Refresh Start " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
 #endif
@@ -108,7 +108,7 @@
                     }
                     finally
                     {
-#if DEBUG
+#if false
                         sw.Stop();
                         Debug.WriteLine("●Refresh " + sw.ElapsedMilliseconds.ToString("N0") + "ms");
 #endif
@@ -250,6 +250,7 @@
             if (!Settings.Default.OverlayVisible)
             {
                 this.HidePanels();
+                OnePointTelopController.HideTelops();
                 return;
             }
 
@@ -444,29 +445,7 @@
                 {
                     foreach (var panel in this.SpellTimerPanels)
                     {
-                        if (panel.Visibility == Visibility.Hidden)
-                        {
-                            panel.Visibility = Visibility.Visible;
-                        }
-
                         panel.Activate();
-                    }
-                });
-            }
-        }
-
-        /// <summary>
-        /// Panelを表示する
-        /// </summary>
-        public void VisiblePanels()
-        {
-            if (this.SpellTimerPanels != null)
-            {
-                ActInvoker.Invoke(() =>
-                {
-                    foreach (var panel in this.SpellTimerPanels)
-                    {
-                        panel.Visibility = Visibility.Visible;
                     }
                 });
             }
@@ -483,7 +462,7 @@
                 {
                     foreach (var panel in this.SpellTimerPanels)
                     {
-                        panel.Visibility = Visibility.Hidden;
+                        panel.HideOverlay();
                     }
                 });
             }

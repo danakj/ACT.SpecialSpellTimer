@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-
+    using System.Threading;
     using ACT.SpecialSpellTimer.Properties;
     using Advanced_Combat_Tracker;
 
@@ -15,17 +15,12 @@
         /// <summary>
         /// パーティメンバ
         /// </summary>
-        private static List<string> ptmember = new List<string>();
+        private static List<string> ptmember;
 
         /// <summary>
         /// 内部バッファ
         /// </summary>
         private List<string> buffer = new List<string>();
-
-        /// <summary>
-        /// 前のゾーン名
-        /// </summary>
-        private string previousZoneName;
 
         /// <summary>
         /// コンストラクタ
@@ -53,32 +48,9 @@
         {
             lock (this.buffer)
             {
-                if (!Settings.Default.EnabledPartyMemberPlaceholder ||
-                    ptmember.Count <= 1)
-                {
-                    var logLines = this.buffer.ToArray();
-                    this.buffer.Clear();
-                    return logLines;
-                }
-
-                // PTメンバの名前をプレースホルダに置き換える
-                var logLinesReplaced = new List<string>();
-                foreach (var logLine in this.buffer)
-                {
-                    var logLineReplaced = logLine;
-
-                    for (int i = 1; i < ptmember.Count; i++)
-                    {
-                        logLineReplaced = logLineReplaced.Replace(
-                            ptmember[i],
-                            "<" + (i + 1).ToString() + ">");
-                    }
-
-                    logLinesReplaced.Add(logLineReplaced);
-                }
-
+                var logLines = this.buffer.ToArray();
                 this.buffer.Clear();
-                return logLinesReplaced.ToArray();
+                return logLines;
             }
         }
 
@@ -107,18 +79,36 @@
                 return;
             }
 
+#if false
             Debug.WriteLine(logInfo.logLine);
+#endif
 
             lock (this.buffer)
             {
-                if (ActGlobals.oFormActMain.CurrentZone != this.previousZoneName)
+                var logLine = logInfo.logLine.Trim();
+
+                // パーティに変化あり？
+                if (ptmember == null ||
+                    logLine.Contains("パーティを解散しました。") ||
+                    logLine.Contains("がパーティに参加しました。") ||
+                    logLine.Contains("がパーティから離脱しました。") ||
+                    logLine.Contains("をパーティから離脱させました。"))
                 {
-                    this.ZoneChanged();
+                    Thread.Sleep(3 * 1000);
+                    RefreshPTList();
                 }
 
-                this.previousZoneName = ActGlobals.oFormActMain.CurrentZone;
+                if (Settings.Default.EnabledPartyMemberPlaceholder)
+                {
+                    for (int i = 0; i < ptmember.Count; i++)
+                    {
+                        logLine = logLine.Replace(
+                            ptmember[i],
+                            "<" + (i + 2).ToString() + ">");
+                    }
+                }
 
-                this.buffer.Add(logInfo.logLine.Trim());
+                this.buffer.Add(logLine);
             }
         }
 
@@ -138,17 +128,37 @@
         /// </summary>
         public static void RefreshPTList()
         {
-            ptmember.Clear();
+            if (ptmember == null)
+            {
+                ptmember = new List<string>();
+            }
+            else
+            {
+                ptmember.Clear();
+            }
 
             if (Settings.Default.EnabledPartyMemberPlaceholder)
             {
+                Debug.WriteLine("PT: Refresh");
+
+                // プレイヤー情報を取得する
+                var player = FF14PluginHelper.GetPlayer();
+                if (player == null)
+                {
+                    return;
+                }
+
                 // PTメンバの名前を記録しておく
                 if (Settings.Default.EnabledPartyMemberPlaceholder)
                 {
                     var partyList = FF14PluginHelper.GetCombatantListParty();
                     foreach (var member in partyList)
                     {
-                        ptmember.Add(member.Name.Trim());
+                        if (member.ID != player.ID)
+                        {
+                            ptmember.Add(member.Name.Trim());
+                            Debug.WriteLine("<-  " + member.Name);
+                        }
                     }
                 }
             }

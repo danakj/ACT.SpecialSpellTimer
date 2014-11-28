@@ -74,31 +74,40 @@
                 // コンパイル済みの正規表現をセットする
                 foreach (var spell in spellsFilteredJob)
                 {
-                    if (!spell.RegexEnabled)
+                    try
                     {
-                        spell.RegexPattern = string.Empty;
-                        spell.Regex = null;
-                        continue;
-                    }
+                        spell.BeginEdit();
 
-                    var pattern = MakeKeyword(spell.Keyword);
-
-                    if (!string.IsNullOrWhiteSpace(pattern))
-                    {
-                        if (spell.IsRegexNull() ||
-                            spell.Regex == null ||
-                            spell.RegexPattern != pattern)
+                        if (!spell.RegexEnabled)
                         {
-                            spell.RegexPattern = pattern;
-                            spell.Regex = new Regex(
-                                pattern,
-                                RegexOptions.Compiled);
+                            spell.RegexPattern = string.Empty;
+                            spell.Regex = null;
+                            continue;
+                        }
+
+                        var pattern = MakeKeyword(spell.Keyword);
+
+                        if (!string.IsNullOrWhiteSpace(pattern))
+                        {
+                            if (spell.IsRegexNull() ||
+                                spell.Regex == null ||
+                                spell.RegexPattern != pattern)
+                            {
+                                spell.RegexPattern = pattern;
+                                spell.Regex = new Regex(
+                                    pattern,
+                                    RegexOptions.Compiled);
+                            }
+                        }
+                        else
+                        {
+                            spell.RegexPattern = string.Empty;
+                            spell.Regex = null;
                         }
                     }
-                    else
+                    finally
                     {
-                        spell.RegexPattern = string.Empty;
-                        spell.Regex = null;
+                        spell.EndEdit();
                     }
                 }
 
