@@ -32,6 +32,63 @@ ACTが吐き出すログには上記のような独自のログがあります
   
 3) 俺の歌を聞かせたい    
 resources/wav にwaveファイルを投入するとスペスペで使用できるようになります  
+
+テキストコマンド
+--------------
+FF14の内部からテキストコマンドで一部の機能を制御できます  
+/e コマンド  
+の書式でコマンドを発行してください  
+
+例) 全てのスペルを無効にする  
+/spespe changeenabled spells all false  
+  
+<table>
+<tr>
+<td>コマンド</td><td>説明</td>
+</tr>
+
+<tr>
+<td>/spespe refresh spells</td>
+<td>スペリストパネルを一度閉じてリフレッシュする</td>
+</tr>
+
+<tr>
+<td>/spespe refresh telops</td>
+<td>テロップを一度閉じてリフレッシュする</td>
+</tr>
+
+<tr>
+<td>/spespe refresh me</td>
+<td>プレイヤー名のキャッシュを更新する</td>
+</tr>
+
+<tr>
+<td>/spespe changeenabled spells "サンプルパネル" true</td>
+<td>指定したパネルのスペルを有効にする。falseで無効</td>
+</tr>
+
+<tr>
+<td>/spespe changeenabled spells "サンプルスペル" true</td>
+<td>指定したスペルを有効にする。falseで無効</td>
+</tr>
+
+<tr>
+<td>/spespe changeenabled telops "サンプルテロップ" true</td>
+<td>指定したテロップを有効にする。falseで無効</td>
+</tr>
+
+<tr>
+<td>/spespe changeenabled spells all true</td>
+<td>全てのスペルを有効にする。falseで無効</td>
+</tr>
+
+<tr>
+<td>/spespe changeenabled telops all true</td>
+<td>全てのテロップを有効にする。falseで無効</td>
+</tr>
+
+</table>
+  
   
     
 最新リリース
@@ -56,3 +113,9 @@ https://github.com/GB19xx/ACT.TPMonitor
 http://maoudamashii.jokersounds.com/  
 音楽素材といったら魔王魂。  
 同梱されたwaveサウンドファイルの著作権は魔王魂に帰属します  
+  
+  
+問合せ
+--------------
+不具合報告、要望、質問及び最新版情報などはTwitterにて  
+GitHubと連動しているためツイートは少々五月蠅いかもしれません  
