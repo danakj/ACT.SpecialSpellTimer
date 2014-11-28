@@ -112,6 +112,22 @@
                 }
             };
 
+            this.TelopSelectJobButton.Click += (s1, e1) =>
+            {
+                var src = this.TelopDetailGroupBox.Tag as SpellTimerDataSet.OnePointTelopRow;
+                if (src != null)
+                {
+                    using (var f = new SelectJobForm())
+                    {
+                        f.JobFilter = src.JobFilter;
+                        if (f.ShowDialog(this) == DialogResult.OK)
+                        {
+                            src.JobFilter = f.JobFilter;
+                        }
+                    }
+                }
+            };
+
             this.TelopExportButton.Click += this.TelopExportButton_Click;
             this.TelopImportButton.Click += this.TelopImportButton_Click;
             this.TelopClearAllButton.Click += this.TelopClearAllButton_Click;

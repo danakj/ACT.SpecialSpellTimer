@@ -125,6 +125,22 @@
                 }
             };
 
+            this.SelectJobButton.Click += (s1, e1) =>
+            {
+                var src = this.DetailGroupBox.Tag as SpellTimerDataSet.SpellTimerRow;
+                if (src != null)
+                {
+                    using (var f = new SelectJobForm())
+                    {
+                        f.JobFilter = src.JobFilter;
+                        if (f.ShowDialog(this) == DialogResult.OK)
+                        {
+                            src.JobFilter = f.JobFilter;
+                        }
+                    }
+                }
+            };
+
             // オプションのロードメソッドを呼ぶ
             this.LoadOption();
 

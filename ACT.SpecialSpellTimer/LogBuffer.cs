@@ -124,6 +124,9 @@
                 return;
             }
 
+            // プレイヤ情報を更新する
+            FF14PluginHelper.RefreshPlayer();
+
             // PTメンバの名前を記録しておく
             if (Settings.Default.EnabledPartyMemberPlaceholder)
             {

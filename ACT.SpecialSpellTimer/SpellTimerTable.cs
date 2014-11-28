@@ -1,9 +1,11 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
+
     using ACT.SpecialSpellTimer.Sound;
 
     /// <summary>
@@ -49,8 +51,28 @@
                     select
                     x;
 
-                // コンパイル済みの正規表現をセットする
+                // ジョブフィルタをかける
+                var spellsFilteredJob = new List<SpellTimerDataSet.SpellTimerRow>();
                 foreach (var spell in spells)
+                {
+                    var player = FF14PluginHelper.GetPlayer();
+
+                    if (player == null ||
+                        string.IsNullOrWhiteSpace(spell.JobFilter))
+                    {
+                        spellsFilteredJob.Add(spell);
+                        continue;
+                    }
+
+                    var jobs = spell.JobFilter.Split(',');
+                    if (jobs.Any(x => x == player.Job.ToString()))
+                    {
+                        spellsFilteredJob.Add(spell);
+                    }
+                }
+
+                // コンパイル済みの正規表現をセットする
+                foreach (var spell in spellsFilteredJob)
                 {
                     if (!spell.RegexEnabled)
                     {

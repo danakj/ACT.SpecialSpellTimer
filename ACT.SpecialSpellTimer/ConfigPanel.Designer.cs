@@ -33,6 +33,7 @@
             this.SpecialSpellTabPage = new System.Windows.Forms.TabPage();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.SelectJobButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.DontHideCheckBox = new System.Windows.Forms.CheckBox();
@@ -86,6 +87,7 @@
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.OnPointTelopTabPage = new System.Windows.Forms.TabPage();
             this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.TelopProgressBarEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.EnabledAddMessageCheckBox = new System.Windows.Forms.CheckBox();
             this.label40 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
@@ -173,7 +175,7 @@
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.TelopProgressBarEnabledCheckBox = new System.Windows.Forms.CheckBox();
+            this.TelopSelectJobButton = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -245,6 +247,7 @@
             this.DetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DetailGroupBox.Controls.Add(this.SelectJobButton);
             this.DetailGroupBox.Controls.Add(this.label5);
             this.DetailGroupBox.Controls.Add(this.RegexEnabledCheckBox);
             this.DetailGroupBox.Controls.Add(this.DontHideCheckBox);
@@ -276,6 +279,16 @@
             this.DetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.DetailGroupBox.TabIndex = 5;
             this.DetailGroupBox.TabStop = false;
+            // 
+            // SelectJobButton
+            // 
+            this.SelectJobButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SelectJobButton.Location = new System.Drawing.Point(6, 631);
+            this.SelectJobButton.Name = "SelectJobButton";
+            this.SelectJobButton.Size = new System.Drawing.Size(144, 25);
+            this.SelectJobButton.TabIndex = 27;
+            this.SelectJobButton.Text = "ジョブを限定する";
+            this.SelectJobButton.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -816,6 +829,7 @@
             this.TelopDetailGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TelopDetailGroupBox.Controls.Add(this.TelopSelectJobButton);
             this.TelopDetailGroupBox.Controls.Add(this.TelopProgressBarEnabledCheckBox);
             this.TelopDetailGroupBox.Controls.Add(this.EnabledAddMessageCheckBox);
             this.TelopDetailGroupBox.Controls.Add(this.label40);
@@ -853,6 +867,16 @@
             this.TelopDetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.TelopDetailGroupBox.TabIndex = 5;
             this.TelopDetailGroupBox.TabStop = false;
+            // 
+            // TelopProgressBarEnabledCheckBox
+            // 
+            this.TelopProgressBarEnabledCheckBox.AutoSize = true;
+            this.TelopProgressBarEnabledCheckBox.Location = new System.Drawing.Point(158, 256);
+            this.TelopProgressBarEnabledCheckBox.Name = "TelopProgressBarEnabledCheckBox";
+            this.TelopProgressBarEnabledCheckBox.Size = new System.Drawing.Size(195, 16);
+            this.TelopProgressBarEnabledCheckBox.TabIndex = 44;
+            this.TelopProgressBarEnabledCheckBox.Text = "残り時間をプログレスバーで表示する";
+            this.TelopProgressBarEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // EnabledAddMessageCheckBox
             // 
@@ -1773,15 +1797,15 @@
             // 
             this.ToolTip.IsBalloon = true;
             // 
-            // TelopProgressBarEnabledCheckBox
+            // TelopSelectJobButton
             // 
-            this.TelopProgressBarEnabledCheckBox.AutoSize = true;
-            this.TelopProgressBarEnabledCheckBox.Location = new System.Drawing.Point(158, 256);
-            this.TelopProgressBarEnabledCheckBox.Name = "TelopProgressBarEnabledCheckBox";
-            this.TelopProgressBarEnabledCheckBox.Size = new System.Drawing.Size(195, 16);
-            this.TelopProgressBarEnabledCheckBox.TabIndex = 44;
-            this.TelopProgressBarEnabledCheckBox.Text = "残り時間をプログレスバーで表示する";
-            this.TelopProgressBarEnabledCheckBox.UseVisualStyleBackColor = true;
+            this.TelopSelectJobButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TelopSelectJobButton.Location = new System.Drawing.Point(6, 631);
+            this.TelopSelectJobButton.Name = "TelopSelectJobButton";
+            this.TelopSelectJobButton.Size = new System.Drawing.Size(144, 25);
+            this.TelopSelectJobButton.TabIndex = 45;
+            this.TelopSelectJobButton.Text = "ジョブを限定する";
+            this.TelopSelectJobButton.UseVisualStyleBackColor = true;
             // 
             // ConfigPanel
             // 
@@ -1972,5 +1996,7 @@
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.CheckBox EnabledAddMessageCheckBox;
         private System.Windows.Forms.CheckBox TelopProgressBarEnabledCheckBox;
+        private System.Windows.Forms.Button SelectJobButton;
+        private System.Windows.Forms.Button TelopSelectJobButton;
     }
 }

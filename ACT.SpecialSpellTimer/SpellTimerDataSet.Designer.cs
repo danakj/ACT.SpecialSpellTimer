@@ -403,6 +403,8 @@ namespace ACT.SpecialSpellTimer {
             
             private global::System.Data.DataColumn columnRegexEnabled;
             
+            private global::System.Data.DataColumn columnJobFilter;
+            
             private global::System.Data.DataColumn columnEnabled;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -656,6 +658,14 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn JobFilterColumn {
+                get {
+                    return this.columnJobFilter;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn EnabledColumn {
                 get {
                     return this.columnEnabled;
@@ -727,6 +737,7 @@ namespace ACT.SpecialSpellTimer {
                         object Regex, 
                         string RegexPattern, 
                         bool RegexEnabled, 
+                        string JobFilter, 
                         bool Enabled) {
                 SpellTimerRow rowSpellTimerRow = ((SpellTimerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -757,6 +768,7 @@ namespace ACT.SpecialSpellTimer {
                         Regex,
                         RegexPattern,
                         RegexEnabled,
+                        JobFilter,
                         Enabled};
                 rowSpellTimerRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSpellTimerRow);
@@ -807,6 +819,7 @@ namespace ACT.SpecialSpellTimer {
                 this.columnRegex = base.Columns["Regex"];
                 this.columnRegexPattern = base.Columns["RegexPattern"];
                 this.columnRegexEnabled = base.Columns["RegexEnabled"];
+                this.columnJobFilter = base.Columns["JobFilter"];
                 this.columnEnabled = base.Columns["Enabled"];
             }
             
@@ -867,6 +880,8 @@ namespace ACT.SpecialSpellTimer {
                 base.Columns.Add(this.columnRegexPattern);
                 this.columnRegexEnabled = new global::System.Data.DataColumn("RegexEnabled", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRegexEnabled);
+                this.columnJobFilter = new global::System.Data.DataColumn("JobFilter", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnJobFilter);
                 this.columnEnabled = new global::System.Data.DataColumn("Enabled", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEnabled);
                 this.columnPanel.AllowDBNull = false;
@@ -919,6 +934,8 @@ namespace ACT.SpecialSpellTimer {
                 this.columnRegexPattern.DefaultValue = ((string)(""));
                 this.columnRegexEnabled.AllowDBNull = false;
                 this.columnRegexEnabled.DefaultValue = ((bool)(false));
+                this.columnJobFilter.AllowDBNull = false;
+                this.columnJobFilter.DefaultValue = ((string)(""));
                 this.columnEnabled.AllowDBNull = false;
                 this.columnEnabled.DefaultValue = ((bool)(false));
             }
@@ -1393,6 +1410,8 @@ namespace ACT.SpecialSpellTimer {
             
             private global::System.Data.DataColumn columnTop;
             
+            private global::System.Data.DataColumn columnJobFilter;
+            
             private global::System.Data.DataColumn columnEnabled;
             
             private static System.DateTime columnMatchDateTime_defaultValue = global::System.DateTime.Parse("0001-01-01T00:00:00");
@@ -1664,6 +1683,14 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn JobFilterColumn {
+                get {
+                    return this.columnJobFilter;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn EnabledColumn {
                 get {
                     return this.columnEnabled;
@@ -1737,6 +1764,7 @@ namespace ACT.SpecialSpellTimer {
                         bool RegexEnabled, 
                         double Left, 
                         double Top, 
+                        string JobFilter, 
                         bool Enabled) {
                 OnePointTelopRow rowOnePointTelopRow = ((OnePointTelopRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -1769,6 +1797,7 @@ namespace ACT.SpecialSpellTimer {
                         RegexEnabled,
                         Left,
                         Top,
+                        JobFilter,
                         Enabled};
                 rowOnePointTelopRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowOnePointTelopRow);
@@ -1821,6 +1850,7 @@ namespace ACT.SpecialSpellTimer {
                 this.columnRegexEnabled = base.Columns["RegexEnabled"];
                 this.columnLeft = base.Columns["Left"];
                 this.columnTop = base.Columns["Top"];
+                this.columnJobFilter = base.Columns["JobFilter"];
                 this.columnEnabled = base.Columns["Enabled"];
             }
             
@@ -1885,6 +1915,8 @@ namespace ACT.SpecialSpellTimer {
                 base.Columns.Add(this.columnLeft);
                 this.columnTop = new global::System.Data.DataColumn("Top", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTop);
+                this.columnJobFilter = new global::System.Data.DataColumn("JobFilter", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnJobFilter);
                 this.columnEnabled = new global::System.Data.DataColumn("Enabled", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnEnabled);
                 this.columnID.AllowDBNull = false;
@@ -1943,6 +1975,8 @@ namespace ACT.SpecialSpellTimer {
                 this.columnLeft.DefaultValue = ((double)(0D));
                 this.columnTop.AllowDBNull = false;
                 this.columnTop.DefaultValue = ((double)(0D));
+                this.columnJobFilter.AllowDBNull = false;
+                this.columnJobFilter.DefaultValue = ((string)(""));
                 this.columnEnabled.DefaultValue = ((bool)(false));
             }
             
@@ -2393,6 +2427,17 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string JobFilter {
+                get {
+                    return ((string)(this[this.tableSpellTimer.JobFilterColumn]));
+                }
+                set {
+                    this[this.tableSpellTimer.JobFilterColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Enabled {
                 get {
                     return ((bool)(this[this.tableSpellTimer.EnabledColumn]));
@@ -2820,6 +2865,17 @@ namespace ACT.SpecialSpellTimer {
                 }
                 set {
                     this[this.tableOnePointTelop.TopColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string JobFilter {
+                get {
+                    return ((string)(this[this.tableOnePointTelop.JobFilterColumn]));
+                }
+                set {
+                    this[this.tableOnePointTelop.JobFilterColumn] = value;
                 }
             }
             

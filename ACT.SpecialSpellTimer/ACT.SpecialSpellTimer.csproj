@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="FF14PluginHelper.cs" />
     <Compile Include="FF14PluginHelper.Extension.cs" />
+    <Compile Include="Job.cs" />
     <Compile Include="LogBuffer.cs" />
     <Compile Include="OnePointTelopController.cs" />
     <Compile Include="OnePointTelopTable.cs" />
@@ -79,6 +80,12 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SelectJobForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectJobForm.Designer.cs">
+      <DependentUpon>SelectJobForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Sound\SoundController.cs" />
     <Compile Include="SpecialSpellTimerPlugin.cs" />
@@ -174,6 +181,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ConfigPanel.resx">
       <DependentUpon>ConfigPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectJobForm.resx">
+      <DependentUpon>SelectJobForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
