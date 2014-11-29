@@ -289,6 +289,25 @@
     [Serializable]
     public class OnePointTelop
     {
+        public OnePointTelop()
+        {
+            this.Title = string.Empty;
+            this.Keyword = string.Empty;
+            this.KeywordToHide = string.Empty;
+            this.Message = string.Empty;
+            this.MatchSound = string.Empty;
+            this.MatchTextToSpeak = string.Empty;
+            this.DelaySound = string.Empty;
+            this.DelayTextToSpeak = string.Empty;
+            this.BackColor = string.Empty;
+            this.FontFamily = string.Empty;
+            this.FontColor = string.Empty;
+            this.MatchedLog = string.Empty;
+            this.MessageReplaced = string.Empty;
+            this.RegexPattern = string.Empty;
+            this.RegexPatternToHide = string.Empty;
+        }
+
         public long ID { get; set; }
         public string Title { get; set; }
         public string Keyword { get; set; }

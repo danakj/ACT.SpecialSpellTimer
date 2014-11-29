@@ -270,6 +270,25 @@
     [Serializable]
     public class SpellTimer
     {
+        public SpellTimer()
+        {
+            this.Panel = string.Empty;
+            this.SpellTitle = string.Empty;
+            this.Keyword = string.Empty;
+            this.MatchSound = string.Empty;
+            this.MatchTextToSpeak = string.Empty;
+            this.OverSound = string.Empty;
+            this.OverTextToSpeak = string.Empty;
+            this.TimeupSound = string.Empty;
+            this.TimeupTextToSpeak = string.Empty;
+            this.FontColor = string.Empty;
+            this.BarColor = string.Empty;
+            this.JobFilter = string.Empty;
+            this.SpellTitleReplaced = string.Empty;
+            this.MatchedLog = string.Empty;
+            this.RegexPattern = string.Empty;
+        }
+
         public string Panel { get; set; }
         public string SpellTitle { get; set; }
         public string Keyword { get; set; }
