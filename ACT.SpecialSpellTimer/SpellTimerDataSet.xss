@@ -8,7 +8,7 @@
   <Shapes>
     <Shape ID="DesignTable:SpellTimer" ZOrder="2" X="24" Y="33" Height="460" Width="167" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="456" />
     <Shape ID="DesignTable:PanelSettings" ZOrder="3" X="288" Y="44" Height="70" Width="195" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="66" />
-    <Shape ID="DesignTable:OnePointTelop" ZOrder="1" X="276" Y="228" Height="505" Width="168" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="501" />
+    <Shape ID="DesignTable:OnePointTelop" ZOrder="1" X="287" Y="188" Height="490" Width="168" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="486" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

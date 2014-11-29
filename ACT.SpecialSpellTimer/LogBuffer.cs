@@ -20,6 +20,11 @@
         private static List<string> ptmember;
 
         /// <summary>
+        /// 内部バッファ
+        /// </summary>
+        private List<string> buffer = new List<string>();
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public LogBuffer()
@@ -33,6 +38,35 @@
         public void Dispose()
         {
             ActGlobals.oFormActMain.OnLogLineRead -= this.oFormActMain_OnLogLineRead;
+            this.Clear();
+        }
+
+        /// <summary>
+        /// ログ行を返す
+        /// </summary>
+        /// <returns>
+        /// ログ行の配列</returns>
+        public string[] GetLogLines()
+        {
+            lock (this.buffer)
+            {
+                var logLines = this.buffer.ToArray();
+                this.buffer.Clear();
+                return logLines;
+            }
+        }
+
+        /// <summary>
+        /// バッファをクリアする
+        /// </summary>
+        public void Clear()
+        {
+            lock (this.buffer)
+            {
+                this.buffer.Clear();
+                ptmember.Clear();
+                Debug.WriteLine("Logをクリアしました");
+            }
         }
 
         /// <summary>
@@ -42,64 +76,58 @@
         /// <param name="logInfo">ログ情報</param>
         private void oFormActMain_OnLogLineRead(bool isImport, LogLineEventArgs logInfo)
         {
-            try
+            if (isImport)
             {
-                if (isImport)
-                {
-                    return;
-                }
+                return;
+            }
 
 #if false
-                Debug.WriteLine(logInfo.logLine);
+            Debug.WriteLine(logInfo.logLine);
 #endif
 
-                var logLine = logInfo.logLine.Trim();
+            var logLine = logInfo.logLine.Trim();
 
-                // パーティに変化あり？
-                if (ptmember == null ||
-                    logLine.Contains("パーティを解散しました。") ||
-                    logLine.Contains("がパーティに参加しました。") ||
-                    logLine.Contains("がパーティから離脱しました。") ||
-                    logLine.Contains("をパーティから離脱させました。"))
-                {
-                    Task.Run(() =>
-                    {
-                        Thread.Sleep(5 * 1000);
-                        RefreshPTList();
-                    }).ContinueWith((t) =>
-                    {
-                        t.Dispose();
-                    });
-                }
+            // ジョブに変化あり？
+            if (logLine.Contains("にチェンジした。"))
+            {
+                FF14PluginHelper.RefreshPlayer();
+            }
 
-                if (Settings.Default.EnabledPartyMemberPlaceholder)
+            // パーティに変化あり？
+            if (ptmember == null ||
+                logLine.Contains("パーティを解散しました。") ||
+                logLine.Contains("がパーティに参加しました。") ||
+                logLine.Contains("がパーティから離脱しました。") ||
+                logLine.Contains("をパーティから離脱させました。") ||
+                logLine.Contains("の攻略を開始した。") ||
+                logLine.Contains("の攻略を終了した。"))
+            {
+                Task.Run(() =>
                 {
-                    if (ptmember != null)
+                    Thread.Sleep(5 * 1000);
+                    RefreshPTList();
+                }).ContinueWith((t) =>
+                {
+                    t.Dispose();
+                });
+            }
+
+            if (Settings.Default.EnabledPartyMemberPlaceholder)
+            {
+                if (ptmember != null)
+                {
+                    for (int i = 0; i < ptmember.Count; i++)
                     {
-                        for (int i = 0; i < ptmember.Count; i++)
-                        {
-                            logLine = logLine.Replace(
-                                ptmember[i],
-                                "<" + (i + 2).ToString() + ">");
-                        }
+                        logLine = logLine.Replace(
+                            ptmember[i],
+                            "<" + (i + 2).ToString() + ">");
                     }
                 }
-
-                // テロップとマッチングする
-                OnePointTelopController.Match(logLine);
-
-                // スペルとマッチングする
-                SpellTimerCore.Default.Match(logLine);
-
-                // テキストコマンドとマッチングする
-                TextCommandController.MatchCommand(logLine);
             }
-            catch (Exception ex)
+
+            lock (this.buffer)
             {
-                ActGlobals.oFormActMain.WriteExceptionLog(
-                ex,
-                "ACT.SpecialSpellTimer ログの解析で例外が発生ました。" + Environment.NewLine +
-                logInfo.logLine);
+                this.buffer.Add(logLine);
             }
         }
 

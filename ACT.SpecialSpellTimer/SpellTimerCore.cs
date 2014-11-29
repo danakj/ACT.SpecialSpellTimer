@@ -228,14 +228,149 @@
             // タイマの間隔を標準に戻す
             this.RefreshInterval = Settings.Default.RefreshInterval;
 
-            // スペルを更新する
-            foreach (var spell in spellArray)
+            // ログを取り出す
+            var logLines = this.LogBuffer.GetLogLines();
+
+            // テロップとマッチングする
+            OnePointTelopController.Match(
+                logLines);
+
+            // スペルリストとマッチングする
+            this.MatchSpells(
+                spellArray,
+                logLines);
+
+            // コマンドとマッチングする
+            TextCommandController.MatchCommand(
+                logLines);
+
+            // オーバーレイが非表示？
+            if (!Settings.Default.OverlayVisible)
+            {
+                this.HidePanels();
+                OnePointTelopController.HideTelops();
+                return;
+            }
+
+            // Windowを表示する
+            var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
+            foreach (var name in panelNames)
+            {
+                var w = this.SpellTimerPanels.Where(x => x.PanelName == name).FirstOrDefault();
+                if (w == null)
+                {
+                    w = new SpellTimerListWindow()
+                    {
+                        Title = "SpecialSpellTimer - " + name,
+                        PanelName = name,
+                    };
+
+                    this.SpellTimerPanels.Add(w);
+
+                    // クリックスルー？
+                    if (Settings.Default.ClickThroughEnabled)
+                    {
+                        w.ToTransparentWindow();
+                    }
+
+                    w.Show();
+                }
+
+                w.SpellTimers = (
+                    from x in spellArray
+                    where
+                    x.Panel.Trim() == name
+                    select
+                    x).ToArray();
+
+                w.RefreshSpellTimer();
+            }
+        }
+
+        /// <summary>
+        /// Spellをマッチングする
+        /// </summary>
+        /// <param name="spells">Spell</param>
+        /// <param name="logLines">ログ</param>
+        private void MatchSpells(
+            SpellTimerDataSet.SpellTimerRow[] spells,
+            string[] logLines)
+        {
+            // Spellを舐める
+            foreach (var spell in spells.AsParallel())
             {
                 try
                 {
                     spell.BeginEdit();
 
                     var regex = spell.Regex as Regex;
+
+                    // マッチする？
+                    foreach (var logLine in logLines)
+                    {
+                        // 正規表現が無効？
+                        if (!spell.RegexEnabled ||
+                            regex == null)
+                        {
+                            var keyword = spell.Keyword.Trim();
+
+                            if (string.IsNullOrWhiteSpace(keyword))
+                            {
+                                continue;
+                            }
+
+                            // <me>を置換する
+                            var player = FF14PluginHelper.GetPlayer();
+                            if (player != null)
+                            {
+                                keyword = keyword.Replace("<me>", player.Name);
+                            }
+
+                            // キーワードが含まれるか？
+                            if (logLine.ToUpper().Contains(
+                                keyword.ToUpper()))
+                            {
+                                // ヒットしたログを格納する
+                                spell.MatchedLog = logLine;
+
+                                spell.SpellTitleReplaced = spell.SpellTitle;
+                                spell.MatchDateTime = DateTime.Now;
+                                spell.OverDone = false;
+                                spell.TimeupDone = false;
+
+                                // マッチ時点のサウンドを再生する
+                                this.Play(spell.MatchSound);
+                                this.Play(spell.MatchTextToSpeak);
+                            }
+
+                            continue;
+                        }
+
+                        // 正規表現でマッチングする
+                        if (regex.IsMatch(logLine))
+                        {
+                            // ヒットしたログを格納する
+                            spell.MatchedLog = logLine;
+
+                            // 置換したスペル名を格納する
+                            spell.SpellTitleReplaced = regex.Replace(
+                                logLine,
+                                spell.SpellTitle);
+
+                            spell.MatchDateTime = DateTime.Now;
+                            spell.OverDone = false;
+                            spell.TimeupDone = false;
+
+                            // マッチ時点のサウンドを再生する
+                            this.Play(spell.MatchSound);
+
+                            if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
+                            {
+                                var tts = regex.Replace(logLine, spell.MatchTextToSpeak);
+                                this.Play(tts);
+                            }
+                        }
+                    }
 
                     // Repeat対象のSpellを更新する
                     if (spell.RepeatEnabled &&
@@ -289,142 +424,6 @@
                             }
 
                             spell.TimeupDone = true;
-                        }
-                    }
-                }
-                finally
-                {
-                    spell.EndEdit();
-                }
-            }
-
-            // オーバーレイが非表示？
-            if (!Settings.Default.OverlayVisible)
-            {
-                this.HidePanels();
-                OnePointTelopController.HideTelops();
-                return;
-            }
-
-            // テロップWindowを表示する
-            OnePointTelopController.Refresh();
-
-            // Windowを表示する
-            var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
-            foreach (var name in panelNames)
-            {
-                ActInvoker.Invoke(() =>
-                {
-                    var w = this.SpellTimerPanels.Where(x => x.PanelName == name).FirstOrDefault();
-                    if (w == null)
-                    {
-                        w = new SpellTimerListWindow()
-                        {
-                            Title = "SpecialSpellTimer - " + name,
-                            PanelName = name,
-                        };
-
-                        this.SpellTimerPanels.Add(w);
-
-                        // クリックスルー？
-                        if (Settings.Default.ClickThroughEnabled)
-                        {
-                            w.ToTransparentWindow();
-                        }
-
-                        w.Show();
-                    }
-
-                    w.SpellTimers = (
-                        from x in spellArray
-                        where
-                        x.Panel.Trim() == name
-                        select
-                        x).ToArray();
-
-                    w.RefreshSpellTimer();
-                });
-            }
-        }
-
-        /// <summary>
-        /// Spellをマッチングする
-        /// </summary>
-        /// <param name="logLine">ログ</param>
-        public void Match(
-            string logLine)
-        {
-            var spells = SpellTimerTable.EnabledTable;
-
-            // Spellを舐める
-            foreach (var spell in spells)
-            {
-                try
-                {
-                    spell.BeginEdit();
-
-                    var regex = spell.Regex as Regex;
-
-                    // 正規表現が無効？
-                    if (!spell.RegexEnabled ||
-                        regex == null)
-                    {
-                        var keyword = spell.Keyword.Trim();
-
-                        if (string.IsNullOrWhiteSpace(keyword))
-                        {
-                            continue;
-                        }
-
-                        // <me>を置換する
-                        var player = FF14PluginHelper.GetPlayer();
-                        if (player != null)
-                        {
-                            keyword = keyword.Replace("<me>", player.Name);
-                        }
-
-                        // キーワードが含まれるか？
-                        if (logLine.ToUpper().Contains(
-                            keyword.ToUpper()))
-                        {
-                            // ヒットしたログを格納する
-                            spell.MatchedLog = logLine;
-
-                            spell.SpellTitleReplaced = spell.SpellTitle;
-                            spell.MatchDateTime = DateTime.Now;
-                            spell.OverDone = false;
-                            spell.TimeupDone = false;
-
-                            // マッチ時点のサウンドを再生する
-                            this.Play(spell.MatchSound);
-                            this.Play(spell.MatchTextToSpeak);
-                        }
-
-                        continue;
-                    }
-
-                    // 正規表現でマッチングする
-                    if (regex.IsMatch(logLine))
-                    {
-                        // ヒットしたログを格納する
-                        spell.MatchedLog = logLine;
-
-                        // 置換したスペル名を格納する
-                        spell.SpellTitleReplaced = regex.Replace(
-                            logLine,
-                            spell.SpellTitle);
-
-                        spell.MatchDateTime = DateTime.Now;
-                        spell.OverDone = false;
-                        spell.TimeupDone = false;
-
-                        // マッチ時点のサウンドを再生する
-                        this.Play(spell.MatchSound);
-
-                        if (!string.IsNullOrWhiteSpace(spell.MatchTextToSpeak))
-                        {
-                            var tts = regex.Replace(logLine, spell.MatchTextToSpeak);
-                            this.Play(tts);
                         }
                     }
                 }

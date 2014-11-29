@@ -1406,8 +1406,6 @@ namespace ACT.SpecialSpellTimer {
             
             private global::System.Data.DataColumn columnRegexEnabled;
             
-            private global::System.Data.DataColumn columnForceHide;
-            
             private global::System.Data.DataColumn columnLeft;
             
             private global::System.Data.DataColumn columnTop;
@@ -1669,14 +1667,6 @@ namespace ACT.SpecialSpellTimer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ForceHideColumn {
-                get {
-                    return this.columnForceHide;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn LeftColumn {
                 get {
                     return this.columnLeft;
@@ -1772,7 +1762,6 @@ namespace ACT.SpecialSpellTimer {
                         string RegexPattern, 
                         string RegexPatternToHide, 
                         bool RegexEnabled, 
-                        bool ForceHide, 
                         double Left, 
                         double Top, 
                         string JobFilter, 
@@ -1806,7 +1795,6 @@ namespace ACT.SpecialSpellTimer {
                         RegexPattern,
                         RegexPatternToHide,
                         RegexEnabled,
-                        ForceHide,
                         Left,
                         Top,
                         JobFilter,
@@ -1860,7 +1848,6 @@ namespace ACT.SpecialSpellTimer {
                 this.columnRegexPattern = base.Columns["RegexPattern"];
                 this.columnRegexPatternToHide = base.Columns["RegexPatternToHide"];
                 this.columnRegexEnabled = base.Columns["RegexEnabled"];
-                this.columnForceHide = base.Columns["ForceHide"];
                 this.columnLeft = base.Columns["Left"];
                 this.columnTop = base.Columns["Top"];
                 this.columnJobFilter = base.Columns["JobFilter"];
@@ -1924,8 +1911,6 @@ namespace ACT.SpecialSpellTimer {
                 base.Columns.Add(this.columnRegexPatternToHide);
                 this.columnRegexEnabled = new global::System.Data.DataColumn("RegexEnabled", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRegexEnabled);
-                this.columnForceHide = new global::System.Data.DataColumn("ForceHide", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnForceHide);
                 this.columnLeft = new global::System.Data.DataColumn("Left", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLeft);
                 this.columnTop = new global::System.Data.DataColumn("Top", typeof(double), null, global::System.Data.MappingType.Element);
@@ -1986,8 +1971,6 @@ namespace ACT.SpecialSpellTimer {
                 this.columnRegexPatternToHide.Caption = "RegexPattern";
                 this.columnRegexPatternToHide.DefaultValue = ((string)(""));
                 this.columnRegexEnabled.DefaultValue = ((bool)(false));
-                this.columnForceHide.AllowDBNull = false;
-                this.columnForceHide.DefaultValue = ((bool)(false));
                 this.columnLeft.AllowDBNull = false;
                 this.columnLeft.DefaultValue = ((double)(0D));
                 this.columnTop.AllowDBNull = false;
@@ -2860,17 +2843,6 @@ namespace ACT.SpecialSpellTimer {
                 }
                 set {
                     this[this.tableOnePointTelop.RegexEnabledColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool ForceHide {
-                get {
-                    return ((bool)(this[this.tableOnePointTelop.ForceHideColumn]));
-                }
-                set {
-                    this[this.tableOnePointTelop.ForceHideColumn] = value;
                 }
             }
             
