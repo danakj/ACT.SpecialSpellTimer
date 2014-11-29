@@ -103,7 +103,7 @@
                     }
                 }
 
-                return spells.ToArray();
+                return spellsFilteredJob.ToArray();
             }
         }
 

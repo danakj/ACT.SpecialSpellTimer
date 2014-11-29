@@ -99,11 +99,13 @@
             {
                 if (Settings.Default.OverlayVisible)
                 {
-                    button.BackColor = Color.Azure;
+                    button.BackColor = Color.OrangeRed;
+                    button.ForeColor = Color.WhiteSmoke;
                 }
                 else
                 {
                     button.BackColor = SystemColors.Control;
+                    button.ForeColor = Color.Black;
                 }
             });
 
