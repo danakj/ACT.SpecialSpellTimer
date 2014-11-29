@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
-    using System.Text.RegularExpressions;
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
@@ -86,9 +86,8 @@
             {
                 lock (lockObject)
                 {
-#if false
+#if DEBUG
                     var sw = Stopwatch.StartNew();
-                    Debug.WriteLine("●Refresh Start " + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fff"));
 #endif
                     try
                     {
@@ -106,7 +105,7 @@
                     }
                     finally
                     {
-#if false
+#if DEBUG
                         sw.Stop();
                         Debug.WriteLine("●Refresh " + sw.ElapsedMilliseconds.ToString("N0") + "ms");
 #endif
@@ -297,11 +296,7 @@
             string[] logLines)
         {
             // Spellを舐める
-#if !DEBUG
             foreach (var spell in spells.AsParallel())
-#else
-            foreach (var spell in spells)
-#endif
             {
                 var regex = spell.Regex;
 
