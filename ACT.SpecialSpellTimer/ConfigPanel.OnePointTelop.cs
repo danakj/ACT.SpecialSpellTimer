@@ -313,6 +313,16 @@
                 src.DelayTextToSpeak = this.TelopDelayTTSTextBox.Text;
 
                 src.EndEdit();
+
+                if ((int)this.TelopLeftNumericUpDown.Tag != src.Left ||
+                    (int)this.TelopTopNumericUpDown.Tag != src.Top)
+                {
+                    OnePointTelopController.SetLocation(
+                        src.Title,
+                        src.Left,
+                        src.Top);
+                }
+
                 OnePointTelopTable.Default.Save();
                 this.LoadTelopTable();
 
@@ -425,7 +435,9 @@
                 !this.TelopBackColorTranceparentCheckBox.Checked;
 
             this.TelopLeftNumericUpDown.Value = (int)src.Left;
+            this.TelopLeftNumericUpDown.Tag = (int)src.Left;
             this.TelopTopNumericUpDown.Value = (int)src.Top;
+            this.TelopTopNumericUpDown.Tag = (int)src.Top;
 
             this.TelopMatchSoundComboBox.SelectedValue = src.MatchSound;
             this.TelopMatchTTSTextBox.Text = src.MatchTextToSpeak;

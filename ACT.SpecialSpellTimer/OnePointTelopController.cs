@@ -20,6 +20,28 @@
         private static List<OnePointTelopWindow> telopWindowList = new List<OnePointTelopWindow>();
 
         /// <summary>
+        /// 位置を設定する
+        /// </summary>
+        /// <param name="telopTitle">設定するテロップのTitle</param>
+        /// <param name="left">Left</param>
+        /// <param name="top">Top</param>
+        public static void SetLocation(
+            string telopTitle,
+            double left,
+            double top)
+        {
+            if (telopWindowList != null)
+            {
+                var telop = telopWindowList.Where(x => x.DataSource.Title == telopTitle).FirstOrDefault();
+                if (telop != null)
+                {
+                    telop.Left = left;
+                    telop.Top = top;
+                }
+            }
+        }
+
+        /// <summary>
         /// テロップを閉じる
         /// </summary>
         public static void CloseTelops()

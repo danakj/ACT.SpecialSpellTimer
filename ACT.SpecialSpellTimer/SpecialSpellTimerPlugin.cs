@@ -95,14 +95,28 @@
         /// </summary>
         private void SetSwitchVisibleButton()
         {
+            var changeColor = new Action<Button>((button) =>
+            {
+                if (Settings.Default.OverlayVisible)
+                {
+                    button.BackColor = Color.Azure;
+                }
+                else
+                {
+                    button.BackColor = SystemColors.Control;
+                }
+            });
+
             SwitchVisibleButton = new Button();
             SwitchVisibleButton.Name = "SpecialSpellTimerSwitchVisibleButton";
             SwitchVisibleButton.Size = new Size(90, 24);
             SwitchVisibleButton.Text = "スペスペ";
             SwitchVisibleButton.TextAlign = ContentAlignment.MiddleCenter;
             SwitchVisibleButton.UseVisualStyleBackColor = true;
-            SwitchVisibleButton.Click += (s, e1) =>
+            SwitchVisibleButton.Click += (s, e) =>
             {
+                var button = s as Button;
+
                 Settings.Default.OverlayVisible = !Settings.Default.OverlayVisible;
                 Settings.Default.Save();
 
@@ -114,7 +128,11 @@
                     SpellTimerCore.Default.ActivatePanels();
                     OnePointTelopController.ActivateTelops();
                 }
+
+                changeColor(s as Button);
             };
+
+            changeColor(SwitchVisibleButton);
 
             ActGlobals.oFormActMain.Resize += this.oFormActMain_Resize;
             ActGlobals.oFormActMain.Controls.Add(SwitchVisibleButton);
