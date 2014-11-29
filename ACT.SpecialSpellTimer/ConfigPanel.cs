@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -87,7 +86,7 @@
 
             this.SpellTimerTreeView.AfterCheck += (s1, e1) =>
             {
-                var source = e1.Node.Tag as SpellTimerDataSet.SpellTimerRow;
+                var source = e1.Node.Tag as SpellTimer;
                 if (source != null)
                 {
                     source.Enabled = e1.Node.Checked;
@@ -96,7 +95,7 @@
                 {
                     foreach (TreeNode node in e1.Node.Nodes)
                     {
-                        var sourceChild = node.Tag as SpellTimerDataSet.SpellTimerRow;
+                        var sourceChild = node.Tag as SpellTimer;
                         if (sourceChild != null)
                         {
                             sourceChild.Enabled = e1.Node.Checked;
@@ -127,7 +126,7 @@
 
             this.SelectJobButton.Click += (s1, e1) =>
             {
-                var src = this.DetailGroupBox.Tag as SpellTimerDataSet.SpellTimerRow;
+                var src = this.DetailGroupBox.Tag as SpellTimer;
                 if (src != null)
                 {
                     using (var f = new SelectJobForm())
@@ -157,7 +156,7 @@
         {
             lock (SpellTimerTable.Table)
             {
-                var nr = SpellTimerTable.Table.NewSpellTimerRow();
+                var nr = new SpellTimer();
 
                 nr.Panel = "General";
                 nr.SpellTitle = "New Spell";
@@ -169,8 +168,8 @@
                 if (this.SpellTimerTreeView.SelectedNode != null)
                 {
                     var baseRow = this.SpellTimerTreeView.SelectedNode.Tag != null ?
-                        this.SpellTimerTreeView.SelectedNode.Tag as SpellTimerDataSet.SpellTimerRow :
-                        this.SpellTimerTreeView.SelectedNode.Nodes[0].Tag as SpellTimerDataSet.SpellTimerRow;
+                        this.SpellTimerTreeView.SelectedNode.Tag as SpellTimer :
+                        this.SpellTimerTreeView.SelectedNode.Nodes[0].Tag as SpellTimer;
 
                     if (baseRow != null)
                     {
@@ -195,7 +194,7 @@
                     50;
                 nr.Regex = null;
                 nr.RegexPattern = string.Empty;
-                SpellTimerTable.Table.AddSpellTimerRow(nr);
+                SpellTimerTable.Table.Add(nr);
 
                 SpellTimerTable.Save();
 
@@ -263,7 +262,7 @@
                     return;
                 }
 
-                var src = this.DetailGroupBox.Tag as SpellTimerDataSet.SpellTimerRow;
+                var src = this.DetailGroupBox.Tag as SpellTimer;
                 if (src != null)
                 {
                     src.Panel = this.PanelNameTextBox.Text;
@@ -306,10 +305,10 @@
         {
             lock (SpellTimerTable.Table)
             {
-                var src = this.DetailGroupBox.Tag as SpellTimerDataSet.SpellTimerRow;
+                var src = this.DetailGroupBox.Tag as SpellTimer;
                 if (src != null)
                 {
-                    SpellTimerTable.Table.RemoveSpellTimerRow(src);
+                    SpellTimerTable.Table.Remove(src);
                     SpellTimerTable.Save();
 
                     this.DetailGroupBox.Visible = false;
@@ -327,7 +326,7 @@
         private void SpellTimerTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             this.ShowDetail(
-                e.Node.Tag as SpellTimerDataSet.SpellTimerRow);
+                e.Node.Tag as SpellTimer);
         }
 
         /// <summary>
@@ -384,9 +383,9 @@
         /// <summary>
         /// 詳細を表示する
         /// </summary>
-        /// <param name="dataSource"></param>
+        /// <param name="dataSource">データソース</param>
         private void ShowDetail(
-            SpellTimerDataSet.SpellTimerRow dataSource)
+            SpellTimer dataSource)
         {
             var src = dataSource;
             if (src == null)

@@ -93,7 +93,7 @@
       <DependentUpon>SpellTimerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpellTimerCore.cs" />
-    <Compile Include="SpellTimerDataSet.Designer.cs">
+    <Compile Include="SpellTimerDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SpellTimerDataSet.xsd</DependentUpon>
@@ -166,16 +166,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="SpellTimerDataSet.xsc">
-      <DependentUpon>SpellTimerDataSet.xsd</DependentUpon>
-    </None>
     <None Include="SpellTimerDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SpellTimerDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="SpellTimerDataSet.xss">
-      <DependentUpon>SpellTimerDataSet.xsd</DependentUpon>
+      <LastGenOutput>SpellTimerDataSet1.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

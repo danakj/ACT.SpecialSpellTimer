@@ -36,7 +36,7 @@
         /// <summary>
         /// 表示するデータソース
         /// </summary>
-        public SpellTimerDataSet.OnePointTelopRow DataSource
+        public OnePointTelop DataSource
         {
             get;
             set;

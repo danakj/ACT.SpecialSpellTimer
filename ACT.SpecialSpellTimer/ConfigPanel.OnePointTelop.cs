@@ -67,7 +67,7 @@
 
             this.TelopTreeView.AfterCheck += (s1, e1) =>
             {
-                var source = e1.Node.Tag as SpellTimerDataSet.OnePointTelopRow;
+                var source = e1.Node.Tag as OnePointTelop;
                 if (source != null)
                 {
                     source.Enabled = e1.Node.Checked;
@@ -77,7 +77,7 @@
             this.TelopTreeView.AfterSelect += (s1, e1) =>
             {
                 this.ShowTelopDetail(
-                    e1.Node.Tag as SpellTimerDataSet.OnePointTelopRow);
+                    e1.Node.Tag as OnePointTelop);
             };
 
             this.TelopBackColorButton.Click += (s1, e1) =>
@@ -114,7 +114,7 @@
 
             this.TelopSelectJobButton.Click += (s1, e1) =>
             {
-                var src = this.TelopDetailGroupBox.Tag as SpellTimerDataSet.OnePointTelopRow;
+                var src = this.TelopDetailGroupBox.Tag as OnePointTelop;
                 if (src != null)
                 {
                     using (var f = new SelectJobForm())
@@ -202,7 +202,7 @@
         /// <param name="e">イベント引数</param>
         private void TelopAddButton_Click(object sender, EventArgs e)
         {
-            var nr = OnePointTelopTable.Default.Table.NewOnePointTelopRow();
+            var nr = new OnePointTelop();
 
             nr.ID = OnePointTelopTable.Default.Table.Any() ?
                 OnePointTelopTable.Default.Table.Max(x => x.ID) + 1 :
@@ -221,8 +221,8 @@
             if (this.TelopTreeView.SelectedNode != null)
             {
                 var baseRow = this.TelopTreeView.SelectedNode.Tag != null ?
-                    this.TelopTreeView.SelectedNode.Tag as SpellTimerDataSet.OnePointTelopRow :
-                    this.TelopTreeView.SelectedNode.Nodes[0].Tag as SpellTimerDataSet.OnePointTelopRow;
+                    this.TelopTreeView.SelectedNode.Tag as OnePointTelop :
+                    this.TelopTreeView.SelectedNode.Nodes[0].Tag as OnePointTelop;
 
                 if (baseRow != null)
                 {
@@ -252,7 +252,7 @@
             nr.RegexToHide = null;
             nr.RegexPatternToHide = string.Empty;
 
-            OnePointTelopTable.Default.Table.AddOnePointTelopRow(nr);
+            OnePointTelopTable.Default.Table.Add(nr);
 
             OnePointTelopTable.Default.Save();
 
@@ -286,11 +286,9 @@
                 return;
             }
 
-            var src = this.TelopDetailGroupBox.Tag as SpellTimerDataSet.OnePointTelopRow;
+            var src = this.TelopDetailGroupBox.Tag as OnePointTelop;
             if (src != null)
             {
-                src.BeginEdit();
-
                 src.Title = this.TelopTitleTextBox.Text;
                 src.Message = this.TelopMessageTextBox.Text;
                 src.Keyword = this.TelopKeywordTextBox.Text;
@@ -312,8 +310,6 @@
                 src.DelaySound = (string)this.TelopDelaySoundComboBox.SelectedValue ?? string.Empty;
                 src.DelayTextToSpeak = this.TelopDelayTTSTextBox.Text;
 
-                src.EndEdit();
-
                 if ((int)this.TelopLeftNumericUpDown.Tag != src.Left ||
                     (int)this.TelopTopNumericUpDown.Tag != src.Top)
                 {
@@ -328,7 +324,7 @@
 
                 foreach (TreeNode node in this.TelopTreeView.Nodes)
                 {
-                    var ds = node.Tag as SpellTimerDataSet.OnePointTelopRow;
+                    var ds = node.Tag as OnePointTelop;
                     if (ds != null)
                     {
                         if (ds.ID == src.ID)
@@ -350,10 +346,10 @@
         {
             lock (OnePointTelopTable.Default.Table)
             {
-                var src = this.TelopDetailGroupBox.Tag as SpellTimerDataSet.OnePointTelopRow;
+                var src = this.TelopDetailGroupBox.Tag as OnePointTelop;
                 if (src != null)
                 {
-                    OnePointTelopTable.Default.Table.RemoveOnePointTelopRow(src);
+                    OnePointTelopTable.Default.Table.Remove(src);
                     OnePointTelopTable.Default.Save();
 
                     OnePointTelopController.CloseTelops();
@@ -402,7 +398,7 @@
         /// </summary>
         /// <param name="dataSource"></param>
         private void ShowTelopDetail(
-            SpellTimerDataSet.OnePointTelopRow dataSource)
+            OnePointTelop dataSource)
         {
             var src = dataSource;
             if (src == null)

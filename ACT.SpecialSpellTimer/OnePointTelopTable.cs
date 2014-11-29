@@ -4,7 +4,9 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Text.RegularExpressions;
+    using System.Xml.Serialization;
 
     using ACT.SpecialSpellTimer.Sound;
 
@@ -37,7 +39,7 @@
         /// <summary>
         /// データテーブル
         /// </summary>
-        private SpellTimerDataSet.OnePointTelopDataTable table = new SpellTimerDataSet.OnePointTelopDataTable();
+        private List<OnePointTelop> table = new List<OnePointTelop>();
 
         /// <summary>
         /// コンストラクタ
@@ -50,7 +52,7 @@
         /// <summary>
         /// 生のテーブル
         /// </summary>
-        public SpellTimerDataSet.OnePointTelopDataTable Table
+        public List<OnePointTelop> Table
         {
             get
             {
@@ -61,7 +63,7 @@
         /// <summary>
         /// 有効なエントリのリスト
         /// </summary>
-        public SpellTimerDataSet.OnePointTelopRow[] EnabledTable
+        public OnePointTelop[] EnabledTable
         {
             get
             {
@@ -75,7 +77,7 @@
                     x;
 
                 // ジョブフィルタをかける
-                var spellsFilteredJob = new List<SpellTimerDataSet.OnePointTelopRow>();
+                var spellsFilteredJob = new List<OnePointTelop>();
                 foreach (var spell in spells)
                 {
                     var player = FF14PluginHelper.GetPlayer();
@@ -97,62 +99,51 @@
                 // コンパイル済みの正規表現をセットする
                 foreach (var spell in spellsFilteredJob)
                 {
-                    try
+                    if (!spell.RegexEnabled)
                     {
-                        spell.BeginEdit();
+                        spell.RegexPattern = string.Empty;
+                        spell.Regex = null;
+                        spell.RegexPatternToHide = string.Empty;
+                        spell.RegexToHide = null;
+                        continue;
+                    }
 
-                        if (!spell.RegexEnabled)
-                        {
-                            spell.RegexPattern = string.Empty;
-                            spell.Regex = null;
-                            spell.RegexPatternToHide = string.Empty;
-                            spell.RegexToHide = null;
-                            continue;
-                        }
+                    var pattern = SpellTimerTable.MakeKeyword(spell.Keyword);
 
-                        var pattern = SpellTimerTable.MakeKeyword(spell.Keyword);
-
-                        if (!string.IsNullOrWhiteSpace(pattern))
+                    if (!string.IsNullOrWhiteSpace(pattern))
+                    {
+                        if (spell.Regex == null ||
+                            spell.RegexPattern != pattern)
                         {
-                            if (spell.IsRegexNull() ||
-                                spell.Regex == null ||
-                                spell.RegexPattern != pattern)
-                            {
-                                spell.RegexPattern = pattern;
-                                spell.Regex = new Regex(
-                                    pattern,
-                                    RegexOptions.Compiled);
-                            }
-                        }
-                        else
-                        {
-                            spell.RegexPattern = string.Empty;
-                            spell.Regex = null;
-                        }
-
-                        var patternToHide = SpellTimerTable.MakeKeyword(spell.KeywordToHide);
-
-                        if (!string.IsNullOrWhiteSpace(patternToHide))
-                        {
-                            if (spell.IsRegexToHideNull() ||
-                                spell.RegexToHide == null ||
-                                spell.RegexPatternToHide != patternToHide)
-                            {
-                                spell.RegexPatternToHide = patternToHide;
-                                spell.RegexToHide = new Regex(
-                                    patternToHide,
-                                    RegexOptions.Compiled);
-                            }
-                        }
-                        else
-                        {
-                            spell.RegexPatternToHide = string.Empty;
-                            spell.RegexToHide = null;
+                            spell.RegexPattern = pattern;
+                            spell.Regex = new Regex(
+                                pattern,
+                                RegexOptions.Compiled);
                         }
                     }
-                    finally
+                    else
                     {
-                        spell.EndEdit();
+                        spell.RegexPattern = string.Empty;
+                        spell.Regex = null;
+                    }
+
+                    var patternToHide = SpellTimerTable.MakeKeyword(spell.KeywordToHide);
+
+                    if (!string.IsNullOrWhiteSpace(patternToHide))
+                    {
+                        if (spell.RegexToHide == null ||
+                            spell.RegexPatternToHide != patternToHide)
+                        {
+                            spell.RegexPatternToHide = patternToHide;
+                            spell.RegexToHide = new Regex(
+                                patternToHide,
+                                RegexOptions.Compiled);
+                        }
+                    }
+                    else
+                    {
+                        spell.RegexPatternToHide = string.Empty;
+                        spell.RegexToHide = null;
                     }
                 }
 
@@ -186,8 +177,6 @@
             var id = 0L;
             foreach (var row in this.table)
             {
-                row.BeginEdit();
-
                 id++;
                 row.ID = id;
                 row.MatchDateTime = DateTime.MinValue;
@@ -202,11 +191,7 @@
                 row.DelaySound = !string.IsNullOrWhiteSpace(row.DelaySound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.DelaySound)) :
                     string.Empty;
-
-                row.EndEdit();
             }
-
-            this.table.AcceptChanges();
         }
 
         /// <summary>
@@ -233,7 +218,18 @@
                     this.table.Clear();
                 }
 
-                this.table.ReadXml(file);
+                // 旧フォーマットを置換する
+                var content = File.ReadAllText(file, new UTF8Encoding(false)).Replace(
+                    "DocumentElement",
+                    "ArrayOfOnePointTelop");
+                File.WriteAllText(file, content, new UTF8Encoding(false));
+
+                using (var sr = new StreamReader(file, new UTF8Encoding(false)))
+                {
+                    var xs = new XmlSerializer(table.GetType());
+                    table = xs.Deserialize(sr) as List<OnePointTelop>; ;
+                }
+
                 this.Reset();
             }
         }
@@ -253,40 +249,85 @@
         public void Save(
             string file)
         {
-            this.table.AcceptChanges();
-
-            var copy = this.table.Copy() as SpellTimerDataSet.OnePointTelopDataTable;
-
             var dir = Path.GetDirectoryName(file);
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
             }
 
-            foreach (var item in copy)
+            foreach (var item in table)
             {
-                item.BeginEdit();
-
-                item.MessageReplaced = string.Empty;
-                item.MatchedLog = string.Empty;
-                item.MatchDateTime = DateTime.MinValue;
-                item.Regex = null;
-                item.RegexPattern = string.Empty;
-                item.RegexToHide = null;
-                item.RegexPatternToHide = string.Empty;
-
                 item.MatchSound = !string.IsNullOrWhiteSpace(item.MatchSound) ?
                     Path.GetFileName(item.MatchSound) :
                     string.Empty;
                 item.DelaySound = !string.IsNullOrWhiteSpace(item.DelaySound) ?
                     Path.GetFileName(item.DelaySound) :
                     string.Empty;
-
-                item.EndEdit();
             }
 
-            copy.AcceptChanges();
-            copy.WriteXml(file);
+            using (var sw = new StreamWriter(file, false, new UTF8Encoding(false)))
+            {
+                var xs = new XmlSerializer(table.GetType());
+                xs.Serialize(sw, table);
+            }
+
+            foreach (var item in table)
+            {
+                item.MatchSound = !string.IsNullOrWhiteSpace(item.MatchSound) ?
+                    Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(item.MatchSound)) :
+                    string.Empty;
+                item.DelaySound = !string.IsNullOrWhiteSpace(item.DelaySound) ?
+                    Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(item.DelaySound)) :
+                    string.Empty;
+            }
         }
+    }
+
+    /// <summary>
+    /// ワンポイントテロップ
+    /// </summary>
+    [Serializable]
+    public class OnePointTelop
+    {
+        public long ID { get; set; }
+        public string Title { get; set; }
+        public string Keyword { get; set; }
+        public string KeywordToHide { get; set; }
+        public string Message { get; set; }
+        public long Delay { get; set; }
+        public long DisplayTime { get; set; }
+        public bool AddMessageEnabled { get; set; }
+        public bool ProgressBarEnabled { get; set; }
+        public string MatchSound { get; set; }
+        public string MatchTextToSpeak { get; set; }
+        public string DelaySound { get; set; }
+        public string DelayTextToSpeak { get; set; }
+        public string BackColor { get; set; }
+        public string FontFamily { get; set; }
+        public float FontSize { get; set; }
+        public int FontStyle { get; set; }
+        public string FontColor { get; set; }
+        public bool RegexEnabled { get; set; }
+        public double Left { get; set; }
+        public double Top { get; set; }
+        public string JobFilter { get; set; }
+        public bool Enabled { get; set; }
+
+        [XmlIgnore]
+        public DateTime MatchDateTime { get; set; }
+        [XmlIgnore]
+        public bool Delayed { get; set; }
+        [XmlIgnore]
+        public string MatchedLog { get; set; }
+        [XmlIgnore]
+        public string MessageReplaced { get; set; }
+        [XmlIgnore]
+        public string RegexPattern { get; set; }
+        [XmlIgnore]
+        public string RegexPatternToHide { get; set; }
+        [XmlIgnore]
+        public Regex Regex { get; set; }
+        [XmlIgnore]
+        public Regex RegexToHide { get; set; }
     }
 }

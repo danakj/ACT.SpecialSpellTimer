@@ -4,7 +4,9 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Text.RegularExpressions;
+    using System.Xml.Serialization;
 
     using ACT.SpecialSpellTimer.Sound;
 
@@ -16,18 +18,18 @@
         /// <summary>
         /// SpellTimerデータテーブル
         /// </summary>
-        private static SpellTimerDataSet.SpellTimerDataTable table;
+        private static List<SpellTimer> table;
 
         /// <summary>
         /// SpellTimerデータテーブル
         /// </summary>
-        public static SpellTimerDataSet.SpellTimerDataTable Table
+        public static List<SpellTimer> Table
         {
             get
             {
                 if (table == null)
                 {
-                    table = new SpellTimerDataSet.SpellTimerDataTable();
+                    table = new List<SpellTimer>();
                     Load();
                 }
 
@@ -38,7 +40,7 @@
         /// <summary>
         /// 有効なSpellTimerデータテーブル
         /// </summary>
-        public static SpellTimerDataSet.SpellTimerRow[] EnabledTable
+        public static SpellTimer[] EnabledTable
         {
             get
             {
@@ -52,7 +54,7 @@
                     x;
 
                 // ジョブフィルタをかける
-                var spellsFilteredJob = new List<SpellTimerDataSet.SpellTimerRow>();
+                var spellsFilteredJob = new List<SpellTimer>();
                 foreach (var spell in spells)
                 {
                     var player = FF14PluginHelper.GetPlayer();
@@ -74,40 +76,30 @@
                 // コンパイル済みの正規表現をセットする
                 foreach (var spell in spellsFilteredJob)
                 {
-                    try
+                    if (!spell.RegexEnabled)
                     {
-                        spell.BeginEdit();
+                        spell.RegexPattern = string.Empty;
+                        spell.Regex = null;
+                        continue;
+                    }
 
-                        if (!spell.RegexEnabled)
-                        {
-                            spell.RegexPattern = string.Empty;
-                            spell.Regex = null;
-                            continue;
-                        }
+                    var pattern = MakeKeyword(spell.Keyword);
 
-                        var pattern = MakeKeyword(spell.Keyword);
-
-                        if (!string.IsNullOrWhiteSpace(pattern))
+                    if (!string.IsNullOrWhiteSpace(pattern))
+                    {
+                        if (spell.Regex == null ||
+                            spell.RegexPattern != pattern)
                         {
-                            if (spell.IsRegexNull() ||
-                                spell.Regex == null ||
-                                spell.RegexPattern != pattern)
-                            {
-                                spell.RegexPattern = pattern;
-                                spell.Regex = new Regex(
-                                    pattern,
-                                    RegexOptions.Compiled);
-                            }
-                        }
-                        else
-                        {
-                            spell.RegexPattern = string.Empty;
-                            spell.Regex = null;
+                            spell.RegexPattern = pattern;
+                            spell.Regex = new Regex(
+                                pattern,
+                                RegexOptions.Compiled);
                         }
                     }
-                    finally
+                    else
                     {
-                        spell.EndEdit();
+                        spell.RegexPattern = string.Empty;
+                        spell.Regex = null;
                     }
                 }
 
@@ -139,8 +131,6 @@
         {
             foreach (var row in Table)
             {
-                row.BeginEdit();
-
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;
@@ -154,11 +144,7 @@
                 row.TimeupSound = !string.IsNullOrWhiteSpace(row.TimeupSound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.TimeupSound)) :
                     string.Empty;
-
-                row.EndEdit();
             }
-
-            Table.AcceptChanges();
         }
 
         /// <summary>
@@ -185,7 +171,18 @@
                     Table.Clear();
                 }
 
-                Table.ReadXml(file);
+                // 旧フォーマットを置換する
+                var content = File.ReadAllText(file, new UTF8Encoding(false)).Replace(
+                    "DocumentElement",
+                    "ArrayOfSpellTimer");
+                File.WriteAllText(file, content, new UTF8Encoding(false));
+
+                using (var sr = new StreamReader(file, new UTF8Encoding(false)))
+                {
+                    var xs = new XmlSerializer(table.GetType());
+                    table = xs.Deserialize(sr) as List<SpellTimer>; ;
+                }
+
                 Reset();
             }
         }
@@ -206,26 +203,14 @@
         public static void Save(
             string file)
         {
-            Table.AcceptChanges();
-
-            var copy = Table.Copy() as SpellTimerDataSet.SpellTimerDataTable;
-
             var dir = Path.GetDirectoryName(file);
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
             }
 
-            foreach (var item in copy)
+            foreach (var item in table)
             {
-                item.BeginEdit();
-
-                item.SpellTitleReplaced = string.Empty;
-                item.MatchedLog = string.Empty;
-                item.MatchDateTime = DateTime.MinValue;
-                item.Regex = null;
-                item.RegexPattern = string.Empty;
-
                 item.MatchSound = !string.IsNullOrWhiteSpace(item.MatchSound) ?
                     Path.GetFileName(item.MatchSound) :
                     string.Empty;
@@ -235,12 +220,26 @@
                 item.TimeupSound = !string.IsNullOrWhiteSpace(item.TimeupSound) ?
                     Path.GetFileName(item.TimeupSound) :
                     string.Empty;
-
-                item.EndEdit();
             }
 
-            copy.AcceptChanges();
-            copy.WriteXml(file);
+            using (var sw = new StreamWriter(file, false, new UTF8Encoding(false)))
+            {
+                var xs = new XmlSerializer(table.GetType());
+                xs.Serialize(sw, table);
+            }
+
+            foreach (var item in table)
+            {
+                item.MatchSound = !string.IsNullOrWhiteSpace(item.MatchSound) ?
+                    Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(item.MatchSound)) :
+                    string.Empty;
+                item.OverSound = !string.IsNullOrWhiteSpace(item.OverSound) ?
+                    Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(item.OverSound)) :
+                    string.Empty;
+                item.TimeupSound = !string.IsNullOrWhiteSpace(item.TimeupSound) ?
+                    Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(item.TimeupSound)) :
+                    string.Empty;
+            }
         }
 
         /// <summary>
@@ -263,5 +262,49 @@
                 string.Empty :
                 ".*" + keyword + ".*";
         }
+    }
+
+    /// <summary>
+    /// スペルタイマ
+    /// </summary>
+    [Serializable]
+    public class SpellTimer
+    {
+        public string Panel { get; set; }
+        public string SpellTitle { get; set; }
+        public string Keyword { get; set; }
+        public long RecastTime { get; set; }
+        public bool RepeatEnabled { get; set; }
+        public bool ProgressBarVisible { get; set; }
+        public string MatchSound { get; set; }
+        public string MatchTextToSpeak { get; set; }
+        public string OverSound { get; set; }
+        public string OverTextToSpeak { get; set; }
+        public long OverTime { get; set; }
+        public string TimeupSound { get; set; }
+        public string TimeupTextToSpeak { get; set; }
+        public DateTime MatchDateTime { get; set; }
+        public bool TimeupHide { get; set; }
+        public bool IsReverse { get; set; }
+        public string FontColor { get; set; }
+        public string BarColor { get; set; }
+        public bool DontHide { get; set; }
+        public bool RegexEnabled { get; set; }
+        public string JobFilter { get; set; }
+        public bool Enabled { get; set; }
+
+        [XmlIgnore]
+        public bool OverDone { get; set; }
+        [XmlIgnore]
+        public bool TimeupDone { get; set; }
+        [XmlIgnore]
+        public string SpellTitleReplaced { get; set; }
+        [XmlIgnore]
+        public string MatchedLog { get; set; }
+        public long DisplayNo { get; set; }
+        [XmlIgnore]
+        public Regex Regex { get; set; }
+        [XmlIgnore]
+        public string RegexPattern { get; set; }
     }
 }

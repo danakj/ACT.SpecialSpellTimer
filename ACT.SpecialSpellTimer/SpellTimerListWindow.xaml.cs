@@ -36,7 +36,7 @@
         /// <summary>
         /// 扱うSpellTimerのリスト
         /// </summary>
-        public SpellTimerDataSet.SpellTimerRow[] SpellTimers { get; set; }
+        public SpellTimer[] SpellTimers { get; set; }
 
         /// <summary>
         /// Loaded
