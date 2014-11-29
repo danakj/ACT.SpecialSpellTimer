@@ -297,7 +297,11 @@
             string[] logLines)
         {
             // Spellを舐める
+#if !DEBUG
             foreach (var spell in spells.AsParallel())
+#else
+            foreach (var spell in spells)
+#endif
             {
                 var regex = spell.Regex;
 
