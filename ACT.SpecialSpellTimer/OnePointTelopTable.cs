@@ -108,7 +108,7 @@
                         continue;
                     }
 
-                    var pattern = SpellTimerTable.MakeKeyword(spell.Keyword);
+                    var pattern = LogBuffer.MakeKeywordToRegex(spell.Keyword);
 
                     if (!string.IsNullOrWhiteSpace(pattern))
                     {
@@ -127,7 +127,7 @@
                         spell.Regex = null;
                     }
 
-                    var patternToHide = SpellTimerTable.MakeKeyword(spell.KeywordToHide);
+                    var patternToHide = LogBuffer.MakeKeywordToRegex(spell.KeywordToHide);
 
                     if (!string.IsNullOrWhiteSpace(patternToHide))
                     {

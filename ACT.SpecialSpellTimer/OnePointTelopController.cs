@@ -106,7 +106,6 @@
             string[] logLines)
         {
             var telops = OnePointTelopTable.Default.EnabledTable;
-            var player = FF14PluginHelper.GetPlayer();
 
             foreach (var telop in telops.AsParallel())
             {
@@ -119,10 +118,7 @@
                     // 通常マッチ
                     if (regex == null)
                     {
-                        var keyword = player != null ?
-                            telop.Keyword.Trim().Replace("<me>", player.Name) :
-                            telop.Keyword.Trim();
-
+                        var keyword = LogBuffer.MakeKeyword(telop.Keyword);
                         if (!string.IsNullOrWhiteSpace(keyword))
                         {
                             if (log.ToUpper().Contains(
@@ -181,10 +177,7 @@
                     // 通常マッチ(強制非表示)
                     if (regexToHide == null)
                     {
-                        var keyword = player != null ?
-                            telop.KeywordToHide.Trim().Replace("<me>", player.Name) :
-                            telop.KeywordToHide.Trim();
-
+                        var keyword = LogBuffer.MakeKeyword(telop.KeywordToHide);
                         if (!string.IsNullOrWhiteSpace(keyword))
                         {
                             if (log.ToUpper().Contains(

@@ -134,6 +134,70 @@
         }
 
         /// <summary>
+        /// マッチングキーワードを生成する
+        /// </summary>
+        /// <param name="keyword">元のキーワード</param>
+        /// <returns>生成したキーワード</returns>
+        public static string MakeKeyword(
+            string keyword)
+        {
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                return keyword.Trim();
+            }
+
+            keyword = keyword.Trim();
+
+            var player = FF14PluginHelper.GetPlayer();
+            if (player != null)
+            {
+                keyword = keyword.Replace("<me>", player.Name.Trim());
+            }
+
+            if (Settings.Default.EnabledPartyMemberPlaceholder)
+            {
+                if (ptmember != null)
+                {
+                    for (int i = 0; i < ptmember.Count; i++)
+                    {
+                        keyword = keyword.Replace(
+                            "<" + (i + 2).ToString() + ">",
+                            ptmember[i].Trim());
+                    }
+                }
+            }
+
+            return keyword;
+        }
+
+        /// <summary>
+        /// 正規表現向けマッチングキーワードを生成する
+        /// </summary>
+        /// <param name="keyword">元のキーワード</param>
+        /// <returns>生成したキーワード</returns>
+        public static string MakeKeywordToRegex(
+            string keyword)
+        {
+            keyword = MakeKeyword(keyword);
+
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                return keyword.Trim();
+            }
+
+            return ".*" + keyword + ".*";
+        }
+
+        /// <summary>
+        /// PTメンバーリストを返す
+        /// </summary>
+        /// <returns>PTメンバーリスト</returns>
+        public static string[] GetPTMember()
+        {
+            return ptmember.ToArray();
+        }
+
+        /// <summary>
         /// パーティリストを更新する
         /// </summary>
         public static void RefreshPTList()

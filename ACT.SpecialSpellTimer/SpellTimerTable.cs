@@ -83,7 +83,7 @@
                         continue;
                     }
 
-                    var pattern = MakeKeyword(spell.Keyword);
+                    var pattern = LogBuffer.MakeKeywordToRegex(spell.Keyword);
 
                     if (!string.IsNullOrWhiteSpace(pattern))
                     {
@@ -240,27 +240,6 @@
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(item.TimeupSound)) :
                     string.Empty;
             }
-        }
-
-        /// <summary>
-        /// 正規表現用のキーワードを生成する
-        /// </summary>
-        /// <param name="pattern">元のパターン</param>
-        /// <returns>マッチ用キーワード</returns>
-        public static string MakeKeyword(
-            string pattern)
-        {
-            var keyword = pattern.Trim();
-
-            var player = FF14PluginHelper.GetPlayer();
-            if (player != null)
-            {
-                keyword = keyword.Replace("<me>", player.Name.Trim());
-            }
-
-            return string.IsNullOrWhiteSpace(keyword) ?
-                string.Empty :
-                ".*" + keyword + ".*";
         }
     }
 

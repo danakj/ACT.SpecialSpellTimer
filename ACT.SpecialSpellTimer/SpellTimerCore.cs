@@ -312,18 +312,10 @@
                     if (!spell.RegexEnabled ||
                         regex == null)
                     {
-                        var keyword = spell.Keyword.Trim();
-
+                        var keyword = LogBuffer.MakeKeyword(spell.Keyword);
                         if (string.IsNullOrWhiteSpace(keyword))
                         {
                             continue;
-                        }
-
-                        // <me>を置換する
-                        var player = FF14PluginHelper.GetPlayer();
-                        if (player != null)
-                        {
-                            keyword = keyword.Replace("<me>", player.Name);
                         }
 
                         // キーワードが含まれるか？
