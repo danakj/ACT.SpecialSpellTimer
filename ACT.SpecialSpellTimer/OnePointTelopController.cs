@@ -244,16 +244,22 @@
 
                     if (telop.MatchDateTime > DateTime.MinValue)
                     {
-                        if (telop.MatchDateTime.AddSeconds(telop.Delay) <= DateTime.Now &&
-                            DateTime.Now <= telop.MatchDateTime.AddSeconds(telop.Delay + telop.DisplayTime))
+                        var start = telop.MatchDateTime.AddSeconds(telop.Delay);
+                        var end = telop.MatchDateTime.AddSeconds(telop.Delay + telop.DisplayTime);
+
+                        if (start <= DateTime.Now && DateTime.Now <= end)
                         {
                             w.ShowOverlay();
                         }
                         else
                         {
                             w.HideOverlay();
-                            telop.MatchDateTime = DateTime.MinValue;
-                            telop.MessageReplaced = string.Empty;
+
+                            if (DateTime.Now > end)
+                            {
+                                telop.MatchDateTime = DateTime.MinValue;
+                                telop.MessageReplaced = string.Empty;
+                            }
                         }
 
                         if (isForceHide)

@@ -39,6 +39,8 @@
         {
             ActGlobals.oFormActMain.OnLogLineRead -= this.oFormActMain_OnLogLineRead;
             this.Clear();
+
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
