@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading;
+    using System.Threading.Tasks;
+
     using ACT.SpecialSpellTimer.Properties;
     using Advanced_Combat_Tracker;
 
@@ -16,11 +18,6 @@
         /// パーティメンバ
         /// </summary>
         private static List<string> ptmember;
-
-        /// <summary>
-        /// 内部バッファ
-        /// </summary>
-        private List<string> buffer = new List<string>();
 
         /// <summary>
         /// コンストラクタ
@@ -36,35 +33,6 @@
         public void Dispose()
         {
             ActGlobals.oFormActMain.OnLogLineRead -= this.oFormActMain_OnLogLineRead;
-            this.Clear();
-        }
-
-        /// <summary>
-        /// ログ行を返す
-        /// </summary>
-        /// <returns>
-        /// ログ行の配列</returns>
-        public string[] GetLogLines()
-        {
-            lock (this.buffer)
-            {
-                var logLines = this.buffer.ToArray();
-                this.buffer.Clear();
-                return logLines;
-            }
-        }
-
-        /// <summary>
-        /// バッファをクリアする
-        /// </summary>
-        public void Clear()
-        {
-            lock (this.buffer)
-            {
-                this.buffer.Clear();
-                ptmember.Clear();
-                Debug.WriteLine("Logをクリアしました");
-            }
         }
 
         /// <summary>
@@ -74,17 +42,17 @@
         /// <param name="logInfo">ログ情報</param>
         private void oFormActMain_OnLogLineRead(bool isImport, LogLineEventArgs logInfo)
         {
-            if (isImport)
+            try
             {
-                return;
-            }
+                if (isImport)
+                {
+                    return;
+                }
 
 #if false
-            Debug.WriteLine(logInfo.logLine);
+                Debug.WriteLine(logInfo.logLine);
 #endif
 
-            lock (this.buffer)
-            {
                 var logLine = logInfo.logLine.Trim();
 
                 // パーティに変化あり？
@@ -94,33 +62,45 @@
                     logLine.Contains("がパーティから離脱しました。") ||
                     logLine.Contains("をパーティから離脱させました。"))
                 {
-                    Thread.Sleep(3 * 1000);
-                    RefreshPTList();
+                    Task.Run(() =>
+                    {
+                        Thread.Sleep(5 * 1000);
+                        RefreshPTList();
+                    }).ContinueWith((t) =>
+                    {
+                        t.Dispose();
+                    });
                 }
 
                 if (Settings.Default.EnabledPartyMemberPlaceholder)
                 {
-                    for (int i = 0; i < ptmember.Count; i++)
+                    if (ptmember != null)
                     {
-                        logLine = logLine.Replace(
-                            ptmember[i],
-                            "<" + (i + 2).ToString() + ">");
+                        for (int i = 0; i < ptmember.Count; i++)
+                        {
+                            logLine = logLine.Replace(
+                                ptmember[i],
+                                "<" + (i + 2).ToString() + ">");
+                        }
                     }
                 }
 
-                this.buffer.Add(logLine);
+                // テロップとマッチングする
+                OnePointTelopController.Match(logLine);
+
+                // スペルとマッチングする
+                SpellTimerCore.Default.Match(logLine);
+
+                // テキストコマンドとマッチングする
+                TextCommandController.MatchCommand(logLine);
             }
-        }
-
-        /// <summary>
-        /// ゾーンが変わった？
-        /// </summary>
-        private void ZoneChanged()
-        {
-            // プレイヤ情報を更新する
-            FF14PluginHelper.RefreshPlayer();
-
-            RefreshPTList();
+            catch (Exception ex)
+            {
+                ActGlobals.oFormActMain.WriteExceptionLog(
+                ex,
+                "ACT.SpecialSpellTimer ログの解析で例外が発生ました。" + Environment.NewLine +
+                logInfo.logLine);
+            }
         }
 
         /// <summary>

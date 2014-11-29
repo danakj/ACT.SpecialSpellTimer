@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Windows;
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Sound;
@@ -27,16 +26,16 @@
         {
             if (telopWindowList != null)
             {
-                foreach (var telop in telopWindowList)
+                ActInvoker.Invoke(() =>
                 {
-                    telop.DataSource.Left = telop.Left;
-                    telop.DataSource.Top = telop.Top;
-
-                    ActInvoker.Invoke(() =>
+                    foreach (var telop in telopWindowList)
                     {
+                        telop.DataSource.Left = telop.Left;
+                        telop.DataSource.Top = telop.Top;
+
                         telop.Close();
-                    });
-                }
+                    }
+                });
 
                 OnePointTelopTable.Default.Save();
 
@@ -79,25 +78,128 @@
         }
 
         /// <summary>
-        /// ログとマッチングする
+        /// Windowをリフレッシュする
         /// </summary>
-        /// <param name="logLines">ログ行</param>
-        public static void Match(
-            string[] logLines)
+        public static void Refresh()
         {
             var telops = OnePointTelopTable.Default.EnabledTable;
             var player = FF14PluginHelper.GetPlayer();
 
             foreach (var telop in telops)
             {
-                telop.BeginEdit();
-
-                var regex = telop.Regex as Regex;
-                var regexToHide = telop.RegexToHide as Regex;
-                var isForceHide = false;
-
-                foreach (var log in logLines)
+                try
                 {
+                    telop.BeginEdit();
+
+                    var regex = telop.Regex as Regex;
+
+                    // ディレイ時間が経過した？
+                    if (!telop.Delayed &&
+                        telop.MatchDateTime > DateTime.MinValue &&
+                        telop.Delay > 0)
+                    {
+                        var delayed = telop.MatchDateTime.AddSeconds(telop.Delay);
+                        if (DateTime.Now >= delayed)
+                        {
+                            telop.Delayed = true;
+                            SoundController.Default.Play(telop.DelaySound);
+                            var tts = regex != null && !string.IsNullOrWhiteSpace(telop.DelayTextToSpeak) ?
+                                regex.Replace(telop.MatchedLog, telop.DelayTextToSpeak) :
+                                telop.DelayTextToSpeak;
+                            SoundController.Default.Play(tts);
+                        }
+                    }
+
+                    var w = telopWindowList.Where(x => x.DataSource.ID == telop.ID).FirstOrDefault();
+                    if (w == null)
+                    {
+                        w = new OnePointTelopWindow()
+                        {
+                            Title = "OnePointTelop - " + telop.Title,
+                            DataSource = telop
+                        };
+
+                        if (Settings.Default.ClickThroughEnabled)
+                        {
+                            w.ToTransparentWindow();
+                        }
+
+                        w.Opacity = 0;
+                        w.Show();
+
+                        telopWindowList.Add(w);
+                    }
+
+                    w.Refresh();
+
+                    // telopの位置を保存する
+                    if (DateTime.Now.Second == 0)
+                    {
+                        telop.Left = w.Left;
+                        telop.Top = w.Top;
+                        OnePointTelopTable.Default.Save();
+                    }
+
+                    if (Settings.Default.OverlayVisible &&
+                        Settings.Default.TelopAlwaysVisible)
+                    {
+                        w.ShowOverlay();
+                        continue;
+                    }
+
+                    if (telop.MatchDateTime > DateTime.MinValue)
+                    {
+                        if (telop.MatchDateTime.AddSeconds(telop.Delay) <= DateTime.Now &&
+                            DateTime.Now <= telop.MatchDateTime.AddSeconds(telop.Delay + telop.DisplayTime))
+                        {
+                            w.ShowOverlay();
+                        }
+                        else
+                        {
+                            w.HideOverlay();
+                            telop.MatchDateTime = DateTime.MinValue;
+                            telop.MessageReplaced = string.Empty;
+                        }
+
+                        if (telop.ForceHide)
+                        {
+                            w.HideOverlay();
+                            telop.MatchDateTime = DateTime.MinValue;
+                            telop.MessageReplaced = string.Empty;
+                        }
+                    }
+                    else
+                    {
+                        w.HideOverlay();
+                        telop.MessageReplaced = string.Empty;
+                    }
+                }
+                finally
+                {
+                    telop.EndEdit();
+                }
+            }   // end loop telops
+        }
+
+        /// <summary>
+        /// ログとマッチングする
+        /// </summary>
+        /// <param name="logLine">ログ行</param>
+        public static void Match(
+            string logLine)
+        {
+            var telops = OnePointTelopTable.Default.EnabledTable;
+            var player = FF14PluginHelper.GetPlayer();
+
+            foreach (var telop in telops)
+            {
+                try
+                {
+                    telop.BeginEdit();
+
+                    var regex = telop.Regex as Regex;
+                    var regexToHide = telop.RegexToHide as Regex;
+
                     // 通常マッチ
                     if (regex == null)
                     {
@@ -107,7 +209,7 @@
 
                         if (!string.IsNullOrWhiteSpace(keyword))
                         {
-                            if (log.ToUpper().Contains(
+                            if (logLine.ToUpper().Contains(
                                 keyword.ToUpper()))
                             {
                                 if (!telop.AddMessageEnabled)
@@ -123,7 +225,8 @@
 
                                 telop.MatchDateTime = DateTime.Now;
                                 telop.Delayed = false;
-                                telop.MatchedLog = log;
+                                telop.ForceHide = false;
+                                telop.MatchedLog = logLine;
 
                                 SoundController.Default.Play(telop.MatchSound);
                                 SoundController.Default.Play(telop.MatchTextToSpeak);
@@ -134,27 +237,28 @@
                     // 正規表現マッチ
                     if (regex != null)
                     {
-                        if (regex.IsMatch(log))
+                        if (regex.IsMatch(logLine))
                         {
                             if (!telop.AddMessageEnabled)
                             {
-                                telop.MessageReplaced = regex.Replace(log, telop.Message);
+                                telop.MessageReplaced = regex.Replace(logLine, telop.Message);
                             }
                             else
                             {
                                 telop.MessageReplaced += string.IsNullOrWhiteSpace(telop.MessageReplaced) ?
-                                    regex.Replace(log, telop.Message) :
-                                    Environment.NewLine + regex.Replace(log, telop.Message);
+                                    regex.Replace(logLine, telop.Message) :
+                                    Environment.NewLine + regex.Replace(logLine, telop.Message);
                             }
 
                             telop.MatchDateTime = DateTime.Now;
                             telop.Delayed = false;
-                            telop.MatchedLog = log;
+                            telop.ForceHide = false;
+                            telop.MatchedLog = logLine;
 
                             SoundController.Default.Play(telop.MatchSound);
                             if (!string.IsNullOrWhiteSpace(telop.MatchTextToSpeak))
                             {
-                                var tts = regex.Replace(log, telop.MatchTextToSpeak);
+                                var tts = regex.Replace(logLine, telop.MatchTextToSpeak);
                                 SoundController.Default.Play(tts);
                             }
                         }
@@ -169,10 +273,10 @@
 
                         if (!string.IsNullOrWhiteSpace(keyword))
                         {
-                            if (log.ToUpper().Contains(
+                            if (logLine.ToUpper().Contains(
                                 keyword.ToUpper()))
                             {
-                                isForceHide = true;
+                                telop.ForceHide = true;
                             }
                         }
                     }
@@ -180,96 +284,17 @@
                     // 正規表現マッチ(強制非表示)
                     if (regexToHide != null)
                     {
-                        if (regexToHide.IsMatch(log))
+                        if (regexToHide.IsMatch(logLine))
                         {
-                            isForceHide = true;
+                            telop.ForceHide = true;
                         }
                     }
-                }   // end loop logLines
-
-                // ディレイ時間が経過した？
-                if (!telop.Delayed &&
-                    telop.MatchDateTime > DateTime.MinValue &&
-                    telop.Delay > 0)
-                {
-                    var delayed = telop.MatchDateTime.AddSeconds(telop.Delay);
-                    if (DateTime.Now >= delayed)
-                    {
-                        telop.Delayed = true;
-                        SoundController.Default.Play(telop.DelaySound);
-                        var tts = regex != null && !string.IsNullOrWhiteSpace(telop.DelayTextToSpeak) ?
-                            regex.Replace(telop.MatchedLog, telop.DelayTextToSpeak) :
-                            telop.DelayTextToSpeak;
-                        SoundController.Default.Play(tts);
-                    }
                 }
-
-                var w = telopWindowList.Where(x => x.DataSource.ID == telop.ID).FirstOrDefault();
-                if (w == null)
+                finally
                 {
-                    w = new OnePointTelopWindow()
-                    {
-                        Title = "OnePointTelop - " + telop.Title,
-                        DataSource = telop
-                    };
-
-                    if (Settings.Default.ClickThroughEnabled)
-                    {
-                        w.ToTransparentWindow();
-                    }
-
-                    w.Opacity = 0;
-                    w.Show();
-
-                    telopWindowList.Add(w);
+                    telop.EndEdit();
                 }
-
-                w.Refresh();
-
-                // telopの位置を保存する
-                if (DateTime.Now.Second == 0)
-                {
-                    telop.Left = w.Left;
-                    telop.Top = w.Top;
-                    OnePointTelopTable.Default.Save();
-                }
-
-                if (Settings.Default.OverlayVisible &&
-                    Settings.Default.TelopAlwaysVisible)
-                {
-                    w.ShowOverlay();
-                    continue;
-                }
-
-                if (telop.MatchDateTime > DateTime.MinValue)
-                {
-                    if (telop.MatchDateTime.AddSeconds(telop.Delay) <= DateTime.Now &&
-                        DateTime.Now <= telop.MatchDateTime.AddSeconds(telop.Delay + telop.DisplayTime))
-                    {
-                        w.ShowOverlay();
-                    }
-                    else
-                    {
-                        w.HideOverlay();
-                        telop.MatchDateTime = DateTime.MinValue;
-                        telop.MessageReplaced = string.Empty;
-                    }
-
-                    if (isForceHide)
-                    {
-                        w.HideOverlay();
-                        telop.MatchDateTime = DateTime.MinValue;
-                        telop.MessageReplaced = string.Empty;
-                    }
-                }
-                else
-                {
-                    w.HideOverlay();
-                    telop.MessageReplaced = string.Empty;
-                }
-
-                telop.EndEdit();
-            }   // end loop telops
+            }
         }
     }
 }

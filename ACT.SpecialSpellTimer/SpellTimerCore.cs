@@ -2,10 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Windows;
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
@@ -230,21 +228,75 @@
             // タイマの間隔を標準に戻す
             this.RefreshInterval = Settings.Default.RefreshInterval;
 
-            // ログを取り出す
-            var logLines = this.LogBuffer.GetLogLines();
+            // スペルを更新する
+            foreach (var spell in spellArray)
+            {
+                try
+                {
+                    spell.BeginEdit();
 
-            // テロップとマッチングする
-            OnePointTelopController.Match(
-                logLines);
+                    var regex = spell.Regex as Regex;
 
-            // スペルリストとマッチングする
-            this.MatchSpells(
-                spellArray,
-                logLines);
+                    // Repeat対象のSpellを更新する
+                    if (spell.RepeatEnabled &&
+                        spell.MatchDateTime > DateTime.MinValue)
+                    {
+                        if (DateTime.Now >= spell.MatchDateTime.AddSeconds(spell.RecastTime))
+                        {
+                            spell.MatchDateTime = DateTime.Now;
+                            spell.OverDone = false;
+                            spell.TimeupDone = false;
+                        }
+                    }
 
-            // コマンドとマッチングする
-            TextCommandController.MatchCommand(
-                logLines);
+                    // ｎ秒後のSoundを再生する
+                    if (spell.OverTime > 0 &&
+                        !spell.OverDone &&
+                        spell.MatchDateTime > DateTime.MinValue)
+                    {
+                        var over = spell.MatchDateTime.AddSeconds(spell.OverTime);
+
+                        if (DateTime.Now >= over)
+                        {
+                            this.Play(spell.OverSound);
+                            if (!string.IsNullOrWhiteSpace(spell.OverTextToSpeak))
+                            {
+                                var tts = spell.RegexEnabled && regex != null ?
+                                    regex.Replace(spell.MatchedLog, spell.OverTextToSpeak) :
+                                    spell.OverTextToSpeak;
+                                this.Play(tts);
+                            }
+
+                            spell.OverDone = true;
+                        }
+                    }
+
+                    // リキャスト完了のSoundを再生する
+                    if (spell.RecastTime > 0 &&
+                        !spell.TimeupDone &&
+                        spell.MatchDateTime > DateTime.MinValue)
+                    {
+                        var recast = spell.MatchDateTime.AddSeconds(spell.RecastTime);
+                        if (DateTime.Now >= recast)
+                        {
+                            this.Play(spell.TimeupSound);
+                            if (!string.IsNullOrWhiteSpace(spell.TimeupTextToSpeak))
+                            {
+                                var tts = spell.RegexEnabled && regex != null ?
+                                    regex.Replace(spell.MatchedLog, spell.TimeupTextToSpeak) :
+                                    spell.TimeupTextToSpeak;
+                                this.Play(tts);
+                            }
+
+                            spell.TimeupDone = true;
+                        }
+                    }
+                }
+                finally
+                {
+                    spell.EndEdit();
+                }
+            }
 
             // オーバーレイが非表示？
             if (!Settings.Default.OverlayVisible)
@@ -253,6 +305,9 @@
                 OnePointTelopController.HideTelops();
                 return;
             }
+
+            // テロップWindowを表示する
+            OnePointTelopController.Refresh();
 
             // Windowを表示する
             var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
@@ -295,22 +350,21 @@
         /// <summary>
         /// Spellをマッチングする
         /// </summary>
-        /// <param name="spells">Spell</param>
-        /// <param name="logLines">ログ</param>
-        private void MatchSpells(
-            SpellTimerDataSet.SpellTimerRow[] spells,
-            string[] logLines)
+        /// <param name="logLine">ログ</param>
+        public void Match(
+            string logLine)
         {
+            var spells = SpellTimerTable.EnabledTable;
+
             // Spellを舐める
             foreach (var spell in spells)
             {
-                spell.BeginEdit();
-
-                var regex = spell.Regex as Regex;
-
-                // マッチする？
-                foreach (var logLine in logLines)
+                try
                 {
+                    spell.BeginEdit();
+
+                    var regex = spell.Regex as Regex;
+
                     // 正規表現が無効？
                     if (!spell.RegexEnabled ||
                         regex == null)
@@ -374,63 +428,10 @@
                         }
                     }
                 }
-
-                // Repeat対象のSpellを更新する
-                if (spell.RepeatEnabled &&
-                    spell.MatchDateTime > DateTime.MinValue)
+                finally
                 {
-                    if (DateTime.Now >= spell.MatchDateTime.AddSeconds(spell.RecastTime))
-                    {
-                        spell.MatchDateTime = DateTime.Now;
-                        spell.OverDone = false;
-                        spell.TimeupDone = false;
-                    }
+                    spell.EndEdit();
                 }
-
-                // ｎ秒後のSoundを再生する
-                if (spell.OverTime > 0 &&
-                    !spell.OverDone &&
-                    spell.MatchDateTime > DateTime.MinValue)
-                {
-                    var over = spell.MatchDateTime.AddSeconds(spell.OverTime);
-
-                    if (DateTime.Now >= over)
-                    {
-                        this.Play(spell.OverSound);
-                        if (!string.IsNullOrWhiteSpace(spell.OverTextToSpeak))
-                        {
-                            var tts = spell.RegexEnabled && regex != null ?
-                                regex.Replace(spell.MatchedLog, spell.OverTextToSpeak) :
-                                spell.OverTextToSpeak;
-                            this.Play(tts);
-                        }
-
-                        spell.OverDone = true;
-                    }
-                }
-
-                // リキャスト完了のSoundを再生する
-                if (spell.RecastTime > 0 &&
-                    !spell.TimeupDone &&
-                    spell.MatchDateTime > DateTime.MinValue)
-                {
-                    var recast = spell.MatchDateTime.AddSeconds(spell.RecastTime);
-                    if (DateTime.Now >= recast)
-                    {
-                        this.Play(spell.TimeupSound);
-                        if (!string.IsNullOrWhiteSpace(spell.TimeupTextToSpeak))
-                        {
-                            var tts = spell.RegexEnabled && regex != null ?
-                                regex.Replace(spell.MatchedLog, spell.TimeupTextToSpeak) :
-                                spell.TimeupTextToSpeak;
-                            this.Play(tts);
-                        }
-
-                        spell.TimeupDone = true;
-                    }
-                }
-
-                spell.EndEdit();
             }
         }
 

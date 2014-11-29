@@ -195,6 +195,7 @@
                 row.RegexPattern = string.Empty;
                 row.RegexToHide = null;
                 row.RegexPatternToHide = string.Empty;
+                row.ForceHide = false;
 
                 row.MatchSound = !string.IsNullOrWhiteSpace(row.MatchSound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.MatchSound)) :
@@ -274,6 +275,7 @@
                 item.RegexPattern = string.Empty;
                 item.RegexToHide = null;
                 item.RegexPatternToHide = string.Empty;
+                item.ForceHide = false;
 
                 item.MatchSound = !string.IsNullOrWhiteSpace(item.MatchSound) ?
                     Path.GetFileName(item.MatchSound) :
