@@ -114,19 +114,6 @@
                 });
             }
 
-            if (Settings.Default.EnabledPartyMemberPlaceholder)
-            {
-                if (ptmember != null)
-                {
-                    for (int i = 0; i < ptmember.Count; i++)
-                    {
-                        logLine = logLine.Replace(
-                            ptmember[i],
-                            "<" + (i + 2).ToString() + ">");
-                    }
-                }
-            }
-
             lock (this.buffer)
             {
                 this.buffer.Add(logLine);
