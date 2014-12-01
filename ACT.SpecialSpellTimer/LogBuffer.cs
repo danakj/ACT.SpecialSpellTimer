@@ -278,7 +278,7 @@
 
                 if (pet != null)
                 {
-                    petid = Convert.ToString((long)((ulong)pet.ID), 16);
+                    petid = Convert.ToString((long)((ulong)pet.ID), 16).ToUpper();
                 }
             }
         }
