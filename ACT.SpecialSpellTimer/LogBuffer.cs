@@ -128,7 +128,7 @@
                 {
                     Task.Run(() =>
                     {
-                        Thread.Sleep(3 * 1000);
+                        Thread.Sleep(5 * 1000);
                         RefreshPetID();
                     }).ContinueWith((t) =>
                     {
