@@ -274,7 +274,7 @@
 
                 if (pet != null)
                 {
-                    petid = pet.ID.ToString("x8");
+                    petid = Convert.ToString((long)((ulong)pet.ID), 16);
                 }
             }
         }
