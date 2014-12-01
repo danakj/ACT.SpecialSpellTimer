@@ -7,6 +7,7 @@
     using System.Reflection;
 
     using ACT.SpecialSpellTimer.Utility;
+    using ACT.TTSInterface;
     using Advanced_Combat_Tracker;
 
     /// <summary>
@@ -44,7 +45,7 @@
         /// <summary>
         /// TTSYukkuriプラグインinstance
         /// </summary>
-        private object ttsYukkuriPlugin;
+        private ITTS ttsYukkuriPlugin;
 
         /// <summary>
         /// ゆっくりが有効かどうか？
@@ -118,7 +119,7 @@
                             if (item.pluginFile.Name.ToUpper() == "ACT.TTSYukkuri.dll".ToUpper() &&
                                 item.lblPluginStatus.Text.ToUpper() == "Plugin Started".ToUpper())
                             {
-                                this.ttsYukkuriPlugin = item.pluginObj;
+                                this.ttsYukkuriPlugin = item.pluginObj as ITTS;
                                 break;
                             }
                         }
@@ -144,12 +145,7 @@
 
                 if (this.EnabledYukkuri)
                 {
-                    var speak = this.ttsYukkuriPlugin.GetType().InvokeMember(
-                        "Speak",
-                        BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod,
-                        null,
-                        this.ttsYukkuriPlugin,
-                        new object[] { source });
+                    this.ttsYukkuriPlugin.Speak(source);
                 }
                 else
                 {

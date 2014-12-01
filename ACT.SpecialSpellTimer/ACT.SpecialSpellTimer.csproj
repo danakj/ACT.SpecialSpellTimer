@@ -33,6 +33,9 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ACT.TTSInterface">
+      <HintPath>..\ACT.TTSInterface.dll</HintPath>
+    </Reference>
     <Reference Include="Advanced Combat Tracker">
       <HintPath>..\..\ACTv3\Advanced Combat Tracker.exe</HintPath>
       <Private>False</Private>

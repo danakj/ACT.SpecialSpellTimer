@@ -121,16 +121,20 @@
             }
 
             // 召喚した？
-            if (logLine.Contains("の「サモン"))
+            var player = FF14PluginHelper.GetPlayer();
+            if (player != null)
             {
-                Task.Run(() =>
+                if (logLine.Contains(player.Name + "の「サモン"))
                 {
-                    Thread.Sleep(3 * 1000);
-                    RefreshPetID();
-                }).ContinueWith((t) =>
-                {
-                    t.Dispose();
-                });
+                    Task.Run(() =>
+                    {
+                        Thread.Sleep(3 * 1000);
+                        RefreshPetID();
+                    }).ContinueWith((t) =>
+                    {
+                        t.Dispose();
+                    });
+                }
             }
 
             lock (this.buffer)
