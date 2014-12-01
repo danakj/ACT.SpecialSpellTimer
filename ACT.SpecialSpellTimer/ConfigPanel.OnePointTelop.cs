@@ -112,6 +112,15 @@
                 }
             };
 
+            this.TelopFontOutlineColorButton.Click += (s1, e1) =>
+            {
+                this.ColorDialog.Color = this.TelopFontOutlineColorButton.BackColor;
+                if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
+                {
+                    this.TelopFontOutlineColorButton.BackColor = this.ColorDialog.Color;
+                }
+            };
+
             this.TelopSelectJobButton.Click += (s1, e1) =>
             {
                 var src = this.TelopDetailGroupBox.Tag as OnePointTelop;
@@ -211,6 +220,7 @@
             nr.DisplayTime = 3;
             nr.BackColor = Color.Transparent.ToHTML();
             nr.FontColor = Settings.Default.FontColor.ToHTML();
+            nr.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
             nr.FontFamily = Settings.Default.Font.Name;
             nr.FontSize = Settings.Default.Font.Size;
             nr.FontStyle = (int)Settings.Default.Font.Style;
@@ -237,6 +247,7 @@
                     nr.ProgressBarEnabled = baseRow.ProgressBarEnabled;
                     nr.BackColor = baseRow.BackColor;
                     nr.FontColor = baseRow.FontColor;
+                    nr.FontOutlineColor = baseRow.FontOutlineColor;
                     nr.FontFamily = baseRow.FontFamily;
                     nr.FontSize = baseRow.FontSize;
                     nr.FontStyle = baseRow.FontStyle;
@@ -300,6 +311,7 @@
                 src.ProgressBarEnabled = this.TelopProgressBarEnabledCheckBox.Checked;
                 src.BackColor = this.TelopSampleLabel.BackColor.ToHTML();
                 src.FontColor = this.TelopSampleLabel.ForeColor.ToHTML();
+                src.FontOutlineColor = this.TelopFontOutlineColorButton.BackColor.ToHTML();
                 src.FontFamily = this.TelopSampleLabel.Font.Name;
                 src.FontSize = this.TelopSampleLabel.Font.Size;
                 src.FontStyle = (int)this.TelopSampleLabel.Font.Style;
@@ -429,6 +441,9 @@
                 this.TelopSampleLabel.BackColor == Color.Transparent;
             this.TelopBackColorButton.Enabled =
                 !this.TelopBackColorTranceparentCheckBox.Checked;
+            this.TelopFontOutlineColorButton.BackColor = string.IsNullOrWhiteSpace(src.FontOutlineColor) ?
+                Settings.Default.FontOutlineColor :
+                src.FontOutlineColor.FromHTML();
 
             this.TelopLeftNumericUpDown.Value = (int)src.Left;
             this.TelopLeftNumericUpDown.Tag = (int)src.Left;

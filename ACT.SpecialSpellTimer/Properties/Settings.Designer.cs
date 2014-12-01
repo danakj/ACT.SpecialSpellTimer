@@ -37,7 +37,7 @@ namespace ACT.SpecialSpellTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("185, 5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("190, 8")]
         public global::System.Drawing.Size ProgressBarSize {
             get {
                 return ((global::System.Drawing.Size)(this["ProgressBarSize"]));
@@ -49,7 +49,7 @@ namespace ACT.SpecialSpellTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("OrangeRed")]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
         public global::System.Drawing.Color ProgressBarColor {
             get {
                 return ((global::System.Drawing.Color)(this["ProgressBarColor"]));
@@ -61,7 +61,7 @@ namespace ACT.SpecialSpellTimer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("メイリオ, 9.75pt, style=Bold")]
+        [global::System.Configuration.DefaultSettingValueAttribute("メイリオ, 11.25pt, style=Bold")]
         public global::System.Drawing.Font Font {
             get {
                 return ((global::System.Drawing.Font)(this["Font"]));
@@ -200,6 +200,18 @@ namespace ACT.SpecialSpellTimer.Properties {
             }
             set {
                 this["PlayerInfoRefreshInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("22, 120, 157")]
+        public global::System.Drawing.Color FontOutlineColor {
+            get {
+                return ((global::System.Drawing.Color)(this["FontOutlineColor"]));
+            }
+            set {
+                this["FontOutlineColor"] = value;
             }
         }
     }

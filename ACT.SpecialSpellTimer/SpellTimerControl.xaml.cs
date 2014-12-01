@@ -51,6 +51,11 @@
         public string FontColor { get; set; }
 
         /// <summary>
+        /// FontOutlineの色
+        /// </summary>
+        public string FontOutlineColor { get; set; }
+
+        /// <summary>
         /// 描画を更新する
         /// </summary>
         public void Refresh()
@@ -60,9 +65,16 @@
             var tb = default(OutlineTextBlock);
             var font = Settings.Default.Font;
             var fontBrush = new SolidColorBrush(Settings.Default.FontColor.ToWPF());
+            var fontOutline = new SolidColorBrush(Settings.Default.FontOutlineColor.ToWPF());
+
             if (!string.IsNullOrWhiteSpace(this.FontColor))
             {
                 fontBrush.Color = this.FontColor.FromHTMLWPF();
+            }
+
+            if (!string.IsNullOrWhiteSpace(this.FontOutlineColor))
+            {
+                fontOutline.Color = this.FontOutlineColor.FromHTMLWPF();
             }
 
             // Titleを描画する
@@ -73,8 +85,8 @@
             tb.FontStyle = font.ToFontStyleWPF();
             tb.FontWeight = font.ToFontWeightWPF();
             tb.Fill = fontBrush;
-            tb.Stroke = new SolidColorBrush(Color.FromRgb(0x46, 0x86, 0xa9));
-            tb.StrokeThickness = 0.15d;
+            tb.Stroke = fontOutline;
+            tb.StrokeThickness = 0.2d;
 
             // リキャスト時間を描画する
             tb = this.RecastTimeTextBlock;
@@ -86,8 +98,8 @@
             tb.FontStyle = font.ToFontStyleWPF();
             tb.FontWeight = font.ToFontWeightWPF();
             tb.Fill = fontBrush;
-            tb.Stroke = new SolidColorBrush(Color.FromRgb(0x46, 0x86, 0xa9));
-            tb.StrokeThickness = 0.15d;
+            tb.Stroke = fontOutline;
+            tb.StrokeThickness = 0.2d;
 
             // ProgressBarを描画する
             var foreBrush = new SolidColorBrush(Settings.Default.ProgressBarColor.ToWPF());
@@ -120,12 +132,22 @@
             Canvas.SetLeft(backRect, 0);
             Canvas.SetTop(backRect, 0);
 
+            var outlineRect = new Rectangle();
+            outlineRect.Stroke = fontOutline;
+            outlineRect.Width = Settings.Default.ProgressBarSize.Width;
+            outlineRect.Height = foreRect.Height;
+            outlineRect.RadiusX = 2.0d;
+            outlineRect.RadiusY = 2.0d;
+            Canvas.SetLeft(outlineRect, 0);
+            Canvas.SetTop(outlineRect, 0);
+
             this.ProgressBarCanvas.Width = backRect.Width;
             this.ProgressBarCanvas.Height = backRect.Height;
 
             this.ProgressBarCanvas.Children.Clear();
             this.ProgressBarCanvas.Children.Add(backRect);
             this.ProgressBarCanvas.Children.Add(foreRect);
+            this.ProgressBarCanvas.Children.Add(outlineRect);
         }
     }
 }

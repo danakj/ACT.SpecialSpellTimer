@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -22,6 +23,13 @@
             this.InitializeComponent();
 
             this.Load += this.ConfigPanel_Load;
+
+            // フォントアウトライン用のデフォルト色を追加しておく
+            this.ColorDialog.CustomColors = new int[]
+            {
+                ColorTranslator.ToOle(Color.GhostWhite),
+                ColorTranslator.ToOle(Color.FromArgb(22, 120, 157))
+            };
         }
 
         /// <summary>
@@ -124,6 +132,15 @@
                 }
             };
 
+            this.OneFontOutlineColorButton.Click += (s1, e1) =>
+            {
+                this.ColorDialog.Color = this.OneFontOutlineColorButton.BackColor;
+                if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
+                {
+                    this.OneFontOutlineColorButton.BackColor = this.ColorDialog.Color;
+                }
+            };
+
             this.SelectJobButton.Click += (s1, e1) =>
             {
                 var src = this.DetailGroupBox.Tag as SpellTimer;
@@ -163,6 +180,7 @@
                 nr.ProgressBarVisible = true;
                 nr.BarColor = Settings.Default.ProgressBarColor.ToHTML();
                 nr.FontColor = Settings.Default.FontColor.ToHTML();
+                nr.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
 
                 // 現在選択しているノードの情報を一部コピーする
                 if (this.SpellTimerTreeView.SelectedNode != null)
@@ -183,6 +201,7 @@
                         nr.IsReverse = baseRow.IsReverse;
                         nr.BarColor = baseRow.BarColor;
                         nr.FontColor = baseRow.FontColor;
+                        nr.FontOutlineColor = baseRow.FontOutlineColor;
                         nr.DontHide = baseRow.DontHide;
                     }
                 }
@@ -287,6 +306,7 @@
                     src.IsReverse = this.IsReverseCheckBox.Checked;
                     src.BarColor = this.SampleLabel.BackColor.ToHTML();
                     src.FontColor = this.SampleLabel.ForeColor.ToHTML();
+                    src.FontOutlineColor = this.OneFontOutlineColorButton.BackColor.ToHTML();
                     src.DontHide = this.DontHideCheckBox.Checked;
 
                     SpellTimerTable.Save();
@@ -422,6 +442,9 @@
             this.SampleLabel.ForeColor = string.IsNullOrWhiteSpace(src.FontColor) ?
                 Settings.Default.FontColor :
                 src.FontColor.FromHTML();
+            this.OneFontOutlineColorButton.BackColor = string.IsNullOrWhiteSpace(src.FontOutlineColor) ?
+                Settings.Default.FontOutlineColor :
+                src.FontOutlineColor.FromHTML();
             this.SampleLabel.Font = Settings.Default.Font;
             this.DontHideCheckBox.Checked = src.DontHide;
 

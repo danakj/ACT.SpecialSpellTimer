@@ -50,8 +50,9 @@
 
                 // 設定Panelを追加する
                 ConfigPanel = new ConfigPanel();
-                ConfigPanel.Dock = DockStyle.Fill;
                 pluginScreenSpace.Controls.Add(ConfigPanel);
+                ConfigPanel.Size = pluginScreenSpace.Size;
+                ConfigPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right;
 
                 // 本体を開始する
                 SpellTimerCore.Default.Begin();

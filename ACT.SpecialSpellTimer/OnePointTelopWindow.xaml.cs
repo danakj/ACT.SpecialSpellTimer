@@ -109,12 +109,15 @@
                     (System.Drawing.FontStyle)this.DataSource.FontStyle);
 
                 var fillBrush = new SolidColorBrush(this.DataSource.FontColor.FromHTML().ToWPF());
+                var strokeBrush = string.IsNullOrWhiteSpace(this.DataSource.FontOutlineColor) ?
+                    new SolidColorBrush(Settings.Default.FontOutlineColor.ToWPF()) :
+                    new SolidColorBrush(this.DataSource.FontOutlineColor.FromHTMLWPF());
                 this.MessageTextBlock.FontFamily = font.ToFontFamilyWPF();
                 this.MessageTextBlock.FontSize = font.ToFontSizeWPF();
                 this.MessageTextBlock.FontStyle = font.ToFontStyleWPF();
                 this.MessageTextBlock.FontWeight = font.ToFontWeightWPF();
                 this.MessageTextBlock.Fill = fillBrush;
-                this.MessageTextBlock.Stroke = new SolidColorBrush(Color.FromRgb(0x46, 0x86, 0xa9));
+                this.MessageTextBlock.Stroke = strokeBrush;
                 this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 2.5d);
 
                 this.Background = new SolidColorBrush(this.DataSource.BackColor.FromHTML().ToWPF());
@@ -183,12 +186,22 @@
                             Canvas.SetLeft(backRect, 0);
                             Canvas.SetTop(backRect, 0);
 
+                            var outlineRect = new Rectangle();
+                            outlineRect.Stroke = strokeBrush;
+                            outlineRect.Width = this.MessageTextBlock.ActualWidth;
+                            outlineRect.Height = Settings.Default.ProgressBarSize.Height;
+                            outlineRect.RadiusX = 2.0d;
+                            outlineRect.RadiusY = 2.0d;
+                            Canvas.SetLeft(outlineRect, 0);
+                            Canvas.SetTop(outlineRect, 0);
+
                             this.ProgressBarCanvas.Width = backRect.Width;
                             this.ProgressBarCanvas.Height = backRect.Height;
 
                             this.ProgressBarCanvas.Children.Clear();
                             this.ProgressBarCanvas.Children.Add(backRect);
                             this.ProgressBarCanvas.Children.Add(barRect);
+                            this.ProgressBarCanvas.Children.Add(outlineRect);
                         }),
                         DispatcherPriority.Loaded);
 

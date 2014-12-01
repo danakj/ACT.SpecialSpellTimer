@@ -302,6 +302,7 @@
             this.BackColor = string.Empty;
             this.FontFamily = string.Empty;
             this.FontColor = string.Empty;
+            this.FontOutlineColor = string.Empty;
             this.MatchedLog = string.Empty;
             this.MessageReplaced = string.Empty;
             this.RegexPattern = string.Empty;
@@ -326,6 +327,7 @@
         public float FontSize { get; set; }
         public int FontStyle { get; set; }
         public string FontColor { get; set; }
+        public string FontOutlineColor { get; set; }
         public bool RegexEnabled { get; set; }
         public double Left { get; set; }
         public double Top { get; set; }

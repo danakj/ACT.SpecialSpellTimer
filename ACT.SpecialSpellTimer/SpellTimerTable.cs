@@ -261,6 +261,7 @@
             this.TimeupSound = string.Empty;
             this.TimeupTextToSpeak = string.Empty;
             this.FontColor = string.Empty;
+            this.FontOutlineColor = string.Empty;
             this.BarColor = string.Empty;
             this.JobFilter = string.Empty;
             this.SpellTitleReplaced = string.Empty;
@@ -285,6 +286,7 @@
         public bool TimeupHide { get; set; }
         public bool IsReverse { get; set; }
         public string FontColor { get; set; }
+        public string FontOutlineColor { get; set; }
         public string BarColor { get; set; }
         public bool DontHide { get; set; }
         public bool RegexEnabled { get; set; }

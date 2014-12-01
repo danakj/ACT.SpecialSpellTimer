@@ -134,6 +134,7 @@
                 c.IsReverse = spell.IsReverse;
                 c.BarColor = spell.BarColor;
                 c.FontColor = spell.FontColor;
+                c.FontOutlineColor = spell.FontOutlineColor;
                 c.RecastTime = 0;
                 c.Progress = 1.0d;
 

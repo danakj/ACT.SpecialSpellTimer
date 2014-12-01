@@ -6,13 +6,13 @@
       <Value Profile="(Default)">2000-01-01</Value>
     </Setting>
     <Setting Name="ProgressBarSize" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">185, 5</Value>
+      <Value Profile="(Default)">190, 8</Value>
     </Setting>
     <Setting Name="ProgressBarColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">OrangeRed</Value>
+      <Value Profile="(Default)">White</Value>
     </Setting>
     <Setting Name="Font" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">メイリオ, 9.75pt, style=Bold</Value>
+      <Value Profile="(Default)">メイリオ, 11.25pt, style=Bold</Value>
     </Setting>
     <Setting Name="FontColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">White</Value>
@@ -46,6 +46,9 @@
     </Setting>
     <Setting Name="PlayerInfoRefreshInterval" Type="System.Double" Scope="User">
       <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="FontOutlineColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">22, 120, 157</Value>
     </Setting>
   </Settings>
 </SettingsFile>
