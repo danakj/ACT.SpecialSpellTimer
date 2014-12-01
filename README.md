@@ -12,6 +12,7 @@ ACT.SpecialSpellTimer
 --------------
 resources  
 ACT.SpecialSpellTimer.dll  
+ACT.TTSInterface.dll  
 をACTのインストールディレクトリにコピーします  
 その後、プラグインとしてACT.SpecialSpellTimer.dllを追加してください  
   
