@@ -57,7 +57,7 @@
         {
             this.Width = Settings.Default.ProgressBarSize.Width;
 
-            var tb = default(TextBlock);
+            var tb = default(OutlineTextBlock);
             var font = Settings.Default.Font;
             var fontBrush = new SolidColorBrush(Settings.Default.FontColor.ToWPF());
             if (!string.IsNullOrWhiteSpace(this.FontColor))
@@ -72,7 +72,9 @@
             tb.FontSize = font.ToFontSizeWPF();
             tb.FontStyle = font.ToFontStyleWPF();
             tb.FontWeight = font.ToFontWeightWPF();
-            tb.Foreground = fontBrush;
+            tb.Fill = fontBrush;
+            tb.Stroke = new SolidColorBrush(Color.FromRgb(0x46, 0x86, 0xa9));
+            tb.StrokeThickness = 0.15d;
 
             // リキャスト時間を描画する
             tb = this.RecastTimeTextBlock;
@@ -83,7 +85,9 @@
             tb.FontSize = font.ToFontSizeWPF();
             tb.FontStyle = font.ToFontStyleWPF();
             tb.FontWeight = font.ToFontWeightWPF();
-            tb.Foreground = fontBrush;
+            tb.Fill = fontBrush;
+            tb.Stroke = new SolidColorBrush(Color.FromRgb(0x46, 0x86, 0xa9));
+            tb.StrokeThickness = 0.15d;
 
             // ProgressBarを描画する
             var foreBrush = new SolidColorBrush(Settings.Default.ProgressBarColor.ToWPF());

@@ -1,8 +1,13 @@
-﻿<Window x:Class="ACT.SpecialSpellTimer.SpellTimerListWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SpellTimerListWindow" SizeToContent="WidthAndHeight"
-        AllowsTransparency="True" WindowStyle="None" Opacity="1" Background="{x:Null}">
+﻿<Window 
+    x:Class="ACT.SpecialSpellTimer.SpellTimerListWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="SpellTimerListWindow" SizeToContent="WidthAndHeight"
+    AllowsTransparency="True" WindowStyle="None" Opacity="1" Background="{x:Null}"
+    TextOptions.TextFormattingMode="Display"
+    TextOptions.TextHintingMode="Animated"
+    TextOptions.TextRenderingMode="ClearType">
+
     <Grid Name="BaseGrid">
     </Grid>
 </Window>

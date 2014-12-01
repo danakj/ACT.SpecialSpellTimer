@@ -108,12 +108,16 @@
                     this.DataSource.FontSize,
                     (System.Drawing.FontStyle)this.DataSource.FontStyle);
 
+                var fillBrush = new SolidColorBrush(this.DataSource.FontColor.FromHTML().ToWPF());
                 this.MessageTextBlock.FontFamily = font.ToFontFamilyWPF();
                 this.MessageTextBlock.FontSize = font.ToFontSizeWPF();
                 this.MessageTextBlock.FontStyle = font.ToFontStyleWPF();
                 this.MessageTextBlock.FontWeight = font.ToFontWeightWPF();
-                this.MessageTextBlock.Foreground = new SolidColorBrush(this.DataSource.FontColor.FromHTML().ToWPF());
-                this.MessageTextBlock.Background = new SolidColorBrush(this.DataSource.BackColor.FromHTML().ToWPF());
+                this.MessageTextBlock.Fill = fillBrush;
+                this.MessageTextBlock.Stroke = new SolidColorBrush(Color.FromRgb(0x46, 0x86, 0xa9));
+                this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 2.5d);
+
+                this.Background = new SolidColorBrush(this.DataSource.BackColor.FromHTML().ToWPF());
 
                 // プログレスバーを表示する？
                 if (this.DataSource.ProgressBarEnabled &&

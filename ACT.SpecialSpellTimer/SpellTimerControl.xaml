@@ -1,10 +1,16 @@
-﻿<UserControl x:Class="ACT.SpecialSpellTimer.SpellTimerControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="32" d:DesignWidth="300">
+﻿<UserControl 
+    xmlns:Utility="clr-namespace:ACT.SpecialSpellTimer.Utility"
+    x:Class="ACT.SpecialSpellTimer.SpellTimerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    mc:Ignorable="d" 
+    d:DesignHeight="32" d:DesignWidth="300" 
+    TextOptions.TextFormattingMode="Display"
+    TextOptions.TextHintingMode="Animated"
+    TextOptions.TextRenderingMode="ClearType">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -16,66 +22,64 @@
             <ColumnDefinition Width="30*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock
+        <Utility:OutlineTextBlock
             Grid.Column="0" Grid.Row="0"
             HorizontalAlignment="{Binding HorizontalAlignment, ElementName=SpellTitleTextBlock, Mode=OneWay}"
             VerticalAlignment="{Binding VerticalAlignment, ElementName=SpellTitleTextBlock, Mode=OneWay}"
             Margin="{Binding Margin, ElementName=SpellTitleTextBlock, Mode=OneWay}"
-            Padding="{Binding Padding, ElementName=SpellTitleTextBlock, Mode=OneWay}"
             TextWrapping="{Binding TextWrapping, ElementName=SpellTitleTextBlock, Mode=OneWay}"
             Text="{Binding Text, ElementName=SpellTitleTextBlock, Mode=OneWay}"
             FontFamily="{Binding FontFamily, ElementName=SpellTitleTextBlock, Mode=OneWay}"
             FontSize="{Binding FontSize, ElementName=SpellTitleTextBlock, Mode=OneWay}"
             FontStyle="{Binding FontStyle, ElementName=SpellTitleTextBlock, Mode=OneWay}"
             FontWeight="{Binding FontWeight, ElementName=SpellTitleTextBlock, Mode=OneWay}" 
-            Foreground="Navy"
+            Fill="{Binding Fill, ElementName=SpellTitleTextBlock}"
+            Stroke="{Binding Stroke, ElementName=SpellTitleTextBlock}"
             >
-            <TextBlock.Effect>
+            <Utility:OutlineTextBlock.Effect>
                 <BlurEffect 
-                    Radius="6" 
+                    Radius="2" 
                     RenderingBias="Quality" />
-            </TextBlock.Effect>
-        </TextBlock>
+            </Utility:OutlineTextBlock.Effect>
+        </Utility:OutlineTextBlock>
 
-        <TextBlock 
+        <Utility:OutlineTextBlock 
             Grid.Column="0" Grid.Row="0"
-            Name="SpellTitleTextBlock" 
+            x:Name="SpellTitleTextBlock" 
             HorizontalAlignment="Left" 
             VerticalAlignment="Top"
             Margin="0,0,0,0" 
-            Padding="0"
             TextWrapping="NoWrap"
             Text="SpellTitle" 
             />
 
-        <TextBlock 
+        <Utility:OutlineTextBlock
             Grid.Column="1" Grid.Row="0"
             HorizontalAlignment="{Binding HorizontalAlignment, ElementName=RecastTimeTextBlock, Mode=OneWay}"
             VerticalAlignment="{Binding VerticalAlignment, ElementName=RecastTimeTextBlock, Mode=OneWay}"
             Margin="{Binding Margin, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            Padding="{Binding Padding, ElementName=RecastTimeTextBlock, Mode=OneWay}"
             TextWrapping="{Binding TextWrapping, ElementName=RecastTimeTextBlock, Mode=OneWay}"
             Text="{Binding Text, ElementName=RecastTimeTextBlock, Mode=OneWay}"
             FontFamily="{Binding FontFamily, ElementName=RecastTimeTextBlock, Mode=OneWay}"
             FontSize="{Binding FontSize, ElementName=RecastTimeTextBlock, Mode=OneWay}"
             FontStyle="{Binding FontStyle, ElementName=RecastTimeTextBlock, Mode=OneWay}"
             FontWeight="{Binding FontWeight, ElementName=RecastTimeTextBlock, Mode=OneWay}"
-            Foreground="Navy"
+            Fill="{Binding Fill, ElementName=RecastTimeTextBlock}"
+            Stroke="{Binding Stroke, ElementName=RecastTimeTextBlock}"
             >
-            <TextBlock.Effect>
+            <Utility:OutlineTextBlock.Effect>
                 <BlurEffect 
-                    Radius="6" 
+                    Radius="2" 
                     RenderingBias="Quality" />
-            </TextBlock.Effect>
-        </TextBlock>
-
-        <TextBlock 
+            </Utility:OutlineTextBlock.Effect>
+        </Utility:OutlineTextBlock>
+        
+        <Utility:OutlineTextBlock 
             Grid.Column="1" Grid.Row="0"
-            Name="RecastTimeTextBlock" 
+            x:Name="RecastTimeTextBlock" 
             HorizontalAlignment="Right" 
             VerticalAlignment="Top"
-            Margin="0,0,0,0" 
-            Padding="0"
+            Margin="0,0,3,0" 
             TextWrapping="NoWrap"
             Text="RecastTime"
             />
