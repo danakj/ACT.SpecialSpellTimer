@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -18,6 +19,11 @@
         /// パーティメンバ
         /// </summary>
         private static List<string> ptmember;
+
+        /// <summary>
+        /// ペットのID
+        /// </summary>
+        private static string petid;
 
         /// <summary>
         /// 内部バッファ
@@ -114,6 +120,19 @@
                 });
             }
 
+            // 召喚した？
+            if (logLine.Contains("の「サモン"))
+            {
+                Task.Run(() =>
+                {
+                    Thread.Sleep(3 * 1000);
+                    RefreshPetID();
+                }).ContinueWith((t) =>
+                {
+                    t.Dispose();
+                });
+            }
+
             lock (this.buffer)
             {
                 this.buffer.Add(logLine);
@@ -152,6 +171,11 @@
                             ptmember[i].Trim());
                     }
                 }
+            }
+
+            if (!string.IsNullOrWhiteSpace(petid))
+            {
+                keyword = keyword.Replace("<petid>", petid);
             }
 
             return keyword;
@@ -221,6 +245,36 @@
                             Debug.WriteLine("<-  " + member.Name);
                         }
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// ペットIDを更新する
+        /// </summary>
+        public static void RefreshPetID()
+        {
+            // Combatantリストを取得する
+            var combatant = FF14PluginHelper.GetCombatantList();
+
+            if (combatant != null &&
+                combatant.Count > 0)
+            {
+                var pet = (
+                    from x in combatant
+                    where
+                    x.OwnerID == combatant[0].ID &&
+                    (
+                        x.Name.Contains("フェアリー・") ||
+                        x.Name.Contains("・エギ") ||
+                        x.Name.Contains("カーバンクル・")
+                    )
+                    select
+                    x).FirstOrDefault();
+
+                if (pet != null)
+                {
+                    petid = pet.ID.ToString("x8");
                 }
             }
         }

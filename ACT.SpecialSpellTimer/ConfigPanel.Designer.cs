@@ -1434,9 +1434,9 @@
             this.label48.AutoSize = true;
             this.label48.Location = new System.Drawing.Point(251, 308);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(343, 12);
+            this.label48.Size = new System.Drawing.Size(169, 12);
             this.label48.TabIndex = 32;
-            this.label48.Text = "※<2>～<8>が使用可能になりますが、名前でのマッチは出来なくなります";
+            this.label48.Text = "※<2>～<8>が使用可能になります";
             // 
             // EnabledPTPlaceholderCheckBox
             // 
@@ -1624,7 +1624,7 @@
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(108, 12);
             this.label21.TabIndex = 17;
-            this.label21.Text = "オーバーレイの透明度";
+            this.label21.Text = "オーバーレイの透過率";
             // 
             // label20
             // 
