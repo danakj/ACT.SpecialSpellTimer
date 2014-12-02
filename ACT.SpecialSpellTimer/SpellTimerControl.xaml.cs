@@ -1,5 +1,6 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
+    using System.Diagnostics;
     using System.Windows.Controls;
     using System.Windows.Media;
     using System.Windows.Shapes;
@@ -17,7 +18,9 @@
         /// </summary>
         public SpellTimerControl()
         {
+            Debug.WriteLine("Spell");
             this.InitializeComponent();
+            this.Background = Brushes.Transparent;
         }
 
         /// <summary>
@@ -60,6 +63,9 @@
         /// </summary>
         public void Refresh()
         {
+#if false
+            var sw = Stopwatch.StartNew();
+#endif
             this.Width = Settings.Default.ProgressBarSize.Width;
 
             var tb = default(OutlineTextBlock);
@@ -148,6 +154,11 @@
             this.ProgressBarCanvas.Children.Add(backRect);
             this.ProgressBarCanvas.Children.Add(foreRect);
             this.ProgressBarCanvas.Children.Add(outlineRect);
+
+#if false
+            sw.Stop();
+            Debug.WriteLine("Spell Refresh -> " + sw.ElapsedMilliseconds.ToString("N0") + "ms");
+#endif
         }
     }
 }

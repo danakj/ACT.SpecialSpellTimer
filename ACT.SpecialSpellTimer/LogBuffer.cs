@@ -72,7 +72,12 @@
             lock (this.buffer)
             {
                 this.buffer.Clear();
-                ptmember.Clear();
+
+                if (ptmember != null)
+                {
+                    ptmember.Clear();
+                }
+
                 Debug.WriteLine("Logをクリアしました");
             }
         }
@@ -241,13 +246,25 @@
                 if (Settings.Default.EnabledPartyMemberPlaceholder)
                 {
                     var partyList = FF14PluginHelper.GetCombatantListParty();
-                    foreach (var member in partyList)
+
+                    // FF14内部のPTメンバ自動ソート順で並び替える
+                    var sorted =
+                        from x in partyList
+                        join y in Job.GetJobList() on
+                            x.Job equals y.JobId
+                        where
+                            x.ID != player.ID
+                        orderby
+                            y.Role,
+                            x.Job,
+                            x.ID
+                        select
+                            x.Name.Trim();
+
+                    foreach (var name in sorted)
                     {
-                        if (member.ID != player.ID)
-                        {
-                            ptmember.Add(member.Name.Trim());
-                            Debug.WriteLine("<-  " + member.Name);
-                        }
+                        ptmember.Add(name);
+                        Debug.WriteLine("<-  " + name);
                     }
                 }
             }

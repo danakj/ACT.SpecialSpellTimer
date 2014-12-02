@@ -175,6 +175,9 @@
             {
                 var nr = new SpellTimer();
 
+                nr.ID = SpellTimerTable.Table.Any() ?
+                    SpellTimerTable.Table.Max(x => x.ID) + 1 :
+                    1;
                 nr.Panel = "General";
                 nr.SpellTitle = "New Spell";
                 nr.ProgressBarVisible = true;
@@ -310,10 +313,31 @@
                     src.DontHide = this.DontHideCheckBox.Checked;
 
                     SpellTimerTable.Save();
+                    this.LoadSpellTimerTable();
+
+                    // 一度全てのパネルを閉じる
+                    SpellTimerCore.Default.ClosePanels();
+
+                    foreach (TreeNode root in this.TelopTreeView.Nodes)
+                    {
+                        if (root.Nodes != null)
+                        {
+                            foreach (TreeNode node in root.Nodes)
+                            {
+                                var ds = node.Tag as SpellTimer;
+                                if (ds != null)
+                                {
+                                    if (ds.ID == src.ID)
+                                    {
+                                        this.TelopTreeView.SelectedNode = node;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
-
-            this.LoadSpellTimerTable();
         }
 
         /// <summary>

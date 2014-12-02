@@ -334,6 +334,9 @@
                 OnePointTelopTable.Default.Save();
                 this.LoadTelopTable();
 
+                // 一度全てのテロップを閉じる
+                OnePointTelopController.CloseTelops();
+
                 foreach (TreeNode node in this.TelopTreeView.Nodes)
                 {
                     var ds = node.Tag as OnePointTelop;
@@ -445,10 +448,29 @@
                 Settings.Default.FontOutlineColor :
                 src.FontOutlineColor.FromHTML();
 
-            this.TelopLeftNumericUpDown.Value = (int)src.Left;
-            this.TelopLeftNumericUpDown.Tag = (int)src.Left;
-            this.TelopTopNumericUpDown.Value = (int)src.Top;
-            this.TelopTopNumericUpDown.Tag = (int)src.Top;
+            var left = (int)src.Left;
+            var top = (int)src.Top;
+
+            double x, y;
+            OnePointTelopController.GettLocation(
+                src.Title,
+                out x,
+                out y);
+
+            if (x != 0)
+            {
+                left = (int)x;
+            }
+
+            if (y != 0)
+            {
+                top = (int)y;
+            }
+
+            this.TelopLeftNumericUpDown.Value = left;
+            this.TelopLeftNumericUpDown.Tag = left;
+            this.TelopTopNumericUpDown.Value = top;
+            this.TelopTopNumericUpDown.Tag = top;
 
             this.TelopMatchSoundComboBox.SelectedValue = src.MatchSound;
             this.TelopMatchTTSTextBox.Text = src.MatchTextToSpeak;

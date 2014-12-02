@@ -227,7 +227,8 @@
                 using (var sr = new StreamReader(file, new UTF8Encoding(false)))
                 {
                     var xs = new XmlSerializer(table.GetType());
-                    table = xs.Deserialize(sr) as List<OnePointTelop>; ;
+                    var data = xs.Deserialize(sr) as List<OnePointTelop>;
+                    table.AddRange(data);
                 }
 
                 this.Reset();

@@ -129,8 +129,11 @@
         /// </summary>
         public static void Reset()
         {
+            var id = 0L;
             foreach (var row in Table)
             {
+                id++;
+                row.ID = id;
                 row.MatchDateTime = DateTime.MinValue;
                 row.Regex = null;
                 row.RegexPattern = string.Empty;
@@ -180,7 +183,8 @@
                 using (var sr = new StreamReader(file, new UTF8Encoding(false)))
                 {
                     var xs = new XmlSerializer(table.GetType());
-                    table = xs.Deserialize(sr) as List<SpellTimer>; ;
+                    var data = xs.Deserialize(sr) as List<SpellTimer>;
+                    table.AddRange(data);
                 }
 
                 Reset();
@@ -269,6 +273,7 @@
             this.RegexPattern = string.Empty;
         }
 
+        public long ID { get; set; }
         public string Panel { get; set; }
         public string SpellTitle { get; set; }
         public string Keyword { get; set; }

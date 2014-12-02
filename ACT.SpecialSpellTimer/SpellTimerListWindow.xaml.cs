@@ -1,11 +1,15 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Interop;
+    using System.Windows.Media;
 
     using ACT.SpecialSpellTimer.Properties;
 
@@ -19,13 +23,45 @@
         /// </summary>
         public SpellTimerListWindow()
         {
+            Debug.WriteLine("SpellList");
             this.InitializeComponent();
 
             this.ShowInTaskbar = false;
             this.Topmost = true;
+            this.Background = Brushes.Transparent;
+
+            this.SpellTimerControls = new Dictionary<long, SpellTimerControl>();
 
             this.Loaded += this.SpellTimerListWindow_Loaded;
             this.MouseLeftButtonDown += (s1, e1) => this.DragMove();
+            this.Closed += (s1, e1) =>
+            {
+                if (this.SpellTimerControls != null)
+                {
+                    this.SpellTimerControls.Clear();
+                }
+            };
+
+            this.DragOn = new Action<MouseEventArgs>((mouse) =>
+            {
+                if (mouse.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.IsDragging = true;
+                    Debug.WriteLine("Drag On");
+                }
+            });
+
+            this.DragOff = new Action<MouseEventArgs>((mouse) =>
+            {
+                if (mouse.LeftButton == MouseButtonState.Released)
+                {
+                    this.IsDragging = false;
+                    Debug.WriteLine("Drag Off");
+                }
+            });
+
+            this.MouseDown += (s1, e1) => this.DragOn(e1);
+            this.MouseUp += (s1, e1) => this.DragOff(e1);
         }
 
         /// <summary>
@@ -37,6 +73,26 @@
         /// 扱うSpellTimerのリスト
         /// </summary>
         public SpellTimer[] SpellTimers { get; set; }
+
+        /// <summary>
+        /// 扱っているスペルタイマコントロールのリスト
+        /// </summary>
+        public Dictionary<long, SpellTimerControl> SpellTimerControls { get; private set; }
+
+        /// <summary>
+        /// ドラッグ中か？
+        /// </summary>
+        private bool IsDragging;
+
+        /// <summary>
+        /// ドラッグ開始
+        /// </summary>
+        private Action<MouseEventArgs> DragOn;
+
+        /// <summary>
+        /// ドラッグ終了
+        /// </summary>
+        private Action<MouseEventArgs> DragOff;
 
         /// <summary>
         /// Loaded
@@ -64,9 +120,10 @@
         /// </summary>
         public void RefreshSpellTimer()
         {
-            // コントロールを消去する
-            this.BaseGrid.Children.Clear();
-            this.BaseGrid.RowDefinitions.Clear();
+            if (this.IsDragging)
+            {
+                return;
+            }
 
             // 表示するものがなければ何もしない
             if (this.SpellTimers == null ||
@@ -127,7 +184,26 @@
             // スペルタイマコントロールのリストを生成する
             foreach (var spell in spells)
             {
-                var c = new SpellTimerControl();
+                SpellTimerControl c;
+                if (this.SpellTimerControls.ContainsKey(spell.ID))
+                {
+                    c = this.SpellTimerControls[spell.ID];
+                }
+                else
+                {
+                    c = new SpellTimerControl();
+                    this.SpellTimerControls.Add(spell.ID, c);
+
+                    c.MouseDown += (s, e) => this.DragOn(e);
+                    c.MouseUp += (s, e) => this.DragOff(e);
+
+                    this.BaseGrid.RowDefinitions.Add(new RowDefinition());
+                    this.BaseGrid.Children.Add(c);
+
+                    c.SetValue(Grid.ColumnProperty, 0);
+                    c.SetValue(Grid.RowProperty, this.BaseGrid.Children.Count - 1);
+                }
+
                 c.SpellTitle = string.IsNullOrWhiteSpace(spell.SpellTitleReplaced) ?
                     spell.SpellTitle :
                     spell.SpellTitleReplaced;
@@ -158,15 +234,22 @@
                 }
 
                 c.Refresh();
-
-                this.BaseGrid.RowDefinitions.Add(new RowDefinition());
-                this.BaseGrid.Children.Add(c);
-
-                c.SetValue(Grid.ColumnProperty, 0);
-                c.SetValue(Grid.RowProperty, this.BaseGrid.Children.Count - 1);
             }
 
-            if (this.BaseGrid.Children.Count > 0)
+            // スペルの表示を制御する
+            foreach (var c in this.SpellTimerControls)
+            {
+                if (spells.Any(x => x.ID == c.Key))
+                {
+                    c.Value.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    c.Value.Visibility = Visibility.Hidden;
+                }
+            }
+
+            if (spells.Count() > 0)
             {
                 this.ShowOverlay();
                 this.Topmost = true;

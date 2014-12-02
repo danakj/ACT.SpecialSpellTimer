@@ -41,6 +41,31 @@
         }
 
         /// <summary>
+        /// 位置を取得する
+        /// </summary>
+        /// <param name="telopTitle">設定するテロップのTitle</param>
+        /// <param name="left">Left</param>
+        /// <param name="top">Top</param>
+        public static void GettLocation(
+            string telopTitle,
+            out double left,
+            out double top)
+        {
+            left = 0;
+            top = 0;
+
+            if (telopWindowList != null)
+            {
+                var telop = telopWindowList.Where(x => x.DataSource.Title == telopTitle).FirstOrDefault();
+                if (telop != null)
+                {
+                    left = telop.Left;
+                    top = telop.Top;
+                }
+            }
+        }
+
+        /// <summary>
         /// テロップを閉じる
         /// </summary>
         public static void CloseTelops()

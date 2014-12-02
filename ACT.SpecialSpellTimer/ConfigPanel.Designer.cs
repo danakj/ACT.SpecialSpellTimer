@@ -1470,9 +1470,9 @@
             this.label48.AutoSize = true;
             this.label48.Location = new System.Drawing.Point(277, 308);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(169, 12);
+            this.label48.Size = new System.Drawing.Size(390, 12);
             this.label48.TabIndex = 32;
-            this.label48.Text = "※<2>～<8>が使用可能になります";
+            this.label48.Text = "※<2>～<8>が使用可能になります。ただし2～8の順序は正しくない場合があります";
             // 
             // EnabledPTPlaceholderCheckBox
             // 

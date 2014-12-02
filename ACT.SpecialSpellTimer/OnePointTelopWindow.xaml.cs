@@ -1,9 +1,11 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Windows;
     using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Interop;
     using System.Windows.Media;
     using System.Windows.Shapes;
@@ -18,19 +20,61 @@
     public partial class OnePointTelopWindow : Window
     {
         /// <summary>
+        /// ドラッグ中か？
+        /// </summary>
+        private bool IsDragging;
+
+        /// <summary>
+        /// ドラッグ開始
+        /// </summary>
+        private Action<MouseEventArgs> DragOn;
+
+        /// <summary>
+        /// ドラッグ終了
+        /// </summary>
+        private Action<MouseEventArgs> DragOff;
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public OnePointTelopWindow()
         {
+            Debug.WriteLine("Telop");
             this.InitializeComponent();
 
             this.MessageTextBlock.Text = string.Empty;
 
             this.ShowInTaskbar = false;
             this.Topmost = true;
+            this.Background = Brushes.Transparent;
 
             this.Loaded += this.OnePointTelopWindow_Loaded;
             this.MouseLeftButtonDown += (s1, e1) => this.DragMove();
+
+            this.DragOn = new Action<MouseEventArgs>((mouse) =>
+            {
+                if (mouse.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.IsDragging = true;
+                    Debug.WriteLine("Drag On");
+                }
+            });
+
+            this.DragOff = new Action<MouseEventArgs>((mouse) =>
+            {
+                if (mouse.LeftButton == MouseButtonState.Released)
+                {
+                    this.IsDragging = false;
+                    Debug.WriteLine("Drag Off");
+                }
+            });
+
+            this.MouseDown += (s1, e1) => this.DragOn(e1);
+            this.MouseUp += (s1, e1) => this.DragOff(e1);
+            this.MessageTextBlock.MouseDown += (s1, e1) => this.DragOn(e1);
+            this.MessageTextBlock.MouseUp += (s1, e1) => this.DragOff(e1);
+            this.ProgressBarCanvas.MouseDown += (s1, e1) => this.DragOn(e1);
+            this.ProgressBarCanvas.MouseUp += (s1, e1) => this.DragOff(e1);
         }
 
         /// <summary>
@@ -63,6 +107,11 @@
         /// </summary>
         public void Refresh()
         {
+            if (this.IsDragging)
+            {
+                return;
+            }
+
             if (this.DataSource == null)
             {
                 this.HideOverlay();
