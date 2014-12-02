@@ -57,6 +57,11 @@
         private LogBuffer LogBuffer;
 
         /// <summary>
+        /// 最後にFF14プロセスをチェックした時間
+        /// </summary>
+        private DateTime LastFFXIVProcessDateTime;
+
+        /// <summary>
         /// SpellTimerのPanelリスト
         /// </summary>
         private List<SpellTimerListWindow> SpellTimerPanels
@@ -220,15 +225,19 @@
                 return;
             }
 
-#if !DEBUG
-            // FF14が起動していない？
-            if (FF14PluginHelper.GetFFXIVProcess == null)
+            if ((DateTime.Now - this.LastFFXIVProcessDateTime).TotalSeconds >= 5.0d)
             {
-                this.HidePanels();
-                this.RefreshInterval = 1000;
-                return;
-            }
+#if !DEBUG
+                // FF14が起動していない？
+                if (FF14PluginHelper.GetFFXIVProcess == null)
+                {
+                    this.HidePanels();
+                    this.RefreshInterval = 1000;
+                    return;
+                }
 #endif
+                this.LastFFXIVProcessDateTime = DateTime.Now;
+            }
 
             // タイマの間隔を標準に戻す
             this.RefreshInterval = Settings.Default.RefreshInterval;
