@@ -152,7 +152,7 @@
             {
                 outlineBrush.Color = fontOutline.Color;
             }
-            
+
             var outlineRect = new Rectangle();
             outlineRect.Stroke = outlineBrush;
             outlineRect.Width = Settings.Default.ProgressBarSize.Width;

@@ -18,8 +18,8 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70*"/>
-            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition x:Name="TitleColumn"/>
+            <ColumnDefinition x:Name="RecastTimeColumn" MinWidth="{Binding ActualWidth, ElementName=RecastTimeTextBlock, Mode=OneWay}"/>
         </Grid.ColumnDefinitions>
 
         <Utility:OutlineTextBlock
@@ -63,6 +63,7 @@
             FontSize="{Binding FontSize, ElementName=RecastTimeTextBlock, Mode=OneWay}"
             FontStyle="{Binding FontStyle, ElementName=RecastTimeTextBlock, Mode=OneWay}"
             FontWeight="{Binding FontWeight, ElementName=RecastTimeTextBlock, Mode=OneWay}"
+            TextAlignment="{Binding TextAlignment, ElementName=RecastTimeTextBlock, Mode=OneWay}"
             Fill="{Binding Fill, ElementName=RecastTimeTextBlock}"
             Stroke="{Binding Stroke, ElementName=RecastTimeTextBlock}"
             >
@@ -78,6 +79,7 @@
             x:Name="RecastTimeTextBlock" 
             HorizontalAlignment="Right" 
             VerticalAlignment="Top"
+            TextAlignment="Right"
             Margin="0,0,3,0" 
             TextWrapping="NoWrap"
             />
