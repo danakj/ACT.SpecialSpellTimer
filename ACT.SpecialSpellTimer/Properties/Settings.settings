@@ -50,5 +50,8 @@
     <Setting Name="FontOutlineColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">22, 120, 157</Value>
     </Setting>
+    <Setting Name="ProgressBarOutlineColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">22, 120, 157</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

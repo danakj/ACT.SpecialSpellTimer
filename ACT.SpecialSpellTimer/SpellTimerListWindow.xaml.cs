@@ -182,6 +182,7 @@
             }
 
             // スペルタイマコントロールのリストを生成する
+            var displayList = new List<SpellTimerControl>();
             foreach (var spell in spells)
             {
                 SpellTimerControl c;
@@ -194,6 +195,7 @@
                     c = new SpellTimerControl();
                     this.SpellTimerControls.Add(spell.ID, c);
 
+                    c.Visibility = Visibility.Hidden;
                     c.MouseDown += (s, e) => this.DragOn(e);
                     c.MouseUp += (s, e) => this.DragOff(e);
 
@@ -209,6 +211,7 @@
                     spell.SpellTitleReplaced;
                 c.IsReverse = spell.IsReverse;
                 c.BarColor = spell.BarColor;
+                c.BarOutlineColor = spell.BarOutlineColor;
                 c.FontColor = spell.FontColor;
                 c.FontOutlineColor = spell.FontOutlineColor;
                 c.RecastTime = 0;
@@ -234,19 +237,26 @@
                 }
 
                 c.Refresh();
+
+                displayList.Add(c);
             }
 
-            // スペルの表示を制御する
+            // 今回表示しないスペルを隠す
             foreach (var c in this.SpellTimerControls)
             {
-                if (spells.Any(x => x.ID == c.Key))
-                {
-                    c.Value.Visibility = Visibility.Visible;
-                }
-                else
+                if (!spells.Any(x => x.ID == c.Key))
                 {
                     c.Value.Visibility = Visibility.Hidden;
                 }
+            }
+
+            // スペルの表示順を設定する
+            var index = 0;
+            foreach (var displaySpell in displayList)
+            {
+                displaySpell.SetValue(Grid.RowProperty, index);
+                displaySpell.Visibility = Visibility.Visible;
+                index++;
             }
 
             if (spells.Count() > 0)

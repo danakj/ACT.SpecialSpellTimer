@@ -34,6 +34,7 @@
                 if (instance == null)
                 {
                     instance = new SpellTimerCore();
+                    Debug.WriteLine("SpellTimerCore");
                 }
 
                 return instance;
@@ -158,6 +159,8 @@
         /// </summary>
         private void RefreshWindow()
         {
+            var sw1 = Stopwatch.StartNew();
+
             // 有効なSpellリストを取得する
             var spellArray = SpellTimerTable.EnabledTable;
 
@@ -205,6 +208,9 @@
                 }
             }
 
+            sw1.Stop();
+            Debug.WriteLine("Refresh ClosePanels ->" + sw1.ElapsedMilliseconds.ToString("N0") + "ms");
+
             // ACTが起動していない？
             if (ActGlobals.oFormActMain == null ||
                 !ActGlobals.oFormActMain.Visible)
@@ -228,16 +234,25 @@
             this.RefreshInterval = Settings.Default.RefreshInterval;
 
             // ログを取り出す
+            var sw2 = Stopwatch.StartNew();
             var logLines = this.LogBuffer.GetLogLines();
+            sw2.Stop();
+            Debug.WriteLine("Refresh GetLog ->" + sw2.ElapsedMilliseconds.ToString("N0") + "ms");
 
             // テロップとマッチングする
+            var sw3 = Stopwatch.StartNew();
             OnePointTelopController.Match(
                 logLines);
+            sw3.Stop();
+            Debug.WriteLine("Refresh MatchTelop ->" + sw3.ElapsedMilliseconds.ToString("N0") + "ms");
 
             // スペルリストとマッチングする
+            var sw4 = Stopwatch.StartNew();
             this.MatchSpells(
                 spellArray,
                 logLines);
+            sw4.Stop();
+            Debug.WriteLine("Refresh MatchSpell ->" + sw4.ElapsedMilliseconds.ToString("N0") + "ms");
 
             // コマンドとマッチングする
             TextCommandController.MatchCommand(
@@ -252,6 +267,7 @@
             }
 
             // Windowを表示する
+            var sw5 = Stopwatch.StartNew();
             var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
             foreach (var name in panelNames)
             {
@@ -284,6 +300,9 @@
 
                 w.RefreshSpellTimer();
             }
+
+            sw5.Stop();
+            Debug.WriteLine("Refresh RefreshSpell ->" + sw5.ElapsedMilliseconds.ToString("N0") + "ms");
         }
 
         /// <summary>

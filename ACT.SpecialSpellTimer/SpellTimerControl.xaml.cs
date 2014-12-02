@@ -49,6 +49,11 @@
         public string BarColor { get; set; }
 
         /// <summary>
+        /// バーOutlineの色
+        /// </summary>
+        public string BarOutlineColor { get; set; }
+
+        /// <summary>
         /// Fontの色
         /// </summary>
         public string FontColor { get; set; }
@@ -138,8 +143,18 @@
             Canvas.SetLeft(backRect, 0);
             Canvas.SetTop(backRect, 0);
 
+            var outlineBrush = new SolidColorBrush(Settings.Default.ProgressBarOutlineColor.ToWPF());
+            if (!string.IsNullOrWhiteSpace(this.BarOutlineColor))
+            {
+                outlineBrush.Color = this.BarOutlineColor.FromHTMLWPF();
+            }
+            else
+            {
+                outlineBrush.Color = fontOutline.Color;
+            }
+            
             var outlineRect = new Rectangle();
-            outlineRect.Stroke = fontOutline;
+            outlineRect.Stroke = outlineBrush;
             outlineRect.Width = Settings.Default.ProgressBarSize.Width;
             outlineRect.Height = foreRect.Height;
             outlineRect.RadiusX = 2.0d;

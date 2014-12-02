@@ -1,6 +1,7 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System.Text.RegularExpressions;
+
     using ACT.SpecialSpellTimer.Sound;
     using ACT.SpecialSpellTimer.Utility;
 

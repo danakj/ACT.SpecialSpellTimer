@@ -267,6 +267,7 @@
             this.FontColor = string.Empty;
             this.FontOutlineColor = string.Empty;
             this.BarColor = string.Empty;
+            this.BarOutlineColor = string.Empty;
             this.JobFilter = string.Empty;
             this.SpellTitleReplaced = string.Empty;
             this.MatchedLog = string.Empty;
@@ -293,6 +294,7 @@
         public string FontColor { get; set; }
         public string FontOutlineColor { get; set; }
         public string BarColor { get; set; }
+        public string BarOutlineColor { get; set; }
         public bool DontHide { get; set; }
         public bool RegexEnabled { get; set; }
         public string JobFilter { get; set; }

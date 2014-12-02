@@ -136,6 +136,20 @@
         }
 
         /// <summary>
+        /// BarOutlineColor Click
+        /// </summary>
+        /// <param name="sender">イベント発生元</param>
+        /// <param name="e">イベント引数</param>
+        private void BarOutlineColorButton_Click(object sender, EventArgs e)
+        {
+            this.ColorDialog.Color = this.BarOutlineColorButton.BackColor;
+            if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
+            {
+                this.BarOutlineColorButton.BackColor = this.ColorDialog.Color;
+            }
+        }
+
+        /// <summary>
         /// FontOutlineColor Click
         /// </summary>
         /// <param name="sender">イベント発生元</param>
@@ -186,6 +200,7 @@
             this.PreviewLabel.Font = Settings.Default.Font;
             this.PreviewLabel.ForeColor = Settings.Default.FontColor;
             this.FontOutlineColorButton.BackColor = Settings.Default.FontOutlineColor;
+            this.BarOutlineColorButton.BackColor = Settings.Default.ProgressBarOutlineColor;
             this.OpacityNumericUpDown.Value = Settings.Default.Opacity;
             this.ClickThroughCheckBox.Checked = Settings.Default.ClickThroughEnabled;
             this.AutoSortCheckBox.Checked = Settings.Default.AutoSortEnabled;
@@ -207,6 +222,7 @@
             Settings.Default.Font = this.PreviewLabel.Font;
             Settings.Default.FontColor = this.PreviewLabel.ForeColor;
             Settings.Default.FontOutlineColor = this.FontOutlineColorButton.BackColor;
+            Settings.Default.ProgressBarOutlineColor = this.BarOutlineColorButton.BackColor;
             Settings.Default.Opacity = (int)this.OpacityNumericUpDown.Value;
             Settings.Default.ClickThroughEnabled = this.ClickThroughCheckBox.Checked;
             Settings.Default.AutoSortEnabled = this.AutoSortCheckBox.Checked;

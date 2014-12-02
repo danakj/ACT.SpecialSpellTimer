@@ -159,7 +159,7 @@
             if (this.FormattedText != null)
             {
                 this.FormattedText.MaxTextWidth = Math.Min(3579139, availableSize.Width);
-                this.FormattedText.MaxTextHeight = availableSize.Height;
+                this.FormattedText.MaxTextHeight = availableSize.Height > 0.0d ? availableSize.Height : 1.0d;
                 return new Size(this.FormattedText.Width, this.FormattedText.Height);
             }
             else
@@ -174,8 +174,8 @@
 
             if (this.FormattedText != null)
             {
-                this.FormattedText.MaxTextWidth = finalSize.Width;
-                this.FormattedText.MaxTextHeight = finalSize.Height;
+                this.FormattedText.MaxTextWidth = finalSize.Width > 0.0d ? finalSize.Width : 1.0d;
+                this.FormattedText.MaxTextHeight = finalSize.Height > 0.0d ? finalSize.Height : 1.0d;
             }
 
             this.TextGeometry = null;

@@ -132,6 +132,15 @@
                 }
             };
 
+            this.OneBarOutlineColorButton.Click += (s1, e1) =>
+            {
+                this.ColorDialog.Color = this.OneBarOutlineColorButton.BackColor;
+                if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
+                {
+                    this.OneBarOutlineColorButton.BackColor = this.ColorDialog.Color;
+                }
+            };
+
             this.OneFontOutlineColorButton.Click += (s1, e1) =>
             {
                 this.ColorDialog.Color = this.OneFontOutlineColorButton.BackColor;
@@ -183,6 +192,7 @@
                 nr.ProgressBarVisible = true;
                 nr.BarColor = Settings.Default.ProgressBarColor.ToHTML();
                 nr.FontColor = Settings.Default.FontColor.ToHTML();
+                nr.BarOutlineColor = Settings.Default.ProgressBarOutlineColor.ToHTML();
                 nr.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
 
                 // 現在選択しているノードの情報を一部コピーする
@@ -205,6 +215,7 @@
                         nr.BarColor = baseRow.BarColor;
                         nr.FontColor = baseRow.FontColor;
                         nr.FontOutlineColor = baseRow.FontOutlineColor;
+                        nr.BarOutlineColor = baseRow.BarOutlineColor;
                         nr.DontHide = baseRow.DontHide;
                     }
                 }
@@ -310,6 +321,7 @@
                     src.BarColor = this.SampleLabel.BackColor.ToHTML();
                     src.FontColor = this.SampleLabel.ForeColor.ToHTML();
                     src.FontOutlineColor = this.OneFontOutlineColorButton.BackColor.ToHTML();
+                    src.BarOutlineColor = this.OneBarOutlineColorButton.BackColor.ToHTML();
                     src.DontHide = this.DontHideCheckBox.Checked;
 
                     SpellTimerTable.Save();
@@ -469,6 +481,9 @@
             this.OneFontOutlineColorButton.BackColor = string.IsNullOrWhiteSpace(src.FontOutlineColor) ?
                 Settings.Default.FontOutlineColor :
                 src.FontOutlineColor.FromHTML();
+            this.OneBarOutlineColorButton.BackColor = string.IsNullOrWhiteSpace(src.BarOutlineColor) ?
+                this.OneFontOutlineColorButton.BackColor :
+                src.BarOutlineColor.FromHTML();
             this.SampleLabel.Font = Settings.Default.Font;
             this.DontHideCheckBox.Checked = src.DontHide;
 

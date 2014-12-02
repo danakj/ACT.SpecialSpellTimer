@@ -214,5 +214,17 @@ namespace ACT.SpecialSpellTimer.Properties {
                 this["FontOutlineColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("22, 120, 157")]
+        public global::System.Drawing.Color ProgressBarOutlineColor {
+            get {
+                return ((global::System.Drawing.Color)(this["ProgressBarOutlineColor"]));
+            }
+            set {
+                this["ProgressBarOutlineColor"] = value;
+            }
+        }
     }
 }
