@@ -18,8 +18,8 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="TitleColumn"/>
-            <ColumnDefinition x:Name="RecastTimeColumn" MinWidth="{Binding ActualWidth, ElementName=RecastTimeTextBlock, Mode=OneWay}"/>
+            <ColumnDefinition x:Name="TitleColumn" Width="68*"/>
+            <ColumnDefinition x:Name="RecastTimeColumn" Width="32*"/>
         </Grid.ColumnDefinitions>
 
         <Utility:OutlineTextBlock
@@ -38,7 +38,7 @@
             >
             <Utility:OutlineTextBlock.Effect>
                 <BlurEffect 
-                    Radius="2" 
+                    Radius="1.5" 
                     RenderingBias="Quality" />
             </Utility:OutlineTextBlock.Effect>
         </Utility:OutlineTextBlock>
@@ -69,7 +69,7 @@
             >
             <Utility:OutlineTextBlock.Effect>
                 <BlurEffect 
-                    Radius="2" 
+                    Radius="1.5" 
                     RenderingBias="Quality" />
             </Utility:OutlineTextBlock.Effect>
         </Utility:OutlineTextBlock>
