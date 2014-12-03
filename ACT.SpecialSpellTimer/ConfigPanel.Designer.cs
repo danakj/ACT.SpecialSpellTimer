@@ -33,6 +33,7 @@
             this.SpecialSpellTabPage = new System.Windows.Forms.TabPage();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.OneBarOutlineColorButton = new System.Windows.Forms.Button();
             this.OneFontOutlineColorButton = new System.Windows.Forms.Button();
             this.SelectJobButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -140,6 +141,8 @@
             this.TelopExportButton = new System.Windows.Forms.Button();
             this.TelopTreeView = new System.Windows.Forms.TreeView();
             this.OptionTabPage = new System.Windows.Forms.TabPage();
+            this.SamplePictureBox = new System.Windows.Forms.PictureBox();
+            this.HaishokuToitsuButton = new System.Windows.Forms.Button();
             this.BarOutlineColorButton = new System.Windows.Forms.Button();
             this.FontOutlineColorButton = new System.Windows.Forms.Button();
             this.label48 = new System.Windows.Forms.Label();
@@ -180,7 +183,6 @@
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.OneBarOutlineColorButton = new System.Windows.Forms.Button();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -199,6 +201,7 @@
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TelopDelayNumericUpDown)).BeginInit();
             this.OptionTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SamplePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).BeginInit();
@@ -287,9 +290,18 @@
             this.DetailGroupBox.TabIndex = 5;
             this.DetailGroupBox.TabStop = false;
             // 
+            // OneBarOutlineColorButton
+            // 
+            this.OneBarOutlineColorButton.Location = new System.Drawing.Point(649, 137);
+            this.OneBarOutlineColorButton.Name = "OneBarOutlineColorButton";
+            this.OneBarOutlineColorButton.Size = new System.Drawing.Size(52, 20);
+            this.OneBarOutlineColorButton.TabIndex = 29;
+            this.OneBarOutlineColorButton.Text = "Bar縁";
+            this.OneBarOutlineColorButton.UseVisualStyleBackColor = true;
+            // 
             // OneFontOutlineColorButton
             // 
-            this.OneFontOutlineColorButton.Location = new System.Drawing.Point(649, 137);
+            this.OneFontOutlineColorButton.Location = new System.Drawing.Point(533, 137);
             this.OneFontOutlineColorButton.Name = "OneFontOutlineColorButton";
             this.OneFontOutlineColorButton.Size = new System.Drawing.Size(52, 20);
             this.OneFontOutlineColorButton.TabIndex = 28;
@@ -371,7 +383,7 @@
             // 
             // OneFontColorButton
             // 
-            this.OneFontColorButton.Location = new System.Drawing.Point(533, 137);
+            this.OneFontColorButton.Location = new System.Drawing.Point(475, 137);
             this.OneFontColorButton.Name = "OneFontColorButton";
             this.OneFontColorButton.Size = new System.Drawing.Size(52, 20);
             this.OneFontColorButton.TabIndex = 10;
@@ -380,7 +392,7 @@
             // 
             // OneBarColorButton
             // 
-            this.OneBarColorButton.Location = new System.Drawing.Point(475, 137);
+            this.OneBarColorButton.Location = new System.Drawing.Point(591, 137);
             this.OneBarColorButton.Name = "OneBarColorButton";
             this.OneBarColorButton.Size = new System.Drawing.Size(52, 20);
             this.OneBarColorButton.TabIndex = 9;
@@ -684,9 +696,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(6, 141);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(122, 12);
+            this.label6.Size = new System.Drawing.Size(110, 12);
             this.label6.TabIndex = 11;
-            this.label6.Text = "プログレスバーを表示する";
+            this.label6.Text = "スペルリストに表示する";
             // 
             // ShowProgressBarCheckBox
             // 
@@ -893,7 +905,7 @@
             this.TelopFontOutlineColorButton.Name = "TelopFontOutlineColorButton";
             this.TelopFontOutlineColorButton.Size = new System.Drawing.Size(52, 20);
             this.TelopFontOutlineColorButton.TabIndex = 46;
-            this.TelopFontOutlineColorButton.Text = "Outline";
+            this.TelopFontOutlineColorButton.Text = "Font縁";
             this.TelopFontOutlineColorButton.UseVisualStyleBackColor = true;
             // 
             // TelopSelectJobButton
@@ -1417,6 +1429,8 @@
             // OptionTabPage
             // 
             this.OptionTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.OptionTabPage.Controls.Add(this.SamplePictureBox);
+            this.OptionTabPage.Controls.Add(this.HaishokuToitsuButton);
             this.OptionTabPage.Controls.Add(this.BarOutlineColorButton);
             this.OptionTabPage.Controls.Add(this.FontOutlineColorButton);
             this.OptionTabPage.Controls.Add(this.label48);
@@ -1459,19 +1473,38 @@
             this.OptionTabPage.TabIndex = 1;
             this.OptionTabPage.Text = "オプション";
             // 
+            // SamplePictureBox
+            // 
+            this.SamplePictureBox.BackColor = System.Drawing.Color.Silver;
+            this.SamplePictureBox.Location = new System.Drawing.Point(213, 89);
+            this.SamplePictureBox.Name = "SamplePictureBox";
+            this.SamplePictureBox.Size = new System.Drawing.Size(364, 60);
+            this.SamplePictureBox.TabIndex = 36;
+            this.SamplePictureBox.TabStop = false;
+            // 
+            // HaishokuToitsuButton
+            // 
+            this.HaishokuToitsuButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.HaishokuToitsuButton.Location = new System.Drawing.Point(922, 637);
+            this.HaishokuToitsuButton.Name = "HaishokuToitsuButton";
+            this.HaishokuToitsuButton.Size = new System.Drawing.Size(126, 25);
+            this.HaishokuToitsuButton.TabIndex = 35;
+            this.HaishokuToitsuButton.Text = "配色を統一する";
+            this.HaishokuToitsuButton.UseVisualStyleBackColor = true;
+            // 
             // BarOutlineColorButton
             // 
-            this.BarOutlineColorButton.Location = new System.Drawing.Point(435, 155);
+            this.BarOutlineColorButton.Location = new System.Drawing.Point(509, 155);
             this.BarOutlineColorButton.Name = "BarOutlineColorButton";
             this.BarOutlineColorButton.Size = new System.Drawing.Size(68, 25);
             this.BarOutlineColorButton.TabIndex = 34;
-            this.BarOutlineColorButton.Text = "バーの縁";
+            this.BarOutlineColorButton.Text = "Bar縁";
             this.BarOutlineColorButton.UseVisualStyleBackColor = true;
             this.BarOutlineColorButton.Click += new System.EventHandler(this.BarOutlineColorButton_Click);
             // 
             // FontOutlineColorButton
             // 
-            this.FontOutlineColorButton.Location = new System.Drawing.Point(509, 155);
+            this.FontOutlineColorButton.Location = new System.Drawing.Point(361, 155);
             this.FontOutlineColorButton.Name = "FontOutlineColorButton";
             this.FontOutlineColorButton.Size = new System.Drawing.Size(68, 25);
             this.FontOutlineColorButton.TabIndex = 33;
@@ -1580,9 +1613,9 @@
             // TekiyoButton
             // 
             this.TekiyoButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.TekiyoButton.Location = new System.Drawing.Point(1078, 637);
+            this.TekiyoButton.Location = new System.Drawing.Point(1054, 637);
             this.TekiyoButton.Name = "TekiyoButton";
-            this.TekiyoButton.Size = new System.Drawing.Size(102, 25);
+            this.TekiyoButton.Size = new System.Drawing.Size(126, 25);
             this.TekiyoButton.TabIndex = 12;
             this.TekiyoButton.Text = "適用する";
             this.TekiyoButton.UseVisualStyleBackColor = true;
@@ -1696,7 +1729,7 @@
             // 
             // FontColorButton
             // 
-            this.FontColorButton.Location = new System.Drawing.Point(361, 155);
+            this.FontColorButton.Location = new System.Drawing.Point(287, 155);
             this.FontColorButton.Name = "FontColorButton";
             this.FontColorButton.Size = new System.Drawing.Size(68, 25);
             this.FontColorButton.TabIndex = 5;
@@ -1706,7 +1739,7 @@
             // 
             // FontButton
             // 
-            this.FontButton.Location = new System.Drawing.Point(287, 155);
+            this.FontButton.Location = new System.Drawing.Point(213, 155);
             this.FontButton.Name = "FontButton";
             this.FontButton.Size = new System.Drawing.Size(68, 25);
             this.FontButton.TabIndex = 4;
@@ -1716,23 +1749,24 @@
             // 
             // BarColorButton
             // 
-            this.BarColorButton.Location = new System.Drawing.Point(213, 155);
+            this.BarColorButton.Location = new System.Drawing.Point(435, 155);
             this.BarColorButton.Name = "BarColorButton";
             this.BarColorButton.Size = new System.Drawing.Size(68, 25);
             this.BarColorButton.TabIndex = 3;
-            this.BarColorButton.Text = "バーの色";
+            this.BarColorButton.Text = "Bar色";
             this.BarColorButton.UseVisualStyleBackColor = true;
             this.BarColorButton.Click += new System.EventHandler(this.BarColorButton_Click);
             // 
             // PreviewLabel
             // 
             this.PreviewLabel.BackColor = System.Drawing.Color.IndianRed;
-            this.PreviewLabel.Location = new System.Drawing.Point(214, 89);
+            this.PreviewLabel.Location = new System.Drawing.Point(1096, 6);
             this.PreviewLabel.Name = "PreviewLabel";
-            this.PreviewLabel.Size = new System.Drawing.Size(215, 63);
+            this.PreviewLabel.Size = new System.Drawing.Size(84, 25);
             this.PreviewLabel.TabIndex = 11;
-            this.PreviewLabel.Text = "バーサク 90.0";
+            this.PreviewLabel.Text = "ダミー";
             this.PreviewLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.PreviewLabel.Visible = false;
             // 
             // label18
             // 
@@ -1822,7 +1856,7 @@
             this.ShokikaButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ShokikaButton.Location = new System.Drawing.Point(6, 637);
             this.ShokikaButton.Name = "ShokikaButton";
-            this.ShokikaButton.Size = new System.Drawing.Size(102, 25);
+            this.ShokikaButton.Size = new System.Drawing.Size(126, 25);
             this.ShokikaButton.TabIndex = 13;
             this.ShokikaButton.Text = "初期化";
             this.ShokikaButton.UseVisualStyleBackColor = true;
@@ -1857,15 +1891,6 @@
             // 
             this.ToolTip.IsBalloon = true;
             // 
-            // OneBarOutlineColorButton
-            // 
-            this.OneBarOutlineColorButton.Location = new System.Drawing.Point(591, 137);
-            this.OneBarOutlineColorButton.Name = "OneBarOutlineColorButton";
-            this.OneBarOutlineColorButton.Size = new System.Drawing.Size(52, 20);
-            this.OneBarOutlineColorButton.TabIndex = 29;
-            this.OneBarOutlineColorButton.Text = "Bar縁";
-            this.OneBarOutlineColorButton.UseVisualStyleBackColor = true;
-            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1899,6 +1924,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.TelopDelayNumericUpDown)).EndInit();
             this.OptionTabPage.ResumeLayout(false);
             this.OptionTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SamplePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).EndInit();
@@ -2062,5 +2088,7 @@
         private System.Windows.Forms.Button FontOutlineColorButton;
         private System.Windows.Forms.Button BarOutlineColorButton;
         private System.Windows.Forms.Button OneBarOutlineColorButton;
+        private System.Windows.Forms.Button HaishokuToitsuButton;
+        private System.Windows.Forms.PictureBox SamplePictureBox;
     }
 }

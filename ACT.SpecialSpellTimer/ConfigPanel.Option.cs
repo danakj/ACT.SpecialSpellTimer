@@ -2,9 +2,12 @@
 {
     using System;
     using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Text;
     using System.Windows.Forms;
 
     using ACT.SpecialSpellTimer.Properties;
+    using ACT.SpecialSpellTimer.Utility;
 
     /// <summary>
     /// Configパネル オプション
@@ -56,6 +59,45 @@
 
             this.OptionTabPage.MouseHover += (s1, e1) => action();
             this.SwitchOverlayButton.MouseHover += (s1, e1) => action();
+
+            // 配色を統一する
+            this.HaishokuToitsuButton.Click += (s1, e1) =>
+            {
+                if (MessageBox.Show(
+                    this,
+                    "スペルとテロップの配色を統一しますか？",
+                    "ACT.SpecialSpellTimer",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2) == DialogResult.OK)
+                {
+                    this.ApplySettingsOption();
+
+                    foreach (var spell in SpellTimerTable.Table)
+                    {
+                        spell.FontColor = Settings.Default.FontColor.ToHTML();
+                        spell.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
+                        spell.BarColor = Settings.Default.ProgressBarColor.ToHTML();
+                        spell.BarOutlineColor = Settings.Default.ProgressBarOutlineColor.ToHTML();
+                    }
+
+                    foreach (var telop in OnePointTelopTable.Default.Table)
+                    {
+                        telop.FontColor = Settings.Default.FontColor.ToHTML();
+                        telop.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
+                    }
+
+                    SpellTimerTable.Save();
+                    OnePointTelopTable.Default.Save();
+
+                    // Windowを一度閉じてリフレッシュする
+                    SpellTimerCore.Default.ClosePanels();
+                    OnePointTelopController.CloseTelops();
+                }
+            };
+
+            this.BarWidthNumericUpDown.ValueChanged += (s1, e1) => this.DrawSampleImage();
+            this.BarHeightNumericUpDown.ValueChanged += (s1, e1) => this.DrawSampleImage();
         }
 
         /// <summary>
@@ -91,6 +133,10 @@
         private void TekiyoButton_Click(object sender, EventArgs e)
         {
             this.ApplySettingsOption();
+
+            // Windowを一旦すべて閉じる
+            SpellTimerCore.Default.ClosePanels();
+            OnePointTelopController.CloseTelops();
         }
 
         /// <summary>
@@ -104,6 +150,9 @@
             if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
             {
                 this.PreviewLabel.BackColor = this.ColorDialog.Color;
+
+                // サンプル画像を描画する
+                this.DrawSampleImage();
             }
         }
 
@@ -118,6 +167,9 @@
             if (this.FontDialog.ShowDialog(this) != DialogResult.Cancel)
             {
                 this.PreviewLabel.Font = this.FontDialog.Font;
+
+                // サンプル画像を描画する
+                this.DrawSampleImage();
             }
         }
 
@@ -132,6 +184,9 @@
             if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
             {
                 this.PreviewLabel.ForeColor = this.ColorDialog.Color;
+
+                // サンプル画像を描画する
+                this.DrawSampleImage();
             }
         }
 
@@ -146,6 +201,9 @@
             if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
             {
                 this.BarOutlineColorButton.BackColor = this.ColorDialog.Color;
+
+                // サンプル画像を描画する
+                this.DrawSampleImage();
             }
         }
 
@@ -160,6 +218,9 @@
             if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
             {
                 this.FontOutlineColorButton.BackColor = this.ColorDialog.Color;
+
+                // サンプル画像を描画する
+                this.DrawSampleImage();
             }
         }
 
@@ -208,6 +269,9 @@
             this.TimeOfHideNumericUpDown.Value = (decimal)Settings.Default.TimeOfHideSpell;
             this.RefreshIntervalNumericUpDown.Value = Settings.Default.RefreshInterval;
             this.EnabledPTPlaceholderCheckBox.Checked = Settings.Default.EnabledPartyMemberPlaceholder;
+
+            // サンプル画像を描画する
+            this.DrawSampleImage();
         }
 
         /// <summary>
@@ -233,10 +297,103 @@
 
             // 設定を保存する
             Settings.Default.Save();
+        }
 
-            // Windowを一旦すべて閉じる
-            SpellTimerCore.Default.ClosePanels();
-            OnePointTelopController.CloseTelops();
+        /// <summary>
+        /// サンプルイメージを描画する
+        /// </summary>
+        private void DrawSampleImage()
+        {
+            var font = this.PreviewLabel.Font;
+            var fontColor = this.PreviewLabel.ForeColor;
+            var fontOutlineColor = this.FontOutlineColorButton.BackColor;
+            var barColor = this.PreviewLabel.BackColor;
+            var barOutlineColor = this.BarOutlineColorButton.BackColor;
+            var barSize = new Size(
+                (int)this.BarWidthNumericUpDown.Value,
+                (int)this.BarHeightNumericUpDown.Value);
+            var barLocation = new Point(
+                (this.SamplePictureBox.Width / 2) - (barSize.Width / 2),
+                this.SamplePictureBox.Height - barSize.Height - 25);
+
+            var bmp = new Bitmap(this.SamplePictureBox.Width, this.SamplePictureBox.Height);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+
+                // バーの暗を描く
+                var backRect = new Rectangle(barLocation, barSize);
+                var backBrush = new SolidBrush(barColor.ChangeBrightness(0.4d));
+                g.FillRectangle(backBrush, backRect);
+
+                // バーの明を描く
+                var foreRect = new Rectangle(barLocation, new Size((int)(barSize.Width * 0.6), barSize.Height));
+                var foreBrush = new SolidBrush(barColor);
+                g.FillRectangle(foreBrush, foreRect);
+
+                // バーのアウトラインを描く
+                var outlineRect = new Rectangle(barLocation, barSize);
+                var outlinePen = new Pen(barOutlineColor, 1.0f);
+                g.DrawRectangle(outlinePen, outlineRect);
+
+                // フォントのペンを生成する
+                var fontBrush = new SolidBrush(fontColor);
+                var fontOutlinePen = new Pen(fontOutlineColor, 0.2f);
+                var fontRect = new Rectangle(
+                    barLocation.X,
+                    22,
+                    barSize.Width,
+                    this.SamplePictureBox.Height - 22);
+
+                // フォントを描く
+                var spellSf = new StringFormat()
+                {
+                    Alignment = StringAlignment.Near
+                };
+
+                var recastSf = new StringFormat()
+                {
+                    Alignment = StringAlignment.Far
+                };
+
+                var path = new GraphicsPath();
+                path.AddString(
+                    "サンプルスペル",
+                    font.FontFamily,
+                    (int)font.Style,
+                    (float)font.ToFontSizeWPF(),
+                    fontRect,
+                    spellSf);
+
+                path.AddString(
+                    "120.0",
+                    font.FontFamily,
+                    (int)font.Style,
+                    (float)font.ToFontSizeWPF(),
+                    fontRect,
+                    recastSf);
+
+                g.FillPath(fontBrush, path);
+                g.DrawPath(fontOutlinePen, path);
+
+                // まとめて後片付け
+                backBrush.Dispose();
+                foreBrush.Dispose();
+                outlinePen.Dispose();
+                fontOutlinePen.Dispose();
+                path.Dispose();
+                spellSf.Dispose();
+                recastSf.Dispose();
+            }
+
+            if (this.SamplePictureBox.Image != null)
+            {
+                this.SamplePictureBox.Image.Dispose();
+                this.SamplePictureBox.Image = null;
+            }
+
+            this.SamplePictureBox.Image = bmp;
         }
     }
 }
