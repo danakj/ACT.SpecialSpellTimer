@@ -2,6 +2,9 @@
 {
     using System;
     using System.Drawing;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
     using System.Windows.Forms;
 
     using ACT.SpecialSpellTimer.Properties;
@@ -29,6 +32,52 @@
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public SpecialSpellTimerPlugin()
+        {
+            // このDLLの配置場所とACT標準のPluginディレクトリも解決の対象にする
+            AppDomain.CurrentDomain.AssemblyResolve += (s, e) =>
+            {
+                const string thisName = "ACT.SpecialSpellTimer.dll";
+
+                try
+                {
+                    var thisDirectory = ActGlobals.oFormActMain.ActPlugins
+                        .Where(x => x.pluginFile.Name.ToLower() == thisName.ToLower())
+                        .Select(x => Path.GetDirectoryName(x.pluginFile.FullName))
+                        .FirstOrDefault();
+
+                    var pluginDirectory = Path.Combine(
+                        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                        @"Advanced Combat Tracker\Plugins");
+
+                    var asm = new AssemblyName(e.Name);
+                    var path1 = Path.Combine(thisDirectory, asm.Name + ".dll");
+                    var path2 = Path.Combine(pluginDirectory, asm.Name + ".dll");
+
+                    if (File.Exists(path1))
+                    {
+                        return Assembly.LoadFrom(path1);
+                    }
+
+                    if (File.Exists(path2))
+                    {
+                        return Assembly.LoadFrom(path2);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ActGlobals.oFormActMain.WriteExceptionLog(
+                        ex,
+                        "ACT.SpecialSpellTimer Assemblyの解決で例外が発生しました");
+                }
+
+                return null;
+            };
         }
 
         /// <summary>
