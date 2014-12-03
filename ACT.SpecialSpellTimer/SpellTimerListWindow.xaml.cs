@@ -222,8 +222,6 @@
                     c.RecastTime = 0;
                     c.Progress = 1.0d;
 
-                    c.BarColor = spell.BarColor;
-                    c.BarOutlineColor = spell.BarOutlineColor;
                     c.BarWidth = spell.BarWidth;
                     c.BarHeight = spell.BarHeight;
                     c.TextFontFamily = spell.FontFamily;
@@ -231,6 +229,8 @@
                     c.TextFontStyle = spell.FontStyle;
                     c.FontColor = spell.FontColor;
                     c.FontOutlineColor = spell.FontOutlineColor;
+                    c.BarColor = spell.BarColor;
+                    c.BarOutlineColor = spell.BarOutlineColor;
 
                     if (spell.MatchDateTime > DateTime.MinValue)
                     {

@@ -147,10 +147,10 @@
                 nr.Panel = "General";
                 nr.SpellTitle = "New Spell";
                 nr.ProgressBarVisible = true;
-                nr.BarColor = Settings.Default.ProgressBarColor.ToHTML();
                 nr.FontColor = Settings.Default.FontColor.ToHTML();
-                nr.BarOutlineColor = Settings.Default.ProgressBarOutlineColor.ToHTML();
                 nr.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
+                nr.BarColor = Settings.Default.ProgressBarColor.ToHTML();
+                nr.BarOutlineColor = Settings.Default.ProgressBarOutlineColor.ToHTML();
                 nr.FontFamily = Settings.Default.Font.Name;
                 nr.FontSize = Settings.Default.Font.Size;
                 nr.FontStyle = (int)Settings.Default.Font.Style;
@@ -174,9 +174,9 @@
                         nr.RepeatEnabled = baseRow.RepeatEnabled;
                         nr.ProgressBarVisible = baseRow.ProgressBarVisible;
                         nr.IsReverse = baseRow.IsReverse;
-                        nr.BarColor = baseRow.BarColor;
                         nr.FontColor = baseRow.FontColor;
                         nr.FontOutlineColor = baseRow.FontOutlineColor;
+                        nr.BarColor = baseRow.BarColor;
                         nr.BarOutlineColor = baseRow.BarOutlineColor;
                         nr.DontHide = baseRow.DontHide;
                         nr.FontFamily = baseRow.FontFamily;
@@ -293,7 +293,7 @@
                     src.FontColor = this.SpellVisualSetting.FontColor.ToHTML();
                     src.FontOutlineColor = this.SpellVisualSetting.FontOutlineColor.ToHTML();
                     src.BarColor = this.SpellVisualSetting.BarColor.ToHTML();
-                    src.BarOutlineColor = this.SpellVisualSetting.FontOutlineColor.ToHTML();
+                    src.BarOutlineColor = this.SpellVisualSetting.BarOutlineColor.ToHTML();
                     src.BarWidth = this.SpellVisualSetting.BarSize.Width;
                     src.BarHeight = this.SpellVisualSetting.BarSize.Height;
 
