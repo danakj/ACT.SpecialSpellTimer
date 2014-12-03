@@ -133,8 +133,6 @@
                 return;
             }
 
-            this.Width = Settings.Default.ProgressBarSize.Width;
-
             // 表示対象だけに絞る
             var spells =
                 from x in this.SpellTimers
