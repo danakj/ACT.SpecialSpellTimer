@@ -5,12 +5,12 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Runtime.InteropServices;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Interop;
     using System.Windows.Media;
-
     using ACT.SpecialSpellTimer.Properties;
 
     /// <summary>
@@ -126,8 +126,7 @@
             }
 
             // 表示するものがなければ何もしない
-            if (this.SpellTimers == null ||
-                !this.SpellTimers.Any(x => x.ProgressBarVisible))
+            if (this.SpellTimers == null)
             {
                 this.HideOverlay();
                 return;
@@ -151,6 +150,12 @@
                     (DateTime.Now - x.MatchDateTime.AddSeconds(x.RecastTime)).TotalSeconds <= Settings.Default.TimeOfHideSpell
                     select
                     x;
+            }
+
+            if (!spells.Any())
+            {
+                this.HideOverlay();
+                return;
             }
 
             // リキャストの近いもの順でソートする
@@ -179,99 +184,102 @@
                 }
             }
 
-            // スペルタイマコントロールのリストを生成する
-            var displayList = new List<SpellTimerControl>();
-            foreach (var spell in spells)
+            Dispatcher.InvokeAsync(new Action(() =>
             {
-                SpellTimerControl c;
-                if (this.SpellTimerControls.ContainsKey(spell.ID))
+                // スペルタイマコントロールのリストを生成する
+                var displayList = new List<SpellTimerControl>();
+                foreach (var spell in spells)
                 {
-                    c = this.SpellTimerControls[spell.ID];
-                }
-                else
-                {
-                    c = new SpellTimerControl();
-                    this.SpellTimerControls.Add(spell.ID, c);
-
-                    c.Visibility = Visibility.Hidden;
-                    c.MouseDown += (s, e) => this.DragOn(e);
-                    c.MouseUp += (s, e) => this.DragOff(e);
-
-                    c.HorizontalAlignment = HorizontalAlignment.Left;
-                    c.VerticalAlignment = VerticalAlignment.Top;
-                    c.Margin = new Thickness();
-
-                    this.BaseGrid.RowDefinitions.Add(new RowDefinition());
-                    this.BaseGrid.Children.Add(c);
-
-                    c.SetValue(Grid.ColumnProperty, 0);
-                    c.SetValue(Grid.RowProperty, this.BaseGrid.Children.Count - 1);
-                }
-
-                c.SpellTitle = string.IsNullOrWhiteSpace(spell.SpellTitleReplaced) ?
-                    spell.SpellTitle :
-                    spell.SpellTitleReplaced;
-                c.IsReverse = spell.IsReverse;
-                c.RecastTime = 0;
-                c.Progress = 1.0d;
-
-                c.BarColor = spell.BarColor;
-                c.BarOutlineColor = spell.BarOutlineColor;
-                c.BarWidth = spell.BarWidth;
-                c.BarHeight = spell.BarHeight;
-                c.TextFontFamily = spell.FontFamily;
-                c.TextFontSize = spell.FontSize;
-                c.TextFontStyle = spell.FontStyle;
-                c.FontColor = spell.FontColor;
-                c.FontOutlineColor = spell.FontOutlineColor;
-
-                if (spell.MatchDateTime > DateTime.MinValue)
-                {
-                    var nextDateTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
-
-                    c.RecastTime = (nextDateTime - DateTime.Now).TotalSeconds;
-                    if (c.RecastTime < 0)
+                    SpellTimerControl c;
+                    if (this.SpellTimerControls.ContainsKey(spell.ID))
                     {
-                        c.RecastTime = 0;
+                        c = this.SpellTimerControls[spell.ID];
+                    }
+                    else
+                    {
+                        c = new SpellTimerControl();
+                        this.SpellTimerControls.Add(spell.ID, c);
+
+                        c.Visibility = Visibility.Hidden;
+                        c.MouseDown += (s, e) => this.DragOn(e);
+                        c.MouseUp += (s, e) => this.DragOff(e);
+
+                        c.HorizontalAlignment = HorizontalAlignment.Left;
+                        c.VerticalAlignment = VerticalAlignment.Top;
+                        c.Margin = new Thickness();
+
+                        this.BaseGrid.RowDefinitions.Add(new RowDefinition());
+                        this.BaseGrid.Children.Add(c);
+
+                        c.SetValue(Grid.ColumnProperty, 0);
+                        c.SetValue(Grid.RowProperty, this.BaseGrid.Children.Count - 1);
                     }
 
-                    c.Progress = spell.RecastTime != 0 ?
-                        (spell.RecastTime - c.RecastTime) / spell.RecastTime :
-                        1.0d;
-                    if (c.Progress > 1.0d)
+                    c.SpellTitle = string.IsNullOrWhiteSpace(spell.SpellTitleReplaced) ?
+                        spell.SpellTitle :
+                        spell.SpellTitleReplaced;
+                    c.IsReverse = spell.IsReverse;
+                    c.RecastTime = 0;
+                    c.Progress = 1.0d;
+
+                    c.BarColor = spell.BarColor;
+                    c.BarOutlineColor = spell.BarOutlineColor;
+                    c.BarWidth = spell.BarWidth;
+                    c.BarHeight = spell.BarHeight;
+                    c.TextFontFamily = spell.FontFamily;
+                    c.TextFontSize = spell.FontSize;
+                    c.TextFontStyle = spell.FontStyle;
+                    c.FontColor = spell.FontColor;
+                    c.FontOutlineColor = spell.FontOutlineColor;
+
+                    if (spell.MatchDateTime > DateTime.MinValue)
                     {
-                        c.Progress = 1.0d;
+                        var nextDateTime = spell.MatchDateTime.AddSeconds(spell.RecastTime);
+
+                        c.RecastTime = (nextDateTime - DateTime.Now).TotalSeconds;
+                        if (c.RecastTime < 0)
+                        {
+                            c.RecastTime = 0;
+                        }
+
+                        c.Progress = spell.RecastTime != 0 ?
+                            (spell.RecastTime - c.RecastTime) / spell.RecastTime :
+                            1.0d;
+                        if (c.Progress > 1.0d)
+                        {
+                            c.Progress = 1.0d;
+                        }
+                    }
+
+                    c.Refresh();
+
+                    displayList.Add(c);
+                }
+
+                // 今回表示しないスペルを隠す
+                foreach (var c in this.SpellTimerControls)
+                {
+                    if (!spells.Any(x => x.ID == c.Key))
+                    {
+                        c.Value.Visibility = Visibility.Hidden;
                     }
                 }
 
-                c.Refresh();
-
-                displayList.Add(c);
-            }
-
-            // 今回表示しないスペルを隠す
-            foreach (var c in this.SpellTimerControls)
-            {
-                if (!spells.Any(x => x.ID == c.Key))
+                // スペルの表示順を設定する
+                var index = 0;
+                foreach (var displaySpell in displayList)
                 {
-                    c.Value.Visibility = Visibility.Hidden;
+                    displaySpell.SetValue(Grid.RowProperty, index);
+                    displaySpell.Visibility = Visibility.Visible;
+                    index++;
                 }
-            }
 
-            // スペルの表示順を設定する
-            var index = 0;
-            foreach (var displaySpell in displayList)
-            {
-                displaySpell.SetValue(Grid.RowProperty, index);
-                displaySpell.Visibility = Visibility.Visible;
-                index++;
-            }
-
-            if (spells.Count() > 0)
-            {
-                this.ShowOverlay();
-                this.Topmost = true;
-            }
+                if (spells.Count() > 0)
+                {
+                    this.ShowOverlay();
+                    this.Topmost = true;
+                }
+            }));
         }
 
         #region フォーカスを奪わない対策
