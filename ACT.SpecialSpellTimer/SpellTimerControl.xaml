@@ -38,7 +38,7 @@
             >
             <Utility:OutlineTextBlock.Effect>
                 <BlurEffect 
-                    Radius="3" 
+                    Radius="2" 
                     RenderingBias="Quality" />
             </Utility:OutlineTextBlock.Effect>
         </Utility:OutlineTextBlock>
@@ -69,7 +69,7 @@
             >
             <Utility:OutlineTextBlock.Effect>
                 <BlurEffect 
-                    Radius="3" 
+                    Radius="2" 
                     RenderingBias="Quality" />
             </Utility:OutlineTextBlock.Effect>
         </Utility:OutlineTextBlock>

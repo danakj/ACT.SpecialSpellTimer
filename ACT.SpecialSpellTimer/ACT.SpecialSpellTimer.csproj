@@ -109,6 +109,12 @@
     <Compile Include="TextCommandController.cs" />
     <Compile Include="Utility\ActInvoker.cs" />
     <Compile Include="Utility\OutlineTextBlock.cs" />
+    <Compile Include="VisualSettingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VisualSettingControl.Designer.cs">
+      <DependentUpon>VisualSettingControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="WindowExtension.Visibility.cs" />
     <Compile Include="WindowExtension.Transparent.cs" />
     <Compile Include="SpellTimerListWindow.xaml.cs">
@@ -123,6 +129,27 @@
     <Folder Include="resources\icon\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="resources\color\サンプル灰色系.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\color\サンプル紫色系.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\color\サンプル緑色系.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\color\サンプル青色系.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\color\テロップ茶色系.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\color\テロップ青色系.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\color\回復風緑系.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\wav\alarm.wav" />
     <Content Include="resources\wav\chime13.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -197,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SelectJobForm.resx">
       <DependentUpon>SelectJobForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisualSettingControl.resx">
+      <DependentUpon>VisualSettingControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

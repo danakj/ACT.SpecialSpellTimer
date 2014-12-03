@@ -197,6 +197,10 @@
                     c.MouseDown += (s, e) => this.DragOn(e);
                     c.MouseUp += (s, e) => this.DragOff(e);
 
+                    c.HorizontalAlignment = HorizontalAlignment.Left;
+                    c.VerticalAlignment = VerticalAlignment.Top;
+                    c.Margin = new Thickness();
+
                     this.BaseGrid.RowDefinitions.Add(new RowDefinition());
                     this.BaseGrid.Children.Add(c);
 
@@ -208,12 +212,18 @@
                     spell.SpellTitle :
                     spell.SpellTitleReplaced;
                 c.IsReverse = spell.IsReverse;
-                c.BarColor = spell.BarColor;
-                c.BarOutlineColor = spell.BarOutlineColor;
-                c.FontColor = spell.FontColor;
-                c.FontOutlineColor = spell.FontOutlineColor;
                 c.RecastTime = 0;
                 c.Progress = 1.0d;
+
+                c.BarColor = spell.BarColor;
+                c.BarOutlineColor = spell.BarOutlineColor;
+                c.BarWidth = spell.BarWidth;
+                c.BarHeight = spell.BarHeight;
+                c.TextFontFamily = spell.FontFamily;
+                c.TextFontSize = spell.FontSize;
+                c.TextFontStyle = spell.FontStyle;
+                c.FontColor = spell.FontColor;
+                c.FontOutlineColor = spell.FontOutlineColor;
 
                 if (spell.MatchDateTime > DateTime.MinValue)
                 {

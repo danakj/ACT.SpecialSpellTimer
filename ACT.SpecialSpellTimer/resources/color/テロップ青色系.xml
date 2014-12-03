@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ColorSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FontColor>#E8F3F5</FontColor>
+  <FontOutlineColor>#3882A5</FontOutlineColor>
+  <BarColor>#E8F3F5</BarColor>
+  <BarOutlineColor>#3882A5</BarOutlineColor>
+</ColorSet>

@@ -54,6 +54,30 @@
         public string BarOutlineColor { get; set; }
 
         /// <summary>
+        /// バーの幅
+        /// </summary>
+        public int BarWidth { get; set; }
+        /// <summary>
+        /// バーの高さ
+        /// </summary>
+        public int BarHeight { get; set; }
+
+        /// <summary>
+        /// フォントファミリー
+        /// </summary>
+        public string TextFontFamily { get; set; }
+
+        /// <summary>
+        /// フォントサイズ
+        /// </summary>
+        public float TextFontSize { get; set; }
+
+        /// <summary>
+        /// フォントスタイル
+        /// </summary>
+        public int TextFontStyle { get; set; }
+
+        /// <summary>
         /// Fontの色
         /// </summary>
         public string FontColor { get; set; }
@@ -71,10 +95,10 @@
 #if false
             var sw = Stopwatch.StartNew();
 #endif
-            this.Width = Settings.Default.ProgressBarSize.Width;
+            this.Width = this.BarWidth;
 
             var tb = default(OutlineTextBlock);
-            var font = Settings.Default.Font;
+            var font = new System.Drawing.Font(this.TextFontFamily, this.TextFontSize, (System.Drawing.FontStyle)this.TextFontStyle);
             var fontBrush = new SolidColorBrush(Settings.Default.FontColor.ToWPF());
             var fontOutline = new SolidColorBrush(Settings.Default.FontOutlineColor.ToWPF());
 
@@ -125,9 +149,9 @@
             foreRect.Stroke = foreBrush;
             foreRect.Fill = foreBrush;
             foreRect.Width = this.IsReverse ?
-                (double)(Settings.Default.ProgressBarSize.Width * (1.0d - this.Progress)) :
-                (double)(Settings.Default.ProgressBarSize.Width * this.Progress);
-            foreRect.Height = Settings.Default.ProgressBarSize.Height;
+                (double)(this.BarWidth * (1.0d - this.Progress)) :
+                (double)(this.BarWidth * this.Progress);
+            foreRect.Height = this.BarHeight;
             foreRect.RadiusX = 2.0d;
             foreRect.RadiusY = 2.0d;
             Canvas.SetLeft(foreRect, 0);
@@ -136,7 +160,7 @@
             var backRect = new Rectangle();
             backRect.Stroke = backBrush;
             backRect.Fill = backBrush;
-            backRect.Width = Settings.Default.ProgressBarSize.Width;
+            backRect.Width = this.BarWidth;
             backRect.Height = foreRect.Height;
             backRect.RadiusX = 2.0d;
             backRect.RadiusY = 2.0d;
@@ -155,7 +179,7 @@
 
             var outlineRect = new Rectangle();
             outlineRect.Stroke = outlineBrush;
-            outlineRect.Width = Settings.Default.ProgressBarSize.Width;
+            outlineRect.Width = backRect.Width;
             outlineRect.Height = foreRect.Height;
             outlineRect.RadiusX = 2.0d;
             outlineRect.RadiusY = 2.0d;

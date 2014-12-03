@@ -33,18 +33,6 @@
             this.TelopDelaySoundComboBox.ValueMember = "FullPath";
             this.TelopDelaySoundComboBox.DisplayMember = "Name";
 
-            // イベントを設定する
-            this.TelopBackColorTranceparentCheckBox.CheckedChanged += (s1, e1) =>
-            {
-                this.TelopBackColorButton.Enabled =
-                    !this.TelopBackColorTranceparentCheckBox.Checked;
-
-                if (this.TelopBackColorTranceparentCheckBox.Checked)
-                {
-                    this.TelopSampleLabel.BackColor = Color.Transparent;
-                }
-            };
-
             this.TelopPlay1Button.Click += (s1, e1) =>
             {
                 SoundController.Default.Play((string)this.TelopMatchSoundComboBox.SelectedValue ?? string.Empty);
@@ -78,47 +66,6 @@
             {
                 this.ShowTelopDetail(
                     e1.Node.Tag as OnePointTelop);
-            };
-
-            this.TelopBackColorButton.Click += (s1, e1) =>
-            {
-                this.ColorDialog.Color = this.TelopSampleLabel.BackColor;
-                if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
-                {
-                    this.TelopSampleLabel.BackColor = this.ColorDialog.Color;
-                }
-            };
-
-            this.TelopFontButton.Click += (s1, e1) =>
-            {
-                var maxSizeBack = this.FontDialog.MaxSize;
-
-                this.FontDialog.MaxSize = 0;
-                this.FontDialog.Font = this.TelopSampleLabel.Font;
-                if (this.FontDialog.ShowDialog(this) != DialogResult.Cancel)
-                {
-                    this.TelopSampleLabel.Font = this.FontDialog.Font;
-                }
-
-                this.FontDialog.MaxSize = maxSizeBack;
-            };
-
-            this.TelopFontColorButton.Click += (s1, e1) =>
-            {
-                this.ColorDialog.Color = this.TelopSampleLabel.ForeColor;
-                if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
-                {
-                    this.TelopSampleLabel.ForeColor = this.ColorDialog.Color;
-                }
-            };
-
-            this.TelopFontOutlineColorButton.Click += (s1, e1) =>
-            {
-                this.ColorDialog.Color = this.TelopFontOutlineColorButton.BackColor;
-                if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
-                {
-                    this.TelopFontOutlineColorButton.BackColor = this.ColorDialog.Color;
-                }
             };
 
             this.TelopSelectJobButton.Click += (s1, e1) =>
@@ -309,12 +256,11 @@
                 src.DisplayTime = (long)this.DisplayTimeNumericUpDown.Value;
                 src.AddMessageEnabled = this.EnabledAddMessageCheckBox.Checked;
                 src.ProgressBarEnabled = this.TelopProgressBarEnabledCheckBox.Checked;
-                src.BackColor = this.TelopSampleLabel.BackColor.ToHTML();
-                src.FontColor = this.TelopSampleLabel.ForeColor.ToHTML();
-                src.FontOutlineColor = this.TelopFontOutlineColorButton.BackColor.ToHTML();
-                src.FontFamily = this.TelopSampleLabel.Font.Name;
-                src.FontSize = this.TelopSampleLabel.Font.Size;
-                src.FontStyle = (int)this.TelopSampleLabel.Font.Style;
+                src.FontColor = this.TelopVisualSetting.FontColor.ToHTML();
+                src.FontOutlineColor = this.TelopVisualSetting.FontOutlineColor.ToHTML();
+                src.FontFamily = this.TelopVisualSetting.TextFont.Name;
+                src.FontSize = this.TelopVisualSetting.TextFont.Size;
+                src.FontStyle = (int)this.TelopVisualSetting.TextFont.Style;
                 src.Left = (double)this.TelopLeftNumericUpDown.Value;
                 src.Top = (double)this.TelopTopNumericUpDown.Value;
                 src.MatchSound = (string)this.TelopMatchSoundComboBox.SelectedValue ?? string.Empty;
@@ -434,19 +380,14 @@
             this.EnabledAddMessageCheckBox.Checked = src.AddMessageEnabled;
             this.TelopProgressBarEnabledCheckBox.Checked = src.ProgressBarEnabled;
 
-            this.TelopSampleLabel.BackColor = src.BackColor.FromHTML();
-            this.TelopSampleLabel.ForeColor = src.FontColor.FromHTML();
-            this.TelopSampleLabel.Font = new Font(
+            this.TelopVisualSetting.FontColor = src.FontColor.FromHTML();
+            this.TelopVisualSetting.FontOutlineColor = src.FontOutlineColor.FromHTML();
+            this.TelopVisualSetting.FontColor = src.FontColor.FromHTML();
+            this.TelopVisualSetting.TextFont = new Font(
                 src.FontFamily,
                 src.FontSize,
                 (FontStyle)src.FontStyle);
-            this.TelopBackColorTranceparentCheckBox.Checked =
-                this.TelopSampleLabel.BackColor == Color.Transparent;
-            this.TelopBackColorButton.Enabled =
-                !this.TelopBackColorTranceparentCheckBox.Checked;
-            this.TelopFontOutlineColorButton.BackColor = string.IsNullOrWhiteSpace(src.FontOutlineColor) ?
-                Settings.Default.FontOutlineColor :
-                src.FontOutlineColor.FromHTML();
+            this.TelopVisualSetting.RefreshSampleImage();
 
             var left = (int)src.Left;
             var top = (int)src.Top;

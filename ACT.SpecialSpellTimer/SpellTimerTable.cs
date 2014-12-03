@@ -8,6 +8,7 @@
     using System.Text.RegularExpressions;
     using System.Xml.Serialization;
 
+    using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Sound;
 
     /// <summary>
@@ -147,6 +148,19 @@
                 row.TimeupSound = !string.IsNullOrWhiteSpace(row.TimeupSound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.TimeupSound)) :
                     string.Empty;
+
+                if (row.BarWidth == 0 && row.BarHeight == 0)
+                {
+                    row.BarWidth = Settings.Default.ProgressBarSize.Width;
+                    row.BarHeight = Settings.Default.ProgressBarSize.Height;
+                }
+
+                if (string.IsNullOrWhiteSpace(row.FontFamily))
+                {
+                    row.FontFamily = Settings.Default.Font.Name;
+                    row.FontSize = Settings.Default.Font.Size;
+                    row.FontStyle = (int)Settings.Default.Font.Style;
+                }
             }
         }
 
@@ -291,10 +305,15 @@
         public DateTime MatchDateTime { get; set; }
         public bool TimeupHide { get; set; }
         public bool IsReverse { get; set; }
+        public string FontFamily { get; set; }
+        public float FontSize { get; set; }
+        public int FontStyle { get; set; }
         public string FontColor { get; set; }
         public string FontOutlineColor { get; set; }
         public string BarColor { get; set; }
         public string BarOutlineColor { get; set; }
+        public int BarWidth { get; set; }
+        public int BarHeight { get; set; }
         public bool DontHide { get; set; }
         public bool RegexEnabled { get; set; }
         public string JobFilter { get; set; }
