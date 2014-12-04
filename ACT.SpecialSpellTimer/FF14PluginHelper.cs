@@ -121,7 +121,7 @@
             {
                 if (item == null)
                 {
-                    break;
+                    continue;
                 }
 
                 var combatant = new Combatant();
