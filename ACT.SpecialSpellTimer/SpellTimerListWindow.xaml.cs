@@ -256,6 +256,13 @@
                     displayList.Add(c);
                 }
 
+                // 表示するスペル数と行数が同じ？
+                if (displayList.Count == this.BaseGrid.RowDefinitions.Count)
+                {
+                    // 空行を加える
+                    this.BaseGrid.RowDefinitions.Add(new RowDefinition());
+                }
+
                 // 今回表示しないスペルを隠す
                 // 非表示にして一番下の行に追いやる
                 foreach (var c in this.SpellTimerControls)

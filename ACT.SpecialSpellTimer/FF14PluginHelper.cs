@@ -7,7 +7,6 @@
     using System.Reflection;
 
     using Advanced_Combat_Tracker;
-    using FFXIV_ACT_Plugin.Memory;
 
     public static partial class FF14PluginHelper
     {
@@ -114,7 +113,10 @@
                 }
 
                 var scanCombatants = GetScanCombatants();
-                if (scanCombatants == null) return null;
+                if (scanCombatants == null)
+                {
+                    return null;
+                }
 
                 var item = scanCombatants.GetType().InvokeMember("GetCombatantList", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod, null, scanCombatants, null);
                 FieldInfo fi = item.GetType().GetField("_items", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField);
@@ -170,16 +172,6 @@
 
             var partyList = new List<uint>();
             partyCount = 0;
-
-            if (plugin == null)
-            {
-                return partyList;
-            }
-
-            if (GetFFXIVProcess == null)
-            {
-                return partyList;
-            }
 
             var scanCombatants = GetScanCombatants();
             if (scanCombatants == null)
