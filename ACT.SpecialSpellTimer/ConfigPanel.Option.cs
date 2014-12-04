@@ -164,6 +164,13 @@
                     "現在の状態 -> 通常";
             }
 
+            this.DefaultVisualSetting.BarSize = Settings.Default.ProgressBarSize;
+            this.DefaultVisualSetting.BarColor = Settings.Default.ProgressBarColor;
+            this.DefaultVisualSetting.BarOutlineColor = Settings.Default.ProgressBarOutlineColor;
+            this.DefaultVisualSetting.TextFont = Settings.Default.Font;
+            this.DefaultVisualSetting.FontColor = Settings.Default.FontColor;
+            this.DefaultVisualSetting.FontOutlineColor = Settings.Default.FontOutlineColor;
+            
             this.OpacityNumericUpDown.Value = Settings.Default.Opacity;
             this.ClickThroughCheckBox.Checked = Settings.Default.ClickThroughEnabled;
             this.AutoSortCheckBox.Checked = Settings.Default.AutoSortEnabled;
@@ -180,10 +187,11 @@
         {
             Settings.Default.ProgressBarSize = this.DefaultVisualSetting.BarSize;
             Settings.Default.ProgressBarColor = this.DefaultVisualSetting.BarColor;
+            Settings.Default.ProgressBarOutlineColor = this.DefaultVisualSetting.BarOutlineColor;
             Settings.Default.Font = this.DefaultVisualSetting.TextFont;
             Settings.Default.FontColor = this.DefaultVisualSetting.FontColor;
             Settings.Default.FontOutlineColor = this.DefaultVisualSetting.FontOutlineColor;
-            Settings.Default.ProgressBarOutlineColor = this.DefaultVisualSetting.BarOutlineColor;
+
             Settings.Default.Opacity = (int)this.OpacityNumericUpDown.Value;
             Settings.Default.ClickThroughEnabled = this.ClickThroughCheckBox.Checked;
             Settings.Default.AutoSortEnabled = this.AutoSortCheckBox.Checked;

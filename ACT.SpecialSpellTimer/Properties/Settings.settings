@@ -12,7 +12,7 @@
       <Value Profile="(Default)">White</Value>
     </Setting>
     <Setting Name="Font" Type="System.Drawing.Font" Scope="User">
-      <Value Profile="(Default)">ＭＳ Ｐゴシック, 9.75pt, style=Bold</Value>
+      <Value Profile="(Default)">Meiryo UI, 9.75pt, style=Bold</Value>
     </Setting>
     <Setting Name="FontColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">AliceBlue</Value>
