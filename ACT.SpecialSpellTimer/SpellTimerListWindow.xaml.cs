@@ -257,11 +257,13 @@
                 }
 
                 // 今回表示しないスペルを隠す
+                // 非表示にして一番下の行に追いやる
                 foreach (var c in this.SpellTimerControls)
                 {
                     if (!spells.Any(x => x.ID == c.Key))
                     {
                         c.Value.Visibility = Visibility.Hidden;
+                        c.Value.SetValue(Grid.RowProperty, this.BaseGrid.RowDefinitions.Count - 1);
                     }
                 }
 

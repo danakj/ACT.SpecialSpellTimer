@@ -7,6 +7,7 @@
     using System.Reflection;
 
     using Advanced_Combat_Tracker;
+    using FFXIV_ACT_Plugin.Memory;
 
     public static partial class FF14PluginHelper
     {
@@ -45,6 +46,11 @@
                 {
                     Initialize();
 
+                    if (plugin == null)
+                    {
+                        return null;
+                    }
+
                     FieldInfo fi = plugin.GetType().GetField("_Memory", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
                     var memory = fi.GetValue(plugin);
                     if (memory == null) return null;
@@ -70,6 +76,11 @@
         {
             Initialize();
 
+            if (plugin == null)
+            {
+                return null;
+            }
+
             FieldInfo fi = plugin.GetType().GetField("_Memory", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
             var memory = fi.GetValue(plugin);
             if (memory == null) return null;
@@ -92,6 +103,16 @@
             var result = new List<Combatant>();
             try
             {
+                if (plugin == null)
+                {
+                    return result;
+                }
+
+                if (GetFFXIVProcess == null)
+                {
+                    return result;
+                }
+
                 var scanCombatants = GetScanCombatants();
                 if (scanCombatants == null) return null;
 
@@ -134,8 +155,9 @@
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex);
             }
 
             return result;
@@ -148,6 +170,16 @@
 
             var partyList = new List<uint>();
             partyCount = 0;
+
+            if (plugin == null)
+            {
+                return partyList;
+            }
+
+            if (GetFFXIVProcess == null)
+            {
+                return partyList;
+            }
 
             var scanCombatants = GetScanCombatants();
             if (scanCombatants == null)
