@@ -148,7 +148,15 @@
                 var countAsText = count.ToString("N1");
                 var displayTimeAsText = this.DataSource.DisplayTime.ToString("N1");
                 countAsText = countAsText.PadLeft(displayTimeAsText.Length, '0');
-                this.MessageTextBlock.Text = message.Replace("{COUNT}", countAsText);
+
+                var count0AsText = count.ToString("N0");
+                var displayTime0AsText = this.DataSource.DisplayTime.ToString("N0");
+                count0AsText = count0AsText.PadLeft(displayTime0AsText.Length, '0');
+
+                message = message.Replace("{COUNT}", countAsText);
+                message = message.Replace("{COUNT0}", count0AsText);
+
+                this.MessageTextBlock.Text = message;
 
                 var font = new System.Drawing.Font(
                     this.DataSource.FontFamily,
