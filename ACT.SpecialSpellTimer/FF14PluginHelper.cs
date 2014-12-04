@@ -1,9 +1,7 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Globalization;
     using System.Reflection;
 
     using Advanced_Combat_Tracker;
@@ -12,17 +10,20 @@
     {
         private static object lockObject = new object();
         private static object plugin;
+        private static object pluginMemory;
+        private static dynamic pluginConfig;
+        private static dynamic pluginScancombat;
 
         public static void Initialize()
         {
             lock (lockObject)
             {
-                if (plugin != null)
+                if (!ActGlobals.oFormActMain.Visible)
                 {
                     return;
                 }
 
-                if (ActGlobals.oFormActMain.Visible)
+                if (plugin == null)
                 {
                     foreach (var item in ActGlobals.oFormActMain.ActPlugins)
                     {
@@ -32,6 +33,39 @@
                             plugin = item.pluginObj;
                             break;
                         }
+                    }
+                }
+
+                if (plugin != null)
+                {
+                    FieldInfo fi;
+
+                    if (pluginMemory == null)
+                    {
+                        fi = plugin.GetType().GetField("_Memory", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+                        pluginMemory = fi.GetValue(plugin);
+                    }
+
+                    if (pluginMemory == null)
+                    {
+                        return;
+                    }
+
+                    if (pluginConfig == null)
+                    {
+                        fi = pluginMemory.GetType().GetField("_config", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+                        pluginConfig = fi.GetValue(pluginMemory);
+                    }
+
+                    if (pluginConfig == null)
+                    {
+                        return;
+                    }
+
+                    if (pluginScancombat == null)
+                    {
+                        fi = pluginConfig.GetType().GetField("ScanCombatants", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
+                        pluginScancombat = fi.GetValue(pluginConfig);
                     }
                 }
             }
@@ -45,22 +79,12 @@
                 {
                     Initialize();
 
-                    if (plugin == null)
+                    if (pluginConfig == null)
                     {
                         return null;
                     }
 
-                    FieldInfo fi = plugin.GetType().GetField("_Memory", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
-                    var memory = fi.GetValue(plugin);
-                    if (memory == null) return null;
-
-                    fi = memory.GetType().GetField("_config", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
-                    var config = fi.GetValue(memory);
-                    if (config == null) return null;
-
-                    fi = config.GetType().GetField("Process", BindingFlags.GetField | BindingFlags.Public | BindingFlags.Instance);
-                    var process = fi.GetValue(config);
-                    if (process == null) return null;
+                    var process = pluginConfig.Process;
 
                     return (Process)process;
                 }
@@ -71,95 +95,50 @@
             }
         }
 
-        private static object GetScanCombatants()
-        {
-            Initialize();
-
-            if (plugin == null)
-            {
-                return null;
-            }
-
-            FieldInfo fi = plugin.GetType().GetField("_Memory", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
-            var memory = fi.GetValue(plugin);
-            if (memory == null) return null;
-
-            fi = memory.GetType().GetField("_config", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
-            var config = fi.GetValue(memory);
-            if (config == null) return null;
-
-            fi = config.GetType().GetField("ScanCombatants", BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Instance);
-            var scanCombatants = fi.GetValue(config);
-            if (scanCombatants == null) return null;
-
-            return scanCombatants;
-        }
-
         public static List<Combatant> GetCombatantList()
         {
             Initialize();
 
             var result = new List<Combatant>();
-            try
+
+            if (plugin == null)
             {
-                if (plugin == null)
-                {
-                    return result;
-                }
-
-                if (GetFFXIVProcess == null)
-                {
-                    return result;
-                }
-
-                var scanCombatants = GetScanCombatants();
-                if (scanCombatants == null)
-                {
-                    return null;
-                }
-
-                var item = scanCombatants.GetType().InvokeMember("GetCombatantList", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod, null, scanCombatants, null);
-                FieldInfo fi = item.GetType().GetField("_items", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField);
-
-                Type[] nestedType = item.GetType().GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-                object tmp = fi.GetValue(item);
-                if (tmp.GetType().IsArray)
-                {
-                    foreach (object temp in (Array)tmp)
-                    {
-                        if (temp == null) break;
-
-                        var combatant = new Combatant();
-
-                        var getValue = new Func<object, string, object>(
-                            (obj, fieldName) =>
-                            {
-                                var fi1 = obj.GetType().GetField(fieldName, BindingFlags.Public | BindingFlags.Instance);
-                                return fi1.GetValue(obj);
-                            });
-
-                        combatant.ID = (uint)getValue(temp, "ID");
-                        combatant.OwnerID = (uint)getValue(temp, "OwnerID");
-                        combatant.Job = (int)getValue(temp, "Job");
-                        combatant.Name = (string)getValue(temp, "Name");
-                        combatant.type = (byte)getValue(temp, "type");
-                        combatant.Level = (int)getValue(temp, "Level");
-
-                        combatant.CurrentHP = (int)getValue(temp, "CurrentHP");
-                        combatant.MaxHP = (int)getValue(temp, "MaxHP");
-
-                        combatant.CurrentMP = (int)getValue(temp, "CurrentMP");
-                        combatant.MaxMP = (int)getValue(temp, "MaxMP");
-
-                        combatant.CurrentTP = (int)getValue(temp, "CurrentTP"); ;
-
-                        result.Add(combatant);
-                    }
-                }
+                return result;
             }
-            catch (Exception ex)
+
+            if (GetFFXIVProcess == null)
             {
-                Debug.WriteLine(ex);
+                return result;
+            }
+
+            if (pluginScancombat == null)
+            {
+                return result;
+            }
+
+            dynamic list = pluginScancombat.GetCombatantList();
+            foreach (dynamic item in list.ToArray())
+            {
+                if (item == null)
+                {
+                    break;
+                }
+
+                var combatant = new Combatant();
+
+                combatant.ID = (uint)item.ID;
+                combatant.OwnerID = (uint)item.OwnerID;
+                combatant.Job = (int)item.Job;
+                combatant.Name = (string)item.Name;
+                combatant.type = (byte)item.type;
+                combatant.Level = (int)item.Level;
+                combatant.CurrentHP = (int)item.CurrentHP;
+                combatant.MaxHP = (int)item.MaxHP;
+                combatant.CurrentMP = (int)item.CurrentMP;
+                combatant.MaxMP = (int)item.MaxMP;
+                combatant.CurrentTP = (int)item.CurrentTP;
+
+                result.Add(combatant);
             }
 
             return result;
@@ -173,51 +152,23 @@
             var partyList = new List<uint>();
             partyCount = 0;
 
-            var scanCombatants = GetScanCombatants();
-            if (scanCombatants == null)
+            if (plugin == null)
             {
                 return partyList;
             }
 
-            var args = new object[]
+            if (GetFFXIVProcess == null)
             {
-                partyCount
-            };
-
-            var modifiers1 = new ParameterModifier(1);
-            modifiers1[0] = true;
-            var modifiers = new ParameterModifier[]
-            {
-                modifiers1
-            };
-
-            var items = scanCombatants.GetType().InvokeMember(
-                "GetCurrentPartyList",
-                BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod,
-                null,
-                scanCombatants,
-                args,
-                modifiers,
-                CultureInfo.CurrentCulture,
-                null);
-
-            partyCount = (int)args[0];
-
-            var fi = items.GetType().GetField("_items", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.GetField);
-            var itemsInner = fi.GetValue(items);
-
-            if (itemsInner.GetType().IsArray)
-            {
-                foreach (var item in (Array)itemsInner)
-                {
-                    if (item == null)
-                    {
-                        break;
-                    }
-
-                    partyList.Add((uint)item);
-                }
+                return partyList;
             }
+
+            if (pluginScancombat == null)
+            {
+                return partyList;
+            }
+
+            partyList = pluginScancombat.GetCurrentPartyList(
+                out partyCount) as List<uint>;
 
             return partyList;
         }
