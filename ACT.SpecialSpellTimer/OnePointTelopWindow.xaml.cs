@@ -20,11 +20,6 @@
     public partial class OnePointTelopWindow : Window
     {
         /// <summary>
-        /// ドラッグ中か？
-        /// </summary>
-        private bool IsDragging;
-
-        /// <summary>
         /// ドラッグ開始
         /// </summary>
         private Action<MouseEventArgs> DragOn;
@@ -33,6 +28,11 @@
         /// ドラッグ終了
         /// </summary>
         private Action<MouseEventArgs> DragOff;
+
+        /// <summary>
+        /// ドラッグ中か？
+        /// </summary>
+        public bool IsDragging { get; private set; }
 
         /// <summary>
         /// コンストラクタ

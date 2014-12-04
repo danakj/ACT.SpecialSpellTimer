@@ -307,7 +307,11 @@
                     select
                     x).ToArray();
 
-                w.RefreshSpellTimer();
+                // ドラッグ中じゃない？
+                if (!w.IsDragging)
+                {
+                    w.RefreshSpellTimer();
+                }
             }
 
             sw5.Stop();

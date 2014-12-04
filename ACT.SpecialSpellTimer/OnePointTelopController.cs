@@ -260,7 +260,11 @@
                     telopWindowList.Add(w);
                 }
 
-                w.Refresh();
+                // ドラッグ中じゃない？
+                if (!w.IsDragging)
+                {
+                    w.Refresh();
+                }
 
                 // telopの位置を保存する
                 if (DateTime.Now.Second == 0)
@@ -273,7 +277,12 @@
                 if (Settings.Default.OverlayVisible &&
                     Settings.Default.TelopAlwaysVisible)
                 {
-                    w.ShowOverlay();
+                    // ドラッグ中じゃない？
+                    if (!w.IsDragging)
+                    {
+                        w.ShowOverlay();
+                    }
+
                     continue;
                 }
 

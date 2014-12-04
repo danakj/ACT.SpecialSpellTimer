@@ -82,7 +82,7 @@
         /// <summary>
         /// ドラッグ中か？
         /// </summary>
-        private bool IsDragging;
+        public bool IsDragging { get; private set; }
 
         /// <summary>
         /// ドラッグ開始
