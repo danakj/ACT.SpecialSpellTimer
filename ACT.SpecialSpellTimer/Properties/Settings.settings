@@ -53,5 +53,8 @@
     <Setting Name="ProgressBarOutlineColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">22, 120, 157</Value>
     </Setting>
+    <Setting Name="BackgroundColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Transparent</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

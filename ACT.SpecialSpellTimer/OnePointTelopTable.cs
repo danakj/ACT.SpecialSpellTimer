@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -9,6 +10,7 @@
     using System.Xml.Serialization;
 
     using ACT.SpecialSpellTimer.Sound;
+    using ACT.SpecialSpellTimer.Utility;
 
     /// <summary>
     /// ワンポイントテレロップ設定テーブル
@@ -191,6 +193,11 @@
                 row.DelaySound = !string.IsNullOrWhiteSpace(row.DelaySound) ?
                     Path.Combine(SoundController.Default.WaveDirectory, Path.GetFileName(row.DelaySound)) :
                     string.Empty;
+
+                if (string.IsNullOrWhiteSpace(row.BackgroundColor))
+                {
+                    row.BackgroundColor = Color.Transparent.ToHTML();
+                }
             }
         }
 
@@ -306,7 +313,7 @@
             this.MatchTextToSpeak = string.Empty;
             this.DelaySound = string.Empty;
             this.DelayTextToSpeak = string.Empty;
-            this.BackColor = string.Empty;
+            this.BackgroundColor = string.Empty;
             this.FontFamily = string.Empty;
             this.FontColor = string.Empty;
             this.FontOutlineColor = string.Empty;
@@ -330,7 +337,8 @@
         public string MatchTextToSpeak { get; set; }
         public string DelaySound { get; set; }
         public string DelayTextToSpeak { get; set; }
-        public string BackColor { get; set; }
+        public string BackgroundColor { get; set; }
+        public int BackgroundAlpha { get; set; }
         public string FontFamily { get; set; }
         public float FontSize { get; set; }
         public int FontStyle { get; set; }

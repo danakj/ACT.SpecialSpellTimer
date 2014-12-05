@@ -175,8 +175,6 @@
                 this.MessageTextBlock.Stroke = strokeBrush;
                 this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 2.5d);
 
-                this.Background = new SolidColorBrush(this.DataSource.BackColor.FromHTML().ToWPF());
-
                 // プログレスバーを表示しない？
                 if (!this.DataSource.ProgressBarEnabled ||
                     this.DataSource.DisplayTime <= 0)
@@ -267,6 +265,18 @@
                     this.ProgressBarCanvas.Visibility = Visibility.Visible;
                 }
             }));
+
+            // 背景色を設定する
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                var backgroundColor = this.DataSource.BackgroundColor.FromHTML().ToWPF();
+                this.BaseColorRectangle.Fill = new SolidColorBrush(Color.FromArgb(
+                    (byte)this.DataSource.BackgroundAlpha,
+                    backgroundColor.R,
+                    backgroundColor.G,
+                    backgroundColor.B));
+            }),
+            DispatcherPriority.Loaded);
         }
 
         #region フォーカスを奪わない対策

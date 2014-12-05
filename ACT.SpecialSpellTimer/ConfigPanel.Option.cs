@@ -56,42 +56,6 @@
 
             this.OptionTabPage.MouseHover += (s1, e1) => action();
             this.SwitchOverlayButton.MouseHover += (s1, e1) => action();
-
-            // 配色を統一する
-            this.HaishokuToitsuButton.Click += (s1, e1) =>
-            {
-                if (MessageBox.Show(
-                    this,
-                    "スペルとテロップの配色を統一しますか？",
-                    "ACT.SpecialSpellTimer",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question,
-                    MessageBoxDefaultButton.Button2) == DialogResult.OK)
-                {
-                    this.ApplySettingsOption();
-
-                    foreach (var spell in SpellTimerTable.Table)
-                    {
-                        spell.FontColor = Settings.Default.FontColor.ToHTML();
-                        spell.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
-                        spell.BarColor = Settings.Default.ProgressBarColor.ToHTML();
-                        spell.BarOutlineColor = Settings.Default.ProgressBarOutlineColor.ToHTML();
-                    }
-
-                    foreach (var telop in OnePointTelopTable.Default.Table)
-                    {
-                        telop.FontColor = Settings.Default.FontColor.ToHTML();
-                        telop.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
-                    }
-
-                    SpellTimerTable.Save();
-                    OnePointTelopTable.Default.Save();
-
-                    // Windowを一度閉じてリフレッシュする
-                    SpellTimerCore.Default.ClosePanels();
-                    OnePointTelopController.CloseTelops();
-                }
-            };
         }
 
         /// <summary>
@@ -170,6 +134,8 @@
             this.DefaultVisualSetting.TextFont = Settings.Default.Font;
             this.DefaultVisualSetting.FontColor = Settings.Default.FontColor;
             this.DefaultVisualSetting.FontOutlineColor = Settings.Default.FontOutlineColor;
+            this.DefaultVisualSetting.BackgroundColor = Settings.Default.BackgroundColor;
+            this.DefaultVisualSetting.RefreshSampleImage();
             
             this.OpacityNumericUpDown.Value = Settings.Default.Opacity;
             this.ClickThroughCheckBox.Checked = Settings.Default.ClickThroughEnabled;
@@ -191,6 +157,7 @@
             Settings.Default.Font = this.DefaultVisualSetting.TextFont;
             Settings.Default.FontColor = this.DefaultVisualSetting.FontColor;
             Settings.Default.FontOutlineColor = this.DefaultVisualSetting.FontOutlineColor;
+            Settings.Default.BackgroundColor = this.DefaultVisualSetting.BackgroundColor;
 
             Settings.Default.Opacity = (int)this.OpacityNumericUpDown.Value;
             Settings.Default.ClickThroughEnabled = this.ClickThroughCheckBox.Checked;

@@ -260,12 +260,6 @@
                     telopWindowList.Add(w);
                 }
 
-                // ドラッグ中じゃない？
-                if (!w.IsDragging)
-                {
-                    w.Refresh();
-                }
-
                 // telopの位置を保存する
                 if (DateTime.Now.Second == 0)
                 {
@@ -280,6 +274,7 @@
                     // ドラッグ中じゃない？
                     if (!w.IsDragging)
                     {
+                        w.Refresh();
                         w.ShowOverlay();
                     }
 
@@ -293,6 +288,7 @@
 
                     if (start <= DateTime.Now && DateTime.Now <= end)
                     {
+                        w.Refresh();
                         w.ShowOverlay();
                     }
                     else

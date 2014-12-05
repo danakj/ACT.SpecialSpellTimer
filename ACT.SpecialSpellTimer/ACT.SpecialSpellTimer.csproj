@@ -112,6 +112,12 @@
     <Compile Include="VisualSettingControl.Designer.cs">
       <DependentUpon>VisualSettingControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="VisualSettingControlBackgoundColorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VisualSettingControlBackgoundColorForm.Designer.cs">
+      <DependentUpon>VisualSettingControlBackgoundColorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WindowExtension.Visibility.cs" />
     <Compile Include="WindowExtension.Transparent.cs" />
     <Compile Include="SpellTimerListWindow.xaml.cs">
@@ -224,6 +230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VisualSettingControl.resx">
       <DependentUpon>VisualSettingControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisualSettingControlBackgoundColorForm.resx">
+      <DependentUpon>VisualSettingControlBackgoundColorForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

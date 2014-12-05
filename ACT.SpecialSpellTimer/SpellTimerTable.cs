@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -10,6 +11,7 @@
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Sound;
+    using ACT.SpecialSpellTimer.Utility;
 
     /// <summary>
     /// SpellTimerテーブル
@@ -161,6 +163,11 @@
                     row.FontSize = Settings.Default.Font.Size;
                     row.FontStyle = (int)Settings.Default.Font.Style;
                 }
+
+                if (string.IsNullOrWhiteSpace(row.BackgroundColor))
+                {
+                    row.BackgroundColor = Color.Transparent.ToHTML();
+                }
             }
         }
 
@@ -288,6 +295,7 @@
             this.FontOutlineColor = string.Empty;
             this.BarColor = string.Empty;
             this.BarOutlineColor = string.Empty;
+            this.BackgroundColor = string.Empty;
             this.JobFilter = string.Empty;
             this.SpellTitleReplaced = string.Empty;
             this.MatchedLog = string.Empty;
@@ -321,6 +329,8 @@
         public string BarOutlineColor { get; set; }
         public int BarWidth { get; set; }
         public int BarHeight { get; set; }
+        public string BackgroundColor { get; set; }
+        public int BackgroundAlpha { get; set; }
         public bool DontHide { get; set; }
         public bool RegexEnabled { get; set; }
         public string JobFilter { get; set; }

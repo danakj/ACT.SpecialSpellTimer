@@ -36,9 +36,18 @@
             this.ChangeFontOutlineColorItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ChangeBarColorItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ChangeBarOutlineColorItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ChangeBackgoundColorItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ChangeBackgroundAlphaItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.SaveColorSetItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResetSpellFontItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResetSpellBarSizeItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResetSpellColorItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ResetTelopFontItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResetTelopColorItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.LoadColorSetItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveColorSetItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BarSizeLabel = new System.Windows.Forms.Label();
             this.WidthNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.HeightNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -59,7 +68,8 @@
             this.SamplePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SamplePictureBox.BackColor = System.Drawing.Color.DarkGray;
+            this.SamplePictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.SamplePictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SamplePictureBox.Location = new System.Drawing.Point(3, 3);
             this.SamplePictureBox.Name = "SamplePictureBox";
             this.SamplePictureBox.Size = new System.Drawing.Size(300, 50);
@@ -75,11 +85,20 @@
             this.ChangeFontOutlineColorItem,
             this.ChangeBarColorItem,
             this.ChangeBarOutlineColorItem,
+            this.ChangeBackgoundColorItem,
+            this.ChangeBackgroundAlphaItem,
             this.toolStripSeparator1,
-            this.SaveColorSetItem,
-            this.LoadColorSetItem});
+            this.ResetSpellFontItem,
+            this.ResetSpellBarSizeItem,
+            this.ResetSpellColorItem,
+            this.toolStripSeparator2,
+            this.ResetTelopFontItem,
+            this.ResetTelopColorItem,
+            this.toolStripSeparator3,
+            this.LoadColorSetItem,
+            this.SaveColorSetItem});
             this.VisualSettingContextMenuStrip.Name = "ContextMenuStrip";
-            this.VisualSettingContextMenuStrip.Size = new System.Drawing.Size(287, 164);
+            this.VisualSettingContextMenuStrip.Size = new System.Drawing.Size(287, 330);
             // 
             // ChangeFontItem
             // 
@@ -111,16 +130,62 @@
             this.ChangeBarOutlineColorItem.Size = new System.Drawing.Size(286, 22);
             this.ChangeBarOutlineColorItem.Text = "バーのアウトラインの色を変更する";
             // 
+            // ChangeBackgoundColorItem
+            // 
+            this.ChangeBackgoundColorItem.Name = "ChangeBackgoundColorItem";
+            this.ChangeBackgoundColorItem.Size = new System.Drawing.Size(286, 22);
+            this.ChangeBackgoundColorItem.Text = "背景色を変更する";
+            // 
+            // ChangeBackgroundAlphaItem
+            // 
+            this.ChangeBackgroundAlphaItem.Name = "ChangeBackgroundAlphaItem";
+            this.ChangeBackgroundAlphaItem.Size = new System.Drawing.Size(286, 22);
+            this.ChangeBackgroundAlphaItem.Text = "背景色のアルファチャンネルを変更する";
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(283, 6);
             // 
-            // SaveColorSetItem
+            // ResetSpellFontItem
             // 
-            this.SaveColorSetItem.Name = "SaveColorSetItem";
-            this.SaveColorSetItem.Size = new System.Drawing.Size(286, 22);
-            this.SaveColorSetItem.Text = "配色を保存する";
+            this.ResetSpellFontItem.Name = "ResetSpellFontItem";
+            this.ResetSpellFontItem.Size = new System.Drawing.Size(286, 22);
+            this.ResetSpellFontItem.Text = "スペルをこのフォントで統一する";
+            // 
+            // ResetSpellBarSizeItem
+            // 
+            this.ResetSpellBarSizeItem.Name = "ResetSpellBarSizeItem";
+            this.ResetSpellBarSizeItem.Size = new System.Drawing.Size(286, 22);
+            this.ResetSpellBarSizeItem.Text = "スペルをこのバーサイズで統一する";
+            // 
+            // ResetSpellColorItem
+            // 
+            this.ResetSpellColorItem.Name = "ResetSpellColorItem";
+            this.ResetSpellColorItem.Size = new System.Drawing.Size(286, 22);
+            this.ResetSpellColorItem.Text = "スペルをこの配色で統一する";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(283, 6);
+            // 
+            // ResetTelopFontItem
+            // 
+            this.ResetTelopFontItem.Name = "ResetTelopFontItem";
+            this.ResetTelopFontItem.Size = new System.Drawing.Size(286, 22);
+            this.ResetTelopFontItem.Text = "テロップをこのフォントで統一する";
+            // 
+            // ResetTelopColorItem
+            // 
+            this.ResetTelopColorItem.Name = "ResetTelopColorItem";
+            this.ResetTelopColorItem.Size = new System.Drawing.Size(286, 22);
+            this.ResetTelopColorItem.Text = "テロップをこの配色で統一する";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(283, 6);
             // 
             // LoadColorSetItem
             // 
@@ -128,15 +193,22 @@
             this.LoadColorSetItem.Size = new System.Drawing.Size(286, 22);
             this.LoadColorSetItem.Text = "配色を読み込む";
             // 
+            // SaveColorSetItem
+            // 
+            this.SaveColorSetItem.Name = "SaveColorSetItem";
+            this.SaveColorSetItem.Size = new System.Drawing.Size(286, 22);
+            this.SaveColorSetItem.Text = "配色を保存する";
+            // 
             // BarSizeLabel
             // 
             this.BarSizeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BarSizeLabel.AutoSize = true;
             this.BarSizeLabel.Location = new System.Drawing.Point(110, 62);
             this.BarSizeLabel.Name = "BarSizeLabel";
-            this.BarSizeLabel.Size = new System.Drawing.Size(64, 12);
+            this.BarSizeLabel.Size = new System.Drawing.Size(60, 12);
             this.BarSizeLabel.TabIndex = 2;
-            this.BarSizeLabel.Text = "バーのサイズ";
+            this.BarSizeLabel.Text = "ﾊﾞｰのｻｲｽﾞ";
+            this.BarSizeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // WidthNumericUpDown
             // 
@@ -261,5 +333,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.SaveFileDialog SaveFileDialog;
         private System.Windows.Forms.OpenFileDialog OpenFileDialog;
+        private System.Windows.Forms.ToolStripMenuItem ChangeBackgoundColorItem;
+        private System.Windows.Forms.ToolStripMenuItem ChangeBackgroundAlphaItem;
+        private System.Windows.Forms.ToolStripMenuItem ResetSpellFontItem;
+        private System.Windows.Forms.ToolStripMenuItem ResetSpellBarSizeItem;
+        private System.Windows.Forms.ToolStripMenuItem ResetSpellColorItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem ResetTelopFontItem;
+        private System.Windows.Forms.ToolStripMenuItem ResetTelopColorItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }

@@ -165,12 +165,12 @@
                 1;
             nr.Title = "New Telop";
             nr.DisplayTime = 3;
-            nr.BackColor = Color.Transparent.ToHTML();
             nr.FontColor = Settings.Default.FontColor.ToHTML();
             nr.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
             nr.FontFamily = Settings.Default.Font.Name;
             nr.FontSize = Settings.Default.Font.Size;
             nr.FontStyle = (int)Settings.Default.Font.Style;
+            nr.BackgroundColor = Settings.Default.BackgroundColor.ToHTML();
             nr.Left = 10.0d;
             nr.Top = 10.0d;
             nr.JobFilter = string.Empty;
@@ -193,12 +193,13 @@
                     nr.DisplayTime = baseRow.DisplayTime;
                     nr.AddMessageEnabled = baseRow.AddMessageEnabled;
                     nr.ProgressBarEnabled = baseRow.ProgressBarEnabled;
-                    nr.BackColor = baseRow.BackColor;
                     nr.FontColor = baseRow.FontColor;
                     nr.FontOutlineColor = baseRow.FontOutlineColor;
                     nr.FontFamily = baseRow.FontFamily;
                     nr.FontSize = baseRow.FontSize;
                     nr.FontStyle = baseRow.FontStyle;
+                    nr.BackgroundColor = baseRow.BackgroundColor;
+                    nr.BackgroundAlpha = baseRow.BackgroundAlpha;
                     nr.Left = baseRow.Left;
                     nr.Top = baseRow.Top;
                     nr.JobFilter = baseRow.JobFilter;
@@ -263,6 +264,8 @@
                 src.FontFamily = this.TelopVisualSetting.TextFont.Name;
                 src.FontSize = this.TelopVisualSetting.TextFont.Size;
                 src.FontStyle = (int)this.TelopVisualSetting.TextFont.Style;
+                src.BackgroundColor = this.TelopVisualSetting.BackgroundColor.ToHTML();
+                src.BackgroundAlpha = this.TelopVisualSetting.BackgroundColor.A;
                 src.Left = (double)this.TelopLeftNumericUpDown.Value;
                 src.Top = (double)this.TelopTopNumericUpDown.Value;
                 src.MatchSound = (string)this.TelopMatchSoundComboBox.SelectedValue ?? string.Empty;
@@ -389,6 +392,10 @@
                 src.FontFamily,
                 src.FontSize,
                 (FontStyle)src.FontStyle);
+            this.TelopVisualSetting.BackgroundColor = string.IsNullOrWhiteSpace(src.BackgroundColor) ?
+                Settings.Default.BackgroundColor :
+                Color.FromArgb(src.BackgroundAlpha, src.BackgroundColor.FromHTML());
+
             this.TelopVisualSetting.RefreshSampleImage();
 
             var left = (int)src.Left;

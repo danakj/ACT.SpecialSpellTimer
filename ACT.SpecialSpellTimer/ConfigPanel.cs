@@ -156,6 +156,7 @@
                 nr.FontStyle = (int)Settings.Default.Font.Style;
                 nr.BarWidth = Settings.Default.ProgressBarSize.Width;
                 nr.BarHeight = Settings.Default.ProgressBarSize.Height;
+                nr.BackgroundColor = Settings.Default.BackgroundColor.ToHTML();
                 nr.JobFilter = string.Empty;
 
                 // 現在選択しているノードの情報を一部コピーする
@@ -185,6 +186,8 @@
                         nr.FontStyle = baseRow.FontStyle;
                         nr.BarWidth = baseRow.BarWidth;
                         nr.BarHeight = baseRow.BarHeight;
+                        nr.BackgroundColor = baseRow.BackgroundColor;
+                        nr.BackgroundAlpha = baseRow.BackgroundAlpha;
                         nr.JobFilter = baseRow.JobFilter;
                     }
                 }
@@ -298,6 +301,14 @@
                     src.BarOutlineColor = this.SpellVisualSetting.BarOutlineColor.ToHTML();
                     src.BarWidth = this.SpellVisualSetting.BarSize.Width;
                     src.BarHeight = this.SpellVisualSetting.BarSize.Height;
+                    src.BackgroundColor = this.SpellVisualSetting.BackgroundColor.ToHTML();
+                    src.BackgroundAlpha = this.SpellVisualSetting.BackgroundColor.A;
+
+                    var panel = SpellTimerTable.Table.Where(x => x.Panel == src.Panel);
+                    foreach (var s in panel)
+                    {
+                        s.BackgroundColor = src.BackgroundColor;
+                    }
 
                     SpellTimerTable.Save();
                     this.LoadSpellTimerTable();
@@ -466,6 +477,9 @@
                 Settings.Default.FontOutlineColor :
                 src.FontOutlineColor.FromHTML();
             this.SpellVisualSetting.BarSize = new Size(src.BarWidth, src.BarHeight);
+            this.SpellVisualSetting.BackgroundColor = string.IsNullOrWhiteSpace(src.BackgroundColor) ?
+                Settings.Default.BackgroundColor :
+                Color.FromArgb(src.BackgroundAlpha, src.BackgroundColor.FromHTML());
 
             this.SpellVisualSetting.RefreshSampleImage();
 

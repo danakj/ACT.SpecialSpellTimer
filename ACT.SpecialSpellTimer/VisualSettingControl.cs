@@ -20,10 +20,15 @@
     {
         private bool barEnabled;
 
+        private Color backgroundColor;
+
+        private VisualSettingControlBackgoundColorForm alphaDialog = new VisualSettingControlBackgoundColorForm();
+
         public VisualSettingControl()
         {
             this.InitializeComponent();
 
+            this.components.Add(this.alphaDialog);
             this.TextFont = Settings.Default.Font;
             this.FontColor = Settings.Default.FontColor;
             this.FontOutlineColor = Settings.Default.FontOutlineColor;
@@ -108,14 +113,28 @@
                 }
             };
 
-            this.WidthNumericUpDown.ValueChanged += (s1, e1) =>
+            this.ChangeBackgoundColorItem.Click += (s1, e1) =>
             {
-                this.RefreshSampleImage();
+                this.ColorDialog.Color = this.backgroundColor;
+                if (this.ColorDialog.ShowDialog(this) != DialogResult.Cancel)
+                {
+                    this.backgroundColor = Color.FromArgb(
+                        this.alphaDialog.Alpha,
+                        this.ColorDialog.Color);
+                    this.RefreshSampleImage();
+                }
             };
 
-            this.HeightNumericUpDown.ValueChanged += (s1, e1) =>
+            this.ChangeBackgroundAlphaItem.Click += (s1, e1) =>
             {
-                this.RefreshSampleImage();
+                this.alphaDialog.Alpha = this.backgroundColor.A;
+                if (this.alphaDialog.ShowDialog(this) != DialogResult.Cancel)
+                {
+                    this.backgroundColor = Color.FromArgb(
+                        this.alphaDialog.Alpha,
+                        this.backgroundColor);
+                    this.RefreshSampleImage();
+                }
             };
 
             this.LoadColorSetItem.Click += (s1, e1) =>
@@ -132,6 +151,9 @@
                             this.FontOutlineColor = colorSet.FontOutlineColor.FromHTML();
                             this.BarColor = colorSet.BarColor.FromHTML();
                             this.BarOutlineColor = colorSet.BarOutlineColor.FromHTML();
+                            this.backgroundColor = string.IsNullOrWhiteSpace(colorSet.BackgroundColor) ?
+                                Color.Transparent :
+                                Color.FromArgb(colorSet.BackgroundAlpha, colorSet.BackgroundColor.FromHTML());
 
                             this.RefreshSampleImage();
 
@@ -162,7 +184,9 @@
                         FontColor = this.FontColor.ToHTML(),
                         FontOutlineColor = this.FontOutlineColor.ToHTML(),
                         BarColor = this.BarColor.ToHTML(),
-                        BarOutlineColor = this.BarOutlineColor.ToHTML()
+                        BarOutlineColor = this.BarOutlineColor.ToHTML(),
+                        BackgroundColor = this.backgroundColor.ToHTML(),
+                        BackgroundAlpha = this.backgroundColor.A,
                     };
 
                     using (var sw = new StreamWriter(this.SaveFileDialog.FileName, false, new UTF8Encoding(false)))
@@ -171,6 +195,79 @@
                         xs.Serialize(sw, colorSet);
                     }
                 }
+            };
+
+            this.WidthNumericUpDown.ValueChanged += (s1, e1) =>
+            {
+                this.RefreshSampleImage();
+            };
+
+            this.HeightNumericUpDown.ValueChanged += (s1, e1) =>
+            {
+                this.RefreshSampleImage();
+            };
+
+            this.ResetSpellFontItem.Click += (s1, e1) =>
+            {
+                foreach (var s in SpellTimerTable.Table)
+                {
+                    s.FontFamily = this.TextFont.Name;
+                    s.FontSize = this.TextFont.Size;
+                    s.FontStyle = (int)this.TextFont.Style;
+                }
+
+                SpellTimerTable.Save();
+            };
+
+            this.ResetSpellBarSizeItem.Click += (s1, e1) =>
+            {
+                foreach (var s in SpellTimerTable.Table)
+                {
+                    s.BarWidth = this.BarSize.Width;
+                    s.BarHeight = this.BarSize.Height;
+                }
+
+                SpellTimerTable.Save();
+            };
+
+            this.ResetSpellColorItem.Click += (s1, e1) =>
+            {
+                foreach (var s in SpellTimerTable.Table)
+                {
+                    s.FontColor = this.FontColor.ToHTML();
+                    s.FontOutlineColor = this.FontOutlineColor.ToHTML();
+                    s.BarColor = this.BarColor.ToHTML();
+                    s.BarOutlineColor = this.BarOutlineColor.ToHTML();
+                    s.BackgroundColor = this.backgroundColor.ToHTML();
+                    s.BackgroundAlpha = this.backgroundColor.A;
+                }
+
+                SpellTimerTable.Save();
+            };
+
+            this.ResetTelopFontItem.Click += (s1, e1) =>
+            {
+                foreach (var s in OnePointTelopTable.Default.Table)
+                {
+                    s.FontFamily = this.TextFont.Name;
+                    s.FontSize = this.TextFont.Size;
+                    s.FontStyle = (int)this.TextFont.Style;
+                }
+
+                OnePointTelopTable.Default.Save();
+            };
+
+            this.ResetTelopColorItem.Click += (s1, e1) =>
+            {
+                foreach (var s in OnePointTelopTable.Default.Table)
+                {
+                    s.FontColor = this.FontColor.ToHTML();
+                    s.FontOutlineColor = this.FontOutlineColor.ToHTML();
+                    s.BackgroundColor = this.backgroundColor.ToHTML();
+                    s.BackgroundAlpha = this.backgroundColor.A;
+                }
+
+                OnePointTelopTable.Default.Save();
             };
         }
 
@@ -184,15 +281,28 @@
 
         public Color BarOutlineColor { get; set; }
 
-        public Size BarSize 
-        { 
+        public Color BackgroundColor
+        {
+            get
+            {
+                return this.backgroundColor;
+            }
+            set
+            {
+                this.backgroundColor = value;
+                this.alphaDialog.Alpha = this.backgroundColor.A;
+            }
+        }
+
+        public Size BarSize
+        {
             get
             {
                 return new Size(
                     (int)this.WidthNumericUpDown.Value,
                     (int)this.HeightNumericUpDown.Value);
             }
-            set 
+            set
             {
                 this.WidthNumericUpDown.Value = value.Width;
                 this.HeightNumericUpDown.Value = value.Height;
@@ -214,6 +324,7 @@
                     this.BarSizeXLabel.Visible = true;
                     this.ChangeBarColorItem.Enabled = true;
                     this.ChangeBarOutlineColorItem.Enabled = true;
+                    this.ResetSpellBarSizeItem.Enabled = true;
                 }
                 else
                 {
@@ -223,6 +334,7 @@
                     this.BarSizeXLabel.Visible = false;
                     this.ChangeBarColorItem.Enabled = false;
                     this.ChangeBarOutlineColorItem.Enabled = false;
+                    this.ResetSpellBarSizeItem.Enabled = false;
                 }
 
                 this.RefreshSampleImage();
@@ -251,6 +363,11 @@
             {
                 g.SmoothingMode = SmoothingMode.HighQuality;
                 g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+
+                // 背景色を描く
+                var backgroundRect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+                var backgroundBrush = new SolidBrush(this.backgroundColor);
+                g.FillRectangle(backgroundBrush, backgroundRect);
 
                 if (this.BarEnabled)
                 {
@@ -368,5 +485,7 @@
         public string FontOutlineColor { get; set; }
         public string BarColor { get; set; }
         public string BarOutlineColor { get; set; }
+        public string BackgroundColor { get; set; }
+        public int BackgroundAlpha { get; set; }
     }
 }

@@ -10,8 +10,10 @@
     using System.Windows.Input;
     using System.Windows.Interop;
     using System.Windows.Media;
+    using System.Windows.Threading;
 
     using ACT.SpecialSpellTimer.Properties;
+    using ACT.SpecialSpellTimer.Utility;
 
     /// <summary>
     /// SpellTimerList Window
@@ -206,7 +208,7 @@
 
                         c.HorizontalAlignment = HorizontalAlignment.Left;
                         c.VerticalAlignment = VerticalAlignment.Top;
-                        c.Margin = new Thickness();
+                        c.Margin = new Thickness(0, 0, 0, 0);
 
                         this.BaseGrid.RowDefinitions.Add(new RowDefinition());
                         this.BaseGrid.Children.Add(c);
@@ -289,6 +291,23 @@
                     this.Topmost = true;
                 }
             }));
+
+            // 背景色を設定する
+            if (spells.Count() > 0)
+            {
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    var alpha = spells.FirstOrDefault().BackgroundAlpha;
+                    var color = spells.FirstOrDefault().BackgroundColor.FromHTMLWPF();
+
+                    this.BaseColorRectangle.Fill = new SolidColorBrush(Color.FromArgb(
+                        (byte)alpha,
+                        color.R,
+                        color.G,
+                        color.B));
+                }),
+                DispatcherPriority.Loaded);
+            }
         }
 
         #region フォーカスを奪わない対策

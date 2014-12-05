@@ -50,7 +50,7 @@
         public static System.Windows.Media.Color FromHTMLWPF(
             this string color)
         {
-            return System.Drawing.ColorTranslator.FromHtml(color).ToWPF();
+            return color.FromHTML().ToWPF();
         }
 
         /// <summary>

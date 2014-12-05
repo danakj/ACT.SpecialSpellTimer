@@ -8,7 +8,25 @@
     TextOptions.TextHintingMode="Animated"
     TextOptions.TextRenderingMode="ClearType">
 
-    <Grid Name="BaseGrid">
+    <Grid Name="BackgroundColorGrid">
+
+        <Canvas
+            Margin="0,0,0,0">
+            <Rectangle
+                x:Name="BaseColorRectangle"
+                Margin="0,0,0,0"
+                Fill="Transparent"
+                RadiusX="8"
+                RadiusY="8"
+                Width="{Binding ActualWidth, ElementName=BackgroundColorGrid}"
+                Height="{Binding ActualHeight, ElementName=BackgroundColorGrid}"
+                />
+        </Canvas>
+
+        <Grid Name="BaseGrid" Margin="8,6,6,6">
+        </Grid>
+
     </Grid>
+
 </Window>
     

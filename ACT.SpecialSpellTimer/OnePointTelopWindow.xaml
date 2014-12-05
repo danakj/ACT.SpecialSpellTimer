@@ -9,17 +9,31 @@
     TextOptions.TextHintingMode="Animated"
     TextOptions.TextRenderingMode="ClearType">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+    <Grid Name="BackgroundColorGrid">
+        <Canvas
+            Margin="0,0,0,0">
+            <Rectangle
+                x:Name="BaseColorRectangle"
+                Margin="0,0,0,0"
+                Fill="Transparent"
+                RadiusX="8"
+                RadiusY="8"
+                Width="{Binding ActualWidth, ElementName=BackgroundColorGrid}"
+                Height="{Binding ActualHeight, ElementName=BackgroundColorGrid}"
+                />
+        </Canvas>
+        
+        <Grid Name="BaseGrid" Margin="6,6,6,6">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Utility:OutlineTextBlock 
+            <Utility:OutlineTextBlock 
             Grid.Column="0" Grid.Row="0"
             HorizontalAlignment="{Binding HorizontalAlignment, ElementName=MessageTextBlock, Mode=OneWay}"
             VerticalAlignment="{Binding VerticalAlignment, ElementName=MessageTextBlock, Mode=OneWay}"
@@ -34,26 +48,28 @@
             Fill="{Binding Fill, ElementName=MessageTextBlock}"
             Stroke="{Binding Stroke, ElementName=MessageTextBlock}"
             >
-            <Utility:OutlineTextBlock.Effect>
-                <BlurEffect 
+                <Utility:OutlineTextBlock.Effect>
+                    <BlurEffect 
                     Radius="4"
                     RenderingBias="Quality" />
-            </Utility:OutlineTextBlock.Effect>
-        </Utility:OutlineTextBlock>
+                </Utility:OutlineTextBlock.Effect>
+            </Utility:OutlineTextBlock>
 
-        <Utility:OutlineTextBlock 
+            <Utility:OutlineTextBlock 
             Grid.Column="0" Grid.Row="0"
             x:Name="MessageTextBlock" 
-            Margin="0,0,3,0" 
+            Margin="0,0,0,0" 
             TextWrapping="Wrap"
             Text="" HorizontalAlignment="Left" 
             />
-        
-        <Canvas 
+
+            <Canvas 
             Grid.Column="0" Grid.Row="1"
             Name="ProgressBarCanvas"
             Margin="0,0,0,0"
             VerticalAlignment="Top" HorizontalAlignment="Left" 
             />
+        </Grid>
+
     </Grid>
 </Window>
