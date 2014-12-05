@@ -221,6 +221,12 @@
         public static void Save(
             string file)
         {
+            if (table == null ||
+                table.Count < 1)
+            {
+                return;
+            }
+
             var dir = Path.GetDirectoryName(file);
             if (!Directory.Exists(dir))
             {
@@ -286,6 +292,7 @@
             this.SpellTitleReplaced = string.Empty;
             this.MatchedLog = string.Empty;
             this.RegexPattern = string.Empty;
+            this.JobFilter = string.Empty;
         }
 
         public long ID { get; set; }

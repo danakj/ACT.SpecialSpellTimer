@@ -42,14 +42,10 @@
             // このDLLの配置場所とACT標準のPluginディレクトリも解決の対象にする
             AppDomain.CurrentDomain.AssemblyResolve += (s, e) =>
             {
-                const string thisName = "ACT.SpecialSpellTimer.dll";
-
                 try
                 {
-                    var thisDirectory = ActGlobals.oFormActMain.ActPlugins
-                        .Where(x => x.pluginFile.Name.ToLower() == thisName.ToLower())
-                        .Select(x => Path.GetDirectoryName(x.pluginFile.FullName))
-                        .FirstOrDefault();
+                    var thisDirectory = ActGlobals.oFormActMain.PluginGetSelfData(this)
+                        .pluginFile.DirectoryName;
 
                     var pluginDirectory = Path.Combine(
                         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

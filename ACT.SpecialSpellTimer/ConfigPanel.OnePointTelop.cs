@@ -173,6 +173,7 @@
             nr.FontStyle = (int)Settings.Default.Font.Style;
             nr.Left = 10.0d;
             nr.Top = 10.0d;
+            nr.JobFilter = string.Empty;
 
             // 現在選択しているノードの情報を一部コピーする
             if (this.TelopTreeView.SelectedNode != null)
@@ -200,6 +201,7 @@
                     nr.FontStyle = baseRow.FontStyle;
                     nr.Left = baseRow.Left;
                     nr.Top = baseRow.Top;
+                    nr.JobFilter = baseRow.JobFilter;
                 }
             }
 

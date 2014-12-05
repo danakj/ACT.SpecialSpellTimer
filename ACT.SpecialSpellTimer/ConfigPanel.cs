@@ -156,6 +156,7 @@
                 nr.FontStyle = (int)Settings.Default.Font.Style;
                 nr.BarWidth = Settings.Default.ProgressBarSize.Width;
                 nr.BarHeight = Settings.Default.ProgressBarSize.Height;
+                nr.JobFilter = string.Empty;
 
                 // 現在選択しているノードの情報を一部コピーする
                 if (this.SpellTimerTreeView.SelectedNode != null)
@@ -184,6 +185,7 @@
                         nr.FontStyle = baseRow.FontStyle;
                         nr.BarWidth = baseRow.BarWidth;
                         nr.BarHeight = baseRow.BarHeight;
+                        nr.JobFilter = baseRow.JobFilter;
                     }
                 }
 

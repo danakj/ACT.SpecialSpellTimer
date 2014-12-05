@@ -7,7 +7,6 @@
     using System.Reflection;
 
     using ACT.SpecialSpellTimer.Utility;
-    using ACT.TTSInterface;
     using Advanced_Combat_Tracker;
 
     /// <summary>
@@ -45,7 +44,7 @@
         /// <summary>
         /// TTSYukkuriプラグインinstance
         /// </summary>
-        private ITTS ttsYukkuriPlugin;
+        private dynamic ttsYukkuriPlugin;
 
         /// <summary>
         /// ゆっくりが有効かどうか？
@@ -119,7 +118,7 @@
                             if (item.pluginFile.Name.ToUpper() == "ACT.TTSYukkuri.dll".ToUpper() &&
                                 item.lblPluginStatus.Text.ToUpper() == "Plugin Started".ToUpper())
                             {
-                                this.ttsYukkuriPlugin = item.pluginObj as ITTS;
+                                this.ttsYukkuriPlugin = item.pluginObj;
                                 break;
                             }
                         }

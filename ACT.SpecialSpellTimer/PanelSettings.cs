@@ -82,6 +82,12 @@
         {
             this.settingsTable.AcceptChanges();
 
+            if (this.settingsTable == null ||
+                this.settingsTable.Count < 1)
+            {
+                return;
+            }
+
             var dir = Path.GetDirectoryName(this.DefaultFile);
 
             if (!Directory.Exists(dir))
