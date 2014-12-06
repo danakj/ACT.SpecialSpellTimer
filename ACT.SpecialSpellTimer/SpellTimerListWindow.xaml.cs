@@ -295,18 +295,22 @@
             // 背景色を設定する
             if (spells.Count() > 0)
             {
-                Dispatcher.BeginInvoke(new Action(() =>
+                var s = spells.FirstOrDefault();
+                if (s != null)
                 {
-                    var alpha = spells.FirstOrDefault().BackgroundAlpha;
-                    var color = spells.FirstOrDefault().BackgroundColor.FromHTMLWPF();
+                    var alpha = s.BackgroundAlpha;
+                    var color = s.BackgroundColor.FromHTMLWPF();
 
-                    this.BaseColorRectangle.Fill = new SolidColorBrush(Color.FromArgb(
-                        (byte)alpha,
-                        color.R,
-                        color.G,
-                        color.B));
-                }),
-                DispatcherPriority.Loaded);
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        this.BaseColorRectangle.Fill = new SolidColorBrush(Color.FromArgb(
+                            (byte)alpha,
+                            color.R,
+                            color.G,
+                            color.B));
+                    }),
+                    DispatcherPriority.Loaded);
+                }
             }
         }
 

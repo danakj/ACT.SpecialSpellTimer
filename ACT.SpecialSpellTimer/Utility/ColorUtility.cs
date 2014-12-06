@@ -39,6 +39,11 @@
         public static System.Drawing.Color FromHTML(
             this string color)
         {
+            if (string.IsNullOrWhiteSpace(color))
+            {
+                return System.Drawing.Color.Transparent;
+            }
+
             return System.Drawing.ColorTranslator.FromHtml(color);
         }
 
