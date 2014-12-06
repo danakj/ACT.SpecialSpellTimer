@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
+
     using ACT.SpecialSpellTimer.Utility;
     using Advanced_Combat_Tracker;
 

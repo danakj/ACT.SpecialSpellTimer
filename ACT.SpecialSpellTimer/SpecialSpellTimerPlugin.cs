@@ -44,25 +44,28 @@
             {
                 try
                 {
-                    var thisDirectory = ActGlobals.oFormActMain.PluginGetSelfData(this)
-                        .pluginFile.DirectoryName;
+                    var asm = new AssemblyName(e.Name);
+
+                    var plugin = ActGlobals.oFormActMain.PluginGetSelfData(this);
+                    if (plugin != null)
+                    {
+                        var thisDirectory = plugin.pluginFile.DirectoryName;
+                        var path1 = Path.Combine(thisDirectory, asm.Name + ".dll");
+                        if (File.Exists(path1))
+                        {
+                            return Assembly.LoadFrom(path1);
+                        }
+                    }
 
                     var pluginDirectory = Path.Combine(
                         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                         @"Advanced Combat Tracker\Plugins");
 
-                    var asm = new AssemblyName(e.Name);
-                    var path1 = Path.Combine(thisDirectory, asm.Name + ".dll");
-                    var path2 = Path.Combine(pluginDirectory, asm.Name + ".dll");
+                    var path = Path.Combine(pluginDirectory, asm.Name + ".dll");
 
-                    if (File.Exists(path1))
+                    if (File.Exists(path))
                     {
-                        return Assembly.LoadFrom(path1);
-                    }
-
-                    if (File.Exists(path2))
-                    {
-                        return Assembly.LoadFrom(path2);
+                        return Assembly.LoadFrom(path);
                     }
                 }
                 catch (Exception ex)
