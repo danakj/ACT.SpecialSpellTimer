@@ -1,7 +1,7 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// ジョブ
