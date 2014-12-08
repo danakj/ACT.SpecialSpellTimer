@@ -233,9 +233,12 @@
 
                 using (var sr = new StreamReader(file, new UTF8Encoding(false)))
                 {
-                    var xs = new XmlSerializer(table.GetType());
-                    var data = xs.Deserialize(sr) as List<OnePointTelop>;
-                    table.AddRange(data);
+                    if (sr.BaseStream.Length > 0)
+                    {
+                        var xs = new XmlSerializer(table.GetType());
+                        var data = xs.Deserialize(sr) as List<OnePointTelop>;
+                        table.AddRange(data);
+                    }
                 }
 
                 this.Reset();
@@ -257,12 +260,6 @@
         public void Save(
             string file)
         {
-            if (table == null ||
-                table.Count < 1)
-            {
-                return;
-            }
-
             var dir = Path.GetDirectoryName(file);
             if (!Directory.Exists(dir))
             {
