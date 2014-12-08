@@ -61,10 +61,6 @@
 
             this.MessageTextBlock.Text = string.Empty;
 
-            this.ShowInTaskbar = false;
-            this.Topmost = true;
-            this.Background = Brushes.Transparent;
-
             this.Loaded += this.OnePointTelopWindow_Loaded;
             this.MouseLeftButtonDown += (s1, e1) => this.DragMove();
 

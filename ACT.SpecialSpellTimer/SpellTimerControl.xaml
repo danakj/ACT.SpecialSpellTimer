@@ -9,7 +9,8 @@
     d:DesignHeight="32" d:DesignWidth="300" 
     TextOptions.TextFormattingMode="Display"
     TextOptions.TextHintingMode="Animated"
-    TextOptions.TextRenderingMode="ClearType">
+    TextOptions.TextRenderingMode="ClearType"
+    Background="Transparent">
 
     <Grid>
         <Grid.RowDefinitions>

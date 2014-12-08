@@ -28,10 +28,6 @@
             Debug.WriteLine("SpellList");
             this.InitializeComponent();
 
-            this.ShowInTaskbar = false;
-            this.Topmost = true;
-            this.Background = Brushes.Transparent;
-
             this.SpellTimerControls = new Dictionary<long, SpellTimerControl>();
 
             this.Loaded += this.SpellTimerListWindow_Loaded;

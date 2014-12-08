@@ -19,7 +19,6 @@
         {
             Debug.WriteLine("Spell");
             this.InitializeComponent();
-            this.Background = Brushes.Transparent;
         }
 
         /// <summary>
@@ -133,7 +132,10 @@
             this.BarOutlineBrush = this.CreateBrush(this.BarOutlineBrush, barOutlineColor);
 
             var tb = default(OutlineTextBlock);
-            var font = new System.Drawing.Font(this.TextFontFamily, this.TextFontSize, (System.Drawing.FontStyle)this.TextFontStyle);
+            var font = new System.Drawing.Font(
+                this.TextFontFamily, 
+                this.TextFontSize, 
+                (System.Drawing.FontStyle)this.TextFontStyle);
 
             // Titleを描画する
             tb = this.SpellTitleTextBlock;

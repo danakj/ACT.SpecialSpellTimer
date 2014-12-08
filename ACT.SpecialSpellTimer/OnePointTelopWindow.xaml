@@ -4,7 +4,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="OnePointTelopWindow" SizeToContent="WidthAndHeight"
-    AllowsTransparency="True" WindowStyle="None" Opacity="1" Background="{x:Null}"
+    AllowsTransparency="True" WindowStyle="None" Opacity="0" Background="Transparent" ShowInTaskbar="False" Topmost="True"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextHintingMode="Fixed"
     TextOptions.TextRenderingMode="ClearType">
