@@ -100,6 +100,9 @@
         /// <summary>バーのアウトラインのBrush</summary>
         private SolidColorBrush BarOutlineBrush { get; set; }
 
+        /// <summary>Cacheされたフォント</summary>
+        private System.Drawing.Font CachedFont { get; set; }
+
         /// <summary>
         /// 描画を更新する
         /// </summary>
@@ -112,7 +115,7 @@
 
             // Brushを生成する
             var fontColor = string.IsNullOrWhiteSpace(this.FontColor) ?
-                Settings.Default.FontColor.ToWPF():
+                Settings.Default.FontColor.ToWPF() :
                 this.FontColor.FromHTMLWPF();
             var fontOutlineColor = string.IsNullOrWhiteSpace(this.FontOutlineColor) ?
                 Settings.Default.FontOutlineColor.ToWPF() :
@@ -131,11 +134,20 @@
             this.BarBackBrush = this.CreateBrush(this.BarBackBrush, barBackColor);
             this.BarOutlineBrush = this.CreateBrush(this.BarOutlineBrush, barOutlineColor);
 
+            // フォントを生成する
+            if (this.CachedFont == null ||
+                this.CachedFont.Name != this.TextFontFamily ||
+                this.CachedFont.Size != this.TextFontSize ||
+                this.CachedFont.Style != (System.Drawing.FontStyle)this.TextFontStyle)
+            {
+                this.CachedFont = new System.Drawing.Font(
+                    this.TextFontFamily,
+                    this.TextFontSize,
+                    (System.Drawing.FontStyle)this.TextFontStyle);
+            }
+
             var tb = default(OutlineTextBlock);
-            var font = new System.Drawing.Font(
-                this.TextFontFamily, 
-                this.TextFontSize, 
-                (System.Drawing.FontStyle)this.TextFontStyle);
+            var font = this.CachedFont;
 
             // Titleを描画する
             tb = this.SpellTitleTextBlock;

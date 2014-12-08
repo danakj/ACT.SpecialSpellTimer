@@ -51,6 +51,9 @@
         /// <summary>背景色のBrush</summary>
         private SolidColorBrush BackgroundBrush { get; set; }
 
+        /// <summary>Cacheされたフォント</summary>
+        private System.Drawing.Font CachedFont { get; set; }
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -153,12 +156,26 @@
             this.BarOutlineBrush = this.CreateBrush(this.BarOutlineBrush, barOutlineColor);
             this.BackgroundBrush = this.CreateBrush(this.BackgroundBrush, backGroundColor);
 
+            // フォントを生成する
+            if (this.CachedFont == null ||
+                this.CachedFont.Name != this.DataSource.FontFamily ||
+                this.CachedFont.Size != this.DataSource.FontSize ||
+                this.CachedFont.Style != (System.Drawing.FontStyle)this.DataSource.FontStyle)
+            {
+                this.CachedFont = new System.Drawing.Font(
+                    this.DataSource.FontFamily,
+                    this.DataSource.FontSize,
+                    (System.Drawing.FontStyle)this.DataSource.FontStyle);
+            }
+
             Dispatcher.InvokeAsync(new Action(() =>
             {
-                if (!this.DataSource.ProgressBarEnabled &&
-                    this.ProgressBarCanvas.Children.Count > 0)
+                // 背景色を設定する
+                var nowbackground = this.BaseColorRectangle.Fill as SolidColorBrush;
+                if (nowbackground == null ||
+                    nowbackground.Color != this.BackgroundBrush.Color)
                 {
-                    this.ProgressBarCanvas.Children.Clear();
+                    this.BaseColorRectangle.Fill = this.BackgroundBrush;
                 }
 
                 var message = Settings.Default.TelopAlwaysVisible ?
@@ -195,11 +212,7 @@
                 {
                     this.MessageTextBlock.Text = message;
 
-                    var font = new System.Drawing.Font(
-                        this.DataSource.FontFamily,
-                        this.DataSource.FontSize,
-                        (System.Drawing.FontStyle)this.DataSource.FontStyle);
-
+                    var font = this.CachedFont;
                     this.MessageTextBlock.FontFamily = font.ToFontFamilyWPF();
                     this.MessageTextBlock.FontSize = font.ToFontSizeWPF();
                     this.MessageTextBlock.FontStyle = font.ToFontStyleWPF();
@@ -285,18 +298,6 @@
                     this.ProgressBarCanvas.Visibility = Visibility.Visible;
                 }
             }));
-
-            // 背景色を設定する
-            var nowbackground = this.BaseColorRectangle.Fill as SolidColorBrush;
-            if (nowbackground == null ||
-                nowbackground.Color != this.BackgroundBrush.Color)
-            {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    this.BaseColorRectangle.Fill = this.BackgroundBrush;
-                }),
-                DispatcherPriority.Loaded);
-            }
         }
 
         #region フォーカスを奪わない対策

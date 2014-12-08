@@ -204,6 +204,17 @@
 
             Dispatcher.InvokeAsync(new Action(() =>
             {
+                // 背景色を設定する
+                var nowbackground = this.BaseColorRectangle.Fill as SolidColorBrush;
+                if (nowbackground == null ||
+                    nowbackground.Color != this.BackgroundBrush.Color)
+                {
+                    if (this.BackgroundBrush != null)
+                    {
+                        this.BaseColorRectangle.Fill = this.BackgroundBrush;
+                    }
+                }
+
                 // スペルタイマコントロールのリストを生成する
                 var displayList = new List<SpellTimerControl>();
                 foreach (var spell in spells)
@@ -307,21 +318,6 @@
                     this.Topmost = true;
                 }
             }));
-
-            // 背景色を設定する
-            var nowbackground = this.BaseColorRectangle.Fill as SolidColorBrush;
-            if (nowbackground == null ||
-                nowbackground.Color != this.BackgroundBrush.Color)
-            {
-                if (this.BackgroundBrush != null)
-                {
-                    Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                        this.BaseColorRectangle.Fill = this.BackgroundBrush;
-                    }),
-                    DispatcherPriority.Loaded);
-                }
-            }
         }
 
         #region フォーカスを奪わない対策
