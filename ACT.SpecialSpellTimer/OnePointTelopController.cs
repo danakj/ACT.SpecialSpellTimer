@@ -192,6 +192,8 @@
 
                                 SoundController.Default.Play(telop.MatchSound);
                                 SoundController.Default.Play(telop.MatchTextToSpeak);
+
+                                continue;
                             }
                         }
                     }
@@ -222,6 +224,8 @@
                                 var tts = regex.Replace(log, telop.MatchTextToSpeak);
                                 SoundController.Default.Play(tts);
                             }
+
+                            continue;
                         }
                     }
 
@@ -235,6 +239,7 @@
                                 keyword.ToUpper()))
                             {
                                 isForceHide = true;
+                                continue;
                             }
                         }
                     }
@@ -245,6 +250,7 @@
                         if (regexToHide.IsMatch(log))
                         {
                             isForceHide = true;
+                            continue;
                         }
                     }
                 }   // end loop logLines
