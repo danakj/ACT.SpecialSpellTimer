@@ -216,6 +216,7 @@
                     s.FontStyle = (int)this.TextFont.Style;
                 }
 
+                SpellTimerCore.Default.ClosePanels();
                 SpellTimerTable.Save();
             };
 
@@ -227,6 +228,7 @@
                     s.BarHeight = this.BarSize.Height;
                 }
 
+                SpellTimerCore.Default.ClosePanels();
                 SpellTimerTable.Save();
             };
 
@@ -242,6 +244,7 @@
                     s.BackgroundAlpha = this.backgroundColor.A;
                 }
 
+                SpellTimerCore.Default.ClosePanels();
                 SpellTimerTable.Save();
             };
 
@@ -254,6 +257,7 @@
                     s.FontStyle = (int)this.TextFont.Style;
                 }
 
+                OnePointTelopController.CloseTelops();
                 OnePointTelopTable.Default.Save();
             };
 
@@ -267,6 +271,7 @@
                     s.BackgroundAlpha = this.backgroundColor.A;
                 }
 
+                OnePointTelopController.CloseTelops();
                 OnePointTelopTable.Default.Save();
             };
         }
