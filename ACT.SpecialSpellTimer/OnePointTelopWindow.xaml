@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="OnePointTelopWindow" SizeToContent="WidthAndHeight"
     AllowsTransparency="True" WindowStyle="None" Opacity="1" Background="{x:Null}"
-    TextOptions.TextFormattingMode="Display"
-    TextOptions.TextHintingMode="Animated"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextHintingMode="Fixed"
     TextOptions.TextRenderingMode="ClearType">
 
     <Grid Name="BackgroundColorGrid">
@@ -22,7 +22,7 @@
                 Height="{Binding ActualHeight, ElementName=BackgroundColorGrid}"
                 />
         </Canvas>
-        
+
         <Grid Name="BaseGrid" Margin="6,6,6,6">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -67,8 +67,11 @@
             Grid.Column="0" Grid.Row="1"
             Name="ProgressBarCanvas"
             Margin="0,0,0,0"
-            VerticalAlignment="Top" HorizontalAlignment="Left" 
-            />
+            VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Rectangle x:Name="BarBackRectangle" />
+                <Rectangle x:Name="BarRectangle" />
+                <Rectangle x:Name="BarOutlineRectangle" />
+            </Canvas>
         </Grid>
 
     </Grid>

@@ -3,7 +3,6 @@
     using System.Diagnostics;
     using System.Windows.Controls;
     using System.Windows.Media;
-    using System.Windows.Shapes;
 
     using ACT.SpecialSpellTimer.Properties;
     using ACT.SpecialSpellTimer.Utility;
@@ -87,6 +86,21 @@
         /// </summary>
         public string FontOutlineColor { get; set; }
 
+        /// <summary>フォントのBrush</summary>
+        private SolidColorBrush FontBrush { get; set; }
+
+        /// <summary>フォントのアウトラインBrush</summary>
+        private SolidColorBrush FontOutlineBrush { get; set; }
+
+        /// <summary>バーのBrush</summary>
+        private SolidColorBrush BarBrush { get; set; }
+
+        /// <summary>バーの背景のBrush</summary>
+        private SolidColorBrush BarBackBrush { get; set; }
+
+        /// <summary>バーのアウトラインのBrush</summary>
+        private SolidColorBrush BarOutlineBrush { get; set; }
+
         /// <summary>
         /// 描画を更新する
         /// </summary>
@@ -97,57 +111,66 @@
 #endif
             this.Width = this.BarWidth;
 
+            // Brushを生成する
+            var fontColor = string.IsNullOrWhiteSpace(this.FontColor) ?
+                Settings.Default.FontColor.ToWPF():
+                this.FontColor.FromHTMLWPF();
+            var fontOutlineColor = string.IsNullOrWhiteSpace(this.FontOutlineColor) ?
+                Settings.Default.FontOutlineColor.ToWPF() :
+                this.FontOutlineColor.FromHTMLWPF();
+            var barColor = string.IsNullOrWhiteSpace(this.BarColor) ?
+                Settings.Default.ProgressBarColor.ToWPF() :
+                this.BarColor.FromHTMLWPF();
+            var barBackColor = barColor.ChangeBrightness(0.4d);
+            var barOutlineColor = string.IsNullOrWhiteSpace(this.BarOutlineColor) ?
+                Settings.Default.ProgressBarOutlineColor.ToWPF() :
+                this.BarOutlineColor.FromHTMLWPF();
+
+            this.FontBrush = this.CreateBrush(this.FontBrush, fontColor);
+            this.FontOutlineBrush = this.CreateBrush(this.FontOutlineBrush, fontOutlineColor);
+            this.BarBrush = this.CreateBrush(this.BarBrush, barColor);
+            this.BarBackBrush = this.CreateBrush(this.BarBackBrush, barBackColor);
+            this.BarOutlineBrush = this.CreateBrush(this.BarOutlineBrush, barOutlineColor);
+
             var tb = default(OutlineTextBlock);
             var font = new System.Drawing.Font(this.TextFontFamily, this.TextFontSize, (System.Drawing.FontStyle)this.TextFontStyle);
-            var fontBrush = new SolidColorBrush(Settings.Default.FontColor.ToWPF());
-            var fontOutline = new SolidColorBrush(Settings.Default.FontOutlineColor.ToWPF());
-
-            if (!string.IsNullOrWhiteSpace(this.FontColor))
-            {
-                fontBrush.Color = this.FontColor.FromHTMLWPF();
-            }
-
-            if (!string.IsNullOrWhiteSpace(this.FontOutlineColor))
-            {
-                fontOutline.Color = this.FontOutlineColor.FromHTMLWPF();
-            }
 
             // Titleを描画する
             tb = this.SpellTitleTextBlock;
-            tb.Text = string.IsNullOrWhiteSpace(this.SpellTitle) ? "　" : this.SpellTitle;
-            tb.FontFamily = font.ToFontFamilyWPF();
-            tb.FontSize = font.ToFontSizeWPF();
-            tb.FontStyle = font.ToFontStyleWPF();
-            tb.FontWeight = font.ToFontWeightWPF();
-            tb.Fill = fontBrush;
-            tb.Stroke = fontOutline;
-            tb.StrokeThickness = 0.2d;
+            var title = string.IsNullOrWhiteSpace(this.SpellTitle) ? "　" : this.SpellTitle;
+            if (tb.Text != title)
+            {
+                tb.Text = title;
+                tb.FontFamily = font.ToFontFamilyWPF();
+                tb.FontSize = font.ToFontSizeWPF();
+                tb.FontStyle = font.ToFontStyleWPF();
+                tb.FontWeight = font.ToFontWeightWPF();
+                tb.Fill = this.FontBrush;
+                tb.Stroke = this.FontOutlineBrush;
+                tb.StrokeThickness = 0.2d;
+            }
 
             // リキャスト時間を描画する
             tb = this.RecastTimeTextBlock;
-            tb.Text = this.RecastTime > 0 ?
+            var recast = this.RecastTime > 0 ?
                 this.RecastTime.ToString("N1") :
                 this.IsReverse ? "Over" : "Ready";
-            tb.FontFamily = font.ToFontFamilyWPF();
-            tb.FontSize = font.ToFontSizeWPF();
-            tb.FontStyle = font.ToFontStyleWPF();
-            tb.FontWeight = font.ToFontWeightWPF();
-            tb.Fill = fontBrush;
-            tb.Stroke = fontOutline;
-            tb.StrokeThickness = 0.2d;
-
-            // ProgressBarを描画する
-            var foreBrush = new SolidColorBrush(Settings.Default.ProgressBarColor.ToWPF());
-            if (!string.IsNullOrWhiteSpace(this.BarColor))
+            if (tb.Text != recast)
             {
-                foreBrush.Color = this.BarColor.FromHTMLWPF();
+                tb.Text = recast;
+                tb.FontFamily = font.ToFontFamilyWPF();
+                tb.FontSize = font.ToFontSizeWPF();
+                tb.FontStyle = font.ToFontStyleWPF();
+                tb.FontWeight = font.ToFontWeightWPF();
+                tb.Fill = this.FontBrush;
+                tb.Stroke = this.FontOutlineBrush;
+                tb.StrokeThickness = 0.2d;
             }
 
-            var backBrush = new SolidColorBrush(foreBrush.Color.ChangeBrightness(0.4d));
-
-            var foreRect = new Rectangle();
-            foreRect.Stroke = foreBrush;
-            foreRect.Fill = foreBrush;
+            // ProgressBarを描画する
+            var foreRect = this.BarRectangle;
+            foreRect.Stroke = this.BarBrush;
+            foreRect.Fill = this.BarBrush;
             foreRect.Width = this.IsReverse ?
                 (double)(this.BarWidth * (1.0d - this.Progress)) :
                 (double)(this.BarWidth * this.Progress);
@@ -157,9 +180,9 @@
             Canvas.SetLeft(foreRect, 0);
             Canvas.SetTop(foreRect, 0);
 
-            var backRect = new Rectangle();
-            backRect.Stroke = backBrush;
-            backRect.Fill = backBrush;
+            var backRect = this.BarBackRectangle;
+            backRect.Stroke = this.BarBackBrush;
+            backRect.Fill = this.BarBackBrush;
             backRect.Width = this.BarWidth;
             backRect.Height = foreRect.Height;
             backRect.RadiusX = 2.0d;
@@ -167,18 +190,8 @@
             Canvas.SetLeft(backRect, 0);
             Canvas.SetTop(backRect, 0);
 
-            var outlineBrush = new SolidColorBrush(Settings.Default.ProgressBarOutlineColor.ToWPF());
-            if (!string.IsNullOrWhiteSpace(this.BarOutlineColor))
-            {
-                outlineBrush.Color = this.BarOutlineColor.FromHTMLWPF();
-            }
-            else
-            {
-                outlineBrush.Color = fontOutline.Color;
-            }
-
-            var outlineRect = new Rectangle();
-            outlineRect.Stroke = outlineBrush;
+            var outlineRect = this.BarOutlineRectangle;
+            outlineRect.Stroke = this.BarOutlineBrush;
             outlineRect.Width = backRect.Width;
             outlineRect.Height = foreRect.Height;
             outlineRect.RadiusX = 2.0d;
@@ -188,11 +201,6 @@
 
             this.ProgressBarCanvas.Width = backRect.Width;
             this.ProgressBarCanvas.Height = backRect.Height;
-
-            this.ProgressBarCanvas.Children.Clear();
-            this.ProgressBarCanvas.Children.Add(backRect);
-            this.ProgressBarCanvas.Children.Add(foreRect);
-            this.ProgressBarCanvas.Children.Add(outlineRect);
 
 #if false
             sw.Stop();

@@ -96,6 +96,9 @@
         /// </summary>
         private Action<MouseEventArgs> DragOff;
 
+        /// <summary>背景色のBrush</summary>
+        private SolidColorBrush BackgroundBrush { get; set; }
+
         /// <summary>
         /// Loaded
         /// </summary>
@@ -183,6 +186,23 @@
                         x.DisplayNo
                         select
                         x;
+                }
+            }
+
+            // Brushを生成する
+            if (spells.Count() > 0)
+            {
+                var s = spells.FirstOrDefault();
+                if (s != null)
+                {
+                    var c = s.BackgroundColor.FromHTMLWPF();
+                    var backGroundColor = Color.FromArgb(
+                        (byte)s.BackgroundAlpha,
+                        c.R,
+                        c.G,
+                        c.B);
+
+                    this.BackgroundBrush = this.CreateBrush(this.BackgroundBrush, backGroundColor);
                 }
             }
 
@@ -293,21 +313,15 @@
             }));
 
             // 背景色を設定する
-            if (spells.Count() > 0)
+            var nowbackground = this.BaseColorRectangle.Fill as SolidColorBrush;
+            if (nowbackground == null ||
+                nowbackground.Color != this.BackgroundBrush.Color)
             {
-                var s = spells.FirstOrDefault();
-                if (s != null)
+                if (this.BackgroundBrush != null)
                 {
-                    var alpha = s.BackgroundAlpha;
-                    var color = s.BackgroundColor.FromHTMLWPF();
-
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        this.BaseColorRectangle.Fill = new SolidColorBrush(Color.FromArgb(
-                            (byte)alpha,
-                            color.R,
-                            color.G,
-                            color.B));
+                        this.BaseColorRectangle.Fill = this.BackgroundBrush;
                     }),
                     DispatcherPriority.Loaded);
                 }

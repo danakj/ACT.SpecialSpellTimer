@@ -164,6 +164,7 @@
 
                                 if (count >= 6)
                                 {
+                                    petidZone = ActGlobals.oFormActMain.CurrentZone;
                                     break;
                                 }
                             }

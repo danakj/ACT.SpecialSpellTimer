@@ -1,6 +1,8 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
 
     using ACT.SpecialSpellTimer.Properties;
 
@@ -28,6 +30,48 @@
             this Window x)
         {
             x.Opacity = 0;
+        }
+
+        /// <summary>
+        /// Brushを生成する
+        /// </summary>
+        /// <param name="x">Window</param>
+        /// <param name="brush">今のBrush</param>
+        /// <param name="color">カラー</param>
+        /// <returns>Brush</returns>
+        public static SolidColorBrush CreateBrush(
+            this Window x,
+            SolidColorBrush brush,
+            Color color)
+        {
+            if (brush == null || brush.Color != color)
+            {
+                brush = new SolidColorBrush(color);
+                brush.Freeze();
+            }
+
+            return brush;
+        }
+
+        /// <summary>
+        /// Brushを生成する
+        /// </summary>
+        /// <param name="x">Window</param>
+        /// <param name="brush">今のBrush</param>
+        /// <param name="color">カラー</param>
+        /// <returns>Brush</returns>
+        public static SolidColorBrush CreateBrush(
+            this UserControl x,
+            SolidColorBrush brush,
+            Color color)
+        {
+            if (brush == null || brush.Color != color)
+            {
+                brush = new SolidColorBrush(color);
+                brush.Freeze();
+            }
+
+            return brush;
         }
     }
 }

@@ -8,7 +8,6 @@
     using System.Windows.Input;
     using System.Windows.Interop;
     using System.Windows.Media;
-    using System.Windows.Shapes;
     using System.Windows.Threading;
 
     using ACT.SpecialSpellTimer.Properties;
@@ -33,6 +32,24 @@
         /// ドラッグ中か？
         /// </summary>
         public bool IsDragging { get; private set; }
+
+        /// <summary>フォントのBrush</summary>
+        private SolidColorBrush FontBrush { get; set; }
+
+        /// <summary>フォントのアウトラインBrush</summary>
+        private SolidColorBrush FontOutlineBrush { get; set; }
+
+        /// <summary>バーのBrush</summary>
+        private SolidColorBrush BarBrush { get; set; }
+
+        /// <summary>バーの背景のBrush</summary>
+        private SolidColorBrush BarBackBrush { get; set; }
+
+        /// <summary>バーのアウトラインのBrush</summary>
+        private SolidColorBrush BarOutlineBrush { get; set; }
+
+        /// <summary>背景色のBrush</summary>
+        private SolidColorBrush BackgroundBrush { get; set; }
 
         /// <summary>
         /// コンストラクタ
@@ -118,6 +135,28 @@
                 return;
             }
 
+            // Brushを生成する
+            var fontColor = this.DataSource.FontColor.FromHTML().ToWPF();
+            var fontOutlineColor = string.IsNullOrWhiteSpace(this.DataSource.FontOutlineColor) ?
+                Settings.Default.FontOutlineColor.ToWPF() :
+                this.DataSource.FontOutlineColor.FromHTMLWPF();
+            var barColor = fontColor;
+            var barBackColor = barColor.ChangeBrightness(0.4d);
+            var barOutlineColor = fontOutlineColor;
+            var c = this.DataSource.BackgroundColor.FromHTML().ToWPF();
+            var backGroundColor = Color.FromArgb(
+                (byte)this.DataSource.BackgroundAlpha,
+                c.R,
+                c.G,
+                c.B);
+
+            this.FontBrush = this.CreateBrush(this.FontBrush, fontColor);
+            this.FontOutlineBrush = this.CreateBrush(this.FontOutlineBrush, fontOutlineColor);
+            this.BarBrush = this.CreateBrush(this.BarBrush, barColor);
+            this.BarBackBrush = this.CreateBrush(this.BarBackBrush, barBackColor);
+            this.BarOutlineBrush = this.CreateBrush(this.BarOutlineBrush, barOutlineColor);
+            this.BackgroundBrush = this.CreateBrush(this.BackgroundBrush, backGroundColor);
+
             Dispatcher.InvokeAsync(new Action(() =>
             {
                 if (!this.DataSource.ProgressBarEnabled &&
@@ -156,24 +195,23 @@
                 message = message.Replace("{COUNT}", countAsText);
                 message = message.Replace("{COUNT0}", count0AsText);
 
-                this.MessageTextBlock.Text = message;
+                if (this.MessageTextBlock.Text != message)
+                {
+                    this.MessageTextBlock.Text = message;
 
-                var font = new System.Drawing.Font(
-                    this.DataSource.FontFamily,
-                    this.DataSource.FontSize,
-                    (System.Drawing.FontStyle)this.DataSource.FontStyle);
+                    var font = new System.Drawing.Font(
+                        this.DataSource.FontFamily,
+                        this.DataSource.FontSize,
+                        (System.Drawing.FontStyle)this.DataSource.FontStyle);
 
-                var fillBrush = new SolidColorBrush(this.DataSource.FontColor.FromHTML().ToWPF());
-                var strokeBrush = string.IsNullOrWhiteSpace(this.DataSource.FontOutlineColor) ?
-                    new SolidColorBrush(Settings.Default.FontOutlineColor.ToWPF()) :
-                    new SolidColorBrush(this.DataSource.FontOutlineColor.FromHTMLWPF());
-                this.MessageTextBlock.FontFamily = font.ToFontFamilyWPF();
-                this.MessageTextBlock.FontSize = font.ToFontSizeWPF();
-                this.MessageTextBlock.FontStyle = font.ToFontStyleWPF();
-                this.MessageTextBlock.FontWeight = font.ToFontWeightWPF();
-                this.MessageTextBlock.Fill = fillBrush;
-                this.MessageTextBlock.Stroke = strokeBrush;
-                this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 2.5d);
+                    this.MessageTextBlock.FontFamily = font.ToFontFamilyWPF();
+                    this.MessageTextBlock.FontSize = font.ToFontSizeWPF();
+                    this.MessageTextBlock.FontStyle = font.ToFontStyleWPF();
+                    this.MessageTextBlock.FontWeight = font.ToFontWeightWPF();
+                    this.MessageTextBlock.Fill = this.FontBrush;
+                    this.MessageTextBlock.Stroke = this.FontOutlineBrush;
+                    this.MessageTextBlock.StrokeThickness = (this.MessageTextBlock.FontSize / 100d * 2.5d);
+                }
 
                 // プログレスバーを表示しない？
                 if (!this.DataSource.ProgressBarEnabled ||
@@ -212,20 +250,11 @@
 
                 if (progress > 0.0d)
                 {
-                    // Fontの97%の明るさで描画する
-                    var brush = new SolidColorBrush(this.DataSource
-                        .FontColor
-                        .FromHTML()
-                        .ToWPF()
-                        .ChangeBrightness(0.97d));
-
-                    var backBrush = new SolidColorBrush(brush.Color.ChangeBrightness(0.4d));
-
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        var barRect = new Rectangle();
-                        barRect.Stroke = brush;
-                        barRect.Fill = brush;
+                        var barRect = this.BarRectangle;
+                        barRect.Stroke = this.BarBrush;
+                        barRect.Fill = this.BarBrush;
                         barRect.Width = this.MessageTextBlock.ActualWidth * progress;
                         barRect.Height = Settings.Default.ProgressBarSize.Height;
                         barRect.RadiusX = 2.0d;
@@ -233,9 +262,9 @@
                         Canvas.SetLeft(barRect, 0);
                         Canvas.SetTop(barRect, 0);
 
-                        var backRect = new Rectangle();
-                        backRect.Stroke = backBrush;
-                        backRect.Fill = backBrush;
+                        var backRect = this.BarBackRectangle;
+                        backRect.Stroke = this.BarBackBrush;
+                        backRect.Fill = this.BarBackBrush;
                         backRect.Width = this.MessageTextBlock.ActualWidth;
                         backRect.Height = Settings.Default.ProgressBarSize.Height;
                         backRect.RadiusX = 2.0d;
@@ -243,8 +272,8 @@
                         Canvas.SetLeft(backRect, 0);
                         Canvas.SetTop(backRect, 0);
 
-                        var outlineRect = new Rectangle();
-                        outlineRect.Stroke = strokeBrush;
+                        var outlineRect = this.BarOutlineRectangle;
+                        outlineRect.Stroke = this.BarOutlineBrush;
                         outlineRect.Width = this.MessageTextBlock.ActualWidth;
                         outlineRect.Height = Settings.Default.ProgressBarSize.Height;
                         outlineRect.RadiusX = 2.0d;
@@ -254,11 +283,6 @@
 
                         this.ProgressBarCanvas.Width = backRect.Width;
                         this.ProgressBarCanvas.Height = backRect.Height;
-
-                        this.ProgressBarCanvas.Children.Clear();
-                        this.ProgressBarCanvas.Children.Add(backRect);
-                        this.ProgressBarCanvas.Children.Add(barRect);
-                        this.ProgressBarCanvas.Children.Add(outlineRect);
                     }),
                     DispatcherPriority.Loaded);
 
@@ -267,16 +291,16 @@
             }));
 
             // 背景色を設定する
-            Dispatcher.BeginInvoke(new Action(() =>
+            var nowbackground = this.BaseColorRectangle.Fill as SolidColorBrush;
+            if (nowbackground == null ||
+                nowbackground.Color != this.BackgroundBrush.Color)
             {
-                var backgroundColor = this.DataSource.BackgroundColor.FromHTML().ToWPF();
-                this.BaseColorRectangle.Fill = new SolidColorBrush(Color.FromArgb(
-                    (byte)this.DataSource.BackgroundAlpha,
-                    backgroundColor.R,
-                    backgroundColor.G,
-                    backgroundColor.B));
-            }),
-            DispatcherPriority.Loaded);
+                Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    this.BaseColorRectangle.Fill = this.BackgroundBrush;
+                }),
+                DispatcherPriority.Loaded);
+            }
         }
 
         #region フォーカスを奪わない対策

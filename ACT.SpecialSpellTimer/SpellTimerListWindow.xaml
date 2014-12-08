@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="SpellTimerListWindow" SizeToContent="WidthAndHeight"
     AllowsTransparency="True" WindowStyle="None" Opacity="1" Background="{x:Null}"
-    TextOptions.TextFormattingMode="Display"
-    TextOptions.TextHintingMode="Animated"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextHintingMode="Fixed"
     TextOptions.TextRenderingMode="ClearType">
 
     <Grid Name="BackgroundColorGrid">
