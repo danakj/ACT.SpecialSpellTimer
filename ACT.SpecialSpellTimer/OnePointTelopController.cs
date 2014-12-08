@@ -132,6 +132,28 @@
         {
             var telops = OnePointTelopTable.Default.EnabledTable;
 
+            // 不要になったWindowを閉じる
+            var removeWindowList = new List<OnePointTelopWindow>();
+            foreach (var window in telopWindowList)
+            {
+                if (!telops.Any(x => x.Title == window.DataSource.Title))
+                {
+                    removeWindowList.Add(window);
+                }
+            }
+
+            foreach (var window in removeWindowList)
+            {
+                ActInvoker.Invoke(() =>
+                {
+                    window.DataSource.Left = window.Left;
+                    window.DataSource.Top = window.Top;
+                    window.Close();
+                });
+
+                telopWindowList.Remove(window);
+            }
+
             foreach (var telop in telops.AsParallel())
             {
                 var regex = telop.Regex;
