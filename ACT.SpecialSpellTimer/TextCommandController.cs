@@ -14,7 +14,7 @@
         /// コマンド解析用の正規表現
         /// </summary>
         private static Regex regexCommand = new Regex(
-            @".*/spespe (?<command>refresh|changeenabled) (?<target>spells|telops|me|pt)( (?<windowname>"".*""|all) (?<value>.*))*",
+            @".*/spespe (?<command>refresh|changeenabled) (?<target>spells|telops|me|pt|pet)( (?<windowname>"".*""|all) (?<value>.*))*",
             RegexOptions.Compiled |
             RegexOptions.IgnoreCase);
 
@@ -73,6 +73,11 @@
                             case "pt":
                                 LogBuffer.RefreshPTList();
                                 SoundController.Default.Play("リフレッシュ'パーティー。");
+                                break;
+
+                            case "pet":
+                                LogBuffer.RefreshPetID();
+                                SoundController.Default.Play("リフレッシュ'ペット。");
                                 break;
                         }
 

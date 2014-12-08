@@ -1,5 +1,6 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
+    using System.Linq;
     using System.Collections.Generic;
 
     /// <summary>
@@ -62,6 +63,21 @@
             list.Add(new Job() { JobId = 30, JobName = "忍者", Role = JobRoles.DPS });
 
             return list.ToArray();
+        }
+
+        /// <summary>
+        /// ジョブIDからジョブ名を取得する
+        /// </summary>
+        /// <param name="jobID">ジョブID</param>
+        /// <returns>ジョブ名</returns>
+        public static string GetJobName(
+            int jobID)
+        {
+            var jobList = GetJobList();
+            return jobList
+                .Where(x => x.JobId == jobID)
+                .Select(x => x.JobName)
+                .FirstOrDefault() ?? string.Empty;
         }
 
         /// <summary>

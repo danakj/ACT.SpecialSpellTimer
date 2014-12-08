@@ -26,6 +26,11 @@
         private static string petid;
 
         /// <summary>
+        /// ペットのIDを取得したゾーン
+        /// </summary>
+        private static string petidZone;
+
+        /// <summary>
         /// 内部バッファ
         /// </summary>
         private List<string> buffer = new List<string>();
@@ -125,20 +130,48 @@
                 });
             }
 
-            // 召喚した？
+            // ペットIDのCacheを更新する
             var player = FF14PluginHelper.GetPlayer();
             if (player != null)
             {
-                if (logLine.Contains(player.Name + "の「サモン"))
+                var jobName = Job.GetJobName(player.Job);
+                if (jobName == "巴術士" ||
+                    jobName == "学者" ||
+                    jobName == "召喚士")
                 {
-                    Task.Run(() =>
+                    if (logLine.Contains(player.Name + "の「サモン"))
                     {
-                        Thread.Sleep(5 * 1000);
-                        RefreshPetID();
-                    }).ContinueWith((t) =>
+                        Task.Run(() =>
+                        {
+                            Thread.Sleep(5 * 1000);
+                            RefreshPetID();
+                        }).ContinueWith((t) =>
+                        {
+                            t.Dispose();
+                        });
+                    }
+
+                    if (petidZone != ActGlobals.oFormActMain.CurrentZone)
                     {
-                        t.Dispose();
-                    });
+                        Task.Run(() =>
+                        {
+                            var count = 0;
+                            while (petidZone != ActGlobals.oFormActMain.CurrentZone)
+                            {
+                                Thread.Sleep(15 * 1000);
+                                RefreshPetID();
+                                count++;
+
+                                if (count >= 6)
+                                {
+                                    break;
+                                }
+                            }
+                        }).ContinueWith((t) =>
+                        {
+                            t.Dispose();
+                        });
+                    }
                 }
             }
 
@@ -296,6 +329,7 @@
                 if (pet != null)
                 {
                     petid = Convert.ToString((long)((ulong)pet.ID), 16).ToUpper();
+                    petidZone = ActGlobals.oFormActMain.CurrentZone;
                 }
             }
         }
