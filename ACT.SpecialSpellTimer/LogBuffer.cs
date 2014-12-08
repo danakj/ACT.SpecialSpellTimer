@@ -16,6 +16,11 @@
     public class LogBuffer : IDisposable
     {
         /// <summary>
+        /// ペットID更新ロックオブジェクト
+        /// </summary>
+        private static object lockPetidObject = new object();
+
+        /// <summary>
         /// パーティメンバ
         /// </summary>
         private static List<string> ptmember;
@@ -155,17 +160,20 @@
                     {
                         Task.Run(() =>
                         {
-                            var count = 0;
-                            while (petidZone != ActGlobals.oFormActMain.CurrentZone)
+                            lock (lockPetidObject)
                             {
-                                Thread.Sleep(15 * 1000);
-                                RefreshPetID();
-                                count++;
-
-                                if (count >= 6)
+                                var count = 0;
+                                while (petidZone != ActGlobals.oFormActMain.CurrentZone)
                                 {
-                                    petidZone = ActGlobals.oFormActMain.CurrentZone;
-                                    break;
+                                    Thread.Sleep(15 * 1000);
+                                    RefreshPetID();
+                                    count++;
+
+                                    if (count >= 6)
+                                    {
+                                        petidZone = ActGlobals.oFormActMain.CurrentZone;
+                                        break;
+                                    }
                                 }
                             }
                         }).ContinueWith((t) =>
