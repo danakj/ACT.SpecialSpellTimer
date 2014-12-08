@@ -78,7 +78,7 @@
             {
                 ActInvoker.Invoke(() =>
                 {
-                    foreach (var telop in telopWindowList.Select(x => x.Value))
+                    foreach (var telop in telopWindowList.Values)
                     {
                         telop.DataSource.Left = telop.Left;
                         telop.DataSource.Top = telop.Top;
@@ -102,7 +102,7 @@
             {
                 ActInvoker.Invoke(() =>
                 {
-                    foreach (var telop in telopWindowList.Select(x => x.Value))
+                    foreach (var telop in telopWindowList.Values)
                     {
                         telop.HideOverlay();
                     }
@@ -119,7 +119,7 @@
             {
                 ActInvoker.Invoke(() =>
                 {
-                    foreach (var telop in telopWindowList.Select(x => x.Value))
+                    foreach (var telop in telopWindowList.Values)
                     {
                         telop.Activate();
                     }
@@ -138,7 +138,7 @@
 
             // 不要になったWindowを閉じる
             var removeWindowList = new List<OnePointTelopWindow>();
-            foreach (var window in telopWindowList.Select(x => x.Value))
+            foreach (var window in telopWindowList.Values)
             {
                 if (!telops.Any(x => x.ID == window.DataSource.ID))
                 {
