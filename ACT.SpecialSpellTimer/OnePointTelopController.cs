@@ -16,22 +16,24 @@
         /// <summary>
         /// テロップWindowのリスト
         /// </summary>
-        private static List<OnePointTelopWindow> telopWindowList = new List<OnePointTelopWindow>();
+        private static Dictionary<long, OnePointTelopWindow> telopWindowList = new Dictionary<long, OnePointTelopWindow>();
 
         /// <summary>
         /// 位置を設定する
         /// </summary>
-        /// <param name="telopTitle">設定するテロップのTitle</param>
+        /// <param name="telopID">設定するテロップのID</param>
         /// <param name="left">Left</param>
         /// <param name="top">Top</param>
         public static void SetLocation(
-            string telopTitle,
+            long telopID,
             double left,
             double top)
         {
             if (telopWindowList != null)
             {
-                var telop = telopWindowList.Where(x => x.DataSource.Title == telopTitle).FirstOrDefault();
+                var telop = telopWindowList.ContainsKey(telopID) ?
+                    telopWindowList[telopID] :
+                    null;
                 if (telop != null)
                 {
                     telop.Left = left;
@@ -43,11 +45,11 @@
         /// <summary>
         /// 位置を取得する
         /// </summary>
-        /// <param name="telopTitle">設定するテロップのTitle</param>
+        /// <param name="telopID">設定するテロップのID</param>
         /// <param name="left">Left</param>
         /// <param name="top">Top</param>
         public static void GettLocation(
-            string telopTitle,
+            long telopID,
             out double left,
             out double top)
         {
@@ -56,7 +58,9 @@
 
             if (telopWindowList != null)
             {
-                var telop = telopWindowList.Where(x => x.DataSource.Title == telopTitle).FirstOrDefault();
+                var telop = telopWindowList.ContainsKey(telopID) ?
+                    telopWindowList[telopID] :
+                    null;
                 if (telop != null)
                 {
                     left = telop.Left;
@@ -74,7 +78,7 @@
             {
                 ActInvoker.Invoke(() =>
                 {
-                    foreach (var telop in telopWindowList)
+                    foreach (var telop in telopWindowList.Select(x => x.Value))
                     {
                         telop.DataSource.Left = telop.Left;
                         telop.DataSource.Top = telop.Top;
@@ -98,7 +102,7 @@
             {
                 ActInvoker.Invoke(() =>
                 {
-                    foreach (var telop in telopWindowList)
+                    foreach (var telop in telopWindowList.Select(x => x.Value))
                     {
                         telop.HideOverlay();
                     }
@@ -115,7 +119,7 @@
             {
                 ActInvoker.Invoke(() =>
                 {
-                    foreach (var telop in telopWindowList)
+                    foreach (var telop in telopWindowList.Select(x => x.Value))
                     {
                         telop.Activate();
                     }
@@ -134,9 +138,9 @@
 
             // 不要になったWindowを閉じる
             var removeWindowList = new List<OnePointTelopWindow>();
-            foreach (var window in telopWindowList)
+            foreach (var window in telopWindowList.Select(x => x.Value))
             {
-                if (!telops.Any(x => x.Title == window.DataSource.Title))
+                if (!telops.Any(x => x.ID == window.DataSource.ID))
                 {
                     removeWindowList.Add(window);
                 }
@@ -151,7 +155,7 @@
                     window.Close();
                 });
 
-                telopWindowList.Remove(window);
+                telopWindowList.Remove(window.DataSource.ID);
             }
 
             foreach (var telop in telops.AsParallel())
@@ -262,7 +266,7 @@
                     }
                 }
 
-                var w = telopWindowList.Where(x => x.DataSource.ID == telop.ID).FirstOrDefault();
+                var w = telopWindowList.ContainsKey(telop.ID) ? telopWindowList[telop.ID] : null;
                 if (w == null)
                 {
                     w = new OnePointTelopWindow()
@@ -279,7 +283,7 @@
                     w.Opacity = 0;
                     w.Show();
 
-                    telopWindowList.Add(w);
+                    telopWindowList.Add(telop.ID, w);
                 }
 
                 // telopの位置を保存する

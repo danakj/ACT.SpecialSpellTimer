@@ -277,7 +277,7 @@
                     (int)this.TelopTopNumericUpDown.Tag != src.Top)
                 {
                     OnePointTelopController.SetLocation(
-                        src.Title,
+                        src.ID,
                         src.Left,
                         src.Top);
                 }
@@ -403,7 +403,7 @@
 
             double x, y;
             OnePointTelopController.GettLocation(
-                src.Title,
+                src.ID,
                 out x,
                 out y);
 
