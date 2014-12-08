@@ -98,6 +98,11 @@ FF14の内部からテキストコマンドで一部の機能を制御できま�
 </tr>
 
 <tr>
+<td>/spespe refresh pet</td>
+<td>自身のペットIDのキャッシュを更新する</td>
+</tr>
+
+<tr>
 <td>/spespe changeenabled spells "サンプルパネル" true</td>
 <td>指定したパネルのスペルを有効にする。falseで無効</td>
 </tr>
