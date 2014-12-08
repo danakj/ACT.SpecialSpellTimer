@@ -164,8 +164,9 @@
         /// </summary>
         private void RefreshWindow()
         {
+#if DEBUG
             var sw1 = Stopwatch.StartNew();
-
+#endif
             // 有効なSpellリストを取得する
             var spellArray = SpellTimerTable.EnabledTable;
 
@@ -213,8 +214,10 @@
                 }
             }
 
+#if DEBUG
             sw1.Stop();
             Debug.WriteLine("Refresh ClosePanels ->" + sw1.ElapsedMilliseconds.ToString("N0") + "ms");
+#endif
 
             // ACTが起動していない？
             if (ActGlobals.oFormActMain == null ||
@@ -243,25 +246,37 @@
             this.RefreshInterval = Settings.Default.RefreshInterval;
 
             // ログを取り出す
+#if DEBUG
             var sw2 = Stopwatch.StartNew();
+#endif
             var logLines = this.LogBuffer.GetLogLines();
+#if DEBUG
             sw2.Stop();
             Debug.WriteLine("Refresh GetLog ->" + sw2.ElapsedMilliseconds.ToString("N0") + "ms");
+#endif
 
             // テロップとマッチングする
+#if DEBUG
             var sw3 = Stopwatch.StartNew();
+#endif
             OnePointTelopController.Match(
                 logLines);
+#if DEBUG
             sw3.Stop();
             Debug.WriteLine("Refresh MatchTelop ->" + sw3.ElapsedMilliseconds.ToString("N0") + "ms");
+#endif
 
             // スペルリストとマッチングする
+#if DEBUG
             var sw4 = Stopwatch.StartNew();
+#endif
             this.MatchSpells(
                 spellArray,
                 logLines);
+#if DEBUG
             sw4.Stop();
             Debug.WriteLine("Refresh MatchSpell ->" + sw4.ElapsedMilliseconds.ToString("N0") + "ms");
+#endif
 
             // コマンドとマッチングする
             TextCommandController.MatchCommand(
@@ -276,7 +291,9 @@
             }
 
             // Windowを表示する
+#if DEBUG
             var sw5 = Stopwatch.StartNew();
+#endif
             var panelNames = spellArray.Select(x => x.Panel.Trim()).Distinct();
             foreach (var name in panelNames)
             {
@@ -314,8 +331,10 @@
                 }
             }
 
+#if DEBUG
             sw5.Stop();
             Debug.WriteLine("Refresh RefreshSpell ->" + sw5.ElapsedMilliseconds.ToString("N0") + "ms");
+#endif
         }
 
         /// <summary>
