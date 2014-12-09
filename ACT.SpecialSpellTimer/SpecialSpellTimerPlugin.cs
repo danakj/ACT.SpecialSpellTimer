@@ -3,7 +3,6 @@
     using System;
     using System.Drawing;
     using System.IO;
-    using System.Linq;
     using System.Reflection;
     using System.Windows.Forms;
 
@@ -24,6 +23,15 @@
         /// 表示切り替えボタン
         /// </summary>
         private static Button SwitchVisibleButton { get; set; }
+
+        /// <summary>
+        /// 自身の場所
+        /// </summary>
+        public static string Location
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// プラグインステータス表示ラベル
@@ -95,6 +103,13 @@
 
                 // アップデートを確認する
                 this.Update();
+
+                // 自身の場所を格納しておく
+                var plugin = ActGlobals.oFormActMain.PluginGetSelfData(this);
+                if (plugin != null)
+                {
+                    SpecialSpellTimerPlugin.Location = plugin.pluginFile.DirectoryName;
+                }
 
                 // 設定Panelを追加する
                 ConfigPanel = new ConfigPanel();

@@ -64,11 +64,24 @@
             get
             {
                 // ACTのパスを取得する
-                var baseDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                var actDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                var resourcesUnderAct = Path.Combine(actDirectory, @"resources\wav");
 
-                return Path.Combine(
-                    baseDir,
-                    @"resources\wav");
+                if (Directory.Exists(resourcesUnderAct))
+                {
+                    return resourcesUnderAct;
+                }
+
+                // 自身の場所を取得する
+                var selfDirectory = SpecialSpellTimerPlugin.Location;
+                var resourcesUnderThis = Path.Combine(selfDirectory, @"resources\wav");
+
+                if (Directory.Exists(resourcesUnderThis))
+                {
+                    return resourcesUnderThis;
+                }
+
+                return string.Empty;
             }
         }
 

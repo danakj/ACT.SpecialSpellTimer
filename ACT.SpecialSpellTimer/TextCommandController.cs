@@ -1,8 +1,8 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
+    using System.Media;
     using System.Text.RegularExpressions;
 
-    using ACT.SpecialSpellTimer.Sound;
     using ACT.SpecialSpellTimer.Utility;
 
     /// <summary>
@@ -26,6 +26,7 @@
         public static void MatchCommand(
             string[] logLines)
         {
+            var commandDone = false;
             foreach (var log in logLines)
             {
                 // 正規表現の前にキーワードがなければ抜けてしまう
@@ -57,27 +58,27 @@
                         {
                             case "spells":
                                 SpellTimerCore.Default.ClosePanels();
-                                SoundController.Default.Play("リフレッシュ'スペル。");
+                                commandDone = true;
                                 break;
 
                             case "telops":
                                 OnePointTelopController.CloseTelops();
-                                SoundController.Default.Play("リフレッシュ'テロップ。");
+                                commandDone = true;
                                 break;
 
                             case "me":
                                 FF14PluginHelper.RefreshPlayer();
-                                SoundController.Default.Play("リフレッシュ'ミー。");
+                                commandDone = true;
                                 break;
 
                             case "pt":
                                 LogBuffer.RefreshPTList();
-                                SoundController.Default.Play("リフレッシュ'パーティー。");
+                                commandDone = true;
                                 break;
 
                             case "pet":
                                 LogBuffer.RefreshPetID();
-                                SoundController.Default.Play("リフレッシュ'ペット。");
+                                commandDone = true;
                                 break;
                         }
 
@@ -106,7 +107,7 @@
                                         SpecialSpellTimerPlugin.ConfigPanel.LoadSpellTimerTable();
                                     });
 
-                                    SoundController.Default.Play("チェインジ'スペル。");
+                                    commandDone = true;
                                 }
 
                                 break;
@@ -129,7 +130,7 @@
                                         SpecialSpellTimerPlugin.ConfigPanel.LoadTelopTable();
                                     });
 
-                                    SoundController.Default.Play("チェインジ'テロップ。");
+                                    commandDone = true;
                                 }
 
                                 break;
@@ -137,7 +138,13 @@
 
                         break;
                 }
+            }   // loop end logLines
+
+            // コマンドを実行したらシステム音を鳴らす
+            if (commandDone)
+            {
+                SystemSounds.Asterisk.Play();
             }
-        }
+        }   // method end
     }
 }

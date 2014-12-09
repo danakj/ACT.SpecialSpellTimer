@@ -24,6 +24,32 @@
 
         private VisualSettingControlBackgoundColorForm alphaDialog = new VisualSettingControlBackgoundColorForm();
 
+        public string GetColorSetDirectory
+        {
+            get
+            {
+                // ACTのパスを取得する
+                var actDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                var resourcesUnderAct = Path.Combine(actDirectory, @"resources\color");
+
+                if (Directory.Exists(resourcesUnderAct))
+                {
+                    return resourcesUnderAct;
+                }
+
+                // 自身の場所を取得する
+                var selfDirectory = SpecialSpellTimerPlugin.Location;
+                var resourcesUnderThis = Path.Combine(selfDirectory, @"resources\color");
+
+                if (Directory.Exists(resourcesUnderThis))
+                {
+                    return resourcesUnderThis;
+                }
+
+                return string.Empty;
+            }
+        }
+
         public VisualSettingControl()
         {
             this.InitializeComponent();
@@ -43,19 +69,11 @@
 
         private void VisualSettingControl_Load(object sender, EventArgs e)
         {
-
-            var asm = Assembly.GetEntryAssembly();
-            if (asm != null)
+            var colorSetDirectory = this.GetColorSetDirectory;
+            if (Directory.Exists(colorSetDirectory))
             {
-                var colorDirectory = Path.Combine(
-                    asm.Location,
-                    @"resources\color");
-
-                if (Directory.Exists(colorDirectory))
-                {
-                    this.OpenFileDialog.InitialDirectory = colorDirectory;
-                    this.SaveFileDialog.InitialDirectory = colorDirectory;
-                }
+                this.OpenFileDialog.InitialDirectory = colorSetDirectory;
+                this.SaveFileDialog.InitialDirectory = colorSetDirectory;
             }
 
             this.WidthNumericUpDown.Value = this.BarSize.Width;
