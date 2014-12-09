@@ -39,18 +39,18 @@
                 Name="ProgressBarCanvas"
                 Margin="0,0,0,0"
                 VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <Rectangle x:Name="BarBackRectangle" />
-                    <Rectangle x:Name="BarRectangle" >
-                        <Rectangle.Effect>
-                            <DropShadowEffect
+                <Rectangle x:Name="BarBackRectangle" />
+                <Rectangle x:Name="BarRectangle" >
+                    <Rectangle.Effect>
+                        <DropShadowEffect
                             x:Name="BarEffect"
                             ShadowDepth="0"
                             BlurRadius="8"
                             RenderingBias="Quality"
                             />
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <Rectangle x:Name="BarOutlineRectangle" />
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Rectangle x:Name="BarOutlineRectangle" />
             </Canvas>
 
             <Utility:OutlineTextBlock 
