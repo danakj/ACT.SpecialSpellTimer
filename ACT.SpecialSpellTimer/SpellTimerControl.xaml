@@ -23,6 +23,26 @@
             <ColumnDefinition x:Name="RecastTimeColumn" Width="32*"/>
         </Grid.ColumnDefinitions>
 
+        <Canvas 
+            Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
+            Name="ProgressBarCanvas"
+            Margin="0,0,0,10"
+            VerticalAlignment="Top" 
+            >
+            <Rectangle x:Name="BarBackRectangle" />
+            <Rectangle x:Name="BarRectangle" >
+                <Rectangle.Effect>
+                    <DropShadowEffect
+                        x:Name="BarEffect"
+                        ShadowDepth="0"
+                        BlurRadius="8"
+                        RenderingBias="Quality"
+                        />
+                </Rectangle.Effect>
+            </Rectangle>
+            <Rectangle x:Name="BarOutlineRectangle" />
+        </Canvas>
+
         <Utility:OutlineTextBlock
             Grid.Column="0" Grid.Row="0"
             HorizontalAlignment="{Binding HorizontalAlignment, ElementName=SpellTitleTextBlock, Mode=OneWay}"
@@ -84,16 +104,5 @@
             Margin="0,0,3,0" 
             TextWrapping="NoWrap"
             />
-
-        <Canvas 
-            Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
-            Name="ProgressBarCanvas"
-            Margin="0,0,0,10"
-            VerticalAlignment="Top" 
-            >
-            <Rectangle x:Name="BarBackRectangle" />
-            <Rectangle x:Name="BarRectangle" />
-            <Rectangle x:Name="BarOutlineRectangle" />
-        </Canvas>
     </Grid>
 </UserControl>

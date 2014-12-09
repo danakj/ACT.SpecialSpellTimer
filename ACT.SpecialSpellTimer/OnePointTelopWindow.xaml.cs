@@ -290,6 +290,9 @@
                         Canvas.SetLeft(outlineRect, 0);
                         Canvas.SetTop(outlineRect, 0);
 
+                        // バーのエフェクトの色を設定する
+                        this.BarEffect.Color = this.BarBrush.Color.ChangeBrightness(1.05d);
+
                         this.ProgressBarCanvas.Width = backRect.Width;
                         this.ProgressBarCanvas.Height = backRect.Height;
                     }),

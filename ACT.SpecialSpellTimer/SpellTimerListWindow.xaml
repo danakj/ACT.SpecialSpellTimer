@@ -20,7 +20,8 @@
                 RadiusY="8"
                 Width="{Binding ActualWidth, ElementName=BackgroundColorGrid}"
                 Height="{Binding ActualHeight, ElementName=BackgroundColorGrid}"
-                />
+                >
+            </Rectangle>
         </Canvas>
 
         <Grid Name="BaseGrid" Margin="8,6,6,6">

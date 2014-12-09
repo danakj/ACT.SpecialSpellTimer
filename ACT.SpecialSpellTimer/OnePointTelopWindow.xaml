@@ -20,7 +20,8 @@
                 RadiusY="8"
                 Width="{Binding ActualWidth, ElementName=BackgroundColorGrid}"
                 Height="{Binding ActualHeight, ElementName=BackgroundColorGrid}"
-                />
+                >
+            </Rectangle>
         </Canvas>
 
         <Grid Name="BaseGrid" Margin="6,6,6,6">
@@ -32,6 +33,25 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+
+            <Canvas 
+                Grid.Column="0" Grid.Row="1"
+                Name="ProgressBarCanvas"
+                Margin="0,0,0,0"
+                VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <Rectangle x:Name="BarBackRectangle" />
+                    <Rectangle x:Name="BarRectangle" >
+                        <Rectangle.Effect>
+                            <DropShadowEffect
+                            x:Name="BarEffect"
+                            ShadowDepth="0"
+                            BlurRadius="8"
+                            RenderingBias="Quality"
+                            />
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <Rectangle x:Name="BarOutlineRectangle" />
+            </Canvas>
 
             <Utility:OutlineTextBlock 
             Grid.Column="0" Grid.Row="0"
@@ -62,16 +82,6 @@
             TextWrapping="Wrap"
             Text="" HorizontalAlignment="Left" 
             />
-
-            <Canvas 
-            Grid.Column="0" Grid.Row="1"
-            Name="ProgressBarCanvas"
-            Margin="0,0,0,0"
-            VerticalAlignment="Top" HorizontalAlignment="Left">
-                <Rectangle x:Name="BarBackRectangle" />
-                <Rectangle x:Name="BarRectangle" />
-                <Rectangle x:Name="BarOutlineRectangle" />
-            </Canvas>
         </Grid>
 
     </Grid>
