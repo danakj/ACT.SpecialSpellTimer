@@ -29,16 +29,20 @@
             get
             {
                 // ACTのパスを取得する
-                var actDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-                var resourcesUnderAct = Path.Combine(actDirectory, @"resources\color");
-
-                if (Directory.Exists(resourcesUnderAct))
+                var asm = Assembly.GetEntryAssembly();
+                if (asm != null)
                 {
-                    return resourcesUnderAct;
+                    var actDirectory = Path.GetDirectoryName(asm.Location);
+                    var resourcesUnderAct = Path.Combine(actDirectory, @"resources\color");
+
+                    if (Directory.Exists(resourcesUnderAct))
+                    {
+                        return resourcesUnderAct;
+                    }
                 }
 
                 // 自身の場所を取得する
-                var selfDirectory = SpecialSpellTimerPlugin.Location;
+                var selfDirectory = SpecialSpellTimerPlugin.Location ?? string.Empty;
                 var resourcesUnderThis = Path.Combine(selfDirectory, @"resources\color");
 
                 if (Directory.Exists(resourcesUnderThis))
