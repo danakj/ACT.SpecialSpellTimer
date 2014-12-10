@@ -206,6 +206,7 @@
 
             var outlineRect = this.BarOutlineRectangle;
             outlineRect.Stroke = this.BarOutlineBrush;
+            outlineRect.StrokeThickness = 1.0d;
             outlineRect.Width = backRect.Width;
             outlineRect.Height = foreRect.Height;
             outlineRect.RadiusX = 2.0d;

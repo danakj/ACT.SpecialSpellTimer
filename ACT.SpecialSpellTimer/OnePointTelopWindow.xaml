@@ -45,7 +45,7 @@
                         <DropShadowEffect
                             x:Name="BarEffect"
                             ShadowDepth="0"
-                            BlurRadius="8"
+                            BlurRadius="11"
                             RenderingBias="Quality"
                             />
                     </Rectangle.Effect>
