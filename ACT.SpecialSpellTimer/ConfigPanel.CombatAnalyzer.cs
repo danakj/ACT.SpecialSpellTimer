@@ -4,6 +4,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Windows.Forms;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 設定Panel
@@ -103,6 +104,8 @@
         /// </summary>
         public void ShowCombatLog()
         {
+            var copy = new List<CombatLog>(CombatAnalyzer.Default.CurrentCombatLogList.ToArray());
+
             var action = new Action(() =>
             {
                 try
@@ -111,7 +114,7 @@
                     this.CombatLogDataGridView.SuspendLayout();
 
                     this.CombatLogDataGridView.AutoGenerateColumns = false;
-                    this.CombatLogDataGridView.DataSource = CombatAnalyzer.Default.CurrentCombatLogList;
+                    this.CombatLogDataGridView.DataSource = copy;
                     this.SwitchCombatAnalyzerButton.Enabled = true;
                     this.CombatAnalyzingLabel.Visible = false;
                     this.CombatAnalyzingTimer.Stop();

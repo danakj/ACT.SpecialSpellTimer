@@ -19,19 +19,19 @@
         private static readonly string[] AddedKeywords = new string[] { "Added new combatant" };
 
         private static readonly Regex CastRegex = new Regex(
-            @"\[.+?\] \d\d:.+?:(?<actor>.+?)は「(?<skill>.+?)」(を唱えた。|の構え。)$",
+            @"\[.+?\] ..:.+?:(?<actor>.+?)は「(?<skill>.+?)」(を唱えた。|の構え。)$",
             RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
         private static readonly Regex ActionRegex = new Regex(
-            @"\[.+?\] \d\d:.+?:(?<actor>.+?)の「(?<skill>.+?)」$",
+            @"\[.+?\] ..:.+?:(?<actor>.+?)の「(?<skill>.+?)」$",
             RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
         private static readonly Regex HPRateRegex = new Regex(
-            @"\[.+?\] \d\d:(?<actor>.+?) HP at (?<hprate>\d+?)%",
+            @"\[.+?\] ..:(?<actor>.+?) HP at (?<hprate>\d+?)%",
             RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
         private static readonly Regex AddedRegex = new Regex(
-            @"\[.+?\] \d\d:Added new combatant (?<actor>.+)\.  ",
+            @"\[.+?\] ..:Added new combatant (?<actor>.+)\.  ",
             RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
         /// <summary>
@@ -362,6 +362,13 @@
                 return;
             }
 
+            var hprate = match.Groups["hprate"].ToString();
+            if (!hprate.EndsWith("0") &&
+                !hprate.EndsWith("5"))
+            {
+                return;
+            }
+
             if (this.CurrentCombatLogList.Count <= 1)
             {
                 this.StartAnalyzeTimeStamp = logInfo.detectedTime;
@@ -373,8 +380,8 @@
                 TimeStampElapted = (logInfo.detectedTime - this.StartAnalyzeTimeStamp).TotalSeconds,
                 Raw = logInfo.logLine,
                 Actor = match.Groups["actor"].ToString(),
-                HPRate = decimal.Parse(match.Groups["hprate"].ToString()),
-                Action = "HP " + match.Groups["hprate"].ToString().PadLeft(3, ' ') + "%",
+                HPRate = decimal.Parse(hprate),
+                Action = "HP " + hprate.PadLeft(3, ' ') + "%",
                 LogType = CombatLogType.HPRate
             };
 
