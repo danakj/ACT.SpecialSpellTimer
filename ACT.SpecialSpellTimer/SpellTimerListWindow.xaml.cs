@@ -229,7 +229,7 @@
                         c = new SpellTimerControl();
                         this.SpellTimerControls.Add(spell.ID, c);
 
-                        c.Visibility = Visibility.Hidden;
+                        c.Visibility = Visibility.Collapsed;
                         c.MouseDown += (s, e) => this.DragOn(e);
                         c.MouseUp += (s, e) => this.DragOff(e);
 
