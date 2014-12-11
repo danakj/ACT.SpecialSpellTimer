@@ -29,11 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.SpecialSpellTabPage = new System.Windows.Forms.TabPage();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
-            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.SelectJobButton = new System.Windows.Forms.Button();
             this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.DontHideCheckBox = new System.Windows.Forms.CheckBox();
@@ -82,7 +85,6 @@
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.OnPointTelopTabPage = new System.Windows.Forms.TabPage();
             this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
-            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TelopSelectJobButton = new System.Windows.Forms.Button();
             this.TelopProgressBarEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.EnabledAddMessageCheckBox = new System.Windows.Forms.CheckBox();
@@ -127,8 +129,18 @@
             this.TelopImportButton = new System.Windows.Forms.Button();
             this.TelopExportButton = new System.Windows.Forms.Button();
             this.TelopTreeView = new System.Windows.Forms.TreeView();
+            this.CombatAnalyzerTabPage = new System.Windows.Forms.TabPage();
+            this.ExportCombatLogButton = new System.Windows.Forms.Button();
+            this.CombatLogDataGridView = new System.Windows.Forms.DataGridView();
+            this.TimeStampColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ElapsedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LogTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActorColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SpanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LogColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SwitchCombatAnalyzerButton = new System.Windows.Forms.Button();
             this.OptionTabPage = new System.Windows.Forms.TabPage();
-            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.label48 = new System.Windows.Forms.Label();
             this.EnabledPTPlaceholderCheckBox = new System.Windows.Forms.CheckBox();
             this.label43 = new System.Windows.Forms.Label();
@@ -156,6 +168,11 @@
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.CombatAnalyzingLabel = new System.Windows.Forms.Label();
+            this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
+            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -173,6 +190,8 @@
             this.groupBox5.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TelopDelayNumericUpDown)).BeginInit();
+            this.CombatAnalyzerTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CombatLogDataGridView)).BeginInit();
             this.OptionTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).BeginInit();
@@ -186,6 +205,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TabControl.Controls.Add(this.SpecialSpellTabPage);
             this.TabControl.Controls.Add(this.OnPointTelopTabPage);
+            this.TabControl.Controls.Add(this.CombatAnalyzerTabPage);
             this.TabControl.Controls.Add(this.OptionTabPage);
             this.TabControl.Location = new System.Drawing.Point(3, 3);
             this.TabControl.Name = "TabControl";
@@ -204,7 +224,7 @@
             this.SpecialSpellTabPage.Controls.Add(this.SpellTimerTreeView);
             this.SpecialSpellTabPage.Location = new System.Drawing.Point(4, 22);
             this.SpecialSpellTabPage.Name = "SpecialSpellTabPage";
-            this.SpecialSpellTabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.SpecialSpellTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.SpecialSpellTabPage.Size = new System.Drawing.Size(1186, 668);
             this.SpecialSpellTabPage.TabIndex = 0;
             this.SpecialSpellTabPage.Text = "スペシャルスペルタイマ";
@@ -253,21 +273,6 @@
             this.DetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.DetailGroupBox.TabIndex = 5;
             this.DetailGroupBox.TabStop = false;
-            // 
-            // SpellVisualSetting
-            // 
-            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.BarEnabled = true;
-            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.Location = new System.Drawing.Point(187, 124);
-            this.SpellVisualSetting.Name = "SpellVisualSetting";
-            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.SpellVisualSetting.TabIndex = 28;
-            this.SpellVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
             // 
             // SelectJobButton
             // 
@@ -471,7 +476,7 @@
             this.groupBox2.Controls.Add(this.TimeupSoundComboBox);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Location = new System.Drawing.Point(6, 387);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(838, 75);
             this.groupBox2.TabIndex = 19;
@@ -638,7 +643,7 @@
             // 
             this.RecastTimeNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.RecastTimeNumericUpDown.Location = new System.Drawing.Point(187, 96);
-            this.RecastTimeNumericUpDown.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.RecastTimeNumericUpDown.Margin = new System.Windows.Forms.Padding(6);
             this.RecastTimeNumericUpDown.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -797,21 +802,6 @@
             this.TelopDetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.TelopDetailGroupBox.TabIndex = 5;
             this.TelopDetailGroupBox.TabStop = false;
-            // 
-            // TelopVisualSetting
-            // 
-            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.BarEnabled = false;
-            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
-            this.TelopVisualSetting.Name = "TelopVisualSetting";
-            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.TelopVisualSetting.TabIndex = 6;
-            this.TelopVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
             // 
             // TelopSelectJobButton
             // 
@@ -1278,6 +1268,150 @@
             this.TelopTreeView.Size = new System.Drawing.Size(318, 625);
             this.TelopTreeView.TabIndex = 0;
             // 
+            // CombatAnalyzerTabPage
+            // 
+            this.CombatAnalyzerTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.CombatAnalyzerTabPage.Controls.Add(this.CombatAnalyzingLabel);
+            this.CombatAnalyzerTabPage.Controls.Add(this.ExportCombatLogButton);
+            this.CombatAnalyzerTabPage.Controls.Add(this.CombatLogDataGridView);
+            this.CombatAnalyzerTabPage.Controls.Add(this.SwitchCombatAnalyzerButton);
+            this.CombatAnalyzerTabPage.Location = new System.Drawing.Point(4, 22);
+            this.CombatAnalyzerTabPage.Name = "CombatAnalyzerTabPage";
+            this.CombatAnalyzerTabPage.Size = new System.Drawing.Size(1186, 668);
+            this.CombatAnalyzerTabPage.TabIndex = 3;
+            this.CombatAnalyzerTabPage.Text = "戦闘アナライザ";
+            // 
+            // ExportCombatLogButton
+            // 
+            this.ExportCombatLogButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ExportCombatLogButton.Location = new System.Drawing.Point(1054, 637);
+            this.ExportCombatLogButton.Name = "ExportCombatLogButton";
+            this.ExportCombatLogButton.Size = new System.Drawing.Size(126, 25);
+            this.ExportCombatLogButton.TabIndex = 13;
+            this.ExportCombatLogButton.Text = "Export";
+            this.ExportCombatLogButton.UseVisualStyleBackColor = true;
+            // 
+            // CombatLogDataGridView
+            // 
+            this.CombatLogDataGridView.AllowUserToAddRows = false;
+            this.CombatLogDataGridView.AllowUserToDeleteRows = false;
+            this.CombatLogDataGridView.AllowUserToOrderColumns = true;
+            this.CombatLogDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CombatLogDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.CombatLogDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CombatLogDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.CombatLogDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CombatLogDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.TimeStampColumn,
+            this.ElapsedColumn,
+            this.LogTypeColumn,
+            this.ActorColumn,
+            this.ActionColumn,
+            this.SpanColumn,
+            this.LogColumn});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.CombatLogDataGridView.DefaultCellStyle = dataGridViewCellStyle4;
+            this.CombatLogDataGridView.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.CombatLogDataGridView.Location = new System.Drawing.Point(6, 54);
+            this.CombatLogDataGridView.MultiSelect = false;
+            this.CombatLogDataGridView.Name = "CombatLogDataGridView";
+            this.CombatLogDataGridView.ReadOnly = true;
+            this.CombatLogDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.CombatLogDataGridView.RowTemplate.Height = 21;
+            this.CombatLogDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.CombatLogDataGridView.Size = new System.Drawing.Size(1174, 577);
+            this.CombatLogDataGridView.TabIndex = 2;
+            // 
+            // TimeStampColumn
+            // 
+            this.TimeStampColumn.DataPropertyName = "TimeStamp";
+            dataGridViewCellStyle1.Format = "yyyy/MM/dd HH:mm:ss";
+            dataGridViewCellStyle1.NullValue = null;
+            this.TimeStampColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.TimeStampColumn.HeaderText = "タイムスタンプ";
+            this.TimeStampColumn.MinimumWidth = 150;
+            this.TimeStampColumn.Name = "TimeStampColumn";
+            this.TimeStampColumn.ReadOnly = true;
+            this.TimeStampColumn.Width = 150;
+            // 
+            // ElapsedColumn
+            // 
+            this.ElapsedColumn.DataPropertyName = "TimeStampElapted";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N0";
+            this.ElapsedColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ElapsedColumn.HeaderText = "経過秒";
+            this.ElapsedColumn.MinimumWidth = 70;
+            this.ElapsedColumn.Name = "ElapsedColumn";
+            this.ElapsedColumn.ReadOnly = true;
+            this.ElapsedColumn.Width = 70;
+            // 
+            // LogTypeColumn
+            // 
+            this.LogTypeColumn.DataPropertyName = "LogTypeName";
+            this.LogTypeColumn.HeaderText = "分類";
+            this.LogTypeColumn.MinimumWidth = 80;
+            this.LogTypeColumn.Name = "LogTypeColumn";
+            this.LogTypeColumn.ReadOnly = true;
+            this.LogTypeColumn.Width = 80;
+            // 
+            // ActorColumn
+            // 
+            this.ActorColumn.DataPropertyName = "Actor";
+            this.ActorColumn.HeaderText = "アクター";
+            this.ActorColumn.MinimumWidth = 100;
+            this.ActorColumn.Name = "ActorColumn";
+            this.ActorColumn.ReadOnly = true;
+            this.ActorColumn.Width = 300;
+            // 
+            // ActionColumn
+            // 
+            this.ActionColumn.DataPropertyName = "Action";
+            this.ActionColumn.HeaderText = "アクション";
+            this.ActionColumn.MinimumWidth = 100;
+            this.ActionColumn.Name = "ActionColumn";
+            this.ActionColumn.ReadOnly = true;
+            this.ActionColumn.Width = 400;
+            // 
+            // SpanColumn
+            // 
+            this.SpanColumn.DataPropertyName = "Span";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.SpanColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.SpanColumn.HeaderText = "周期";
+            this.SpanColumn.MinimumWidth = 70;
+            this.SpanColumn.Name = "SpanColumn";
+            this.SpanColumn.ReadOnly = true;
+            this.SpanColumn.Width = 70;
+            // 
+            // LogColumn
+            // 
+            this.LogColumn.DataPropertyName = "Raw";
+            this.LogColumn.HeaderText = "ログ";
+            this.LogColumn.MinimumWidth = 300;
+            this.LogColumn.Name = "LogColumn";
+            this.LogColumn.ReadOnly = true;
+            this.LogColumn.Width = 700;
+            // 
+            // SwitchCombatAnalyzerButton
+            // 
+            this.SwitchCombatAnalyzerButton.Location = new System.Drawing.Point(6, 6);
+            this.SwitchCombatAnalyzerButton.Name = "SwitchCombatAnalyzerButton";
+            this.SwitchCombatAnalyzerButton.Size = new System.Drawing.Size(250, 42);
+            this.SwitchCombatAnalyzerButton.TabIndex = 1;
+            this.SwitchCombatAnalyzerButton.Text = "分析を開始する";
+            this.SwitchCombatAnalyzerButton.UseVisualStyleBackColor = true;
+            // 
             // OptionTabPage
             // 
             this.OptionTabPage.BackColor = System.Drawing.SystemColors.Control;
@@ -1308,25 +1442,10 @@
             this.OptionTabPage.Controls.Add(this.ShokikaButton);
             this.OptionTabPage.Location = new System.Drawing.Point(4, 22);
             this.OptionTabPage.Name = "OptionTabPage";
-            this.OptionTabPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.OptionTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.OptionTabPage.Size = new System.Drawing.Size(1186, 668);
             this.OptionTabPage.TabIndex = 1;
             this.OptionTabPage.Text = "オプション";
-            // 
-            // DefaultVisualSetting
-            // 
-            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.BarEnabled = true;
-            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.Location = new System.Drawing.Point(213, 79);
-            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
-            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.DefaultVisualSetting.TabIndex = 37;
-            this.DefaultVisualSetting.TextFont = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Bold);
             // 
             // label48
             // 
@@ -1590,6 +1709,64 @@
             // 
             this.ToolTip.IsBalloon = true;
             // 
+            // CombatAnalyzingLabel
+            // 
+            this.CombatAnalyzingLabel.AutoSize = true;
+            this.CombatAnalyzingLabel.Location = new System.Drawing.Point(262, 32);
+            this.CombatAnalyzingLabel.Name = "CombatAnalyzingLabel";
+            this.CombatAnalyzingLabel.Size = new System.Drawing.Size(121, 12);
+            this.CombatAnalyzingLabel.TabIndex = 14;
+            this.CombatAnalyzingLabel.Text = "ログを解析しています . . .";
+            // 
+            // CombatAnalyzingTimer
+            // 
+            this.CombatAnalyzingTimer.Interval = 600;
+            // 
+            // SpellVisualSetting
+            // 
+            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.BarEnabled = true;
+            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.Location = new System.Drawing.Point(187, 124);
+            this.SpellVisualSetting.Name = "SpellVisualSetting";
+            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.SpellVisualSetting.TabIndex = 28;
+            this.SpellVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
+            // 
+            // TelopVisualSetting
+            // 
+            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.BarEnabled = false;
+            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
+            this.TelopVisualSetting.Name = "TelopVisualSetting";
+            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.TelopVisualSetting.TabIndex = 6;
+            this.TelopVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
+            // 
+            // DefaultVisualSetting
+            // 
+            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.BarEnabled = true;
+            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.Location = new System.Drawing.Point(213, 79);
+            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
+            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.DefaultVisualSetting.TabIndex = 37;
+            this.DefaultVisualSetting.TextFont = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Bold);
+            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1621,6 +1798,9 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TelopDelayNumericUpDown)).EndInit();
+            this.CombatAnalyzerTabPage.ResumeLayout(false);
+            this.CombatAnalyzerTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CombatLogDataGridView)).EndInit();
             this.OptionTabPage.ResumeLayout(false);
             this.OptionTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).EndInit();
@@ -1759,5 +1939,18 @@
         private VisualSettingControl DefaultVisualSetting;
         private VisualSettingControl SpellVisualSetting;
         private VisualSettingControl TelopVisualSetting;
+        private System.Windows.Forms.TabPage CombatAnalyzerTabPage;
+        internal System.Windows.Forms.Button SwitchCombatAnalyzerButton;
+        private System.Windows.Forms.Button ExportCombatLogButton;
+        private System.Windows.Forms.DataGridView CombatLogDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeStampColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ElapsedColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LogTypeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ActorColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ActionColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SpanColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LogColumn;
+        private System.Windows.Forms.Label CombatAnalyzingLabel;
+        private System.Windows.Forms.Timer CombatAnalyzingTimer;
     }
 }

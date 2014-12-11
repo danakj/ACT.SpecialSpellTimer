@@ -128,6 +128,9 @@
 
             // ワンポイントテロップのロードメソッドを呼ぶ
             this.LoadOnePointTelop();
+
+            // 戦闘アナライザのロードメソッドを呼ぶ
+            this.LoadCombatAnalyzer();
         }
 
         /// <summary>

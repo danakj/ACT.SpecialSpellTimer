@@ -54,6 +54,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CombatAnalyzer.cs" />
+    <Compile Include="CombatLog.cs" />
+    <Compile Include="ConfigPanel.CombatAnalyzer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ConfigPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>

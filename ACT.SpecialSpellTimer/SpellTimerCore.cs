@@ -128,6 +128,9 @@
         /// </summary>
         public void End()
         {
+            // 戦闘分析を終了する
+            CombatAnalyzer.Default.Stop();
+
             // ログバッファを開放する
             if (this.LogBuffer != null)
             {
@@ -234,7 +237,9 @@
                 // FF14が起動していない？
                 if (FF14PluginHelper.GetFFXIVProcess == null)
                 {
-                    this.HidePanels();
+                    this.ClosePanels();
+                    OnePointTelopController.CloseTelops();
+
                     this.RefreshInterval = 1000;
                     return;
                 }

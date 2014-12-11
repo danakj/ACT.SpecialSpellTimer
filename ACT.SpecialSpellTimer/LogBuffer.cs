@@ -256,7 +256,14 @@
         /// <returns>PTメンバーリスト</returns>
         public static string[] GetPTMember()
         {
-            return ptmember.ToArray();
+            if (ptmember != null)
+            {
+                return ptmember.ToArray();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
