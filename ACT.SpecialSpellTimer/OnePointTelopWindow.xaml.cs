@@ -226,7 +226,7 @@
                 if (!this.DataSource.ProgressBarEnabled ||
                     this.DataSource.DisplayTime <= 0)
                 {
-                    this.ProgressBarCanvas.Visibility = Visibility.Hidden;
+                    this.ProgressBarCanvas.Visibility = Visibility.Collapsed;
                     return;
                 }
 

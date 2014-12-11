@@ -298,7 +298,7 @@
                 {
                     if (!spells.Any(x => x.ID == c.Key))
                     {
-                        c.Value.Visibility = Visibility.Hidden;
+                        c.Value.Visibility = Visibility.Collapsed;
                         c.Value.SetValue(Grid.RowProperty, this.BaseGrid.RowDefinitions.Count - 1);
                     }
                 }

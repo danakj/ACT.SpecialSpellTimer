@@ -186,8 +186,12 @@
                 Settings.Default.OverlayVisible = !Settings.Default.OverlayVisible;
                 Settings.Default.Save();
 
+                SpellTimerCore.Default.ClosePanels();
+                OnePointTelopController.CloseTelops();
+
                 FF14PluginHelper.RefreshPlayer();
                 LogBuffer.RefreshPTList();
+                LogBuffer.RefreshPetID();
 
                 if (Settings.Default.OverlayVisible)
                 {
