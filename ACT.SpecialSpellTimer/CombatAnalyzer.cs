@@ -6,6 +6,7 @@
     using System.Text.RegularExpressions;
     using System.Threading;
 
+    using ACT.SpecialSpellTimer.Properties;
     using Advanced_Combat_Tracker;
 
     /// <summary>
@@ -64,71 +65,41 @@
         }
 
         /// <summary>
-        /// 分析中？
-        /// </summary>
-        public bool IsAnalyzing { get; private set; }
-
-        /// <summary>
         /// 戦闘ログのリスト
         /// </summary>
         public List<CombatLog> CurrentCombatLogList { get; private set; }
 
         /// <summary>
-        /// 分析を開始したタイムスタンプ
-        /// </summary>
-        private DateTime StartAnalyzeTimeStamp { get; set; }
-
-        /// <summary>
         /// 分析を開始する
         /// </summary>
-        public void Start()
+        public void Initialize()
         {
             this.CurrentCombatLogList.Clear();
-            this.CurrentCombatLogList.Add(new CombatLog()
-            {
-                TimeStamp = DateTime.Now,
-                TimeStampElapted = 0,
-                LogType = CombatLogType.AnalyzeStart,
-                Action = "分析開始"
-            });
-
             ActGlobals.oFormActMain.OnLogLineRead += this.oFormActMain_OnLogLineRead;
-            this.IsAnalyzing = true;
         }
 
         /// <summary>
         /// 分析を停止する
         /// </summary>
-        public void Stop()
+        public void Denitialize()
         {
-            if (this.IsAnalyzing)
-            {
-                ActGlobals.oFormActMain.OnLogLineRead -= this.oFormActMain_OnLogLineRead;
-                this.IsAnalyzing = false;
+            ActGlobals.oFormActMain.OnLogLineRead -= this.oFormActMain_OnLogLineRead;
+            this.CurrentCombatLogList.Clear();
+        }
 
-                if (this.CurrentCombatLogList != null &&
-                    this.CurrentCombatLogList.Count > 0)
-                {
-                    var now = DateTime.Now;
-                    this.CurrentCombatLogList.Add(new CombatLog()
-                    {
-                        TimeStamp = now,
-                        TimeStampElapted = (now - this.StartAnalyzeTimeStamp).TotalSeconds,
-                        LogType = CombatLogType.AnalyzeEnd,
-                        Action = "分析終了"
-                    });
-
-                    // 分析する
-                    this.AnalyzeLog(this.CurrentCombatLogList);
-                }
-            }
+        /// <summary>
+        /// ログを分析する
+        /// </summary>
+        public void AnalyzeLog()
+        {
+            this.AnalyzeLog(this.CurrentCombatLogList);
         }
 
         /// <summary>
         /// ログを分析する
         /// </summary>
         /// <param name="logList">ログのリスト</param>
-        private void AnalyzeLog(
+        public void AnalyzeLog(
             List<CombatLog> logList)
         {
             if (logList == null ||
@@ -141,34 +112,7 @@
 
             foreach (var log in logList.OrderBy(x => x.TimeStamp))
             {
-                Thread.Sleep(10);
-
-                switch (log.LogType)
-                {
-                    case CombatLogType.AnalyzeStart:
-                        log.LogTypeName = "開始";
-                        break;
-
-                    case CombatLogType.AnalyzeEnd:
-                        log.LogTypeName = "終了";
-                        break;
-
-                    case CombatLogType.CastStart:
-                        log.LogTypeName = "準備動作";
-                        break;
-
-                    case CombatLogType.Action:
-                        log.LogTypeName = "アクション";
-                        break;
-
-                    case CombatLogType.Added:
-                        log.LogTypeName = "Added";
-                        break;
-
-                    case CombatLogType.HPRate:
-                        log.LogTypeName = "残HP率";
-                        break;
-                }
+                Thread.Sleep(3);
 
                 if (log.LogType == CombatLogType.AnalyzeStart ||
                     log.LogType == CombatLogType.AnalyzeEnd ||
@@ -199,33 +143,15 @@
             bool isImport,
             LogLineEventArgs logInfo)
         {
-            if (!this.IsAnalyzing)
+            if (!Settings.Default.CombatLogEnabled)
             {
                 return;
             }
 
-            if (this.CurrentCombatLogList == null ||
-                this.CurrentCombatLogList.Count < 1)
+            if (this.CurrentCombatLogList == null)
             {
                 return;
             }
-
-            // プレイヤ情報とパーティリストを取得する
-#if !DEBUG
-            var player = FF14PluginHelper.GetPlayer();
-            var ptlist = LogBuffer.GetPTMember();
-
-            if (player == null ||
-                ptlist == null)
-            {
-                return;
-            }
-            // ログにプレイヤ名が含まれている？
-            if (logInfo.logLine.Contains(player.Name))
-            {
-                return;
-            }
-#endif
 
             // ログにペットが含まれている？
             if (logInfo.logLine.Contains("・エギ") ||
@@ -235,16 +161,34 @@
                 return;
             }
 
-            // ログにパーティメンバ名が含まれている？
-#if !DEBUG
-            foreach (var name in ptlist)
+            // インポートログではない？
+            if (!isImport)
             {
-                if (logInfo.logLine.Contains(name))
+                // プレイヤ情報とパーティリストを取得する
+                var player = FF14PluginHelper.GetPlayer();
+                var ptlist = LogBuffer.GetPTMember();
+
+                if (player == null ||
+                    ptlist == null)
                 {
                     return;
                 }
+
+                // ログにプレイヤ名が含まれている？
+                if (logInfo.logLine.Contains(player.Name))
+                {
+                    return;
+                }
+
+                // ログにパーティメンバ名が含まれている？
+                foreach (var name in ptlist)
+                {
+                    if (logInfo.logLine.Contains(name))
+                    {
+                        return;
+                    }
+                }
             }
-#endif
 
             // キャストのキーワードが含まれている？
             foreach (var keyword in CastKeywords)
@@ -288,6 +232,65 @@
         }
 
         /// <summary>
+        /// ログを格納する
+        /// </summary>
+        /// <param name="log">ログ</param>
+        private void StoreLog(
+            CombatLog log)
+        {
+            switch (log.LogType)
+            {
+                case CombatLogType.AnalyzeStart:
+                    log.LogTypeName = "開始";
+                    break;
+
+                case CombatLogType.AnalyzeEnd:
+                    log.LogTypeName = "終了";
+                    break;
+
+                case CombatLogType.CastStart:
+                    log.LogTypeName = "準備動作";
+                    break;
+
+                case CombatLogType.Action:
+                    log.LogTypeName = "アクション";
+                    break;
+
+                case CombatLogType.Added:
+                    log.LogTypeName = "Added";
+                    break;
+
+                case CombatLogType.HPRate:
+                    log.LogTypeName = "残HP率";
+                    break;
+            }
+
+            lock (this.CurrentCombatLogList)
+            {
+                // バッファサイズを超えた？
+                if (this.CurrentCombatLogList.Count >
+                    Settings.Default.CombatLogBufferSize)
+                {
+                    // オーバー分を消去する
+                    var over = (int)(Settings.Default.CombatLogBufferSize - this.CurrentCombatLogList.Count);
+                    this.CurrentCombatLogList.RemoveRange(0, over);
+                }
+
+                if (this.CurrentCombatLogList.Count > 0)
+                {
+                    log.TimeStampElapted =
+                        (log.TimeStamp - this.CurrentCombatLogList.First().TimeStamp).TotalSeconds;
+                }
+                else
+                {
+                    log.TimeStampElapted = 0;
+                }
+
+                this.CurrentCombatLogList.Add(log);
+            }
+        }
+
+        /// <summary>
         /// キャストログを格納する
         /// </summary>
         /// <param name="logInfo">ログ情報</param>
@@ -300,22 +303,16 @@
                 return;
             }
 
-            if (this.CurrentCombatLogList.Count <= 1)
-            {
-                this.StartAnalyzeTimeStamp = logInfo.detectedTime;
-            }
-
             var log = new CombatLog()
             {
                 TimeStamp = logInfo.detectedTime,
-                TimeStampElapted = (logInfo.detectedTime - this.StartAnalyzeTimeStamp).TotalSeconds,
                 Raw = logInfo.logLine,
                 Actor = match.Groups["actor"].ToString(),
                 Action = match.Groups["skill"].ToString() + " の準備動作",
                 LogType = CombatLogType.CastStart
             };
 
-            this.CurrentCombatLogList.Add(log);
+            this.StoreLog(log);
         }
 
         /// <summary>
@@ -331,22 +328,16 @@
                 return;
             }
 
-            if (this.CurrentCombatLogList.Count <= 1)
-            {
-                this.StartAnalyzeTimeStamp = logInfo.detectedTime;
-            }
-
             var log = new CombatLog()
             {
                 TimeStamp = logInfo.detectedTime,
-                TimeStampElapted = (logInfo.detectedTime - this.StartAnalyzeTimeStamp).TotalSeconds,
                 Raw = logInfo.logLine,
                 Actor = match.Groups["actor"].ToString(),
                 Action = match.Groups["skill"].ToString() + " の発動",
                 LogType = CombatLogType.Action
             };
 
-            this.CurrentCombatLogList.Add(log);
+            this.StoreLog(log);
         }
 
         /// <summary>
@@ -369,15 +360,9 @@
                 return;
             }
 
-            if (this.CurrentCombatLogList.Count <= 1)
-            {
-                this.StartAnalyzeTimeStamp = logInfo.detectedTime;
-            }
-
             var log = new CombatLog()
             {
                 TimeStamp = logInfo.detectedTime,
-                TimeStampElapted = (logInfo.detectedTime - this.StartAnalyzeTimeStamp).TotalSeconds,
                 Raw = logInfo.logLine,
                 Actor = match.Groups["actor"].ToString(),
                 HPRate = decimal.Parse(hprate),
@@ -385,7 +370,7 @@
                 LogType = CombatLogType.HPRate
             };
 
-            this.CurrentCombatLogList.Add(log);
+            this.StoreLog(log);
         }
 
         /// <summary>
@@ -401,22 +386,16 @@
                 return;
             }
 
-            if (this.CurrentCombatLogList.Count <= 1)
-            {
-                this.StartAnalyzeTimeStamp = logInfo.detectedTime;
-            }
-
             var log = new CombatLog()
             {
                 TimeStamp = logInfo.detectedTime,
-                TimeStampElapted = (logInfo.detectedTime - this.StartAnalyzeTimeStamp).TotalSeconds,
                 Raw = logInfo.logLine,
                 Actor = match.Groups["actor"].ToString(),
                 Action = "Added",
                 LogType = CombatLogType.Added
             };
 
-            this.CurrentCombatLogList.Add(log);
+            this.StoreLog(log);
         }
     }
 }

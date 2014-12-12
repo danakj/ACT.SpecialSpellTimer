@@ -75,6 +75,9 @@
         /// </summary>
         public void Begin()
         {
+            // 戦闘分析を初期化する
+            CombatAnalyzer.Default.Initialize();
+
             // Panelリストを生成する
             this.SpellTimerPanels = new List<SpellTimerListWindow>();
 
@@ -128,8 +131,8 @@
         /// </summary>
         public void End()
         {
-            // 戦闘分析を終了する
-            CombatAnalyzer.Default.Stop();
+            // 戦闘分析を開放する
+            CombatAnalyzer.Default.Denitialize();
 
             // ログバッファを開放する
             if (this.LogBuffer != null)

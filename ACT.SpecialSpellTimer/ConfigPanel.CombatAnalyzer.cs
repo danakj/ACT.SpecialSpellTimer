@@ -1,10 +1,11 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System;
-    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Collections.Generic;
+
+    using ACT.SpecialSpellTimer.Properties;
 
     /// <summary>
     /// 設定Panel
@@ -13,11 +14,29 @@
     {
         private int timerCount;
 
+        private List<CombatLog> bindedCombatLogList = new List<CombatLog>();
+
         /// <summary>
         /// ロード
         /// </summary>
         private void LoadCombatAnalyzer()
         {
+            this.CombatLogDataGridView.AutoGenerateColumns = false;
+
+            this.CombatLogEnabledCheckBox.Checked = Settings.Default.CombatLogEnabled;
+            this.CombatLogBufferSizeNumericUpDown.Value = Settings.Default.CombatLogBufferSize;
+
+            var saveSettings = new Action(() =>
+            {
+                Settings.Default.CombatLogEnabled = this.CombatLogEnabledCheckBox.Checked;
+                Settings.Default.CombatLogBufferSize = (long)this.CombatLogBufferSizeNumericUpDown.Value;
+                Settings.Default.Save();
+            });
+
+            this.CombatLogEnabledCheckBox.CheckedChanged += (s, e) => saveSettings();
+            this.CombatLogBufferSizeNumericUpDown.ValueChanged += (s, e) => saveSettings();
+
+            this.CombatAnalyzingLabel.Text = string.Empty;
             this.CombatAnalyzingLabel.Visible = false;
 
             this.CombatAnalyzingTimer.Tick += (s, e) =>
@@ -48,54 +67,69 @@
                 Application.DoEvents();
             };
 
-            var changeButtonCaption = new Action(() =>
+            this.AnalyzeCombatButton.Click += (s, e) =>
             {
-                var text = string.Empty;
+                this.AnalyzeCombatButton.Enabled = false;
+                this.CombatAnalyzingLabel.Visible = true;
+                this.CombatAnalyzingTimer.Start();
 
-                if (CombatAnalyzer.Default.IsAnalyzing)
+                Task.Run(() =>
                 {
-                    text += "分析を停止する" + Environment.NewLine;
-                    text += "現在の状態 -> 分析中";
-                }
-                else
+                    CombatAnalyzer.Default.AnalyzeLog();
+                }).ContinueWith((t) =>
                 {
-                    text += "分析を開始する";
-                }
+                    if (t != null)
+                    {
+                        t.Dispose();
+                    }
 
-                this.SwitchCombatAnalyzerButton.Text = text;
-                Application.DoEvents();
-            });
+                    this.ShowCombatLog();
+                });
+            };
 
-            changeButtonCaption();
-            this.SwitchCombatAnalyzerButton.Click += (s, e) =>
+            this.CombatLogDataGridView.CellValueNeeded += (s, e) =>
             {
-                if (!CombatAnalyzer.Default.IsAnalyzing)
+                // データソースを取り出す
+                var ds = this.CombatLogDataGridView.Rows[e.RowIndex].Tag as CombatLog;
+                if (ds == null)
                 {
-                    CombatAnalyzer.Default.Start();
-                }
-                else
-                {
-                    this.SwitchCombatAnalyzerButton.Enabled = false;
-                    this.CombatAnalyzingLabel.Visible = true;
-                    this.CombatAnalyzingTimer.Start();
-
-                    Task.Run(() =>
-                    {
-                        CombatAnalyzer.Default.Stop();
-                    }).ContinueWith((t) =>
-                    {
-                        if (t != null)
-                        {
-                            t.Dispose();
-                        }
-
-                        this.ShowCombatLog();
-                    });
-
-                    Thread.Sleep(500);
+                    return;
                 }
 
-                changeButtonCaption();
+                if (e.ColumnIndex == this.TimeStampColumn.Index)
+                {
+                    e.Value = ds.TimeStamp;
+                }
+
+                if (e.ColumnIndex == this.ElapsedColumn.Index)
+                {
+                    e.Value = ds.TimeStampElapted;
+                }
+
+                if (e.ColumnIndex == this.LogTypeColumn.Index)
+                {
+                    e.Value = ds.LogTypeName;
+                }
+
+                if (e.ColumnIndex == this.ActorColumn.Index)
+                {
+                    e.Value = ds.Actor;
+                }
+
+                if (e.ColumnIndex == this.ActionColumn.Index)
+                {
+                    e.Value = ds.Action;
+                }
+
+                if (e.ColumnIndex == this.SpanColumn.Index)
+                {
+                    e.Value = ds.Span;
+                }
+
+                if (e.ColumnIndex == this.LogColumn.Index)
+                {
+                    e.Value = ds.Raw;
+                }
             };
         }
 
@@ -104,24 +138,32 @@
         /// </summary>
         public void ShowCombatLog()
         {
-            var copy = new List<CombatLog>(CombatAnalyzer.Default.CurrentCombatLogList.ToArray());
+            this.bindedCombatLogList.Clear();
+            this.bindedCombatLogList.AddRange(CombatAnalyzer.Default.CurrentCombatLogList);
 
             var action = new Action(() =>
             {
                 try
                 {
                     this.CombatLogDataGridView.Visible = false;
+                    this.CombatLogDataGridView.Enabled = false;
                     this.CombatLogDataGridView.SuspendLayout();
+                    this.CombatLogDataGridView.RowCount = this.bindedCombatLogList.Count;
 
-                    this.CombatLogDataGridView.AutoGenerateColumns = false;
-                    this.CombatLogDataGridView.DataSource = copy;
-                    this.SwitchCombatAnalyzerButton.Enabled = true;
+                    for (int i = 0; i < this.CombatLogDataGridView.Rows.Count; i++)
+                    {
+                        this.CombatLogDataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString("N0");
+                        this.CombatLogDataGridView.Rows[i].Tag = this.bindedCombatLogList[i];
+                    }
+
+                    this.AnalyzeCombatButton.Enabled = true;
                     this.CombatAnalyzingLabel.Visible = false;
                     this.CombatAnalyzingTimer.Stop();
                 }
                 finally
                 {
                     this.CombatLogDataGridView.ResumeLayout();
+                    this.CombatLogDataGridView.Enabled = true;
                     this.CombatLogDataGridView.Visible = true;
                 }
             });

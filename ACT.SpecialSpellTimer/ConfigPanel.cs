@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
+    using System.Reflection;
     using System.Windows.Forms;
 
     using ACT.SpecialSpellTimer.Properties;
@@ -21,6 +22,11 @@
         public ConfigPanel()
         {
             this.InitializeComponent();
+
+            // データグリッドのダブルバッファリングを有効にする
+            typeof(DataGridView)
+                .GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic)
+                .SetValue(this.CombatLogDataGridView, true, null);
 
             this.Load += this.ConfigPanel_Load;
         }
