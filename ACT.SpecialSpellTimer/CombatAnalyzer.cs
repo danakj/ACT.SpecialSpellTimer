@@ -287,7 +287,7 @@
             {
                 // バッファサイズを超えた？
                 if (this.CurrentCombatLogList.Count >
-                    Settings.Default.CombatLogBufferSize)
+                    (Settings.Default.CombatLogBufferSize + (Settings.Default.CombatLogBufferSize / 10)))
                 {
                     // オーバー分を消去する
                     var over = (int)(this.CurrentCombatLogList.Count - Settings.Default.CombatLogBufferSize);

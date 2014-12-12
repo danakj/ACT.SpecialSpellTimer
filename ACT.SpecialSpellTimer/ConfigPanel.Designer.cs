@@ -138,6 +138,11 @@
             this.ActionColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SpanColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LogColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CombatAnalyzerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CASelectAllItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.CACopyLogItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CACopyLogDetailItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.CombatLogBufferSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -174,11 +179,6 @@
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
-            this.CombatAnalyzerContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.CASelectAllItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CACopyLogItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CACopyLogDetailItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -197,12 +197,12 @@
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TelopDelayNumericUpDown)).BeginInit();
             this.CombatAnalyzerTabPage.SuspendLayout();
+            this.CombatAnalyzerContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CombatLogBufferSizeNumericUpDown)).BeginInit();
             this.OptionTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).BeginInit();
-            this.CombatAnalyzerContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // TabControl
@@ -1398,6 +1398,44 @@
             this.LogColumnHeader.Text = "ログ";
             this.LogColumnHeader.Width = 600;
             // 
+            // CombatAnalyzerContextMenuStrip
+            // 
+            this.CombatAnalyzerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CASelectAllItem,
+            this.toolStripSeparator1,
+            this.CACopyLogItem,
+            this.CACopyLogDetailItem});
+            this.CombatAnalyzerContextMenuStrip.Name = "CombatAnalyzerContextMenuStrip";
+            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(287, 76);
+            // 
+            // CASelectAllItem
+            // 
+            this.CASelectAllItem.Name = "CASelectAllItem";
+            this.CASelectAllItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.CASelectAllItem.Size = new System.Drawing.Size(286, 22);
+            this.CASelectAllItem.Text = "全て選択";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(283, 6);
+            // 
+            // CACopyLogItem
+            // 
+            this.CACopyLogItem.Name = "CACopyLogItem";
+            this.CACopyLogItem.ShortcutKeyDisplayString = "";
+            this.CACopyLogItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.CACopyLogItem.Size = new System.Drawing.Size(286, 22);
+            this.CACopyLogItem.Text = "ログをコピーする";
+            // 
+            // CACopyLogDetailItem
+            // 
+            this.CACopyLogDetailItem.Name = "CACopyLogDetailItem";
+            this.CACopyLogDetailItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.C)));
+            this.CACopyLogDetailItem.Size = new System.Drawing.Size(286, 22);
+            this.CACopyLogDetailItem.Text = "ログの詳細をコピーする";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -1785,44 +1823,6 @@
             // 
             this.CombatAnalyzingTimer.Interval = 600;
             // 
-            // CombatAnalyzerContextMenuStrip
-            // 
-            this.CombatAnalyzerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CASelectAllItem,
-            this.toolStripSeparator1,
-            this.CACopyLogItem,
-            this.CACopyLogDetailItem});
-            this.CombatAnalyzerContextMenuStrip.Name = "CombatAnalyzerContextMenuStrip";
-            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(287, 98);
-            // 
-            // CASelectAllItem
-            // 
-            this.CASelectAllItem.Name = "CASelectAllItem";
-            this.CASelectAllItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.CASelectAllItem.Size = new System.Drawing.Size(286, 22);
-            this.CASelectAllItem.Text = "全て選択";
-            // 
-            // CACopyLogItem
-            // 
-            this.CACopyLogItem.Name = "CACopyLogItem";
-            this.CACopyLogItem.ShortcutKeyDisplayString = "";
-            this.CACopyLogItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.CACopyLogItem.Size = new System.Drawing.Size(286, 22);
-            this.CACopyLogItem.Text = "ログをコピーする";
-            // 
-            // CACopyLogDetailItem
-            // 
-            this.CACopyLogDetailItem.Name = "CACopyLogDetailItem";
-            this.CACopyLogDetailItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.C)));
-            this.CACopyLogDetailItem.Size = new System.Drawing.Size(286, 22);
-            this.CACopyLogDetailItem.Text = "ログの詳細をコピーする";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(283, 6);
-            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1856,13 +1856,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.TelopDelayNumericUpDown)).EndInit();
             this.CombatAnalyzerTabPage.ResumeLayout(false);
             this.CombatAnalyzerTabPage.PerformLayout();
+            this.CombatAnalyzerContextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CombatLogBufferSizeNumericUpDown)).EndInit();
             this.OptionTabPage.ResumeLayout(false);
             this.OptionTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OpacityNumericUpDown)).EndInit();
-            this.CombatAnalyzerContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
