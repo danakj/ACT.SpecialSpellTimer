@@ -21,6 +21,21 @@
         private List<CombatLog> bindedCombatLogList = new List<CombatLog>();
 
         /// <summary>
+        /// 戦闘アナライザの有効性
+        /// </summary>
+        public bool CombatAnalyzerEnabled
+        {
+            get
+            {
+                return this.CombatLogEnabledCheckBox.Checked;
+            }
+            set
+            {
+                this.CombatLogEnabledCheckBox.Checked = value;
+            }
+        }
+
+        /// <summary>
         /// ロード
         /// </summary>
         private void LoadCombatAnalyzer()
@@ -150,9 +165,17 @@
                         t.Dispose();
                     }
 
-                    this.ShowCombatLog(null);
+                    this.ShowCombatLog();
                 });
             };
+        }
+
+        /// <summary>
+        /// 戦闘ログを表示する
+        /// </summary>
+        public void ShowCombatLog()
+        {
+            this.ShowCombatLog(null);
         }
 
         /// <summary>

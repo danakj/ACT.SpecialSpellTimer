@@ -14,7 +14,7 @@
         /// コマンド解析用の正規表現
         /// </summary>
         private static Regex regexCommand = new Regex(
-            @".*/spespe (?<command>refresh|changeenabled) (?<target>spells|telops|me|pt|pet)( (?<windowname>"".*""|all) (?<value>.*))*",
+            @".*/spespe (?<command>refresh|changeenabled|analyze) (?<target>spells|telops|me|pt|pet|on|off)( (?<windowname>"".*""|all) (?<value>.*))*",
             RegexOptions.Compiled |
             RegexOptions.IgnoreCase);
 
@@ -53,6 +53,22 @@
 
                 switch (command)
                 {
+                    case "analyze":
+                        switch (target)
+                        {
+                            case "on":
+                                SpecialSpellTimerPlugin.ConfigPanel.CombatAnalyzerEnabled = true;
+                                commandDone = true;
+                                break;
+
+                            case "off":
+                                SpecialSpellTimerPlugin.ConfigPanel.CombatAnalyzerEnabled = false;
+                                commandDone = true;
+                                break;
+                        }
+
+                        break;
+
                     case "refresh":
                         switch (target)
                         {

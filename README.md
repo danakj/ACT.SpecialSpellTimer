@@ -127,6 +127,11 @@ FF14の内部からテキストコマンドで一部の機能を制御できま�
 <td>全てのテロップを有効にする。falseで無効</td>
 </tr>
 
+<tr>
+<td>/spespe analyze on</td>
+<td>戦闘ログの収集を有効にする。offで無効</td>
+</tr>
+
 </table>
   
   
