@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.SpecialSpellTabPage = new System.Windows.Forms.TabPage();
             this.ClearAllButton = new System.Windows.Forms.Button();
@@ -132,19 +126,21 @@
             this.TelopExportButton = new System.Windows.Forms.Button();
             this.TelopTreeView = new System.Windows.Forms.TreeView();
             this.CombatAnalyzerTabPage = new System.Windows.Forms.TabPage();
+            this.CombatLogListView = new System.Windows.Forms.ListView();
+            this.DummyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NoColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TimeStampColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ElapsedColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LogTypeColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ActorColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ActionColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SpanColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LogColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.CombatLogBufferSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.CombatLogEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.CombatAnalyzingLabel = new System.Windows.Forms.Label();
-            this.CombatLogDataGridView = new System.Windows.Forms.DataGridView();
-            this.TimeStampColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ElapsedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LogTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ActorColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ActionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SpanColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LogColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AnalyzeCombatButton = new System.Windows.Forms.Button();
             this.OptionTabPage = new System.Windows.Forms.TabPage();
             this.label48 = new System.Windows.Forms.Label();
@@ -197,7 +193,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.TelopDelayNumericUpDown)).BeginInit();
             this.CombatAnalyzerTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CombatLogBufferSizeNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CombatLogDataGridView)).BeginInit();
             this.OptionTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TimeOfHideNumericUpDown)).BeginInit();
@@ -1277,18 +1272,94 @@
             // CombatAnalyzerTabPage
             // 
             this.CombatAnalyzerTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.CombatAnalyzerTabPage.Controls.Add(this.CombatLogListView);
             this.CombatAnalyzerTabPage.Controls.Add(this.label6);
             this.CombatAnalyzerTabPage.Controls.Add(this.label5);
             this.CombatAnalyzerTabPage.Controls.Add(this.CombatLogBufferSizeNumericUpDown);
             this.CombatAnalyzerTabPage.Controls.Add(this.CombatLogEnabledCheckBox);
             this.CombatAnalyzerTabPage.Controls.Add(this.CombatAnalyzingLabel);
-            this.CombatAnalyzerTabPage.Controls.Add(this.CombatLogDataGridView);
             this.CombatAnalyzerTabPage.Controls.Add(this.AnalyzeCombatButton);
             this.CombatAnalyzerTabPage.Location = new System.Drawing.Point(4, 22);
             this.CombatAnalyzerTabPage.Name = "CombatAnalyzerTabPage";
             this.CombatAnalyzerTabPage.Size = new System.Drawing.Size(1186, 668);
             this.CombatAnalyzerTabPage.TabIndex = 3;
             this.CombatAnalyzerTabPage.Text = "戦闘アナライザ";
+            // 
+            // CombatLogListView
+            // 
+            this.CombatLogListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CombatLogListView.BackColor = System.Drawing.SystemColors.Window;
+            this.CombatLogListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CombatLogListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.DummyColumnHeader,
+            this.NoColumnHeader,
+            this.TimeStampColumnHeader,
+            this.ElapsedColumnHeader,
+            this.LogTypeColumnHeader,
+            this.ActorColumnHeader,
+            this.ActionColumnHeader,
+            this.SpanColumnHeader,
+            this.LogColumnHeader});
+            this.CombatLogListView.FullRowSelect = true;
+            this.CombatLogListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.CombatLogListView.HideSelection = false;
+            this.CombatLogListView.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.CombatLogListView.Location = new System.Drawing.Point(6, 46);
+            this.CombatLogListView.Name = "CombatLogListView";
+            this.CombatLogListView.Size = new System.Drawing.Size(1174, 585);
+            this.CombatLogListView.TabIndex = 19;
+            this.CombatLogListView.UseCompatibleStateImageBehavior = false;
+            this.CombatLogListView.View = System.Windows.Forms.View.Details;
+            // 
+            // DummyColumnHeader
+            // 
+            this.DummyColumnHeader.Text = "";
+            this.DummyColumnHeader.Width = 0;
+            // 
+            // NoColumnHeader
+            // 
+            this.NoColumnHeader.Text = "No";
+            this.NoColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.NoColumnHeader.Width = 50;
+            // 
+            // TimeStampColumnHeader
+            // 
+            this.TimeStampColumnHeader.Text = "タイムスタンプ";
+            this.TimeStampColumnHeader.Width = 140;
+            // 
+            // ElapsedColumnHeader
+            // 
+            this.ElapsedColumnHeader.Text = "経過秒";
+            this.ElapsedColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ElapsedColumnHeader.Width = 80;
+            // 
+            // LogTypeColumnHeader
+            // 
+            this.LogTypeColumnHeader.Text = "種類";
+            this.LogTypeColumnHeader.Width = 100;
+            // 
+            // ActorColumnHeader
+            // 
+            this.ActorColumnHeader.Text = "アクター";
+            this.ActorColumnHeader.Width = 120;
+            // 
+            // ActionColumnHeader
+            // 
+            this.ActionColumnHeader.Text = "アクション";
+            this.ActionColumnHeader.Width = 300;
+            // 
+            // SpanColumnHeader
+            // 
+            this.SpanColumnHeader.Text = "周期";
+            this.SpanColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.SpanColumnHeader.Width = 80;
+            // 
+            // LogColumnHeader
+            // 
+            this.LogColumnHeader.Text = "ログ";
+            this.LogColumnHeader.Width = 600;
             // 
             // label6
             // 
@@ -1350,131 +1421,6 @@
             this.CombatAnalyzingLabel.Size = new System.Drawing.Size(121, 12);
             this.CombatAnalyzingLabel.TabIndex = 14;
             this.CombatAnalyzingLabel.Text = "ログを解析しています . . .";
-            // 
-            // CombatLogDataGridView
-            // 
-            this.CombatLogDataGridView.AllowUserToAddRows = false;
-            this.CombatLogDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Beige;
-            this.CombatLogDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.CombatLogDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CombatLogDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.CombatLogDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.CombatLogDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CombatLogDataGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.CombatLogDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CombatLogDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.TimeStampColumn,
-            this.ElapsedColumn,
-            this.LogTypeColumn,
-            this.ActorColumn,
-            this.ActionColumn,
-            this.SpanColumn,
-            this.LogColumn});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.CombatLogDataGridView.DefaultCellStyle = dataGridViewCellStyle5;
-            this.CombatLogDataGridView.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.CombatLogDataGridView.Location = new System.Drawing.Point(6, 44);
-            this.CombatLogDataGridView.Name = "CombatLogDataGridView";
-            this.CombatLogDataGridView.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.CombatLogDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.CombatLogDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.CombatLogDataGridView.RowTemplate.Height = 21;
-            this.CombatLogDataGridView.ShowCellErrors = false;
-            this.CombatLogDataGridView.ShowCellToolTips = false;
-            this.CombatLogDataGridView.ShowEditingIcon = false;
-            this.CombatLogDataGridView.ShowRowErrors = false;
-            this.CombatLogDataGridView.Size = new System.Drawing.Size(1174, 587);
-            this.CombatLogDataGridView.TabIndex = 2;
-            this.CombatLogDataGridView.VirtualMode = true;
-            // 
-            // TimeStampColumn
-            // 
-            this.TimeStampColumn.DataPropertyName = "TimeStamp";
-            dataGridViewCellStyle2.Format = "yyyy/MM/dd HH:mm:ss";
-            dataGridViewCellStyle2.NullValue = null;
-            this.TimeStampColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.TimeStampColumn.FillWeight = 140F;
-            this.TimeStampColumn.HeaderText = "タイムスタンプ";
-            this.TimeStampColumn.MinimumWidth = 140;
-            this.TimeStampColumn.Name = "TimeStampColumn";
-            this.TimeStampColumn.ReadOnly = true;
-            // 
-            // ElapsedColumn
-            // 
-            this.ElapsedColumn.DataPropertyName = "TimeStampElapted";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N0";
-            this.ElapsedColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ElapsedColumn.FillWeight = 80F;
-            this.ElapsedColumn.HeaderText = "経過秒";
-            this.ElapsedColumn.MinimumWidth = 70;
-            this.ElapsedColumn.Name = "ElapsedColumn";
-            this.ElapsedColumn.ReadOnly = true;
-            // 
-            // LogTypeColumn
-            // 
-            this.LogTypeColumn.DataPropertyName = "LogTypeName";
-            this.LogTypeColumn.FillWeight = 90F;
-            this.LogTypeColumn.HeaderText = "分類";
-            this.LogTypeColumn.MinimumWidth = 80;
-            this.LogTypeColumn.Name = "LogTypeColumn";
-            this.LogTypeColumn.ReadOnly = true;
-            // 
-            // ActorColumn
-            // 
-            this.ActorColumn.DataPropertyName = "Actor";
-            this.ActorColumn.FillWeight = 120F;
-            this.ActorColumn.HeaderText = "アクター";
-            this.ActorColumn.MinimumWidth = 100;
-            this.ActorColumn.Name = "ActorColumn";
-            this.ActorColumn.ReadOnly = true;
-            // 
-            // ActionColumn
-            // 
-            this.ActionColumn.DataPropertyName = "Action";
-            this.ActionColumn.FillWeight = 300F;
-            this.ActionColumn.HeaderText = "アクション";
-            this.ActionColumn.MinimumWidth = 100;
-            this.ActionColumn.Name = "ActionColumn";
-            this.ActionColumn.ReadOnly = true;
-            // 
-            // SpanColumn
-            // 
-            this.SpanColumn.DataPropertyName = "Span";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N0";
-            dataGridViewCellStyle4.NullValue = null;
-            this.SpanColumn.DefaultCellStyle = dataGridViewCellStyle4;
-            this.SpanColumn.FillWeight = 80F;
-            this.SpanColumn.HeaderText = "周期";
-            this.SpanColumn.MinimumWidth = 70;
-            this.SpanColumn.Name = "SpanColumn";
-            this.SpanColumn.ReadOnly = true;
-            // 
-            // LogColumn
-            // 
-            this.LogColumn.DataPropertyName = "Raw";
-            this.LogColumn.FillWeight = 500F;
-            this.LogColumn.HeaderText = "ログ";
-            this.LogColumn.MinimumWidth = 300;
-            this.LogColumn.Name = "LogColumn";
-            this.LogColumn.ReadOnly = true;
             // 
             // AnalyzeCombatButton
             // 
@@ -1866,7 +1812,6 @@
             this.CombatAnalyzerTabPage.ResumeLayout(false);
             this.CombatAnalyzerTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CombatLogBufferSizeNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CombatLogDataGridView)).EndInit();
             this.OptionTabPage.ResumeLayout(false);
             this.OptionTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RefreshIntervalNumericUpDown)).EndInit();
@@ -2007,19 +1952,21 @@
         private VisualSettingControl TelopVisualSetting;
         private System.Windows.Forms.TabPage CombatAnalyzerTabPage;
         internal System.Windows.Forms.Button AnalyzeCombatButton;
-        private System.Windows.Forms.DataGridView CombatLogDataGridView;
         private System.Windows.Forms.Label CombatAnalyzingLabel;
         private System.Windows.Forms.Timer CombatAnalyzingTimer;
         private System.Windows.Forms.CheckBox CombatLogEnabledCheckBox;
         private System.Windows.Forms.NumericUpDown CombatLogBufferSizeNumericUpDown;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TimeStampColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ElapsedColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LogTypeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ActorColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ActionColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SpanColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LogColumn;
+        private System.Windows.Forms.ListView CombatLogListView;
+        private System.Windows.Forms.ColumnHeader NoColumnHeader;
+        private System.Windows.Forms.ColumnHeader TimeStampColumnHeader;
+        private System.Windows.Forms.ColumnHeader ElapsedColumnHeader;
+        private System.Windows.Forms.ColumnHeader LogTypeColumnHeader;
+        private System.Windows.Forms.ColumnHeader ActorColumnHeader;
+        private System.Windows.Forms.ColumnHeader ActionColumnHeader;
+        private System.Windows.Forms.ColumnHeader SpanColumnHeader;
+        private System.Windows.Forms.ColumnHeader LogColumnHeader;
+        private System.Windows.Forms.ColumnHeader DummyColumnHeader;
     }
 }

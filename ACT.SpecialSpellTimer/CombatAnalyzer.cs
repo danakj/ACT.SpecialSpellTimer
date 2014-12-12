@@ -88,6 +88,17 @@
         }
 
         /// <summary>
+        /// ログバッファをクリアする
+        /// </summary>
+        public void ClearLogBuffer()
+        {
+            lock (this.CurrentCombatLogList)
+            {
+                this.CurrentCombatLogList.Clear();
+            }
+        }
+
+        /// <summary>
         /// ログを分析する
         /// </summary>
         public void AnalyzeLog()
@@ -112,7 +123,7 @@
 
             foreach (var log in logList.OrderBy(x => x.TimeStamp))
             {
-                Thread.Sleep(3);
+                Thread.Sleep(1);
 
                 if (log.LogType == CombatLogType.AnalyzeStart ||
                     log.LogType == CombatLogType.AnalyzeEnd ||
@@ -272,7 +283,7 @@
                     Settings.Default.CombatLogBufferSize)
                 {
                     // オーバー分を消去する
-                    var over = (int)(Settings.Default.CombatLogBufferSize - this.CurrentCombatLogList.Count);
+                    var over = (int)(this.CurrentCombatLogList.Count - Settings.Default.CombatLogBufferSize);
                     this.CurrentCombatLogList.RemoveRange(0, over);
                 }
 

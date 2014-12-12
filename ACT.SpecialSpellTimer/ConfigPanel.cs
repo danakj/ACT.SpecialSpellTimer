@@ -24,9 +24,9 @@
             this.InitializeComponent();
 
             // データグリッドのダブルバッファリングを有効にする
-            typeof(DataGridView)
+            typeof(ListView)
                 .GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic)
-                .SetValue(this.CombatLogDataGridView, true, null);
+                .SetValue(this.CombatLogListView, true, null);
 
             this.Load += this.ConfigPanel_Load;
         }

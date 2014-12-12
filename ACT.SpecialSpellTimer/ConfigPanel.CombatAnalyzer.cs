@@ -21,8 +21,6 @@
         /// </summary>
         private void LoadCombatAnalyzer()
         {
-            this.CombatLogDataGridView.AutoGenerateColumns = false;
-
             this.CombatLogEnabledCheckBox.Checked = Settings.Default.CombatLogEnabled;
             this.CombatLogBufferSizeNumericUpDown.Value = Settings.Default.CombatLogBufferSize;
 
@@ -33,7 +31,16 @@
                 Settings.Default.Save();
             });
 
-            this.CombatLogEnabledCheckBox.CheckedChanged += (s, e) => saveSettings();
+            this.CombatLogEnabledCheckBox.CheckedChanged += (s, e) =>
+            {
+                saveSettings();
+
+                if (!Settings.Default.CombatLogEnabled)
+                {
+                    CombatAnalyzer.Default.ClearLogBuffer();
+                }
+            };
+
             this.CombatLogBufferSizeNumericUpDown.ValueChanged += (s, e) => saveSettings();
 
             this.CombatAnalyzingLabel.Text = string.Empty;
@@ -43,7 +50,7 @@
             {
                 this.timerCount++;
 
-                if (this.timerCount >= 4)
+                if (this.timerCount >= 5)
                 {
                     this.timerCount = 0;
                 }
@@ -51,16 +58,19 @@
                 switch (this.timerCount)
                 {
                     case 0:
-                        this.CombatAnalyzingLabel.Text = "分析しています";
+                        this.CombatAnalyzingLabel.Text = "Please Wait";
                         break;
                     case 1:
-                        this.CombatAnalyzingLabel.Text = "分析しています .";
+                        this.CombatAnalyzingLabel.Text = "Please Wait .";
                         break;
                     case 2:
-                        this.CombatAnalyzingLabel.Text = "分析しています . .";
+                        this.CombatAnalyzingLabel.Text = "Please Wait . .";
                         break;
                     case 3:
-                        this.CombatAnalyzingLabel.Text = "分析しています . . .";
+                        this.CombatAnalyzingLabel.Text = "Please Wait . . .";
+                        break;
+                    case 4:
+                        this.CombatAnalyzingLabel.Text = "Please Wait . . . .";
                         break;
                 }
 
@@ -86,51 +96,6 @@
                     this.ShowCombatLog();
                 });
             };
-
-            this.CombatLogDataGridView.CellValueNeeded += (s, e) =>
-            {
-                // データソースを取り出す
-                var ds = this.CombatLogDataGridView.Rows[e.RowIndex].Tag as CombatLog;
-                if (ds == null)
-                {
-                    return;
-                }
-
-                if (e.ColumnIndex == this.TimeStampColumn.Index)
-                {
-                    e.Value = ds.TimeStamp;
-                }
-
-                if (e.ColumnIndex == this.ElapsedColumn.Index)
-                {
-                    e.Value = ds.TimeStampElapted;
-                }
-
-                if (e.ColumnIndex == this.LogTypeColumn.Index)
-                {
-                    e.Value = ds.LogTypeName;
-                }
-
-                if (e.ColumnIndex == this.ActorColumn.Index)
-                {
-                    e.Value = ds.Actor;
-                }
-
-                if (e.ColumnIndex == this.ActionColumn.Index)
-                {
-                    e.Value = ds.Action;
-                }
-
-                if (e.ColumnIndex == this.SpanColumn.Index)
-                {
-                    e.Value = ds.Span;
-                }
-
-                if (e.ColumnIndex == this.LogColumn.Index)
-                {
-                    e.Value = ds.Raw;
-                }
-            };
         }
 
         /// <summary>
@@ -143,18 +108,56 @@
 
             var action = new Action(() =>
             {
-                this.CombatLogDataGridView.Rows.Clear();
-                this.CombatLogDataGridView.RowCount = this.bindedCombatLogList.Count;
-
-                for (int i = 0; i < this.CombatLogDataGridView.Rows.Count; i++)
+                try
                 {
-                    this.CombatLogDataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString("N0");
-                    this.CombatLogDataGridView.Rows[i].Tag = this.bindedCombatLogList[i];
-                }
+                    this.CombatLogListView.Visible = false;
+                    this.CombatLogListView.SuspendLayout();
 
-                this.CombatAnalyzingTimer.Stop();
-                this.AnalyzeCombatButton.Enabled = true;
-                this.CombatAnalyzingLabel.Visible = false;
+                    this.CombatLogListView.Items.Clear();
+
+                    for (int i = 0; i < this.bindedCombatLogList.Count; i++)
+                    {
+                        var ds = this.bindedCombatLogList[i];
+
+                        var values = new string[]
+                    {
+                        string.Empty,
+                        (i + 1).ToString("N0"),
+                        ds.TimeStamp.ToString("yy/MM/dd HH:mm:ss.fff"),
+                        ds.TimeStampElapted.ToString("N0"),
+                        ds.LogTypeName,
+                        ds.Actor,
+                        ds.Action,
+                        ds.Span.ToString("N0"),
+                        ds.Raw
+                    };
+
+                        var item = new ListViewItem(values)
+                        {
+                            Tag = ds
+                        };
+
+                        this.CombatLogListView.Items.Add(item);
+                    }
+
+                    this.CombatLogListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    this.CombatLogListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    this.CombatLogListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.ColumnContent);
+
+                    this.CombatAnalyzingTimer.Stop();
+                    this.AnalyzeCombatButton.Enabled = true;
+                    this.CombatAnalyzingLabel.Visible = false;
+                }
+                finally
+                {
+                    this.CombatLogListView.ResumeLayout();
+                    this.CombatLogListView.Visible = true;
+                }
             });
 
             if (this.InvokeRequired)
