@@ -2,7 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
+    using System.Linq;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
@@ -94,7 +97,7 @@
                         t.Dispose();
                     }
 
-                    this.ShowCombatLog();
+                    this.ShowCombatLog(CombatAnalyzer.Default.CurrentCombatLogList);
                 });
             };
 
@@ -102,15 +105,68 @@
             this.CASelectAllItem.Click += (s, e) => this.SelectAll();
             this.CACopyLogItem.Click += (s, e) => this.CopyLog();
             this.CACopyLogDetailItem.Click += (s, e) => this.CopyLogDetail();
+
+            // 経過秒の起点を変える
+            this.CASetOriginItem.Click += (s, e) =>
+            {
+                if (this.CombatLogListView.SelectedItems.Count < 1)
+                {
+                    return;
+                }
+
+                var ds = this.CombatLogListView.SelectedItems[0].Tag as CombatLog;
+                if (ds == null)
+                {
+                    return;
+                }
+
+                // 起点のタイムスタンプを取り出す
+                var originTimeStamp = ds.TimeStamp;
+
+                this.AnalyzeCombatButton.Enabled = false;
+                this.CombatAnalyzingLabel.Visible = true;
+                this.CombatAnalyzingTimer.Start();
+
+                Task.Run(() =>
+                {
+                    // 経過秒を計算し直す
+                    foreach (var log in this.bindedCombatLogList.AsParallel())
+                    {
+                        if ((log.TimeStamp.Ticks % 10) == 0)
+                        {
+                            Thread.Sleep(1);
+                        }
+
+                        log.IsOrigin = false;
+                        log.TimeStampElapted = (log.TimeStamp - originTimeStamp).TotalSeconds;
+                    }
+
+                    // 今回の起点だけマークする
+                    ds.IsOrigin = true;
+                }).ContinueWith((t) =>
+                {
+                    if (t != null)
+                    {
+                        t.Dispose();
+                    }
+
+                    this.ShowCombatLog(null);
+                });
+            };
         }
 
         /// <summary>
         /// 戦闘ログを表示する
         /// </summary>
-        public void ShowCombatLog()
+        /// <param name="combatLogList">表示するコンバットログのリスト</param>
+        public void ShowCombatLog(
+            List<CombatLog> combatLogList)
         {
-            this.bindedCombatLogList.Clear();
-            this.bindedCombatLogList.AddRange(CombatAnalyzer.Default.CurrentCombatLogList);
+            if (combatLogList != null)
+            {
+                this.bindedCombatLogList.Clear();
+                this.bindedCombatLogList.AddRange(combatLogList);
+            }
 
             var action = new Action(() =>
             {
@@ -126,22 +182,27 @@
                         var ds = this.bindedCombatLogList[i];
 
                         var values = new string[]
-                    {
-                        string.Empty,
-                        (i + 1).ToString("N0"),
-                        ds.TimeStamp.ToString("yy/MM/dd HH:mm:ss.fff"),
-                        ds.TimeStampElapted.ToString("N0"),
-                        ds.LogTypeName,
-                        ds.Actor,
-                        ds.Action,
-                        ds.Span.ToString("N0"),
-                        ds.Raw
-                    };
+                        {
+                            string.Empty,
+                            (i + 1).ToString("N0"),
+                            ds.TimeStamp.ToString("yy/MM/dd HH:mm:ss.fff"),
+                            ds.TimeStampElapted.ToString("N0"),
+                            ds.LogTypeName,
+                            ds.Actor,
+                            ds.Action,
+                            ds.Span.ToString("N0"),
+                            ds.Raw
+                        };
 
                         var item = new ListViewItem(values)
                         {
                             Tag = ds
                         };
+
+                        if (ds.IsOrigin)
+                        {
+                            item.BackColor = Color.Beige;
+                        }
 
                         this.CombatLogListView.Items.Add(item);
                     }

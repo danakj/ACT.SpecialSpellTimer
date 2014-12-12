@@ -179,6 +179,8 @@
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
+            this.CASetOriginItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -1404,9 +1406,11 @@
             this.CASelectAllItem,
             this.toolStripSeparator1,
             this.CACopyLogItem,
-            this.CACopyLogDetailItem});
+            this.CACopyLogDetailItem,
+            this.toolStripSeparator2,
+            this.CASetOriginItem});
             this.CombatAnalyzerContextMenuStrip.Name = "CombatAnalyzerContextMenuStrip";
-            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(287, 76);
+            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(287, 126);
             // 
             // CASelectAllItem
             // 
@@ -1823,6 +1827,18 @@
             // 
             this.CombatAnalyzingTimer.Interval = 600;
             // 
+            // CASetOriginItem
+            // 
+            this.CASetOriginItem.Name = "CASetOriginItem";
+            this.CASetOriginItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.CASetOriginItem.Size = new System.Drawing.Size(286, 22);
+            this.CASetOriginItem.Text = "このログを経過秒の起点にする";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(283, 6);
+            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2019,5 +2035,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem CACopyLogItem;
         private System.Windows.Forms.ToolStripMenuItem CACopyLogDetailItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem CASetOriginItem;
     }
 }
