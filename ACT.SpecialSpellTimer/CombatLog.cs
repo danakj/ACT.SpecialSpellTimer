@@ -16,6 +16,7 @@
             this.LogTypeName = string.Empty;
         }
 
+        public long ID { get; set; }
         public bool IsOrigin { get; set; }
         public DateTime TimeStamp { get; set; }
         public double TimeStampElapted { get; set; }

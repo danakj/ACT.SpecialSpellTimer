@@ -70,6 +70,11 @@
         public List<CombatLog> CurrentCombatLogList { get; private set; }
 
         /// <summary>
+        /// ログのID
+        /// </summary>
+        private long id;
+
+        /// <summary>
         /// 分析を開始する
         /// </summary>
         public void Initialize()
@@ -122,7 +127,7 @@
             var previouseAction = new Dictionary<string, DateTime>();
 
             var i = 0L;
-            foreach (var log in logList.OrderBy(x => x.TimeStamp))
+            foreach (var log in logList.OrderBy(x => x.ID))
             {
                 // 10回に1回ちょっとだけスリープする
                 if ((i % 10) == 0)
@@ -285,6 +290,10 @@
 
             lock (this.CurrentCombatLogList)
             {
+                // IDを発番する
+                log.ID = this.id;
+                this.id++;
+
                 // バッファサイズを超えた？
                 if (this.CurrentCombatLogList.Count >
                     (Settings.Default.CombatLogBufferSize + (Settings.Default.CombatLogBufferSize / 10)))

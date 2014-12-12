@@ -222,9 +222,24 @@
                             Tag = ds
                         };
 
+                        switch (ds.LogType)
+                        {
+                            case CombatLogType.CastStart:
+                                item.BackColor = Color.LavenderBlush;
+                                break;
+                            
+                            case CombatLogType.Added:
+                                item.BackColor = Color.Ivory;
+                                break;
+                            
+                            case CombatLogType.HPRate:
+                                item.BackColor = Color.Gainsboro;
+                                break;
+                        }
+
                         if (ds.IsOrigin)
                         {
-                            item.BackColor = Color.Beige;
+                            item.BackColor = Color.LightCyan;
                         }
 
                         this.CombatLogListView.Items.Add(item);
