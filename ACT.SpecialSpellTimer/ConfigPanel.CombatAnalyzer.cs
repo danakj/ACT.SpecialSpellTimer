@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
@@ -96,6 +97,11 @@
                     this.ShowCombatLog();
                 });
             };
+
+            // コンテキストメニューを設定する
+            this.CASelectAllItem.Click += (s, e) => this.SelectAll();
+            this.CACopyLogItem.Click += (s, e) => this.CopyLog();
+            this.CACopyLogDetailItem.Click += (s, e) => this.CopyLogDetail();
         }
 
         /// <summary>
@@ -171,6 +177,61 @@
             {
                 action();
             }
+        }
+
+        /// <summary>
+        /// 全て選択する
+        /// </summary>
+        private void SelectAll()
+        {
+            foreach (ListViewItem item in this.CombatLogListView.Items)
+            {
+                item.Selected = true;
+            }
+        }
+
+        /// <summary>
+        /// ログをコピーする
+        /// </summary>
+        private void CopyLog()
+        {
+            var sb = new StringBuilder();
+            foreach (ListViewItem item in this.CombatLogListView.SelectedItems)
+            {
+                var log = item.Tag as CombatLog;
+                if (log != null)
+                {
+                    sb.AppendLine(log.Raw);
+                }
+            }
+
+            Clipboard.SetText(sb.ToString());
+        }
+
+        /// <summary>
+        /// ログの詳細をコピーする
+        /// </summary>
+        private void CopyLogDetail()
+        {
+            var sb = new StringBuilder();
+            foreach (ListViewItem item in this.CombatLogListView.SelectedItems)
+            {
+                var list = new List<string>();
+                var i = 0;
+                foreach (ListViewItem.ListViewSubItem sub in item.SubItems)
+                {
+                    if (i != 0)
+                    {
+                        list.Add(sub.Text);
+                    }
+
+                    i++;
+                }
+
+                sb.AppendLine(string.Join("\t", list.ToArray()));
+            }
+
+            Clipboard.SetText(sb.ToString());
         }
     }
 }

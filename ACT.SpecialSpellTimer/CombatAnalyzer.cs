@@ -121,9 +121,14 @@
 
             var previouseAction = new Dictionary<string, DateTime>();
 
+            var i = 0L;
             foreach (var log in logList.OrderBy(x => x.TimeStamp))
             {
-                Thread.Sleep(1);
+                // 10回に1回ちょっとだけスリープする
+                if ((i % 10) == 0)
+                {
+                    Thread.Sleep(1);
+                }
 
                 if (log.LogType == CombatLogType.AnalyzeStart ||
                     log.LogType == CombatLogType.AnalyzeEnd ||
@@ -142,6 +147,8 @@
 
                 // 記録しておく
                 previouseAction[key] = log.TimeStamp;
+
+                i++;
             }
         }
 
