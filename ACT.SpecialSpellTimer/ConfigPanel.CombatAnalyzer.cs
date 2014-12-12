@@ -1,9 +1,9 @@
 ﻿namespace ACT.SpecialSpellTimer
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using System.Collections.Generic;
 
     using ACT.SpecialSpellTimer.Properties;
 
@@ -143,29 +143,18 @@
 
             var action = new Action(() =>
             {
-                try
-                {
-                    this.CombatLogDataGridView.Visible = false;
-                    this.CombatLogDataGridView.Enabled = false;
-                    this.CombatLogDataGridView.SuspendLayout();
-                    this.CombatLogDataGridView.RowCount = this.bindedCombatLogList.Count;
+                this.CombatLogDataGridView.Rows.Clear();
+                this.CombatLogDataGridView.RowCount = this.bindedCombatLogList.Count;
 
-                    for (int i = 0; i < this.CombatLogDataGridView.Rows.Count; i++)
-                    {
-                        this.CombatLogDataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString("N0");
-                        this.CombatLogDataGridView.Rows[i].Tag = this.bindedCombatLogList[i];
-                    }
-
-                    this.AnalyzeCombatButton.Enabled = true;
-                    this.CombatAnalyzingLabel.Visible = false;
-                    this.CombatAnalyzingTimer.Stop();
-                }
-                finally
+                for (int i = 0; i < this.CombatLogDataGridView.Rows.Count; i++)
                 {
-                    this.CombatLogDataGridView.ResumeLayout();
-                    this.CombatLogDataGridView.Enabled = true;
-                    this.CombatLogDataGridView.Visible = true;
+                    this.CombatLogDataGridView.Rows[i].HeaderCell.Value = (i + 1).ToString("N0");
+                    this.CombatLogDataGridView.Rows[i].Tag = this.bindedCombatLogList[i];
                 }
+
+                this.CombatAnalyzingTimer.Stop();
+                this.AnalyzeCombatButton.Enabled = true;
+                this.CombatAnalyzingLabel.Visible = false;
             });
 
             if (this.InvokeRequired)
