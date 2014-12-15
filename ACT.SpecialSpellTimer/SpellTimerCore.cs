@@ -236,17 +236,19 @@
 
             if ((DateTime.Now - this.LastFFXIVProcessDateTime).TotalSeconds >= 5.0d)
             {
-#if !DEBUG
                 // FF14が起動していない？
                 if (FF14PluginHelper.GetFFXIVProcess == null)
                 {
-                    this.ClosePanels();
-                    OnePointTelopController.CloseTelops();
-
                     this.RefreshInterval = 1000;
-                    return;
+
+                    if (!Settings.Default.OverlayForceVisible)
+                    {
+                        this.ClosePanels();
+                        OnePointTelopController.CloseTelops();
+                        return;
+                    }
                 }
-#endif
+
                 this.LastFFXIVProcessDateTime = DateTime.Now;
             }
 

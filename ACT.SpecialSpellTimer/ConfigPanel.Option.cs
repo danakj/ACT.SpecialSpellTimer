@@ -18,6 +18,12 @@
         {
             this.LoadSettingsOption();
 
+            this.OverlayForceVisibleCheckBox.CheckedChanged += (s1, e1) =>
+            {
+                Settings.Default.OverlayForceVisible = this.OverlayForceVisibleCheckBox.Checked;
+                Settings.Default.Save();
+            };
+
             this.SwitchOverlayButton.Click += (s1, e1) =>
             {
                 Settings.Default.OverlayVisible = !Settings.Default.OverlayVisible;
@@ -102,6 +108,8 @@
         /// </summary>
         private void LoadSettingsOption()
         {
+            this.OverlayForceVisibleCheckBox.Checked = Settings.Default.OverlayForceVisible;
+
             if (Settings.Default.OverlayVisible)
             {
                 this.SwitchOverlayButton.Text =
@@ -151,6 +159,7 @@
         /// </summary>
         private void ApplySettingsOption()
         {
+            Settings.Default.OverlayForceVisible = this.OverlayForceVisibleCheckBox.Checked;
             Settings.Default.ProgressBarSize = this.DefaultVisualSetting.BarSize;
             Settings.Default.ProgressBarColor = this.DefaultVisualSetting.BarColor;
             Settings.Default.ProgressBarOutlineColor = this.DefaultVisualSetting.BarOutlineColor;

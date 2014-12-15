@@ -262,5 +262,17 @@ namespace ACT.SpecialSpellTimer.Properties {
                 this["CombatLogEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OverlayForceVisible {
+            get {
+                return ((bool)(this["OverlayForceVisible"]));
+            }
+            set {
+                this["OverlayForceVisible"] = value;
+            }
+        }
     }
 }

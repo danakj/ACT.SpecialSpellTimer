@@ -62,12 +62,18 @@
         public CombatAnalyzer()
         {
             this.CurrentCombatLogList = new List<CombatLog>();
+            this.ActorHPRate = new Dictionary<string, decimal>();
         }
 
         /// <summary>
         /// 戦闘ログのリスト
         /// </summary>
         public List<CombatLog> CurrentCombatLogList { get; private set; }
+
+        /// <summary>
+        /// アクターのHP率
+        /// </summary>
+        private Dictionary<string, decimal> ActorHPRate { get; set; }
 
         /// <summary>
         /// ログのID
@@ -100,6 +106,7 @@
             lock (this.CurrentCombatLogList)
             {
                 this.CurrentCombatLogList.Clear();
+                this.ActorHPRate.Clear();
             }
         }
 
@@ -296,13 +303,14 @@
 
                 // バッファサイズを超えた？
                 if (this.CurrentCombatLogList.Count >
-                    (Settings.Default.CombatLogBufferSize + (Settings.Default.CombatLogBufferSize / 10)))
+                    (Settings.Default.CombatLogBufferSize * 1.1m))
                 {
                     // オーバー分を消去する
                     var over = (int)(this.CurrentCombatLogList.Count - Settings.Default.CombatLogBufferSize);
                     this.CurrentCombatLogList.RemoveRange(0, over);
                 }
 
+                // 経過秒を求める
                 if (this.CurrentCombatLogList.Count > 0)
                 {
                     log.TimeStampElapted =
@@ -311,6 +319,12 @@
                 else
                 {
                     log.TimeStampElapted = 0;
+                }
+
+                // アクター別の残HP率をセットする
+                if (this.ActorHPRate.ContainsKey(log.Actor))
+                {
+                    log.HPRate = this.ActorHPRate[log.Actor];
                 }
 
                 this.CurrentCombatLogList.Add(log);
@@ -380,24 +394,18 @@
                 return;
             }
 
-            var hprate = match.Groups["hprate"].ToString();
-            if (!hprate.EndsWith("0") &&
-                !hprate.EndsWith("5"))
+            var actor = match.Groups["actor"].ToString();
+
+            if (!string.IsNullOrWhiteSpace(actor))
             {
-                return;
+                decimal hprate;
+                if (!decimal.TryParse(match.Groups["hprate"].ToString(), out hprate))
+                {
+                    hprate = 0m;
+                }
+
+                this.ActorHPRate[actor] = hprate;
             }
-
-            var log = new CombatLog()
-            {
-                TimeStamp = logInfo.detectedTime,
-                Raw = logInfo.logLine,
-                Actor = match.Groups["actor"].ToString(),
-                HPRate = decimal.Parse(hprate),
-                Action = "HP " + hprate.PadLeft(3, ' ') + "%",
-                LogType = CombatLogType.HPRate
-            };
-
-            this.StoreLog(log);
         }
 
         /// <summary>

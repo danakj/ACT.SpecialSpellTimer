@@ -315,6 +315,8 @@
                 if (spells.Count() > 0)
                 {
                     this.ShowOverlay();
+
+                    this.Topmost = false;
                     this.Topmost = true;
                 }
             }));

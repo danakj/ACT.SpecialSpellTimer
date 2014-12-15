@@ -212,6 +212,7 @@
                             ds.TimeStampElapted.ToString("N0"),
                             ds.LogTypeName,
                             ds.Actor,
+                            ds.HPRate.ToString("N0") + "%",
                             ds.Action,
                             ds.Span.ToString("N0"),
                             ds.Raw
@@ -222,37 +223,40 @@
                             Tag = ds
                         };
 
+                        item.ForeColor = SystemColors.WindowText;
                         switch (ds.LogType)
                         {
                             case CombatLogType.CastStart:
-                                item.BackColor = Color.LavenderBlush;
+                                item.BackColor = Color.LightPink;
                                 break;
-                            
+
                             case CombatLogType.Added:
-                                item.BackColor = Color.Ivory;
+                                item.BackColor = Color.Gold;
                                 break;
-                            
+
                             case CombatLogType.HPRate:
-                                item.BackColor = Color.Gainsboro;
+                                item.BackColor = Color.LightGray;
                                 break;
                         }
 
                         if (ds.IsOrigin)
                         {
-                            item.BackColor = Color.LightCyan;
+                            item.BackColor = Color.MediumBlue;
+                            item.ForeColor = Color.AliceBlue;
                         }
 
                         this.CombatLogListView.Items.Add(item);
                     }
 
-                    this.CombatLogListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
-                    this.CombatLogListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                    this.CombatLogListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                    this.CombatLogListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.ColumnContent);
-                    this.CombatLogListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.ColumnContent);
-                    this.CombatLogListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
-                    this.CombatLogListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                    this.CombatLogListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(this.NoColumnHeader.Index, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(this.TimeStampColumnHeader.Index, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(this.ElapsedColumnHeader.Index, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    this.CombatLogListView.AutoResizeColumn(this.LogTypeColumnHeader.Index, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(this.ActorColumnHeader.Index, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(this.HPRateColumnHeader.Index, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(this.ActionColumnHeader.Index, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    this.CombatLogListView.AutoResizeColumn(this.SpanColumnHeader.Index, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    this.CombatLogListView.AutoResizeColumn(this.LogColumnHeader.Index, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                     this.CombatAnalyzingTimer.Stop();
                     this.AnalyzeCombatButton.Enabled = true;

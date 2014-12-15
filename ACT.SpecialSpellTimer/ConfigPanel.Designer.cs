@@ -33,7 +33,6 @@
             this.SpecialSpellTabPage = new System.Windows.Forms.TabPage();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
-            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.SelectJobButton = new System.Windows.Forms.Button();
             this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.DontHideCheckBox = new System.Windows.Forms.CheckBox();
@@ -82,7 +81,6 @@
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.OnPointTelopTabPage = new System.Windows.Forms.TabPage();
             this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
-            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TelopSelectJobButton = new System.Windows.Forms.Button();
             this.TelopProgressBarEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.EnabledAddMessageCheckBox = new System.Windows.Forms.CheckBox();
@@ -143,6 +141,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.CACopyLogItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CACopyLogDetailItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.CASetOriginItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.CombatLogBufferSizeNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -150,7 +150,7 @@
             this.CombatAnalyzingLabel = new System.Windows.Forms.Label();
             this.AnalyzeCombatButton = new System.Windows.Forms.Button();
             this.OptionTabPage = new System.Windows.Forms.TabPage();
-            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.OverlayForceVisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.label48 = new System.Windows.Forms.Label();
             this.EnabledPTPlaceholderCheckBox = new System.Windows.Forms.CheckBox();
             this.label43 = new System.Windows.Forms.Label();
@@ -179,8 +179,10 @@
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
-            this.CASetOriginItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
+            this.HPRateColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
             this.DetailGroupBox.SuspendLayout();
@@ -282,21 +284,6 @@
             this.DetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.DetailGroupBox.TabIndex = 5;
             this.DetailGroupBox.TabStop = false;
-            // 
-            // SpellVisualSetting
-            // 
-            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.BarEnabled = true;
-            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.Location = new System.Drawing.Point(187, 124);
-            this.SpellVisualSetting.Name = "SpellVisualSetting";
-            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.SpellVisualSetting.TabIndex = 28;
-            this.SpellVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
             // 
             // SelectJobButton
             // 
@@ -827,21 +814,6 @@
             this.TelopDetailGroupBox.TabIndex = 5;
             this.TelopDetailGroupBox.TabStop = false;
             // 
-            // TelopVisualSetting
-            // 
-            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.BarEnabled = false;
-            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
-            this.TelopVisualSetting.Name = "TelopVisualSetting";
-            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.TelopVisualSetting.TabIndex = 6;
-            this.TelopVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
-            // 
             // TelopSelectJobButton
             // 
             this.TelopSelectJobButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1337,6 +1309,7 @@
             this.ElapsedColumnHeader,
             this.LogTypeColumnHeader,
             this.ActorColumnHeader,
+            this.HPRateColumnHeader,
             this.ActionColumnHeader,
             this.SpanColumnHeader,
             this.LogColumnHeader});
@@ -1384,6 +1357,12 @@
             this.ActorColumnHeader.Text = "アクター";
             this.ActorColumnHeader.Width = 120;
             // 
+            // HPRateColumnHeader
+            // 
+            this.HPRateColumnHeader.Text = "HP";
+            this.HPRateColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.HPRateColumnHeader.Width = 80;
+            // 
             // ActionColumnHeader
             // 
             this.ActionColumnHeader.Text = "アクション";
@@ -1410,7 +1389,7 @@
             this.toolStripSeparator2,
             this.CASetOriginItem});
             this.CombatAnalyzerContextMenuStrip.Name = "CombatAnalyzerContextMenuStrip";
-            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(287, 126);
+            this.CombatAnalyzerContextMenuStrip.Size = new System.Drawing.Size(287, 104);
             // 
             // CASelectAllItem
             // 
@@ -1439,6 +1418,18 @@
             | System.Windows.Forms.Keys.C)));
             this.CACopyLogDetailItem.Size = new System.Drawing.Size(286, 22);
             this.CACopyLogDetailItem.Text = "ログの詳細をコピーする";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(283, 6);
+            // 
+            // CASetOriginItem
+            // 
+            this.CASetOriginItem.Name = "CASetOriginItem";
+            this.CASetOriginItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.CASetOriginItem.Size = new System.Drawing.Size(286, 22);
+            this.CASetOriginItem.Text = "このログを経過秒の起点にする";
             // 
             // label6
             // 
@@ -1514,7 +1505,7 @@
             // OptionTabPage
             // 
             this.OptionTabPage.BackColor = System.Drawing.SystemColors.Control;
-            this.OptionTabPage.Controls.Add(this.DefaultVisualSetting);
+            this.OptionTabPage.Controls.Add(this.OverlayForceVisibleCheckBox);
             this.OptionTabPage.Controls.Add(this.label48);
             this.OptionTabPage.Controls.Add(this.EnabledPTPlaceholderCheckBox);
             this.OptionTabPage.Controls.Add(this.label43);
@@ -1539,6 +1530,7 @@
             this.OptionTabPage.Controls.Add(this.label18);
             this.OptionTabPage.Controls.Add(this.SwitchOverlayButton);
             this.OptionTabPage.Controls.Add(this.ShokikaButton);
+            this.OptionTabPage.Controls.Add(this.DefaultVisualSetting);
             this.OptionTabPage.Location = new System.Drawing.Point(4, 22);
             this.OptionTabPage.Name = "OptionTabPage";
             this.OptionTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -1546,25 +1538,20 @@
             this.OptionTabPage.TabIndex = 1;
             this.OptionTabPage.Text = "オプション";
             // 
-            // DefaultVisualSetting
+            // OverlayForceVisibleCheckBox
             // 
-            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.BarEnabled = true;
-            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.Location = new System.Drawing.Point(213, 79);
-            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
-            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.DefaultVisualSetting.TabIndex = 37;
-            this.DefaultVisualSetting.TextFont = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Bold);
+            this.OverlayForceVisibleCheckBox.AutoSize = true;
+            this.OverlayForceVisibleCheckBox.Location = new System.Drawing.Point(6, 54);
+            this.OverlayForceVisibleCheckBox.Name = "OverlayForceVisibleCheckBox";
+            this.OverlayForceVisibleCheckBox.Size = new System.Drawing.Size(261, 16);
+            this.OverlayForceVisibleCheckBox.TabIndex = 38;
+            this.OverlayForceVisibleCheckBox.Text = "FFXIVが起動していなくてもオーバーレイを表示する";
+            this.OverlayForceVisibleCheckBox.UseVisualStyleBackColor = true;
             // 
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(277, 308);
+            this.label48.Location = new System.Drawing.Point(277, 314);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(390, 12);
             this.label48.TabIndex = 32;
@@ -1573,7 +1560,7 @@
             // EnabledPTPlaceholderCheckBox
             // 
             this.EnabledPTPlaceholderCheckBox.AutoSize = true;
-            this.EnabledPTPlaceholderCheckBox.Location = new System.Drawing.Point(213, 307);
+            this.EnabledPTPlaceholderCheckBox.Location = new System.Drawing.Point(213, 313);
             this.EnabledPTPlaceholderCheckBox.Name = "EnabledPTPlaceholderCheckBox";
             this.EnabledPTPlaceholderCheckBox.Size = new System.Drawing.Size(48, 16);
             this.EnabledPTPlaceholderCheckBox.TabIndex = 31;
@@ -1583,7 +1570,7 @@
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(6, 308);
+            this.label43.Location = new System.Drawing.Point(6, 314);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(153, 12);
             this.label43.TabIndex = 30;
@@ -1601,7 +1588,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(325, 282);
+            this.label30.Location = new System.Drawing.Point(325, 288);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(176, 12);
             this.label30.TabIndex = 28;
@@ -1610,7 +1597,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(278, 282);
+            this.label29.Location = new System.Drawing.Point(278, 288);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(31, 12);
             this.label29.TabIndex = 27;
@@ -1619,7 +1606,7 @@
             // RefreshIntervalNumericUpDown
             // 
             this.RefreshIntervalNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.RefreshIntervalNumericUpDown.Location = new System.Drawing.Point(213, 280);
+            this.RefreshIntervalNumericUpDown.Location = new System.Drawing.Point(213, 286);
             this.RefreshIntervalNumericUpDown.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1643,7 +1630,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(6, 282);
+            this.label28.Location = new System.Drawing.Point(6, 288);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(87, 12);
             this.label28.TabIndex = 25;
@@ -1652,7 +1639,7 @@
             // AutoSortReverseCheckBox
             // 
             this.AutoSortReverseCheckBox.AutoSize = true;
-            this.AutoSortReverseCheckBox.Location = new System.Drawing.Point(293, 233);
+            this.AutoSortReverseCheckBox.Location = new System.Drawing.Point(293, 239);
             this.AutoSortReverseCheckBox.Name = "AutoSortReverseCheckBox";
             this.AutoSortReverseCheckBox.Size = new System.Drawing.Size(106, 16);
             this.AutoSortReverseCheckBox.TabIndex = 9;
@@ -1673,7 +1660,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(323, 257);
+            this.label26.Location = new System.Drawing.Point(323, 263);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(148, 12);
             this.label26.TabIndex = 11;
@@ -1682,7 +1669,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(6, 257);
+            this.label25.Location = new System.Drawing.Point(6, 263);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(135, 12);
             this.label25.TabIndex = 24;
@@ -1691,7 +1678,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(278, 257);
+            this.label24.Location = new System.Drawing.Point(278, 263);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(29, 12);
             this.label24.TabIndex = 23;
@@ -1700,7 +1687,7 @@
             // TimeOfHideNumericUpDown
             // 
             this.TimeOfHideNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.TimeOfHideNumericUpDown.Location = new System.Drawing.Point(213, 255);
+            this.TimeOfHideNumericUpDown.Location = new System.Drawing.Point(213, 261);
             this.TimeOfHideNumericUpDown.Maximum = new decimal(new int[] {
             20,
             0,
@@ -1714,7 +1701,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(6, 234);
+            this.label23.Location = new System.Drawing.Point(6, 240);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(171, 12);
             this.label23.TabIndex = 21;
@@ -1723,7 +1710,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(6, 212);
+            this.label22.Location = new System.Drawing.Point(6, 218);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(64, 12);
             this.label22.TabIndex = 20;
@@ -1732,7 +1719,7 @@
             // AutoSortCheckBox
             // 
             this.AutoSortCheckBox.AutoSize = true;
-            this.AutoSortCheckBox.Location = new System.Drawing.Point(213, 233);
+            this.AutoSortCheckBox.Location = new System.Drawing.Point(213, 239);
             this.AutoSortCheckBox.Name = "AutoSortCheckBox";
             this.AutoSortCheckBox.Size = new System.Drawing.Size(48, 16);
             this.AutoSortCheckBox.TabIndex = 8;
@@ -1742,7 +1729,7 @@
             // ClickThroughCheckBox
             // 
             this.ClickThroughCheckBox.AutoSize = true;
-            this.ClickThroughCheckBox.Location = new System.Drawing.Point(213, 211);
+            this.ClickThroughCheckBox.Location = new System.Drawing.Point(213, 217);
             this.ClickThroughCheckBox.Name = "ClickThroughCheckBox";
             this.ClickThroughCheckBox.Size = new System.Drawing.Size(48, 16);
             this.ClickThroughCheckBox.TabIndex = 7;
@@ -1752,7 +1739,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 188);
+            this.label21.Location = new System.Drawing.Point(6, 194);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(108, 12);
             this.label21.TabIndex = 17;
@@ -1761,7 +1748,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(279, 188);
+            this.label20.Location = new System.Drawing.Point(279, 194);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(11, 12);
             this.label20.TabIndex = 16;
@@ -1770,7 +1757,7 @@
             // OpacityNumericUpDown
             // 
             this.OpacityNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.OpacityNumericUpDown.Location = new System.Drawing.Point(213, 186);
+            this.OpacityNumericUpDown.Location = new System.Drawing.Point(213, 192);
             this.OpacityNumericUpDown.Name = "OpacityNumericUpDown";
             this.OpacityNumericUpDown.Size = new System.Drawing.Size(59, 19);
             this.OpacityNumericUpDown.TabIndex = 6;
@@ -1779,7 +1766,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 85);
+            this.label18.Location = new System.Drawing.Point(6, 91);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(113, 12);
             this.label18.TabIndex = 10;
@@ -1827,17 +1814,50 @@
             // 
             this.CombatAnalyzingTimer.Interval = 600;
             // 
-            // CASetOriginItem
+            // SpellVisualSetting
             // 
-            this.CASetOriginItem.Name = "CASetOriginItem";
-            this.CASetOriginItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.CASetOriginItem.Size = new System.Drawing.Size(286, 22);
-            this.CASetOriginItem.Text = "このログを経過秒の起点にする";
+            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.BarEnabled = true;
+            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.Location = new System.Drawing.Point(187, 124);
+            this.SpellVisualSetting.Name = "SpellVisualSetting";
+            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.SpellVisualSetting.TabIndex = 28;
+            this.SpellVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
             // 
-            // toolStripSeparator2
+            // TelopVisualSetting
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(283, 6);
+            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.BarEnabled = false;
+            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
+            this.TelopVisualSetting.Name = "TelopVisualSetting";
+            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.TelopVisualSetting.TabIndex = 6;
+            this.TelopVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
+            // 
+            // DefaultVisualSetting
+            // 
+            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.BarEnabled = true;
+            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.Location = new System.Drawing.Point(213, 85);
+            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
+            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.DefaultVisualSetting.TabIndex = 37;
+            this.DefaultVisualSetting.TextFont = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Bold);
             // 
             // ConfigPanel
             // 
@@ -2037,5 +2057,7 @@
         private System.Windows.Forms.ToolStripMenuItem CACopyLogDetailItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem CASetOriginItem;
+        private System.Windows.Forms.CheckBox OverlayForceVisibleCheckBox;
+        private System.Windows.Forms.ColumnHeader HPRateColumnHeader;
     }
 }
