@@ -422,16 +422,7 @@
             this.DetailPanelGroupBox.Visible = true;
 
             // パネル名を取り出す
-            var panelName = string.Empty;
-            if (e.Node.Nodes.Count > 0)
-            {
-                panelName = (e.Node.Nodes[0].Tag as SpellTimer).Panel;
-            }
-
-            if (string.IsNullOrWhiteSpace(panelName))
-            {
-                return;
-            }
+            var panelName = e.Node.Text;
 
             // パネルの位置を取得する
             double left, top;
