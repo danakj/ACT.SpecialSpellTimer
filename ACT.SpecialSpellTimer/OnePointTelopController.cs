@@ -34,10 +34,21 @@
                 var telop = telopWindowList.ContainsKey(telopID) ?
                     telopWindowList[telopID] :
                     null;
+
                 if (telop != null)
                 {
                     telop.Left = left;
                     telop.Top = top;
+                }
+
+                var telopSettings = OnePointTelopTable.Default.Table
+                    .Where(x => x.ID == telopID)
+                    .FirstOrDefault();
+
+                if (telopSettings != null)
+                {
+                    telopSettings.Left = left;
+                    telopSettings.Top = top;
                 }
             }
         }
@@ -61,10 +72,23 @@
                 var telop = telopWindowList.ContainsKey(telopID) ?
                     telopWindowList[telopID] :
                     null;
+
                 if (telop != null)
                 {
                     left = telop.Left;
                     top = telop.Top;
+                }
+                else
+                {
+                    var telopSettings = OnePointTelopTable.Default.Table
+                        .Where(x => x.ID == telopID)
+                        .FirstOrDefault();
+
+                    if (telopSettings != null)
+                    {
+                        left = telopSettings.Left;
+                        top = telopSettings.Top;
+                    }
                 }
             }
         }

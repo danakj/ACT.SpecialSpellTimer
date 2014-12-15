@@ -23,10 +23,15 @@
         {
             this.InitializeComponent();
 
-            // データグリッドのダブルバッファリングを有効にする
+            // 戦闘分析用のListViewのダブルバッファリングを有効にする
             typeof(ListView)
                 .GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic)
                 .SetValue(this.CombatLogListView, true, null);
+
+            // パネルの詳細用グループボックスの場所を決める
+            this.DetailPanelGroupBox.Location = this.DetailGroupBox.Location;
+            this.DetailPanelGroupBox.Size = this.DetailGroupBox.Size;
+            this.DetailPanelGroupBox.Anchor = this.DetailGroupBox.Anchor;
 
             this.Load += this.ConfigPanel_Load;
         }
@@ -41,6 +46,7 @@
             this.LoadSpellTimerTable();
 
             this.DetailGroupBox.Visible = false;
+            this.DetailPanelGroupBox.Visible = false;
 
             // コンボボックスにアイテムを装填する
             this.MatchSoundComboBox.DataSource = SoundController.Default.EnumlateWave();
@@ -325,7 +331,7 @@
                     // 一度全てのパネルを閉じる
                     SpellTimerCore.Default.ClosePanels();
 
-                    foreach (TreeNode root in this.TelopTreeView.Nodes)
+                    foreach (TreeNode root in this.SpellTimerTreeView.Nodes)
                     {
                         if (root.Nodes != null)
                         {
@@ -336,7 +342,7 @@
                                 {
                                     if (ds.ID == src.ID)
                                     {
-                                        this.TelopTreeView.SelectedNode = node;
+                                        this.SpellTimerTreeView.SelectedNode = node;
                                         break;
                                     }
                                 }
@@ -363,10 +369,32 @@
                     SpellTimerTable.Save();
 
                     this.DetailGroupBox.Visible = false;
+                    this.DetailPanelGroupBox.Visible = false;
                 }
             }
 
-            this.LoadSpellTimerTable();
+            // 今の選択ノードを取り出す
+            var targetNode = this.SpellTimerTreeView.SelectedNode;
+            if (targetNode != null)
+            {
+                // 1個前のノードを取り出しておく
+                var prevNode = targetNode.PrevNode;
+
+                if (targetNode.Parent != null &&
+                    targetNode.Parent.Nodes.Count > 1)
+                {
+                    targetNode.Remove();
+
+                    if (prevNode != null)
+                    {
+                        this.SpellTimerTreeView.SelectedNode = prevNode;
+                    }
+                }
+                else
+                {
+                    targetNode.Parent.Remove();
+                }
+            }
         }
 
         /// <summary>
@@ -376,8 +404,59 @@
         /// <param name="e">イベント引数</param>
         private void SpellTimerTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            this.ShowDetail(
-                e.Node.Tag as SpellTimer);
+            var ds = e.Node.Tag as SpellTimer;
+
+            // スペルの詳細？
+            if (ds != null)
+            {
+                this.DetailPanelGroupBox.Visible = false;
+
+                this.ShowDetail(
+                    e.Node.Tag as SpellTimer);
+
+                return;
+            }
+
+            // パネルの詳細を表示する
+            this.DetailGroupBox.Visible = false;
+            this.DetailPanelGroupBox.Visible = true;
+
+            // パネル名を取り出す
+            var panelName = string.Empty;
+            if (e.Node.Nodes.Count > 0)
+            {
+                panelName = (e.Node.Nodes[0].Tag as SpellTimer).Panel;
+            }
+
+            if (string.IsNullOrWhiteSpace(panelName))
+            {
+                return;
+            }
+
+            // パネルの位置を取得する
+            double left, top;
+            SpellTimerCore.Default.GetPanelLocation(
+                panelName,
+                out left,
+                out top);
+
+            this.PanelLeftNumericUpDown.Value = (int)left;
+            this.PanelTopNumericUpDown.Value = (int)top;
+
+            // 更新ボタンの挙動をセットする
+            var updatePanel = new EventHandler((s1, e1) =>
+            {
+                left = (double)this.PanelLeftNumericUpDown.Value;
+                top = (double)this.PanelTopNumericUpDown.Value;
+
+                SpellTimerCore.Default.SetPanelLocation(
+                    panelName,
+                    left,
+                    top);
+            });
+
+            this.UpdatePanelButton.Click -= updatePanel;
+            this.UpdatePanelButton.Click += updatePanel;
         }
 
         /// <summary>
@@ -547,6 +626,7 @@
                 lock (SpellTimerTable.Table)
                 {
                     this.DetailGroupBox.Visible = false;
+                    this.DetailPanelGroupBox.Visible = false;
                     SpellTimerTable.Table.Clear();
                 }
 

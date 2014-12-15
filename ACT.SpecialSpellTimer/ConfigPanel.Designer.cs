@@ -31,8 +31,16 @@
             this.components = new System.ComponentModel.Container();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.SpecialSpellTabPage = new System.Windows.Forms.TabPage();
+            this.DetailPanelGroupBox = new System.Windows.Forms.GroupBox();
+            this.PanelTopNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.PanelLeftNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label16 = new System.Windows.Forms.Label();
+            this.UpdatePanelButton = new System.Windows.Forms.Button();
             this.ClearAllButton = new System.Windows.Forms.Button();
             this.DetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.SelectJobButton = new System.Windows.Forms.Button();
             this.RegexEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.DontHideCheckBox = new System.Windows.Forms.CheckBox();
@@ -81,6 +89,7 @@
             this.SpellTimerTreeView = new System.Windows.Forms.TreeView();
             this.OnPointTelopTabPage = new System.Windows.Forms.TabPage();
             this.TelopDetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.TelopSelectJobButton = new System.Windows.Forms.Button();
             this.TelopProgressBarEnabledCheckBox = new System.Windows.Forms.CheckBox();
             this.EnabledAddMessageCheckBox = new System.Windows.Forms.CheckBox();
@@ -133,6 +142,7 @@
             this.ElapsedColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LogTypeColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ActorColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.HPRateColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ActionColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SpanColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LogColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -175,16 +185,16 @@
             this.label18 = new System.Windows.Forms.Label();
             this.SwitchOverlayButton = new System.Windows.Forms.Button();
             this.ShokikaButton = new System.Windows.Forms.Button();
+            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.CombatAnalyzingTimer = new System.Windows.Forms.Timer(this.components);
-            this.SpellVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
-            this.TelopVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
-            this.DefaultVisualSetting = new ACT.SpecialSpellTimer.VisualSettingControl();
-            this.HPRateColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TabControl.SuspendLayout();
             this.SpecialSpellTabPage.SuspendLayout();
+            this.DetailPanelGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PanelTopNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PanelLeftNumericUpDown)).BeginInit();
             this.DetailGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DisplayNoNumericUpDown)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -227,6 +237,7 @@
             // SpecialSpellTabPage
             // 
             this.SpecialSpellTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.SpecialSpellTabPage.Controls.Add(this.DetailPanelGroupBox);
             this.SpecialSpellTabPage.Controls.Add(this.ClearAllButton);
             this.SpecialSpellTabPage.Controls.Add(this.DetailGroupBox);
             this.SpecialSpellTabPage.Controls.Add(this.AddButton);
@@ -239,6 +250,95 @@
             this.SpecialSpellTabPage.Size = new System.Drawing.Size(1186, 668);
             this.SpecialSpellTabPage.TabIndex = 0;
             this.SpecialSpellTabPage.Text = "スペシャルスペルタイマ";
+            // 
+            // DetailPanelGroupBox
+            // 
+            this.DetailPanelGroupBox.Controls.Add(this.PanelTopNumericUpDown);
+            this.DetailPanelGroupBox.Controls.Add(this.label13);
+            this.DetailPanelGroupBox.Controls.Add(this.label15);
+            this.DetailPanelGroupBox.Controls.Add(this.PanelLeftNumericUpDown);
+            this.DetailPanelGroupBox.Controls.Add(this.label16);
+            this.DetailPanelGroupBox.Controls.Add(this.UpdatePanelButton);
+            this.DetailPanelGroupBox.Location = new System.Drawing.Point(18, 17);
+            this.DetailPanelGroupBox.Name = "DetailPanelGroupBox";
+            this.DetailPanelGroupBox.Size = new System.Drawing.Size(296, 269);
+            this.DetailPanelGroupBox.TabIndex = 6;
+            this.DetailPanelGroupBox.TabStop = false;
+            // 
+            // PanelTopNumericUpDown
+            // 
+            this.PanelTopNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.PanelTopNumericUpDown.Location = new System.Drawing.Point(152, 18);
+            this.PanelTopNumericUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.PanelTopNumericUpDown.Minimum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            -2147483648});
+            this.PanelTopNumericUpDown.Name = "PanelTopNumericUpDown";
+            this.PanelTopNumericUpDown.Size = new System.Drawing.Size(68, 19);
+            this.PanelTopNumericUpDown.TabIndex = 43;
+            this.PanelTopNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(134, 21);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(12, 12);
+            this.label13.TabIndex = 42;
+            this.label13.Text = "Y";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(42, 21);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(12, 12);
+            this.label15.TabIndex = 41;
+            this.label15.Text = "X";
+            // 
+            // PanelLeftNumericUpDown
+            // 
+            this.PanelLeftNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.PanelLeftNumericUpDown.Location = new System.Drawing.Point(60, 18);
+            this.PanelLeftNumericUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.PanelLeftNumericUpDown.Minimum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            -2147483648});
+            this.PanelLeftNumericUpDown.Name = "PanelLeftNumericUpDown";
+            this.PanelLeftNumericUpDown.Size = new System.Drawing.Size(68, 19);
+            this.PanelLeftNumericUpDown.TabIndex = 40;
+            this.PanelLeftNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(7, 21);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(29, 12);
+            this.label16.TabIndex = 39;
+            this.label16.Text = "位置";
+            // 
+            // UpdatePanelButton
+            // 
+            this.UpdatePanelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.UpdatePanelButton.Location = new System.Drawing.Point(188, 238);
+            this.UpdatePanelButton.Name = "UpdatePanelButton";
+            this.UpdatePanelButton.Size = new System.Drawing.Size(102, 25);
+            this.UpdatePanelButton.TabIndex = 13;
+            this.UpdatePanelButton.Text = "更新";
+            this.UpdatePanelButton.UseVisualStyleBackColor = true;
             // 
             // ClearAllButton
             // 
@@ -284,6 +384,21 @@
             this.DetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.DetailGroupBox.TabIndex = 5;
             this.DetailGroupBox.TabStop = false;
+            // 
+            // SpellVisualSetting
+            // 
+            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.BarEnabled = true;
+            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
+            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.SpellVisualSetting.Location = new System.Drawing.Point(187, 124);
+            this.SpellVisualSetting.Name = "SpellVisualSetting";
+            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.SpellVisualSetting.TabIndex = 28;
+            this.SpellVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
             // 
             // SelectJobButton
             // 
@@ -813,6 +928,21 @@
             this.TelopDetailGroupBox.Size = new System.Drawing.Size(850, 662);
             this.TelopDetailGroupBox.TabIndex = 5;
             this.TelopDetailGroupBox.TabStop = false;
+            // 
+            // TelopVisualSetting
+            // 
+            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.BarEnabled = false;
+            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
+            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
+            this.TelopVisualSetting.Name = "TelopVisualSetting";
+            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.TelopVisualSetting.TabIndex = 6;
+            this.TelopVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
             // 
             // TelopSelectJobButton
             // 
@@ -1792,6 +1922,21 @@
             this.ShokikaButton.UseVisualStyleBackColor = true;
             this.ShokikaButton.Click += new System.EventHandler(this.ShokikaButton_Click);
             // 
+            // DefaultVisualSetting
+            // 
+            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
+            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.BarEnabled = true;
+            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
+            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
+            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
+            this.DefaultVisualSetting.Location = new System.Drawing.Point(213, 85);
+            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
+            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
+            this.DefaultVisualSetting.TabIndex = 37;
+            this.DefaultVisualSetting.TextFont = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Bold);
+            // 
             // OpenFileDialog
             // 
             this.OpenFileDialog.DefaultExt = "xml";
@@ -1814,51 +1959,6 @@
             // 
             this.CombatAnalyzingTimer.Interval = 600;
             // 
-            // SpellVisualSetting
-            // 
-            this.SpellVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.SpellVisualSetting.BarColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.BarEnabled = true;
-            this.SpellVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.SpellVisualSetting.FontColor = System.Drawing.Color.White;
-            this.SpellVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.SpellVisualSetting.Location = new System.Drawing.Point(187, 124);
-            this.SpellVisualSetting.Name = "SpellVisualSetting";
-            this.SpellVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.SpellVisualSetting.TabIndex = 28;
-            this.SpellVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
-            // 
-            // TelopVisualSetting
-            // 
-            this.TelopVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.TelopVisualSetting.BarColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.BarEnabled = false;
-            this.TelopVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.TelopVisualSetting.FontColor = System.Drawing.Color.White;
-            this.TelopVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.TelopVisualSetting.Location = new System.Drawing.Point(187, 143);
-            this.TelopVisualSetting.Name = "TelopVisualSetting";
-            this.TelopVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.TelopVisualSetting.TabIndex = 6;
-            this.TelopVisualSetting.TextFont = new System.Drawing.Font("ＭＳ Ｐゴシック", 9.75F, System.Drawing.FontStyle.Bold);
-            // 
-            // DefaultVisualSetting
-            // 
-            this.DefaultVisualSetting.BackgroundColor = System.Drawing.Color.Empty;
-            this.DefaultVisualSetting.BarColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.BarEnabled = true;
-            this.DefaultVisualSetting.BarOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.BarSize = new System.Drawing.Size(190, 8);
-            this.DefaultVisualSetting.FontColor = System.Drawing.Color.White;
-            this.DefaultVisualSetting.FontOutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(120)))), ((int)(((byte)(157)))));
-            this.DefaultVisualSetting.Location = new System.Drawing.Point(213, 85);
-            this.DefaultVisualSetting.Name = "DefaultVisualSetting";
-            this.DefaultVisualSetting.Size = new System.Drawing.Size(306, 71);
-            this.DefaultVisualSetting.TabIndex = 37;
-            this.DefaultVisualSetting.TextFont = new System.Drawing.Font("メイリオ", 11.25F, System.Drawing.FontStyle.Bold);
-            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1868,6 +1968,10 @@
             this.Size = new System.Drawing.Size(1200, 700);
             this.TabControl.ResumeLayout(false);
             this.SpecialSpellTabPage.ResumeLayout(false);
+            this.DetailPanelGroupBox.ResumeLayout(false);
+            this.DetailPanelGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PanelTopNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PanelLeftNumericUpDown)).EndInit();
             this.DetailGroupBox.ResumeLayout(false);
             this.DetailGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DisplayNoNumericUpDown)).EndInit();
@@ -2059,5 +2163,12 @@
         private System.Windows.Forms.ToolStripMenuItem CASetOriginItem;
         private System.Windows.Forms.CheckBox OverlayForceVisibleCheckBox;
         private System.Windows.Forms.ColumnHeader HPRateColumnHeader;
+        private System.Windows.Forms.GroupBox DetailPanelGroupBox;
+        private System.Windows.Forms.NumericUpDown PanelTopNumericUpDown;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown PanelLeftNumericUpDown;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button UpdatePanelButton;
     }
 }

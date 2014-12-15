@@ -324,7 +324,20 @@
                 }
             }
 
-            this.LoadTelopTable();
+            // 今の選択ノードを取り出す
+            var targetNode = this.TelopTreeView.SelectedNode;
+            if (targetNode != null)
+            {
+                // 1個前のノードを取り出しておく
+                var prevNode = targetNode.PrevNode;
+
+                targetNode.Remove();
+
+                if (prevNode != null)
+                {
+                    this.SpellTimerTreeView.SelectedNode = prevNode;
+                }
+            }
         }
 
         /// <summary>

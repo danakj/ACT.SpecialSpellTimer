@@ -478,6 +478,81 @@
         }
 
         /// <summary>
+        /// Panelの位置を設定する
+        /// </summary>
+        /// <param name="panelName">パネルの名前</param>
+        /// <param name="left">Left</param>
+        /// <param name="top">Top</param>
+        public void SetPanelLocation(
+            string panelName,
+            double left,
+            double top)
+        {
+            if (this.SpellTimerPanels != null)
+            {
+                var panel = this.SpellTimerPanels
+                    .Where(x => x.PanelName == panelName)
+                    .FirstOrDefault();
+
+                if (panel != null)
+                {
+                    panel.Left = left;
+                    panel.Top = top;
+                }
+
+                var panelSettings = PanelSettings.Default.SettingsTable
+                    .Where(x => x.PanelName == panelName)
+                    .FirstOrDefault();
+
+                if (panelSettings != null)
+                {
+                    panelSettings.Left = left;
+                    panelSettings.Top = top;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Panelの位置を取得する
+        /// </summary>
+        /// <param name="panelName">パネルの名前</param>
+        /// <param name="left">Left</param>
+        /// <param name="top">Top</param>
+        public void GetPanelLocation(
+            string panelName,
+            out double left,
+            out double top)
+        {
+            left = 10.0d;
+            top = 10.0d;
+
+            if (this.SpellTimerPanels != null)
+            {
+                var panel = this.SpellTimerPanels
+                    .Where(x => x.PanelName == panelName)
+                    .FirstOrDefault();
+
+                if (panel != null)
+                {
+                    left = panel.Left;
+                    top = panel.Top;
+                }
+                else
+                {
+                    var panelSettings = PanelSettings.Default.SettingsTable
+                        .Where(x => x.PanelName == panelName)
+                        .FirstOrDefault();
+
+                    if (panelSettings != null)
+                    {
+                        left = panelSettings.Left;
+                        top = panelSettings.Top;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Panelをアクティブ化する
         /// </summary>
         public void ActivatePanels()
