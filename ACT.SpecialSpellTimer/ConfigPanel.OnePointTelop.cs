@@ -335,7 +335,7 @@
 
                 if (prevNode != null)
                 {
-                    this.SpellTimerTreeView.SelectedNode = prevNode;
+                    this.TelopTreeView.SelectedNode = prevNode;
                 }
             }
         }
