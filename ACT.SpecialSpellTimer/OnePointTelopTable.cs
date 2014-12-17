@@ -292,6 +292,36 @@
                     string.Empty;
             }
         }
+
+        /// <summary>
+        /// テーブルファイルをバックアップする
+        /// </summary>
+        public void Backup()
+        {
+            var file = this.DefaultFile;
+
+            if (File.Exists(file))
+            {
+                var backupFile = Path.Combine(
+                    Path.GetDirectoryName(file),
+                    Path.GetFileNameWithoutExtension(file) + "." + DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".bak");
+
+                File.Copy(
+                    file,
+                    backupFile,
+                    true);
+
+                // 古いバックアップを消す
+                foreach (var bak in Directory.GetFiles(Path.GetDirectoryName(file), "*.bak"))
+                {
+                    var timeStamp = File.GetCreationTime(bak);
+                    if ((DateTime.Now - timeStamp).TotalDays >= 3.0d)
+                    {
+                        File.Delete(bak);
+                    }
+                }
+            }
+        }
     }
 
     /// <summary>

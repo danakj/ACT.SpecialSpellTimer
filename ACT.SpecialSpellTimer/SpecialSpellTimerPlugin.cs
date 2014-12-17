@@ -117,6 +117,11 @@
                 ConfigPanel.Size = pluginScreenSpace.Size;
                 ConfigPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right;
 
+                // 設定ファイルのバックアップを作成する
+                SpellTimerTable.Backup();
+                OnePointTelopTable.Default.Backup();
+                PanelSettings.Default.Backup();
+
                 // 本体を開始する
                 SpellTimerCore.Default.Begin();
 

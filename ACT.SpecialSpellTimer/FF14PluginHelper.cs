@@ -99,49 +99,52 @@
         {
             Initialize();
 
-            var result = new List<Combatant>();
-
-            if (plugin == null)
+            lock (lockObject)
             {
-                return result;
-            }
+                var result = new List<Combatant>();
 
-            if (GetFFXIVProcess == null)
-            {
-                return result;
-            }
-
-            if (pluginScancombat == null)
-            {
-                return result;
-            }
-
-            dynamic list = pluginScancombat.GetCombatantList();
-            foreach (dynamic item in list.ToArray())
-            {
-                if (item == null)
+                if (plugin == null)
                 {
-                    continue;
+                    return result;
                 }
 
-                var combatant = new Combatant();
+                if (GetFFXIVProcess == null)
+                {
+                    return result;
+                }
 
-                combatant.ID = (uint)item.ID;
-                combatant.OwnerID = (uint)item.OwnerID;
-                combatant.Job = (int)item.Job;
-                combatant.Name = (string)item.Name;
-                combatant.type = (byte)item.type;
-                combatant.Level = (int)item.Level;
-                combatant.CurrentHP = (int)item.CurrentHP;
-                combatant.MaxHP = (int)item.MaxHP;
-                combatant.CurrentMP = (int)item.CurrentMP;
-                combatant.MaxMP = (int)item.MaxMP;
-                combatant.CurrentTP = (int)item.CurrentTP;
+                if (pluginScancombat == null)
+                {
+                    return result;
+                }
 
-                result.Add(combatant);
+                dynamic list = pluginScancombat.GetCombatantList();
+                foreach (dynamic item in list.ToArray())
+                {
+                    if (item == null)
+                    {
+                        continue;
+                    }
+
+                    var combatant = new Combatant();
+
+                    combatant.ID = (uint)item.ID;
+                    combatant.OwnerID = (uint)item.OwnerID;
+                    combatant.Job = (int)item.Job;
+                    combatant.Name = (string)item.Name;
+                    combatant.type = (byte)item.type;
+                    combatant.Level = (int)item.Level;
+                    combatant.CurrentHP = (int)item.CurrentHP;
+                    combatant.MaxHP = (int)item.MaxHP;
+                    combatant.CurrentMP = (int)item.CurrentMP;
+                    combatant.MaxMP = (int)item.MaxMP;
+                    combatant.CurrentTP = (int)item.CurrentTP;
+
+                    result.Add(combatant);
+                }
+
+                return result;
             }
-
-            return result;
         }
 
         public static List<uint> GetCurrentPartyList(
@@ -149,28 +152,31 @@
         {
             Initialize();
 
-            var partyList = new List<uint>();
-            partyCount = 0;
-
-            if (plugin == null)
+            lock (lockObject)
             {
+                var partyList = new List<uint>();
+                partyCount = 0;
+
+                if (plugin == null)
+                {
+                    return partyList;
+                }
+
+                if (GetFFXIVProcess == null)
+                {
+                    return partyList;
+                }
+
+                if (pluginScancombat == null)
+                {
+                    return partyList;
+                }
+
+                partyList = pluginScancombat.GetCurrentPartyList(
+                    out partyCount) as List<uint>;
+
                 return partyList;
             }
-
-            if (GetFFXIVProcess == null)
-            {
-                return partyList;
-            }
-
-            if (pluginScancombat == null)
-            {
-                return partyList;
-            }
-
-            partyList = pluginScancombat.GetCurrentPartyList(
-                out partyCount) as List<uint>;
-
-            return partyList;
         }
     }
 
