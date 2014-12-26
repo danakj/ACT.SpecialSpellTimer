@@ -1069,6 +1069,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to reset all settings and ticker positions?.
+        /// </summary>
+        internal static string ResetAllPrompt {
+            get {
+                return ResourceManager.GetString("ResetAllPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply bar size to all spell timers.
         /// </summary>
         internal static string ResetSpellBarSize {

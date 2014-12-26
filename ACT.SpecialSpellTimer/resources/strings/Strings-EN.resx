@@ -781,4 +781,8 @@
     <value>※ Requires restart</value>
     <comment>※再起動が必要</comment>
   </data>
+  <data name="ResetAllPrompt" xml:space="preserve">
+    <value>Are you sure you want to reset all settings and ticker positions?</value>
+    <comment>あなたはすべての設定とテロップ位置をリセットしてもよろしいですか？</comment>
+  </data>
 </root>

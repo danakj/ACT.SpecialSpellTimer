@@ -1069,6 +1069,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to あなたはすべての設定とテロップ位置をリセットしてもよろしいですか？.
+        /// </summary>
+        internal static string ResetAllPrompt {
+            get {
+                return ResourceManager.GetString("ResetAllPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to スペルをこのバーサイズで統一する.
         /// </summary>
         internal static string ResetSpellBarSize {

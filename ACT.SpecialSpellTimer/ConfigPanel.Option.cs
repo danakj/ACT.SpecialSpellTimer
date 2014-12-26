@@ -76,6 +76,17 @@
         /// <param name="e">イベント引数</param>
         private void ShokikaButton_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show(
+                this,
+                Translate.Get("ResetAllPrompt"),
+                "ACT.SpecialSpellTimer",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2) != DialogResult.OK)
+            {
+                return;
+            }
+
             Settings.Default.Reset();
             Settings.Default.Save();
 
