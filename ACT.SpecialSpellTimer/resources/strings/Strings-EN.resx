@@ -266,7 +266,7 @@
     <comment>削除</comment>
   </data>
   <data name="DisableWhenClear" xml:space="preserve">
-    <value>※Disabled when set to 0 (never hides)</value>
+    <value>※ Disabled when set to 0 (never hides)</value>
     <comment>※0にすると無効（消去しない）</comment>
   </data>
   <data name="DisplayOrderLabel" xml:space="preserve">
@@ -378,7 +378,7 @@
     <comment>テロップに表示するメッセージ</comment>
   </data>
   <data name="Millisecond" xml:space="preserve">
-    <value>millisecs</value>
+    <value>Millisecs</value>
     <comment>ミリ秒</comment>
   </data>
   <data name="MIN" xml:space="preserve">
@@ -582,7 +582,7 @@
     <comment>スペシャルスペルタイマ</comment>
   </data>
   <data name="SpecsLabel" xml:space="preserve">
-    <value>※Please set according to your machine specs.</value>
+    <value>※ Please set according to your machine specs.</value>
     <comment>※スペックに合わせて設定してください</comment>
   </data>
   <data name="SpellClearAllPrompt" xml:space="preserve">
@@ -772,5 +772,13 @@
   <data name="NumberHeader" xml:space="preserve">
     <value>No</value>
     <comment>No</comment>
+  </data>
+  <data name="LanguageLabel" xml:space="preserve">
+    <value>Language (言語)</value>
+    <comment>言語 (Language)</comment>
+  </data>
+  <data name="RequiresRestart" xml:space="preserve">
+    <value>※ Requires restart</value>
+    <comment>※再起動が必要</comment>
   </data>
 </root>

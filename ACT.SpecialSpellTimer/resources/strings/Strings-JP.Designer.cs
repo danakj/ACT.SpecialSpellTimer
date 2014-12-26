@@ -655,6 +655,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 言語 (Language).
+        /// </summary>
+        internal static string LanguageLabel {
+            get {
+                return ResourceManager.GetString("LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 槍術士.
         /// </summary>
         internal static string LNC {
@@ -1047,6 +1056,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string RepeatCheckBox {
             get {
                 return ResourceManager.GetString("RepeatCheckBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ※再起動が必要.
+        /// </summary>
+        internal static string RequiresRestart {
+            get {
+                return ResourceManager.GetString("RequiresRestart", resourceCulture);
             }
         }
         

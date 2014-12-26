@@ -4,27 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Advanced_Combat_Tracker;
+
 namespace ACT.SpecialSpellTimer.Utility
 {
     class Translate
     {
         static System.Resources.ResourceManager Language;
 
+        public static System.Resources.ResourceManager GetTranslationsFor(String name)
+        {
+            switch (name)
+            {
+                case "EN":
+                    return resources.strings.Strings_EN.ResourceManager;
+                case "JP":
+                    return resources.strings.Strings_JP.ResourceManager;
+            }
+            ActGlobals.oFormActMain.WriteExceptionLog(
+                new Exception(),
+                "Unknown language: " + Properties.Settings.Default.Language);
+            return resources.strings.Strings_JP.ResourceManager;
+        }
+
         private static void InitializeIfNeeded()
         {
             if (Language != null)
                 return;
-            switch (Properties.Settings.Default.Language)
-            {
-                case "EN":
-                    Language = resources.strings.Strings_EN.ResourceManager;
-                    break;
-                case "JP":
-                    Language = resources.strings.Strings_JP.ResourceManager;
-                    break;
-                default:
-                    throw new Exception("Unknown language: " + Properties.Settings.Default.Language);
-            }
+            Language = GetTranslationsFor(Properties.Settings.Default.Language);
         }
 
         public static String Get(String name)
@@ -58,12 +65,21 @@ namespace ACT.SpecialSpellTimer.Utility
             }
 
             // Controls that are tables may have column headers that are not controls but have Text.
-            if (control.GetType().Name == "ListView") {
+            if (control is System.Windows.Forms.ListView) {
                 System.Windows.Forms.ListView listview = (System.Windows.Forms.ListView)control;
                 foreach (System.Windows.Forms.ColumnHeader c in listview.Columns)
                     c.Text = Get(c.Text);
             }
 
+            // Controls that are combo boxes have items which need translation.
+            if (control is System.Windows.Forms.ComboBox)
+            {
+                System.Windows.Forms.ComboBox combo = (System.Windows.Forms.ComboBox)control;
+                for (int i = 0; i < combo.Items.Count; ++i) {
+                    if (combo.Items[i] is String)
+                        combo.Items[i] = Get((String)combo.Items[i]);
+                }
+            }
         }
     }
 }

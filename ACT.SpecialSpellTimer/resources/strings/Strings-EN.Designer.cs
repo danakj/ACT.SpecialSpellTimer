@@ -484,7 +484,7 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ※Disabled when set to 0 (never hides).
+        ///   Looks up a localized string similar to ※ Disabled when set to 0 (never hides).
         /// </summary>
         internal static string DisableWhenClear {
             get {
@@ -655,6 +655,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Language (言語).
+        /// </summary>
+        internal static string LanguageLabel {
+            get {
+                return ResourceManager.GetString("LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lancer.
         /// </summary>
         internal static string LNC {
@@ -754,7 +763,7 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to millisecs.
+        ///   Looks up a localized string similar to Millisecs.
         /// </summary>
         internal static string Millisecond {
             get {
@@ -1051,6 +1060,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ※ Requires restart.
+        /// </summary>
+        internal static string RequiresRestart {
+            get {
+                return ResourceManager.GetString("RequiresRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply bar size to all spell timers.
         /// </summary>
         internal static string ResetSpellBarSize {
@@ -1285,7 +1303,7 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ※Please set according to your machine specs..
+        ///   Looks up a localized string similar to ※ Please set according to your machine specs..
         /// </summary>
         internal static string SpecsLabel {
             get {

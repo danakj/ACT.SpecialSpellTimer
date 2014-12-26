@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="TextCommandController.cs" />
     <Compile Include="Utility\ActInvoker.cs" />
+    <Compile Include="Utility\Language.cs" />
     <Compile Include="Utility\Translate.cs" />
     <Compile Include="Utility\OutlineTextBlock.cs" />
     <Compile Include="VisualSettingControl.cs">

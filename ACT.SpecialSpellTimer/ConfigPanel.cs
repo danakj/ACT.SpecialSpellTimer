@@ -25,6 +25,8 @@
 
             Translate.TranslateControls(this);
 
+            this.LanguageComboBox.Items.AddRange(Utility.Language.GetLanguageList());
+
             this.ToolTip.SetToolTip(this.KeywordTextBox, Utility.Translate.Get("MatchingKeywordExplanationTooltip"));
             this.ToolTip.SetToolTip(this.RegexEnabledCheckBox, Utility.Translate.Get("RegularExpressionExplanationTooltip"));
             this.ToolTip.SetToolTip(this.TelopRegexEnabledCheckBox, Utility.Translate.Get("RegularExpressionExplanationTooltip"));

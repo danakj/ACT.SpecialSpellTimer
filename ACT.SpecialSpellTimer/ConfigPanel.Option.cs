@@ -44,6 +44,15 @@
                 this.LoadSettingsOption();
             };
 
+            this.LanguageComboBox.SelectedValueChanged += (s1, e1) =>
+            {
+                Language language = (Language)this.LanguageComboBox.SelectedItem;
+                this.LanguageRestartLabel.Text = Utility.Translate.GetTranslationsFor(language.Value).GetString("RequiresRestart");
+                Settings.Default.Language = language.Value;
+                Settings.Default.Save();
+                this.LoadSettingsOption();
+            };
+
             Action action = new Action(() =>
             {
                 if (Settings.Default.OverlayVisible)
@@ -104,6 +113,12 @@
         /// </summary>
         private void LoadSettingsOption()
         {
+            foreach (Language lang in this.LanguageComboBox.Items)
+            {
+                if (lang.Value == Settings.Default.Language)
+                    this.LanguageComboBox.SelectedItem = lang;
+            }
+
             this.OverlayForceVisibleCheckBox.Checked = Settings.Default.OverlayForceVisible;
 
             if (Settings.Default.OverlayVisible)
@@ -147,6 +162,7 @@
         /// </summary>
         private void ApplySettingsOption()
         {
+            Settings.Default.Language = ((Utility.Language)this.LanguageComboBox.SelectedItem).Value;
             Settings.Default.OverlayForceVisible = this.OverlayForceVisibleCheckBox.Checked;
             Settings.Default.ProgressBarSize = this.DefaultVisualSetting.BarSize;
             Settings.Default.ProgressBarColor = this.DefaultVisualSetting.BarColor;
