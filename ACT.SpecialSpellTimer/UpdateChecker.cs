@@ -93,11 +93,11 @@
                 }
 
                 var prompt = string.Empty;
-                prompt += ProductName + " の新しいバージョンがリリースされています。" + Environment.NewLine;
+                prompt += String.Format(Utility.Translate.Get("NewVersionReleased"), ProductName) + Environment.NewLine;
                 prompt += "now: " + "v" + currentVersion.Major.ToString() + "." + currentVersion.Minor.ToString() + "." + currentVersion.Revision.ToString() + Environment.NewLine;
                 prompt += "new: " + lastestReleaseVersion + Environment.NewLine;
                 prompt += Environment.NewLine;
-                prompt += "ダウンロードしますか？";
+                prompt += Utility.Translate.Get("DownloadPrompt");
 
                 if (MessageBox.Show(prompt, ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) !=
                     DialogResult.Yes)
@@ -109,7 +109,7 @@
             }
             catch (Exception ex)
             {
-                r = "アップデートの確認で例外が発生しました。" + ex.ToString();
+                r = String.Format(Utility.Translate.Get("NewVersionError"), ex.ToString());
             }
 
             return r;

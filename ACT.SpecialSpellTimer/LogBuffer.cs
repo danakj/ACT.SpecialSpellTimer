@@ -111,7 +111,7 @@
             var logLine = logInfo.logLine.Trim();
 
             // ジョブに変化あり？
-            if (logLine.Contains("にチェンジした。"))
+            if (logLine.Contains("にチェンジした。") || logLine.Contains("You change to "))
             {
                 FF14PluginHelper.RefreshPlayer();
             }
@@ -123,7 +123,14 @@
                 logLine.Contains("がパーティから離脱しました。") ||
                 logLine.Contains("をパーティから離脱させました。") ||
                 logLine.Contains("の攻略を開始した。") ||
-                logLine.Contains("の攻略を終了した。"))
+                logLine.Contains("の攻略を終了した。") ||
+                (logLine.Contains("You join ") && logLine.Contains("'s party.")) ||
+                logLine.Contains("You left the party.") ||
+                logLine.Contains("You dissolve the party.") ||
+                logLine.Contains("The party has been disbanded.") ||
+                logLine.Contains("joins the party.") ||
+                logLine.Contains("has left the party.") ||
+                logLine.Contains("was removed from the party."))
             {
                 Task.Run(() =>
                 {
@@ -140,11 +147,12 @@
             if (player != null)
             {
                 var jobName = Job.GetJobName(player.Job);
-                if (jobName == "巴術士" ||
-                    jobName == "学者" ||
-                    jobName == "召喚士")
+                Debug.WriteLine("JOB NAME!! " + jobName);
+                if (jobName == "巴術士" || jobName == "ARC" ||
+                    jobName == "学者" || jobName == "SCH" ||
+                    jobName == "召喚士" || jobName == "SMN")
                 {
-                    if (logLine.Contains(player.Name + "の「サモン"))
+                    if (logLine.Contains(player.Name + "の「サモン") || logLine.Contains("You cast Summon"))
                     {
                         Task.Run(() =>
                         {

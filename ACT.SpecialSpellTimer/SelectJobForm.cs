@@ -16,6 +16,7 @@
         public SelectJobForm()
         {
             this.InitializeComponent();
+            Utility.Translate.TranslateControls(this);
 
             this.Load += this.SelectJobForm_Load;
             this.OKButton.Click += this.OKButton_Click;

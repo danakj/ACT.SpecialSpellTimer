@@ -77,19 +77,19 @@
                 switch (this.timerCount)
                 {
                     case 0:
-                        this.CombatAnalyzingLabel.Text = "Please Wait";
+                        this.CombatAnalyzingLabel.Text = Utility.Translate.Get("PleaseWait1");
                         break;
                     case 1:
-                        this.CombatAnalyzingLabel.Text = "Please Wait .";
+                        this.CombatAnalyzingLabel.Text = Utility.Translate.Get("PleaseWait2");
                         break;
                     case 2:
-                        this.CombatAnalyzingLabel.Text = "Please Wait . .";
+                        this.CombatAnalyzingLabel.Text = Utility.Translate.Get("PleaseWait3");
                         break;
                     case 3:
-                        this.CombatAnalyzingLabel.Text = "Please Wait . . .";
+                        this.CombatAnalyzingLabel.Text = Utility.Translate.Get("PleaseWait4");
                         break;
                     case 4:
-                        this.CombatAnalyzingLabel.Text = "Please Wait . . . .";
+                        this.CombatAnalyzingLabel.Text = Utility.Translate.Get("PleaseWait5");
                         break;
                 }
 

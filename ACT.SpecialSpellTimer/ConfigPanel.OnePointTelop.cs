@@ -134,7 +134,7 @@
         {
             if (MessageBox.Show(
                 this,
-                "全てのテロップを削除してよろしいですか？",
+                Translate.Get("TelopClearAllPrompt"),
                 "ACT.SpecialSpellTimer",
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Question,
@@ -163,7 +163,7 @@
             nr.ID = OnePointTelopTable.Default.Table.Any() ?
                 OnePointTelopTable.Default.Table.Max(x => x.ID) + 1 :
                 1;
-            nr.Title = "New Telop";
+            nr.Title = Translate.Get("NewTelop");
             nr.DisplayTime = 3;
             nr.FontColor = Settings.Default.FontColor.ToHTML();
             nr.FontOutlineColor = Settings.Default.FontOutlineColor.ToHTML();
@@ -240,7 +240,7 @@
             {
                 MessageBox.Show(
                     this,
-                    "テロップの名前を入力してください",
+                    Translate.Get("UpdateTelopNameTitle"),
                     "ACT.SpecialSpellTimer",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);

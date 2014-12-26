@@ -10,6 +10,7 @@
         public VisualSettingControlBackgoundColorForm()
         {
             this.InitializeComponent();
+            Utility.Translate.TranslateControls(this);
 
             this.OpacityNumericUpDown.ValueChanged += (s1, e1) =>
             {

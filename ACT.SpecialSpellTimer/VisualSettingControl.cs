@@ -458,7 +458,7 @@
                 if (this.BarEnabled)
                 {
                     path.AddString(
-                        "サンプルスペル",
+                        Translate.Get("SampleSpell"),
                         font.FontFamily,
                         (int)font.Style,
                         (float)font.ToFontSizeWPF(),
@@ -476,7 +476,7 @@
                 else
                 {
                     path.AddString(
-                        "サンプルテロップ",
+                        Translate.Get("SampleTelop"),
                         font.FontFamily,
                         (int)font.Style,
                         (float)font.ToFontSizeWPF(),

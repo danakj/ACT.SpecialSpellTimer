@@ -249,7 +249,7 @@
             this.SpecialSpellTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.SpecialSpellTabPage.Size = new System.Drawing.Size(1186, 668);
             this.SpecialSpellTabPage.TabIndex = 0;
-            this.SpecialSpellTabPage.Text = "スペシャルスペルタイマ";
+            this.SpecialSpellTabPage.Text = "SpecialSpellTimer";
             // 
             // DetailPanelGroupBox
             // 
@@ -328,7 +328,7 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(29, 12);
             this.label16.TabIndex = 39;
-            this.label16.Text = "位置";
+            this.label16.Text = "Location";
             // 
             // UpdatePanelButton
             // 
@@ -337,7 +337,7 @@
             this.UpdatePanelButton.Name = "UpdatePanelButton";
             this.UpdatePanelButton.Size = new System.Drawing.Size(102, 25);
             this.UpdatePanelButton.TabIndex = 13;
-            this.UpdatePanelButton.Text = "更新";
+            this.UpdatePanelButton.Text = "Update";
             this.UpdatePanelButton.UseVisualStyleBackColor = true;
             // 
             // ClearAllButton
@@ -347,7 +347,7 @@
             this.ClearAllButton.Name = "ClearAllButton";
             this.ClearAllButton.Size = new System.Drawing.Size(75, 25);
             this.ClearAllButton.TabIndex = 4;
-            this.ClearAllButton.Text = "全て削除";
+            this.ClearAllButton.Text = "ClearAllButton";
             this.ClearAllButton.UseVisualStyleBackColor = true;
             this.ClearAllButton.Click += new System.EventHandler(this.ClearAllButton_Click);
             // 
@@ -407,7 +407,7 @@
             this.SelectJobButton.Name = "SelectJobButton";
             this.SelectJobButton.Size = new System.Drawing.Size(144, 25);
             this.SelectJobButton.TabIndex = 27;
-            this.SelectJobButton.Text = "ジョブを限定する";
+            this.SelectJobButton.Text = "SelectJobButton";
             this.SelectJobButton.UseVisualStyleBackColor = true;
             // 
             // RegexEnabledCheckBox
@@ -418,8 +418,7 @@
             this.RegexEnabledCheckBox.Name = "RegexEnabledCheckBox";
             this.RegexEnabledCheckBox.Size = new System.Drawing.Size(88, 16);
             this.RegexEnabledCheckBox.TabIndex = 4;
-            this.RegexEnabledCheckBox.Text = "正規表現ON";
-            this.ToolTip.SetToolTip(this.RegexEnabledCheckBox, "正規表現が無効でも部分一致は既定で有効となっています\r\n正規表現OFFでの部分一致のほうがパフォーマンスは向上します");
+            this.RegexEnabledCheckBox.Text = "RegexEnabledCheckBox";
             this.RegexEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // DontHideCheckBox
@@ -429,7 +428,7 @@
             this.DontHideCheckBox.Name = "DontHideCheckBox";
             this.DontHideCheckBox.Size = new System.Drawing.Size(140, 16);
             this.DontHideCheckBox.TabIndex = 11;
-            this.DontHideCheckBox.Text = "リキャスト後に消去しない";
+            this.DontHideCheckBox.Text = "DontHideCheckBox";
             this.DontHideCheckBox.UseVisualStyleBackColor = true;
             // 
             // label27
@@ -439,7 +438,7 @@
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(115, 12);
             this.label27.TabIndex = 25;
-            this.label27.Text = "※より小さいほうが優先";
+            this.label27.Text = "PriorityExplainLabel";
             // 
             // DisplayNoNumericUpDown
             // 
@@ -462,7 +461,7 @@
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(41, 12);
             this.label19.TabIndex = 24;
-            this.label19.Text = "表示順";
+            this.label19.Text = "DisplayOrderLabel";
             // 
             // IsReverseCheckBox
             // 
@@ -471,7 +470,7 @@
             this.IsReverseCheckBox.Name = "IsReverseCheckBox";
             this.IsReverseCheckBox.Size = new System.Drawing.Size(121, 16);
             this.IsReverseCheckBox.TabIndex = 8;
-            this.IsReverseCheckBox.Text = "進行方向を逆にする";
+            this.IsReverseCheckBox.Text = "ReverseDirectionCheckbox";
             this.IsReverseCheckBox.UseVisualStyleBackColor = true;
             // 
             // DeleteButton
@@ -481,7 +480,7 @@
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(102, 25);
             this.DeleteButton.TabIndex = 13;
-            this.DeleteButton.Text = "削除";
+            this.DeleteButton.Text = "DeleteButton";
             this.DeleteButton.UseVisualStyleBackColor = true;
             // 
             // UpdateButton
@@ -491,7 +490,7 @@
             this.UpdateButton.Name = "UpdateButton";
             this.UpdateButton.Size = new System.Drawing.Size(102, 25);
             this.UpdateButton.TabIndex = 12;
-            this.UpdateButton.Text = "更新";
+            this.UpdateButton.Text = "UpdateButton";
             this.UpdateButton.UseVisualStyleBackColor = true;
             // 
             // groupBox3
@@ -511,7 +510,7 @@
             this.groupBox3.Size = new System.Drawing.Size(838, 96);
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "ログにマッチしてｎ秒後に鳴らすサウンド";
+            this.groupBox3.Text = "DelayedSoundEffectAfterMatch";
             // 
             // label14
             // 
@@ -520,7 +519,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(68, 12);
             this.label14.TabIndex = 20;
-            this.label14.Text = "秒後に鳴らす";
+            this.label14.Text = "SoundInSeconds";
             // 
             // OverTimeNumericUpDown
             // 
@@ -542,7 +541,7 @@
             this.Speak2Button.Name = "Speak2Button";
             this.Speak2Button.Size = new System.Drawing.Size(33, 20);
             this.Speak2Button.TabIndex = 3;
-            this.Speak2Button.Text = "▶";
+            this.Speak2Button.Text = "SpeakButton";
             this.Speak2Button.UseVisualStyleBackColor = true;
             // 
             // Play2Button
@@ -551,7 +550,7 @@
             this.Play2Button.Name = "Play2Button";
             this.Play2Button.Size = new System.Drawing.Size(33, 20);
             this.Play2Button.TabIndex = 1;
-            this.Play2Button.Text = "♪";
+            this.Play2Button.Text = "PlayButton";
             this.Play2Button.UseVisualStyleBackColor = true;
             // 
             // OverTextToSpeakTextBox
@@ -570,7 +569,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(72, 12);
             this.label11.TabIndex = 15;
-            this.label11.Text = "TextToSpeak";
+            this.label11.Text = "TextToSpeakLabel";
             // 
             // OverSoundComboBox
             // 
@@ -589,7 +588,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(31, 12);
             this.label12.TabIndex = 13;
-            this.label12.Text = "wave";
+            this.label12.Text = "WaveSoundLabel";
             // 
             // groupBox2
             // 
@@ -607,7 +606,7 @@
             this.groupBox2.Size = new System.Drawing.Size(838, 75);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "リキャスト完了時に鳴らすサウンド";
+            this.groupBox2.Text = "RecastCompleteSoundEffect";
             // 
             // Speak3Button
             // 
@@ -615,7 +614,7 @@
             this.Speak3Button.Name = "Speak3Button";
             this.Speak3Button.Size = new System.Drawing.Size(33, 20);
             this.Speak3Button.TabIndex = 3;
-            this.Speak3Button.Text = "▶";
+            this.Speak3Button.Text = "SpeakButton";
             this.Speak3Button.UseVisualStyleBackColor = true;
             // 
             // Play3Button
@@ -624,7 +623,7 @@
             this.Play3Button.Name = "Play3Button";
             this.Play3Button.Size = new System.Drawing.Size(33, 20);
             this.Play3Button.TabIndex = 1;
-            this.Play3Button.Text = "♪";
+            this.Play3Button.Text = "PlayButton";
             this.Play3Button.UseVisualStyleBackColor = true;
             // 
             // TimeupTextToSpeakTextBox
@@ -643,7 +642,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 12);
             this.label9.TabIndex = 15;
-            this.label9.Text = "TextToSpeak";
+            this.label9.Text = "TextToSpeakLabel";
             // 
             // TimeupSoundComboBox
             // 
@@ -662,7 +661,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(31, 12);
             this.label10.TabIndex = 13;
-            this.label10.Text = "wave";
+            this.label10.Text = "WaveSoundLabel";
             // 
             // groupBox1
             // 
@@ -679,7 +678,7 @@
             this.groupBox1.Size = new System.Drawing.Size(838, 75);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "ログにマッチした直後に鳴らすサウンド";
+            this.groupBox1.Text = "ImmediateSoundEffect";
             // 
             // Speak1Button
             // 
@@ -687,7 +686,7 @@
             this.Speak1Button.Name = "Speak1Button";
             this.Speak1Button.Size = new System.Drawing.Size(33, 20);
             this.Speak1Button.TabIndex = 3;
-            this.Speak1Button.Text = "▶";
+            this.Speak1Button.Text = "SpeakButton";
             this.Speak1Button.UseVisualStyleBackColor = true;
             // 
             // Play1Button
@@ -696,7 +695,7 @@
             this.Play1Button.Name = "Play1Button";
             this.Play1Button.Size = new System.Drawing.Size(33, 20);
             this.Play1Button.TabIndex = 1;
-            this.Play1Button.Text = "♪";
+            this.Play1Button.Text = "PlayButton";
             this.Play1Button.UseVisualStyleBackColor = true;
             // 
             // MatchTextToSpeakTextBox
@@ -715,7 +714,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(72, 12);
             this.label8.TabIndex = 15;
-            this.label8.Text = "TextToSpeak";
+            this.label8.Text = "TextToSpeakLabel";
             // 
             // MatchSoundComboBox
             // 
@@ -734,7 +733,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(31, 12);
             this.label7.TabIndex = 13;
-            this.label7.Text = "wave";
+            this.label7.Text = "WaveSoundLabel";
             // 
             // ShowProgressBarCheckBox
             // 
@@ -743,7 +742,7 @@
             this.ShowProgressBarCheckBox.Name = "ShowProgressBarCheckBox";
             this.ShowProgressBarCheckBox.Size = new System.Drawing.Size(129, 16);
             this.ShowProgressBarCheckBox.TabIndex = 7;
-            this.ShowProgressBarCheckBox.Text = "スペルリストに表示する";
+            this.ShowProgressBarCheckBox.Text = "ShowProgressBarCheckBox";
             this.ShowProgressBarCheckBox.UseVisualStyleBackColor = true;
             // 
             // RepeatCheckBox
@@ -753,7 +752,7 @@
             this.RepeatCheckBox.Name = "RepeatCheckBox";
             this.RepeatCheckBox.Size = new System.Drawing.Size(129, 16);
             this.RepeatCheckBox.TabIndex = 6;
-            this.RepeatCheckBox.Text = "リキャスト後に繰り返す";
+            this.RepeatCheckBox.Text = "RepeatCheckBox";
             this.RepeatCheckBox.UseVisualStyleBackColor = true;
             // 
             // label4
@@ -763,7 +762,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(130, 12);
             this.label4.TabIndex = 7;
-            this.label4.Text = "スペルのリキャスト時間(秒)";
+            this.label4.Text = "RecastTimeLabel";
             // 
             // RecastTimeNumericUpDown
             // 
@@ -787,7 +786,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 12);
             this.label3.TabIndex = 5;
-            this.label3.Text = "ログに対するマッチングワード";
+            this.label3.Text = "MatchingLogWordLabel";
             // 
             // KeywordTextBox
             // 
@@ -797,7 +796,6 @@
             this.KeywordTextBox.Name = "KeywordTextBox";
             this.KeywordTextBox.Size = new System.Drawing.Size(563, 19);
             this.KeywordTextBox.TabIndex = 3;
-            this.ToolTip.SetToolTip(this.KeywordTextBox, "ログに対して部分一致でマッチングします\r\n例)\r\nマッチングワード : は「凍てつく剣」の構え\r\nログ : シヴァは「凍てつく剣」の構え。\r\n→ マッチします");
             // 
             // SpellTitleTextBox
             // 
@@ -813,7 +811,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 12);
             this.label2.TabIndex = 2;
-            this.label2.Text = "スペルの名前";
+            this.label2.Text = "SpellNameLabel";
             // 
             // PanelNameTextBox
             // 
@@ -829,7 +827,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(112, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "表示するパネルの名前";
+            this.label1.Text = "PanelNameLabel";
             // 
             // AddButton
             // 
@@ -838,7 +836,7 @@
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 25);
             this.AddButton.TabIndex = 1;
-            this.AddButton.Text = "追加";
+            this.AddButton.Text = "AddButton";
             this.AddButton.UseVisualStyleBackColor = true;
             // 
             // ImportButton
@@ -848,7 +846,7 @@
             this.ImportButton.Name = "ImportButton";
             this.ImportButton.Size = new System.Drawing.Size(75, 25);
             this.ImportButton.TabIndex = 3;
-            this.ImportButton.Text = "Import";
+            this.ImportButton.Text = "ImportButton";
             this.ImportButton.UseVisualStyleBackColor = true;
             this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
@@ -859,7 +857,7 @@
             this.ExportButton.Name = "ExportButton";
             this.ExportButton.Size = new System.Drawing.Size(75, 25);
             this.ExportButton.TabIndex = 2;
-            this.ExportButton.Text = "Export";
+            this.ExportButton.Text = "ExportButton";
             this.ExportButton.UseVisualStyleBackColor = true;
             this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
@@ -888,7 +886,7 @@
             this.OnPointTelopTabPage.Name = "OnPointTelopTabPage";
             this.OnPointTelopTabPage.Size = new System.Drawing.Size(1186, 668);
             this.OnPointTelopTabPage.TabIndex = 2;
-            this.OnPointTelopTabPage.Text = "ワンポイントテロップ";
+            this.OnPointTelopTabPage.Text = "TelopTabPageTitle";
             // 
             // TelopDetailGroupBox
             // 
@@ -951,7 +949,7 @@
             this.TelopSelectJobButton.Name = "TelopSelectJobButton";
             this.TelopSelectJobButton.Size = new System.Drawing.Size(144, 25);
             this.TelopSelectJobButton.TabIndex = 45;
-            this.TelopSelectJobButton.Text = "ジョブを限定する";
+            this.TelopSelectJobButton.Text = "SelectJobButton";
             this.TelopSelectJobButton.UseVisualStyleBackColor = true;
             // 
             // TelopProgressBarEnabledCheckBox
@@ -961,7 +959,7 @@
             this.TelopProgressBarEnabledCheckBox.Name = "TelopProgressBarEnabledCheckBox";
             this.TelopProgressBarEnabledCheckBox.Size = new System.Drawing.Size(195, 16);
             this.TelopProgressBarEnabledCheckBox.TabIndex = 44;
-            this.TelopProgressBarEnabledCheckBox.Text = "残り時間をプログレスバーで表示する";
+            this.TelopProgressBarEnabledCheckBox.Text = "DisplayRemainingTimeCheckBox";
             this.TelopProgressBarEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // EnabledAddMessageCheckBox
@@ -971,7 +969,7 @@
             this.EnabledAddMessageCheckBox.Name = "EnabledAddMessageCheckBox";
             this.EnabledAddMessageCheckBox.Size = new System.Drawing.Size(242, 16);
             this.EnabledAddMessageCheckBox.TabIndex = 43;
-            this.EnabledAddMessageCheckBox.Text = "継続的にマッチさせてメッセージを追加表示する";
+            this.EnabledAddMessageCheckBox.Text = "AddMessageCheckBox";
             this.EnabledAddMessageCheckBox.UseVisualStyleBackColor = true;
             // 
             // label40
@@ -981,7 +979,7 @@
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(72, 12);
             this.label40.TabIndex = 42;
-            this.label40.Text = "秒間表示する";
+            this.label40.Text = "DisplaySeconds";
             // 
             // label39
             // 
@@ -990,7 +988,7 @@
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(47, 12);
             this.label39.TabIndex = 41;
-            this.label39.Text = "秒後から";
+            this.label39.Text = "FromSecondsLater";
             // 
             // DisplayTimeNumericUpDown
             // 
@@ -1018,7 +1016,7 @@
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(138, 12);
             this.label36.TabIndex = 39;
-            this.label36.Text = "「, (カンマ)」で改行になります";
+            this.label36.Text = "CommaLineBreakExplain";
             // 
             // TelopTopNumericUpDown
             // 
@@ -1083,7 +1081,7 @@
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(29, 12);
             this.label33.TabIndex = 34;
-            this.label33.Text = "位置";
+            this.label33.Text = "Location";
             // 
             // label32
             // 
@@ -1092,7 +1090,7 @@
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(140, 12);
             this.label32.TabIndex = 33;
-            this.label32.Text = "非表示にするマッチングワード";
+            this.label32.Text = "MatchingWordsToHide";
             // 
             // TelopKeywordToHideTextBox
             // 
@@ -1111,8 +1109,7 @@
             this.TelopRegexEnabledCheckBox.Name = "TelopRegexEnabledCheckBox";
             this.TelopRegexEnabledCheckBox.Size = new System.Drawing.Size(88, 16);
             this.TelopRegexEnabledCheckBox.TabIndex = 4;
-            this.TelopRegexEnabledCheckBox.Text = "正規表現ON";
-            this.ToolTip.SetToolTip(this.TelopRegexEnabledCheckBox, "正規表現が無効でも部分一致は既定で有効となっています\r\n正規表現OFFでの部分一致のほうがパフォーマンスは向上します");
+            this.TelopRegexEnabledCheckBox.Text = "RegexEnabledCheckBox";
             this.TelopRegexEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // TelopDeleteButton
@@ -1122,7 +1119,7 @@
             this.TelopDeleteButton.Name = "TelopDeleteButton";
             this.TelopDeleteButton.Size = new System.Drawing.Size(102, 25);
             this.TelopDeleteButton.TabIndex = 11;
-            this.TelopDeleteButton.Text = "削除";
+            this.TelopDeleteButton.Text = "DeleteButton";
             this.TelopDeleteButton.UseVisualStyleBackColor = true;
             // 
             // TelopUpdateButton
@@ -1132,7 +1129,7 @@
             this.TelopUpdateButton.Name = "TelopUpdateButton";
             this.TelopUpdateButton.Size = new System.Drawing.Size(102, 25);
             this.TelopUpdateButton.TabIndex = 10;
-            this.TelopUpdateButton.Text = "更新";
+            this.TelopUpdateButton.Text = "UpdateButton";
             this.TelopUpdateButton.UseVisualStyleBackColor = true;
             // 
             // groupBox5
@@ -1150,7 +1147,7 @@
             this.groupBox5.Size = new System.Drawing.Size(838, 75);
             this.groupBox5.TabIndex = 20;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "ディレイ後に鳴らすサウンド";
+            this.groupBox5.Text = "DelayedSoundEffect";
             // 
             // TelopSpeak2Button
             // 
@@ -1158,7 +1155,7 @@
             this.TelopSpeak2Button.Name = "TelopSpeak2Button";
             this.TelopSpeak2Button.Size = new System.Drawing.Size(33, 20);
             this.TelopSpeak2Button.TabIndex = 3;
-            this.TelopSpeak2Button.Text = "▶";
+            this.TelopSpeak2Button.Text = "SpeakButton";
             this.TelopSpeak2Button.UseVisualStyleBackColor = true;
             // 
             // TelopPlay2Button
@@ -1167,7 +1164,7 @@
             this.TelopPlay2Button.Name = "TelopPlay2Button";
             this.TelopPlay2Button.Size = new System.Drawing.Size(33, 20);
             this.TelopPlay2Button.TabIndex = 1;
-            this.TelopPlay2Button.Text = "♪";
+            this.TelopPlay2Button.Text = "PlayButton";
             this.TelopPlay2Button.UseVisualStyleBackColor = true;
             // 
             // TelopDelayTTSTextBox
@@ -1186,7 +1183,7 @@
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(72, 12);
             this.label37.TabIndex = 15;
-            this.label37.Text = "TextToSpeak";
+            this.label37.Text = "TextToSpeakLabel";
             // 
             // TelopDelaySoundComboBox
             // 
@@ -1205,7 +1202,7 @@
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(31, 12);
             this.label38.TabIndex = 13;
-            this.label38.Text = "wave";
+            this.label38.Text = "WaveSoundLabel";
             // 
             // groupBox7
             // 
@@ -1222,7 +1219,7 @@
             this.groupBox7.Size = new System.Drawing.Size(838, 75);
             this.groupBox7.TabIndex = 12;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "ログにマッチした直後に鳴らすサウンド";
+            this.groupBox7.Text = "ImmediateSoundEffect";
             // 
             // TelopSpeak1Button
             // 
@@ -1230,7 +1227,7 @@
             this.TelopSpeak1Button.Name = "TelopSpeak1Button";
             this.TelopSpeak1Button.Size = new System.Drawing.Size(33, 20);
             this.TelopSpeak1Button.TabIndex = 3;
-            this.TelopSpeak1Button.Text = "▶";
+            this.TelopSpeak1Button.Text = "SpeakButton";
             this.TelopSpeak1Button.UseVisualStyleBackColor = true;
             // 
             // TelopPlay1Button
@@ -1239,7 +1236,7 @@
             this.TelopPlay1Button.Name = "TelopPlay1Button";
             this.TelopPlay1Button.Size = new System.Drawing.Size(33, 20);
             this.TelopPlay1Button.TabIndex = 1;
-            this.TelopPlay1Button.Text = "♪";
+            this.TelopPlay1Button.Text = "PlayButton";
             this.TelopPlay1Button.UseVisualStyleBackColor = true;
             // 
             // TelopMatchTTSTextBox
@@ -1258,7 +1255,7 @@
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(72, 12);
             this.label41.TabIndex = 15;
-            this.label41.Text = "TextToSpeak";
+            this.label41.Text = "TextToSpeakLabel";
             // 
             // TelopMatchSoundComboBox
             // 
@@ -1277,7 +1274,7 @@
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(31, 12);
             this.label42.TabIndex = 13;
-            this.label42.Text = "wave";
+            this.label42.Text = "WaveSoundLabel";
             // 
             // label44
             // 
@@ -1286,7 +1283,7 @@
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(93, 12);
             this.label44.TabIndex = 7;
-            this.label44.Text = "ログにマッチして・・・";
+            this.label44.Text = "MatchLogLabel";
             // 
             // TelopDelayNumericUpDown
             // 
@@ -1309,7 +1306,7 @@
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(134, 12);
             this.label45.TabIndex = 5;
-            this.label45.Text = "ログに対するマッチングワード";
+            this.label45.Text = "MatchingLogWordLabel";
             // 
             // TelopKeywordTextBox
             // 
@@ -1319,7 +1316,6 @@
             this.TelopKeywordTextBox.Name = "TelopKeywordTextBox";
             this.TelopKeywordTextBox.Size = new System.Drawing.Size(563, 19);
             this.TelopKeywordTextBox.TabIndex = 2;
-            this.ToolTip.SetToolTip(this.TelopKeywordTextBox, "ログに対して部分一致でマッチングします\r\n例)\r\nマッチングワード : は「凍てつく剣」の構え\r\nログ : シヴァは「凍てつく剣」の構え。\r\n→ マッチします");
             // 
             // TelopMessageTextBox
             // 
@@ -1327,8 +1323,6 @@
             this.TelopMessageTextBox.Name = "TelopMessageTextBox";
             this.TelopMessageTextBox.Size = new System.Drawing.Size(364, 19);
             this.TelopMessageTextBox.TabIndex = 1;
-            this.ToolTip.SetToolTip(this.TelopMessageTextBox, "{COUNT}と記入するとテロップが消えるまでの秒数に置換されます\r\n{COUNT} → 小数点第1位まで表示。例) 30.0\r\n{COUNT0} → 整数部のみ" +
-        "表示。例) 30");
             // 
             // label46
             // 
@@ -1337,9 +1331,7 @@
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(136, 12);
             this.label46.TabIndex = 2;
-            this.label46.Text = "テロップに表示するメッセージ";
-            this.ToolTip.SetToolTip(this.label46, "{COUNT}と記入するとテロップが消えるまでの秒数に置換されます\r\n{COUNT} → 小数点第1位まで表示。例) 30.0\r\n{COUNT0} → 整数部のみ" +
-        "表示。例) 30\r\n");
+            this.label46.Text = "MessageOnTickerLabel";
             // 
             // TelopTitleTextBox
             // 
@@ -1355,7 +1347,7 @@
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(73, 12);
             this.label47.TabIndex = 0;
-            this.label47.Text = "テロップの名前";
+            this.label47.Text = "TickerName";
             // 
             // TelopClearAllButton
             // 
@@ -1364,7 +1356,7 @@
             this.TelopClearAllButton.Name = "TelopClearAllButton";
             this.TelopClearAllButton.Size = new System.Drawing.Size(75, 25);
             this.TelopClearAllButton.TabIndex = 4;
-            this.TelopClearAllButton.Text = "全て削除";
+            this.TelopClearAllButton.Text = "ClearAllButton";
             this.TelopClearAllButton.UseVisualStyleBackColor = true;
             // 
             // TelopAddButton
@@ -1374,7 +1366,7 @@
             this.TelopAddButton.Name = "TelopAddButton";
             this.TelopAddButton.Size = new System.Drawing.Size(75, 25);
             this.TelopAddButton.TabIndex = 1;
-            this.TelopAddButton.Text = "追加";
+            this.TelopAddButton.Text = "AddButton";
             this.TelopAddButton.UseVisualStyleBackColor = true;
             // 
             // TelopImportButton
@@ -1384,7 +1376,7 @@
             this.TelopImportButton.Name = "TelopImportButton";
             this.TelopImportButton.Size = new System.Drawing.Size(75, 25);
             this.TelopImportButton.TabIndex = 3;
-            this.TelopImportButton.Text = "Import";
+            this.TelopImportButton.Text = "ImportButton";
             this.TelopImportButton.UseVisualStyleBackColor = true;
             // 
             // TelopExportButton
@@ -1394,7 +1386,7 @@
             this.TelopExportButton.Name = "TelopExportButton";
             this.TelopExportButton.Size = new System.Drawing.Size(75, 25);
             this.TelopExportButton.TabIndex = 2;
-            this.TelopExportButton.Text = "Export";
+            this.TelopExportButton.Text = "ExportButton";
             this.TelopExportButton.UseVisualStyleBackColor = true;
             // 
             // TelopTreeView
@@ -1423,7 +1415,7 @@
             this.CombatAnalyzerTabPage.Name = "CombatAnalyzerTabPage";
             this.CombatAnalyzerTabPage.Size = new System.Drawing.Size(1186, 668);
             this.CombatAnalyzerTabPage.TabIndex = 3;
-            this.CombatAnalyzerTabPage.Text = "戦闘アナライザ";
+            this.CombatAnalyzerTabPage.Text = "CombatAnalyzerTabTitle";
             // 
             // CombatLogListView
             // 
@@ -1462,51 +1454,51 @@
             // 
             // NoColumnHeader
             // 
-            this.NoColumnHeader.Text = "No";
+            this.NoColumnHeader.Text = "NumberHeader";
             this.NoColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.NoColumnHeader.Width = 50;
             // 
             // TimeStampColumnHeader
             // 
-            this.TimeStampColumnHeader.Text = "タイムスタンプ";
+            this.TimeStampColumnHeader.Text = "TimestampHeader";
             this.TimeStampColumnHeader.Width = 140;
             // 
             // ElapsedColumnHeader
             // 
-            this.ElapsedColumnHeader.Text = "経過秒";
+            this.ElapsedColumnHeader.Text = "ElapsedHeader";
             this.ElapsedColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ElapsedColumnHeader.Width = 80;
             // 
             // LogTypeColumnHeader
             // 
-            this.LogTypeColumnHeader.Text = "種類";
+            this.LogTypeColumnHeader.Text = "LogTypeHeader";
             this.LogTypeColumnHeader.Width = 100;
             // 
             // ActorColumnHeader
             // 
-            this.ActorColumnHeader.Text = "アクター";
+            this.ActorColumnHeader.Text = "ActorHeader";
             this.ActorColumnHeader.Width = 120;
             // 
             // HPRateColumnHeader
             // 
-            this.HPRateColumnHeader.Text = "HP";
+            this.HPRateColumnHeader.Text = "HPHeader";
             this.HPRateColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.HPRateColumnHeader.Width = 80;
             // 
             // ActionColumnHeader
             // 
-            this.ActionColumnHeader.Text = "アクション";
+            this.ActionColumnHeader.Text = "ActionHeader";
             this.ActionColumnHeader.Width = 300;
             // 
             // SpanColumnHeader
             // 
-            this.SpanColumnHeader.Text = "周期";
+            this.SpanColumnHeader.Text = "SpanHeader";
             this.SpanColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.SpanColumnHeader.Width = 80;
             // 
             // LogColumnHeader
             // 
-            this.LogColumnHeader.Text = "ログ";
+            this.LogColumnHeader.Text = "LogHeader";
             this.LogColumnHeader.Width = 600;
             // 
             // CombatAnalyzerContextMenuStrip
@@ -1526,7 +1518,7 @@
             this.CASelectAllItem.Name = "CASelectAllItem";
             this.CASelectAllItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.CASelectAllItem.Size = new System.Drawing.Size(286, 22);
-            this.CASelectAllItem.Text = "全て選択";
+            this.CASelectAllItem.Text = "SelectAll";
             // 
             // toolStripSeparator1
             // 
@@ -1539,7 +1531,7 @@
             this.CACopyLogItem.ShortcutKeyDisplayString = "";
             this.CACopyLogItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.CACopyLogItem.Size = new System.Drawing.Size(286, 22);
-            this.CACopyLogItem.Text = "ログをコピーする";
+            this.CACopyLogItem.Text = "CopyLog";
             // 
             // CACopyLogDetailItem
             // 
@@ -1547,7 +1539,7 @@
             this.CACopyLogDetailItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
             this.CACopyLogDetailItem.Size = new System.Drawing.Size(286, 22);
-            this.CACopyLogDetailItem.Text = "ログの詳細をコピーする";
+            this.CACopyLogDetailItem.Text = "CopyLogDetail";
             // 
             // toolStripSeparator2
             // 
@@ -1559,7 +1551,7 @@
             this.CASetOriginItem.Name = "CASetOriginItem";
             this.CASetOriginItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.CASetOriginItem.Size = new System.Drawing.Size(286, 22);
-            this.CASetOriginItem.Text = "このログを経過秒の起点にする";
+            this.CASetOriginItem.Text = "SetLogOrigin";
             // 
             // label6
             // 
@@ -1568,7 +1560,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 12);
             this.label6.TabIndex = 18;
-            this.label6.Text = "行";
+            this.label6.Text = "OKButton";
             // 
             // label5
             // 
@@ -1577,7 +1569,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(76, 12);
             this.label5.TabIndex = 17;
-            this.label5.Text = "バッファのサイズ";
+            this.label5.Text = "BufferSize";
             // 
             // CombatLogBufferSizeNumericUpDown
             // 
@@ -1609,7 +1601,7 @@
             this.CombatLogEnabledCheckBox.Name = "CombatLogEnabledCheckBox";
             this.CombatLogEnabledCheckBox.Size = new System.Drawing.Size(167, 16);
             this.CombatLogEnabledCheckBox.TabIndex = 15;
-            this.CombatLogEnabledCheckBox.Text = "分析用に敵の行動を記録する";
+            this.CombatLogEnabledCheckBox.Text = "CombatLogEnabledCheckBox";
             this.CombatLogEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // CombatAnalyzingLabel
@@ -1620,7 +1612,7 @@
             this.CombatAnalyzingLabel.Name = "CombatAnalyzingLabel";
             this.CombatAnalyzingLabel.Size = new System.Drawing.Size(121, 12);
             this.CombatAnalyzingLabel.TabIndex = 14;
-            this.CombatAnalyzingLabel.Text = "ログを解析しています . . .";
+            this.CombatAnalyzingLabel.Text = "CombatAnalyzing";
             // 
             // AnalyzeCombatButton
             // 
@@ -1629,7 +1621,7 @@
             this.AnalyzeCombatButton.Name = "AnalyzeCombatButton";
             this.AnalyzeCombatButton.Size = new System.Drawing.Size(102, 25);
             this.AnalyzeCombatButton.TabIndex = 1;
-            this.AnalyzeCombatButton.Text = "分析する";
+            this.AnalyzeCombatButton.Text = "AnalyzeCombat";
             this.AnalyzeCombatButton.UseVisualStyleBackColor = true;
             // 
             // OptionTabPage
@@ -1666,7 +1658,7 @@
             this.OptionTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.OptionTabPage.Size = new System.Drawing.Size(1186, 668);
             this.OptionTabPage.TabIndex = 1;
-            this.OptionTabPage.Text = "オプション";
+            this.OptionTabPage.Text = "OptionTabPageTitle";
             // 
             // OverlayForceVisibleCheckBox
             // 
@@ -1675,7 +1667,7 @@
             this.OverlayForceVisibleCheckBox.Name = "OverlayForceVisibleCheckBox";
             this.OverlayForceVisibleCheckBox.Size = new System.Drawing.Size(261, 16);
             this.OverlayForceVisibleCheckBox.TabIndex = 38;
-            this.OverlayForceVisibleCheckBox.Text = "FFXIVが起動していなくてもオーバーレイを表示する";
+            this.OverlayForceVisibleCheckBox.Text = "OverlayForceVisibleCheckBox";
             this.OverlayForceVisibleCheckBox.UseVisualStyleBackColor = true;
             // 
             // label48
@@ -1685,7 +1677,7 @@
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(390, 12);
             this.label48.TabIndex = 32;
-            this.label48.Text = "※<2>～<8>が使用可能になります。ただし2～8の順序は正しくない場合があります";
+            this.label48.Text = "PartyMemberNumberExplainLabel";
             // 
             // EnabledPTPlaceholderCheckBox
             // 
@@ -1694,7 +1686,7 @@
             this.EnabledPTPlaceholderCheckBox.Name = "EnabledPTPlaceholderCheckBox";
             this.EnabledPTPlaceholderCheckBox.Size = new System.Drawing.Size(48, 16);
             this.EnabledPTPlaceholderCheckBox.TabIndex = 31;
-            this.EnabledPTPlaceholderCheckBox.Text = "有効";
+            this.EnabledPTPlaceholderCheckBox.Text = "Enabled";
             this.EnabledPTPlaceholderCheckBox.UseVisualStyleBackColor = true;
             // 
             // label43
@@ -1704,7 +1696,7 @@
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(153, 12);
             this.label43.TabIndex = 30;
-            this.label43.Text = "PTメンバの代名詞を有効にする";
+            this.label43.Text = "PartyPronounLabel";
             // 
             // SwitchTelopButton
             // 
@@ -1712,7 +1704,7 @@
             this.SwitchTelopButton.Name = "SwitchTelopButton";
             this.SwitchTelopButton.Size = new System.Drawing.Size(250, 42);
             this.SwitchTelopButton.TabIndex = 29;
-            this.SwitchTelopButton.Text = "テロップを常に表示する";
+            this.SwitchTelopButton.Text = "AlwaysDisplayTelop";
             this.SwitchTelopButton.UseVisualStyleBackColor = true;
             // 
             // label30
@@ -1722,7 +1714,7 @@
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(176, 12);
             this.label30.TabIndex = 28;
-            this.label30.Text = "※スペックに合わせて設定してください";
+            this.label30.Text = "SpecsLabel";
             // 
             // label29
             // 
@@ -1731,7 +1723,7 @@
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(31, 12);
             this.label29.TabIndex = 27;
-            this.label29.Text = "ミリ秒";
+            this.label29.Text = "Millisecond";
             // 
             // RefreshIntervalNumericUpDown
             // 
@@ -1764,7 +1756,7 @@
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(87, 12);
             this.label28.TabIndex = 25;
-            this.label28.Text = "画面の更新間隔";
+            this.label28.Text = "ScreenUpdateTimeLabel";
             // 
             // AutoSortReverseCheckBox
             // 
@@ -1773,7 +1765,7 @@
             this.AutoSortReverseCheckBox.Name = "AutoSortReverseCheckBox";
             this.AutoSortReverseCheckBox.Size = new System.Drawing.Size(106, 16);
             this.AutoSortReverseCheckBox.TabIndex = 9;
-            this.AutoSortReverseCheckBox.Text = "逆(遠い順)にする";
+            this.AutoSortReverseCheckBox.Text = "AutoSortReverseCheckbox";
             this.AutoSortReverseCheckBox.UseVisualStyleBackColor = true;
             // 
             // TekiyoButton
@@ -1783,7 +1775,7 @@
             this.TekiyoButton.Name = "TekiyoButton";
             this.TekiyoButton.Size = new System.Drawing.Size(126, 25);
             this.TekiyoButton.TabIndex = 12;
-            this.TekiyoButton.Text = "適用する";
+            this.TekiyoButton.Text = "ApplyButton";
             this.TekiyoButton.UseVisualStyleBackColor = true;
             this.TekiyoButton.Click += new System.EventHandler(this.TekiyoButton_Click);
             // 
@@ -1794,7 +1786,7 @@
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(148, 12);
             this.label26.TabIndex = 11;
-            this.label26.Text = "※0にすると無効（消去しない）";
+            this.label26.Text = "DisableWhenClear";
             // 
             // label25
             // 
@@ -1803,7 +1795,7 @@
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(135, 12);
             this.label25.TabIndex = 24;
-            this.label25.Text = "リキャスト完了後に消去する";
+            this.label25.Text = "EraseAfterRecast";
             // 
             // label24
             // 
@@ -1812,7 +1804,7 @@
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(29, 12);
             this.label24.TabIndex = 23;
-            this.label24.Text = "秒後";
+            this.label24.Text = "SecondsLater";
             // 
             // TimeOfHideNumericUpDown
             // 
@@ -1835,7 +1827,7 @@
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(171, 12);
             this.label23.TabIndex = 21;
-            this.label23.Text = "リキャスト完了が近い順でソートする";
+            this.label23.Text = "SortByRecastOrder";
             // 
             // label22
             // 
@@ -1844,7 +1836,7 @@
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(64, 12);
             this.label22.TabIndex = 20;
-            this.label22.Text = "クリックスルー";
+            this.label22.Text = "ClickThrough";
             // 
             // AutoSortCheckBox
             // 
@@ -1853,7 +1845,7 @@
             this.AutoSortCheckBox.Name = "AutoSortCheckBox";
             this.AutoSortCheckBox.Size = new System.Drawing.Size(48, 16);
             this.AutoSortCheckBox.TabIndex = 8;
-            this.AutoSortCheckBox.Text = "有効";
+            this.AutoSortCheckBox.Text = "Enabled";
             this.AutoSortCheckBox.UseVisualStyleBackColor = true;
             // 
             // ClickThroughCheckBox
@@ -1863,7 +1855,7 @@
             this.ClickThroughCheckBox.Name = "ClickThroughCheckBox";
             this.ClickThroughCheckBox.Size = new System.Drawing.Size(48, 16);
             this.ClickThroughCheckBox.TabIndex = 7;
-            this.ClickThroughCheckBox.Text = "有効";
+            this.ClickThroughCheckBox.Text = "Enabled";
             this.ClickThroughCheckBox.UseVisualStyleBackColor = true;
             // 
             // label21
@@ -1873,7 +1865,7 @@
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(108, 12);
             this.label21.TabIndex = 17;
-            this.label21.Text = "オーバーレイの透過率";
+            this.label21.Text = "TransmitOverlay";
             // 
             // label20
             // 
@@ -1882,7 +1874,7 @@
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(11, 12);
             this.label20.TabIndex = 16;
-            this.label20.Text = "%";
+            this.label20.Text = "__%";
             // 
             // OpacityNumericUpDown
             // 
@@ -1900,7 +1892,7 @@
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(113, 12);
             this.label18.TabIndex = 10;
-            this.label18.Text = "プログレスバーの見た目";
+            this.label18.Text = "ProgressBarAppearance";
             // 
             // SwitchOverlayButton
             // 
@@ -1908,7 +1900,7 @@
             this.SwitchOverlayButton.Name = "SwitchOverlayButton";
             this.SwitchOverlayButton.Size = new System.Drawing.Size(250, 42);
             this.SwitchOverlayButton.TabIndex = 0;
-            this.SwitchOverlayButton.Text = "スペルを表示する";
+            this.SwitchOverlayButton.Text = "SwitchOverlayButton";
             this.SwitchOverlayButton.UseVisualStyleBackColor = true;
             // 
             // ShokikaButton
@@ -1918,7 +1910,7 @@
             this.ShokikaButton.Name = "ShokikaButton";
             this.ShokikaButton.Size = new System.Drawing.Size(126, 25);
             this.ShokikaButton.TabIndex = 13;
-            this.ShokikaButton.Text = "初期化";
+            this.ShokikaButton.Text = "InitializationButton";
             this.ShokikaButton.UseVisualStyleBackColor = true;
             this.ShokikaButton.Click += new System.EventHandler(this.ShokikaButton_Click);
             // 
@@ -1941,14 +1933,14 @@
             // 
             this.OpenFileDialog.DefaultExt = "xml";
             this.OpenFileDialog.FileName = "ACT.SpecialSpellTimer.Spells.xml";
-            this.OpenFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
+            this.OpenFileDialog.Filter = Utility.Translate.Get("XmlFileFilter");
             this.OpenFileDialog.RestoreDirectory = true;
             // 
             // SaveFileDialog
             // 
             this.SaveFileDialog.DefaultExt = "xml";
             this.SaveFileDialog.FileName = "ACT.SpecialSpellTimer.Spells.xml";
-            this.SaveFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
+            this.SaveFileDialog.Filter = Utility.Translate.Get("XmlFileFilter");
             this.SaveFileDialog.RestoreDirectory = true;
             // 
             // ToolTip

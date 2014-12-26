@@ -1,0 +1,776 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACN" xml:space="preserve">
+    <value>Arcanist</value>
+    <comment>巴術士</comment>
+  </data>
+  <data name="ACTAssemblyError" xml:space="preserve">
+    <value>An exception occurred in ACT.SpecialSpellTimer Assembly resolution.</value>
+    <comment>ACT.SpecialSpellTimer Assemblyの解決で例外が発生しました。</comment>
+  </data>
+  <data name="ActionHeader" xml:space="preserve">
+    <value>Action</value>
+    <comment>アクション</comment>
+  </data>
+  <data name="ActorHeader" xml:space="preserve">
+    <value>Actor</value>
+    <comment>アクター</comment>
+  </data>
+  <data name="ACTPluginStartError" xml:space="preserve">
+    <value>An exception occurred in the initialization of ACT.SpecialSpellTimer plug-ins.</value>
+    <comment>ACT.SpecialSpellTimer プラグインの初期化で例外が発生しました。</comment>
+  </data>
+  <data name="ACTPluginStopError" xml:space="preserve">
+    <value>An exception occurred at the end of ACT.SpecialSpellTimer plug-ins.</value>
+    <comment>ACT.SpecialSpellTimer プラグインの終了で例外が発生しました。</comment>
+  </data>
+  <data name="AddButton" xml:space="preserve">
+    <value>Add</value>
+    <comment>追加</comment>
+  </data>
+  <data name="AddMessageCheckBox" xml:space="preserve">
+    <value>Add timers instead of restarting</value>
+    <comment>継続的にマッチさせてメッセージを追加表示する</comment>
+  </data>
+  <data name="ALC" xml:space="preserve">
+    <value>Alchemist</value>
+    <comment>錬金術師</comment>
+  </data>
+  <data name="AllOffButton" xml:space="preserve">
+    <value>All Off</value>
+    <comment>全てOFF</comment>
+  </data>
+  <data name="AllOnButton" xml:space="preserve">
+    <value>All On</value>
+    <comment>全てON</comment>
+  </data>
+  <data name="AnalyzeCombat" xml:space="preserve">
+    <value>Analyze</value>
+    <comment>分析する</comment>
+  </data>
+  <data name="ApplyButton" xml:space="preserve">
+    <value>Apply</value>
+    <comment>適用する</comment>
+  </data>
+  <data name="ARC" xml:space="preserve">
+    <value>Archer</value>
+    <comment>弓術士</comment>
+  </data>
+  <data name="ARM" xml:space="preserve">
+    <value>Armorer</value>
+    <comment>甲冑師</comment>
+  </data>
+  <data name="AutoSortReverseCheckbox" xml:space="preserve">
+    <value>Reverse sorting</value>
+    <comment>逆(遠い順)にする</comment>
+  </data>
+  <data name="BackgroundColorAlphaTitle" xml:space="preserve">
+    <value>Alpha channel of the background color</value>
+    <comment>背景色のアルファチャンネル</comment>
+  </data>
+  <data name="BLM" xml:space="preserve">
+    <value>Black Mage</value>
+    <comment>黒魔道士</comment>
+  </data>
+  <data name="BOT" xml:space="preserve">
+    <value>Botanist</value>
+    <comment>園芸師</comment>
+  </data>
+  <data name="BRD" xml:space="preserve">
+    <value>Bard</value>
+    <comment>吟遊詩人</comment>
+  </data>
+  <data name="BSM" xml:space="preserve">
+    <value>Blacksmith</value>
+    <comment>鍛冶師</comment>
+  </data>
+  <data name="BufferSize" xml:space="preserve">
+    <value>Buffer size</value>
+    <comment>バッファのサイズ</comment>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>キャンセル</comment>
+  </data>
+  <data name="ClearAllButton" xml:space="preserve">
+    <value>Delete all</value>
+    <comment>全て削除</comment>
+  </data>
+  <data name="ClickThrough" xml:space="preserve">
+    <value>Click-through</value>
+    <comment>クリックスルー</comment>
+  </data>
+  <data name="CNJ" xml:space="preserve">
+    <value>Conjurer</value>
+    <comment>幻術士</comment>
+  </data>
+  <data name="CombatAnalyzerTabTitle" xml:space="preserve">
+    <value>Combat Analyzer</value>
+    <comment>戦闘アナライザ</comment>
+  </data>
+  <data name="CombatAnalyzing" xml:space="preserve">
+    <value>Analyzing the log...</value>
+    <comment>ログを解析しています . . .</comment>
+  </data>
+  <data name="CombatLogEnabledCheckBox" xml:space="preserve">
+    <value>Enable combat log analysis</value>
+    <comment>分析用に敵の行動を記録する</comment>
+  </data>
+  <data name="CommaLineBreakExplain" xml:space="preserve">
+    <value>Comma "," makes new line</value>
+    <comment>「, (カンマ)」で改行になります</comment>
+  </data>
+  <data name="CopyLog" xml:space="preserve">
+    <value>Copy log</value>
+    <comment>ログをコピーする</comment>
+  </data>
+  <data name="CopyLogDetail" xml:space="preserve">
+    <value>Copy log details</value>
+    <comment>ログの詳細をコピーする</comment>
+  </data>
+  <data name="CRP" xml:space="preserve">
+    <value>Carpenter</value>
+    <comment>木工師</comment>
+  </data>
+  <data name="CUL" xml:space="preserve">
+    <value>Culinarian</value>
+    <comment>調理師</comment>
+  </data>
+  <data name="DelayedSoundEffect" xml:space="preserve">
+    <value>Play sound after delay</value>
+    <comment>ディレイ後に鳴らすサウンド</comment>
+  </data>
+  <data name="DelayedSoundEffectAfterMatch" xml:space="preserve">
+    <value>Play sound when log matches, after N seconds</value>
+    <comment>ログにマッチしてｎ秒後に鳴らすサウンド</comment>
+  </data>
+  <data name="DeleteButton" xml:space="preserve">
+    <value>Delete</value>
+    <comment>削除</comment>
+  </data>
+  <data name="DisableWhenClear" xml:space="preserve">
+    <value>※Disabled when set to 0 (never hides)</value>
+    <comment>※0にすると無効（消去しない）</comment>
+  </data>
+  <data name="DisplayOrderLabel" xml:space="preserve">
+    <value>Priority</value>
+    <comment>表示順</comment>
+  </data>
+  <data name="DisplayRemainingTimeCheckBox" xml:space="preserve">
+    <value>Display progress bar</value>
+    <comment>残り時間をプログレスバーで表示する</comment>
+  </data>
+  <data name="DisplaySeconds" xml:space="preserve">
+    <value>seconds</value>
+    <comment>秒間表示する</comment>
+  </data>
+  <data name="DontHideCheckBox" xml:space="preserve">
+    <value>Do not hide when completed</value>
+    <comment>リキャスト後に消去しない</comment>
+  </data>
+  <data name="DownloadPrompt" xml:space="preserve">
+    <value>Do you want to download?</value>
+    <comment>ダウンロードしますか？</comment>
+  </data>
+  <data name="DRG" xml:space="preserve">
+    <value>Dragoon</value>
+    <comment>竜騎士</comment>
+  </data>
+  <data name="ElapsedHeader" xml:space="preserve">
+    <value>Elapsed seconds</value>
+    <comment>経過秒</comment>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Enabled</value>
+    <comment>有効</comment>
+  </data>
+  <data name="EraseAfterRecast" xml:space="preserve">
+    <value>Hide spell timers after completion</value>
+    <comment>リキャスト完了後に消去する</comment>
+  </data>
+  <data name="ExportButton" xml:space="preserve">
+    <value>Export</value>
+    <comment>Export</comment>
+  </data>
+  <data name="FromSecondsLater" xml:space="preserve">
+    <value>Duration</value>
+    <comment>秒後から</comment>
+  </data>
+  <data name="FSH" xml:space="preserve">
+    <value>Fisher</value>
+    <comment>漁師</comment>
+  </data>
+  <data name="GLD" xml:space="preserve">
+    <value>Gladiator</value>
+    <comment>剣術士</comment>
+  </data>
+  <data name="GSM" xml:space="preserve">
+    <value>Goldsmith</value>
+    <comment>彫金師</comment>
+  </data>
+  <data name="HPHeader" xml:space="preserve">
+    <value>HP</value>
+    <comment>HP</comment>
+  </data>
+  <data name="ImmediateSoundEffect" xml:space="preserve">
+    <value>Play sound when log matches</value>
+    <comment>ログにマッチした直後に鳴らすサウンド</comment>
+  </data>
+  <data name="ImportButton" xml:space="preserve">
+    <value>Import</value>
+    <comment>Import</comment>
+  </data>
+  <data name="InitializationButton" xml:space="preserve">
+    <value>Reset to defaults</value>
+    <comment>初期化</comment>
+  </data>
+  <data name="LNC" xml:space="preserve">
+    <value>Lancer</value>
+    <comment>槍術士</comment>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+    <comment>位置</comment>
+  </data>
+  <data name="LogHeader" xml:space="preserve">
+    <value>Log</value>
+    <comment>ログ</comment>
+  </data>
+  <data name="LogTypeHeader" xml:space="preserve">
+    <value>Type</value>
+    <comment>種類</comment>
+  </data>
+  <data name="LTW" xml:space="preserve">
+    <value>Leatherworker</value>
+    <comment>革細工師</comment>
+  </data>
+  <data name="MatchingLogWordLabel" xml:space="preserve">
+    <value>Matching log text to show</value>
+    <comment>ログに対するマッチングワード</comment>
+  </data>
+  <data name="MatchingWordsToHide" xml:space="preserve">
+    <value>Matching log text to hide</value>
+    <comment>非表示にするマッチングワード</comment>
+  </data>
+  <data name="MatchLogLabel" xml:space="preserve">
+    <value>Delay before displaying</value>
+    <comment>ログにマッチして・・・</comment>
+  </data>
+  <data name="MessageOnTickerLabel" xml:space="preserve">
+    <value>Message to display on ticker</value>
+    <comment>テロップに表示するメッセージ</comment>
+  </data>
+  <data name="Millisecond" xml:space="preserve">
+    <value>millisecs</value>
+    <comment>ミリ秒</comment>
+  </data>
+  <data name="MIN" xml:space="preserve">
+    <value>Miner</value>
+    <comment>採掘師</comment>
+  </data>
+  <data name="MNK" xml:space="preserve">
+    <value>Monk</value>
+    <comment>モンク</comment>
+  </data>
+  <data name="MRD" xml:space="preserve">
+    <value>Marauder</value>
+    <comment>斧術士</comment>
+  </data>
+  <data name="NewTelop" xml:space="preserve">
+    <value>New Telop</value>
+    <comment>New Telop</comment>
+  </data>
+  <data name="NewVersionError" xml:space="preserve">
+    <value>An exception occurred in the confirmation of updates: {0}</value>
+    <comment>アップデートの確認で例外が発生しました。{0}</comment>
+  </data>
+  <data name="NewVersionReleased" xml:space="preserve">
+    <value>New version of {0} has been released.</value>
+    <comment>{0} の新しいバージョンがリリースされています。</comment>
+  </data>
+  <data name="NIN" xml:space="preserve">
+    <value>Ninja</value>
+    <comment>忍者</comment>
+  </data>
+  <data name="OKButton" xml:space="preserve">
+    <value>OK</value>
+    <comment>OK</comment>
+  </data>
+  <data name="OpacityDescription" xml:space="preserve">
+    <value>0: Transparent, 255: Opaque</value>
+    <comment>0:透明, 255:不透明</comment>
+  </data>
+  <data name="OptionTabPageTitle" xml:space="preserve">
+    <value>Options</value>
+    <comment>オプション</comment>
+  </data>
+  <data name="OverlayDisplaySwitchIsOff" xml:space="preserve">
+    <value>Display overlay: OFF</value>
+    <comment>オーバーレイの表示スイッチ\n現在の状態 -&gt; OFF</comment>
+  </data>
+  <data name="OverlayDisplaySwitchIsOn" xml:space="preserve">
+    <value>Display overlay: ON</value>
+    <comment>オーバーレイの表示スイッチ\n現在の状態 -&gt; ON</comment>
+  </data>
+  <data name="OverlayForceVisibleCheckBox" xml:space="preserve">
+    <value>Display overlay even if FFXIV is not running</value>
+    <comment>FFXIVが起動していなくてもオーバーレイを表示する</comment>
+  </data>
+  <data name="PanelNameLabel" xml:space="preserve">
+    <value>Panel name</value>
+    <comment>表示するパネルの名前</comment>
+  </data>
+  <data name="PartyMemberNumberExplainLabel" xml:space="preserve">
+    <value>※ &lt;2&gt; - &lt;8&gt; can be used, however the order may be incorrect.</value>
+    <comment>※&lt;2&gt;～&lt;8&gt;が使用可能になります。ただし2～8の順序は正しくない場合があります</comment>
+  </data>
+  <data name="PartyPronounLabel" xml:space="preserve">
+    <value>Use party member names in matching</value>
+    <comment>PTメンバの代名詞を有効にする</comment>
+  </data>
+  <data name="PlayButton" xml:space="preserve">
+    <value>♪</value>
+    <comment>♪</comment>
+  </data>
+  <data name="PLD" xml:space="preserve">
+    <value>Paladin</value>
+    <comment>戦士</comment>
+  </data>
+  <data name="PleaseWait1" xml:space="preserve">
+    <value>Please Wait</value>
+    <comment>Please Wait</comment>
+  </data>
+  <data name="PleaseWait2" xml:space="preserve">
+    <value>Please Wait .</value>
+    <comment>Please Wait .</comment>
+  </data>
+  <data name="PleaseWait3" xml:space="preserve">
+    <value>Please Wait . .</value>
+    <comment>Please Wait . .</comment>
+  </data>
+  <data name="PleaseWait4" xml:space="preserve">
+    <value>Please Wait . . .</value>
+    <comment>Please Wait . . .</comment>
+  </data>
+  <data name="PleaseWait5" xml:space="preserve">
+    <value>Please Wait . . . .</value>
+    <comment>Please Wait . . . .</comment>
+  </data>
+  <data name="PriorityExplainLabel" xml:space="preserve">
+    <value>※ Smaller has more priority</value>
+    <comment>※より小さいほうが優先</comment>
+  </data>
+  <data name="ProgressBarAppearance" xml:space="preserve">
+    <value>Progress bar appearance</value>
+    <comment>プログレスバーの見た目</comment>
+  </data>
+  <data name="PUG" xml:space="preserve">
+    <value>Pugilist</value>
+    <comment>格闘士</comment>
+  </data>
+  <data name="RecastCompleteSoundEffect" xml:space="preserve">
+    <value>Play sound when timer expires</value>
+    <comment>リキャスト完了時に鳴らすサウンド</comment>
+  </data>
+  <data name="RecastTimeLabel" xml:space="preserve">
+    <value>Recast time (seconds)</value>
+    <comment>スペルのリキャスト時間(秒)</comment>
+  </data>
+  <data name="RegexEnabledCheckBox" xml:space="preserve">
+    <value>Use Regex</value>
+    <comment>正規表現ON</comment>
+  </data>
+  <data name="RepeatCheckBox" xml:space="preserve">
+    <value>Repeat</value>
+    <comment>リキャスト後に繰り返す</comment>
+  </data>
+  <data name="ReverseDirectionCheckbox" xml:space="preserve">
+    <value>Reverse direciton</value>
+    <comment>進行方向を逆にする</comment>
+  </data>
+  <data name="ROG" xml:space="preserve">
+    <value>Rogue</value>
+    <comment>双剣士</comment>
+  </data>
+  <data name="SampleSpell" xml:space="preserve">
+    <value>Sample spell</value>
+    <comment>サンプルスペル</comment>
+  </data>
+  <data name="SampleTelop" xml:space="preserve">
+    <value>Sample ticker</value>
+    <comment>サンプルテロップ</comment>
+  </data>
+  <data name="SCH" xml:space="preserve">
+    <value>Scholar</value>
+    <comment>学者</comment>
+  </data>
+  <data name="ScreenUpdateTimeLabel" xml:space="preserve">
+    <value>Screen update interval</value>
+    <comment>画面の更新間隔</comment>
+  </data>
+  <data name="SecondsLater" xml:space="preserve">
+    <value>Seconds later</value>
+    <comment>秒後</comment>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select all</value>
+    <comment>全て選択</comment>
+  </data>
+  <data name="SelectJobButton" xml:space="preserve">
+    <value>Job Filter...</value>
+    <comment>ジョブを限定する</comment>
+  </data>
+  <data name="SelectJobSubtitle" xml:space="preserve">
+    <value>※ If you want to limit the job of interest, please turn ON the check</value>
+    <comment>※対象とするジョブを限定したい場合はチェックをONにしてください</comment>
+  </data>
+  <data name="SelectJobTitle" xml:space="preserve">
+    <value>Please select the job of interest</value>
+    <comment>対象のジョブを選択してください</comment>
+  </data>
+  <data name="SetLogOrigin" xml:space="preserve">
+    <value>Set time zero to here</value>
+    <comment>このログを経過秒の起点にする</comment>
+  </data>
+  <data name="ShowProgressBarCheckBox" xml:space="preserve">
+    <value>Show visual timer and progress bar</value>
+    <comment>スペルリストに表示する</comment>
+  </data>
+  <data name="SMN" xml:space="preserve">
+    <value>Summoner</value>
+    <comment>召喚士</comment>
+  </data>
+  <data name="SortByRecastOrder" xml:space="preserve">
+    <value>Sort spell timers by next recast</value>
+    <comment>リキャスト完了が近い順でソートする</comment>
+  </data>
+  <data name="SoundError" xml:space="preserve">
+    <value>An exception occurred in the regeneration of ACT.SpecialSpellTimer Sound.</value>
+    <comment>ACT.SpecialSpellTimer Soundの再生で例外が発生しました。</comment>
+  </data>
+  <data name="SoundInSeconds" xml:space="preserve">
+    <value>Delay until sound plays (in seconds)</value>
+    <comment>秒後に鳴らす</comment>
+  </data>
+  <data name="SpanHeader" xml:space="preserve">
+    <value>Period</value>
+    <comment>周期</comment>
+  </data>
+  <data name="SpeakButton" xml:space="preserve">
+    <value>▶</value>
+    <comment>▶</comment>
+  </data>
+  <data name="SpecialSpellTimer" xml:space="preserve">
+    <value>Special spell timer</value>
+    <comment>スペシャルスペルタイマ</comment>
+  </data>
+  <data name="SpecsLabel" xml:space="preserve">
+    <value>※Please set according to your machine specs.</value>
+    <comment>※スペックに合わせて設定してください</comment>
+  </data>
+  <data name="SpellClearAllPrompt" xml:space="preserve">
+    <value>Are you sure you want to delete all spell timers?</value>
+    <comment>全てのスペルを削除してよろしいですか？</comment>
+  </data>
+  <data name="SpellNameLabel" xml:space="preserve">
+    <value>Spell name</value>
+    <comment>スペルの名前</comment>
+  </data>
+  <data name="SpellTimerRefreshError" xml:space="preserve">
+    <value>An exception occurred in the Refresh of ACT.SpecialSpellTimer spell timer Window.</value>
+    <comment>ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。</comment>
+  </data>
+  <data name="SupeSupe" xml:space="preserve">
+    <value>SupeSupe</value>
+    <comment>スペスペ</comment>
+  </data>
+  <data name="SwitchOverlayButton" xml:space="preserve">
+    <value>Display spell</value>
+    <comment>スペルを表示する</comment>
+  </data>
+  <data name="TelopClearAllPrompt" xml:space="preserve">
+    <value>Are you sure you want to delete all tickers?</value>
+    <comment>全てのテロップを削除してよろしいですか？</comment>
+  </data>
+  <data name="TelopDisplaySwitchIsOff" xml:space="preserve">
+    <value>Display all tickers (for position adjustment): OFF</value>
+    <comment>テロップの表示スイッチ\n現在の状態 -&gt; 通常</comment>
+  </data>
+  <data name="TelopDisplaySwitchIsOn" xml:space="preserve">
+    <value>Display all tickers (for position adjustment): ON</value>
+    <comment>テロップの表示スイッチ\n現在の状態 -&gt; 常に表示(位置調整向け)</comment>
+  </data>
+  <data name="TelopTabPageTitle" xml:space="preserve">
+    <value>Tickers</value>
+    <comment>ワンポイントテロップ</comment>
+  </data>
+  <data name="TextToSpeakLabel" xml:space="preserve">
+    <value>Text to speak</value>
+    <comment>TextToSpeak</comment>
+  </data>
+  <data name="THM" xml:space="preserve">
+    <value>Thaumaturge</value>
+    <comment>呪術士</comment>
+  </data>
+  <data name="TickerName" xml:space="preserve">
+    <value>Ticker name</value>
+    <comment>テロップの名前</comment>
+  </data>
+  <data name="TimestampHeader" xml:space="preserve">
+    <value>Timestamp</value>
+    <comment>タイムスタンプ</comment>
+  </data>
+  <data name="TransmitOverlay" xml:space="preserve">
+    <value>Overlay opacity</value>
+    <comment>オーバーレイの透過率</comment>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+    <comment>更新</comment>
+  </data>
+  <data name="UpdateButton" xml:space="preserve">
+    <value>Save</value>
+    <comment>更新</comment>
+  </data>
+  <data name="UpdateSpellNameTitle" xml:space="preserve">
+    <value>Please enter the spell name</value>
+    <comment>スペル名を入力してください</comment>
+  </data>
+  <data name="UpdateSpellPanelTitle" xml:space="preserve">
+    <value>Please enter the panel name</value>
+    <comment>パネル名を入力してください</comment>
+  </data>
+  <data name="UpdateTelopNameTitle" xml:space="preserve">
+    <value>Please enter the name of the ticker</value>
+    <comment>テロップの名前を入力してください</comment>
+  </data>
+  <data name="WAR" xml:space="preserve">
+    <value>Warrior</value>
+    <comment>ナイト</comment>
+  </data>
+  <data name="WaveSoundLabel" xml:space="preserve">
+    <value>Sound effect</value>
+    <comment>wave</comment>
+  </data>
+  <data name="WHM" xml:space="preserve">
+    <value>White Mage</value>
+    <comment>白魔道士</comment>
+  </data>
+  <data name="WVR" xml:space="preserve">
+    <value>Weaver</value>
+    <comment>裁縫師</comment>
+  </data>
+  <data name="X" xml:space="preserve">
+    <value>X</value>
+    <comment>X</comment>
+  </data>
+  <data name="XmlFileFilter" xml:space="preserve">
+    <value>XML files (*.xml)|*.xml|All files (*.*)|*.*</value>
+    <comment>XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*</comment>
+  </data>
+  <data name="Y" xml:space="preserve">
+    <value>Y</value>
+    <comment>Y</comment>
+  </data>
+  <data name="BarSize" xml:space="preserve">
+    <value>Bar size</value>
+    <comment>ﾊﾞｰのｻｲｽﾞ</comment>
+  </data>
+  <data name="ChangeBackgroundAlpha" xml:space="preserve">
+    <value>Background alpha...</value>
+    <comment>背景色のアルファチャンネルを変更する</comment>
+  </data>
+  <data name="ChangeBackgroundColor" xml:space="preserve">
+    <value>Background color...</value>
+    <comment>背景色を変更する</comment>
+  </data>
+  <data name="ChangeBarColor" xml:space="preserve">
+    <value>Bar color...</value>
+    <comment>バーの色を変更する</comment>
+  </data>
+  <data name="ChangeBarOutlineColor" xml:space="preserve">
+    <value>Bar outline color...</value>
+    <comment>バーのアウトラインの色を変更する</comment>
+  </data>
+  <data name="ChangeFont" xml:space="preserve">
+    <value>Font...</value>
+    <comment>フォントを変更する</comment>
+  </data>
+  <data name="ChangeFontColor" xml:space="preserve">
+    <value>Font color...</value>
+    <comment>フォントの色を変更する</comment>
+  </data>
+  <data name="ChangeFontOutlineColor" xml:space="preserve">
+    <value>Font outline color...</value>
+    <comment>フォントのアウトラインの色を変更する</comment>
+  </data>
+  <data name="LoadColorSet" xml:space="preserve">
+    <value>Load color scheme</value>
+    <comment>配色を読み込む</comment>
+  </data>
+  <data name="MatchingKeywordExplanationTooltip" xml:space="preserve">
+    <value>This looks for partial matches in the game log\nExample)\r\nIf you chose "freezing sword" as your matching text.\nAnd the log contains the string "Shiva uses stance of freezing sword".\n→ Then this would match that line in the game log.</value>
+    <comment>ログに対して部分一致でマッチングします\n例)\nマッチングワード : は「凍てつく剣」の構え\nログ : シヴァは「凍てつく剣」の構え。\n→ マッチします</comment>
+  </data>
+  <data name="RegularExpressionExplanationTooltip" xml:space="preserve">
+    <value>Regular expression matching is disabled by default.\nPrefer partial string matching instead of regular expressions for better performance.</value>
+    <comment>正規表現が無効でも部分一致は既定で有効となっています\n正規表現OFFでの部分一致のほうがパフォーマンスは向上します</comment>
+  </data>
+  <data name="ResetSpellBarSize" xml:space="preserve">
+    <value>Apply bar size to all spell timers</value>
+    <comment>スペルをこのバーサイズで統一する</comment>
+  </data>
+  <data name="ResetSpellColor" xml:space="preserve">
+    <value>Apply colors to all spell timers</value>
+    <comment>スペルをこの配色で統一する</comment>
+  </data>
+  <data name="ResetSpellFont" xml:space="preserve">
+    <value>Apply font to all spell timers</value>
+    <comment>スペルをこのフォントで統一する</comment>
+  </data>
+  <data name="ResetTelopColor" xml:space="preserve">
+    <value>Apply color to all tickers</value>
+    <comment>テロップをこの配色で統一する</comment>
+  </data>
+  <data name="ResetTelopFont" xml:space="preserve">
+    <value>Apply font to all tickers</value>
+    <comment>テロップをこのフォントで統一する</comment>
+  </data>
+  <data name="SaveColorSet" xml:space="preserve">
+    <value>Save color scheme</value>
+    <comment>配色を保存する</comment>
+  </data>
+  <data name="TelopMessageExplanationTooltip" xml:space="preserve">
+    <value>For the displayed message, {COUNT} will be replaced by the number of seconds until the ticker completes.\n{COUNT} → displays a single decimal point (eg. 30.0)\n{COUNT0} → display no decimals (eg. 30)</value>
+    <comment>{COUNT}と記入するとテロップが消えるまでの秒数に置換されます\n{COUNT} → 小数点第1位まで表示。例) 30.0\n{COUNT0} → 整数部のみ表示。例) 30</comment>
+  </data>
+  <data name="AlwaysDisplayTelop" xml:space="preserve">
+    <value>テロップを常に表示する</value>
+    <comment>Do not hide when complete</comment>
+  </data>
+  <data name="ChangeByRightClicking" xml:space="preserve">
+    <value>Right click to edit</value>
+    <comment>※右クリックで変更</comment>
+  </data>
+  <data name="NumberHeader" xml:space="preserve">
+    <value>No</value>
+    <comment>No</comment>
+  </data>
+</root>

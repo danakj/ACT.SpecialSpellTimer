@@ -48,15 +48,11 @@
             {
                 if (Settings.Default.OverlayVisible)
                 {
-                    this.SwitchOverlayButton.Text =
-                        "オーバーレイの表示スイッチ" + Environment.NewLine +
-                        "現在の状態 -> ON";
+                    this.SwitchOverlayButton.Text = Translate.Get("OverlayDisplaySwitchIsOn");
                 }
                 else
                 {
-                    this.SwitchOverlayButton.Text =
-                        "オーバーレイの表示スイッチ" + Environment.NewLine +
-                        "現在の状態 -> OFF";
+                    this.SwitchOverlayButton.Text = Translate.Get("OverlayDisplaySwitchIsOff");
                 }
             });
 
@@ -112,28 +108,20 @@
 
             if (Settings.Default.OverlayVisible)
             {
-                this.SwitchOverlayButton.Text =
-                    "オーバーレイの表示スイッチ" + Environment.NewLine +
-                    "現在の状態 -> ON";
+                this.SwitchOverlayButton.Text = Translate.Get("OverlayDisplaySwitchIsOn");
             }
             else
             {
-                this.SwitchOverlayButton.Text =
-                    "オーバーレイの表示スイッチ" + Environment.NewLine +
-                    "現在の状態 -> OFF";
+                this.SwitchOverlayButton.Text = Translate.Get("OverlayDisplaySwitchIsOff");
             }
 
             if (Settings.Default.TelopAlwaysVisible)
             {
-                this.SwitchTelopButton.Text =
-                    "テロップの表示スイッチ" + Environment.NewLine +
-                    "現在の状態 -> 常に表示(位置調整向け)";
+                this.SwitchTelopButton.Text = Translate.Get("TelopDisplaySwitchIsOn");
             }
             else
             {
-                this.SwitchTelopButton.Text =
-                    "テロップの表示スイッチ" + Environment.NewLine +
-                    "現在の状態 -> 通常";
+                this.SwitchTelopButton.Text = Translate.Get("TelopDisplaySwitchIsOff");
             }
 
             this.DefaultVisualSetting.BarSize = Settings.Default.ProgressBarSize;

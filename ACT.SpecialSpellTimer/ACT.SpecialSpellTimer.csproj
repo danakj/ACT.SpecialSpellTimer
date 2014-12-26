@@ -92,6 +92,16 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="resources\strings\Strings-EN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings-EN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="resources\strings\Strings-JP.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings-JP.resx</DependentUpon>
+    </Compile>
     <Compile Include="SelectJobForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +121,7 @@
     </Compile>
     <Compile Include="TextCommandController.cs" />
     <Compile Include="Utility\ActInvoker.cs" />
+    <Compile Include="Utility\Translate.cs" />
     <Compile Include="Utility\OutlineTextBlock.cs" />
     <Compile Include="VisualSettingControl.cs">
       <SubType>UserControl</SubType>
@@ -226,10 +237,21 @@
   <ItemGroup>
     <EmbeddedResource Include="ConfigPanel.resx">
       <DependentUpon>ConfigPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\strings\Strings-EN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Strings-EN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\strings\Strings-JP.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings-JP.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SelectJobForm.resx">
       <DependentUpon>SelectJobForm.cs</DependentUpon>

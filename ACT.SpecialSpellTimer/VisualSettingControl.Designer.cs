@@ -104,43 +104,43 @@
             // 
             this.ChangeFontItem.Name = "ChangeFontItem";
             this.ChangeFontItem.Size = new System.Drawing.Size(286, 22);
-            this.ChangeFontItem.Text = "フォントを変更する";
+            this.ChangeFontItem.Text = "ChangeFont";
             // 
             // ChangeFontColorItem
             // 
             this.ChangeFontColorItem.Name = "ChangeFontColorItem";
             this.ChangeFontColorItem.Size = new System.Drawing.Size(286, 22);
-            this.ChangeFontColorItem.Text = "フォントの色を変更する";
+            this.ChangeFontColorItem.Text = "ChangeFontColor";
             // 
             // ChangeFontOutlineColorItem
             // 
             this.ChangeFontOutlineColorItem.Name = "ChangeFontOutlineColorItem";
             this.ChangeFontOutlineColorItem.Size = new System.Drawing.Size(286, 22);
-            this.ChangeFontOutlineColorItem.Text = "フォントのアウトラインの色を変更する";
+            this.ChangeFontOutlineColorItem.Text = "ChangeFontOutlineColor";
             // 
             // ChangeBarColorItem
             // 
             this.ChangeBarColorItem.Name = "ChangeBarColorItem";
             this.ChangeBarColorItem.Size = new System.Drawing.Size(286, 22);
-            this.ChangeBarColorItem.Text = "バーの色を変更する";
+            this.ChangeBarColorItem.Text = "ChangeBarColor";
             // 
             // ChangeBarOutlineColorItem
             // 
             this.ChangeBarOutlineColorItem.Name = "ChangeBarOutlineColorItem";
             this.ChangeBarOutlineColorItem.Size = new System.Drawing.Size(286, 22);
-            this.ChangeBarOutlineColorItem.Text = "バーのアウトラインの色を変更する";
+            this.ChangeBarOutlineColorItem.Text = "ChangeBarOutlineColor";
             // 
             // ChangeBackgoundColorItem
             // 
             this.ChangeBackgoundColorItem.Name = "ChangeBackgoundColorItem";
             this.ChangeBackgoundColorItem.Size = new System.Drawing.Size(286, 22);
-            this.ChangeBackgoundColorItem.Text = "背景色を変更する";
+            this.ChangeBackgoundColorItem.Text = "ChangeBackgroundColor";
             // 
             // ChangeBackgroundAlphaItem
             // 
             this.ChangeBackgroundAlphaItem.Name = "ChangeBackgroundAlphaItem";
             this.ChangeBackgroundAlphaItem.Size = new System.Drawing.Size(286, 22);
-            this.ChangeBackgroundAlphaItem.Text = "背景色のアルファチャンネルを変更する";
+            this.ChangeBackgroundAlphaItem.Text = "ChangeBackgroundAlpha";
             // 
             // toolStripSeparator1
             // 
@@ -151,19 +151,19 @@
             // 
             this.ResetSpellFontItem.Name = "ResetSpellFontItem";
             this.ResetSpellFontItem.Size = new System.Drawing.Size(286, 22);
-            this.ResetSpellFontItem.Text = "スペルをこのフォントで統一する";
+            this.ResetSpellFontItem.Text = "ResetSpellFont";
             // 
             // ResetSpellBarSizeItem
             // 
             this.ResetSpellBarSizeItem.Name = "ResetSpellBarSizeItem";
             this.ResetSpellBarSizeItem.Size = new System.Drawing.Size(286, 22);
-            this.ResetSpellBarSizeItem.Text = "スペルをこのバーサイズで統一する";
+            this.ResetSpellBarSizeItem.Text = "ResetSpellBarSize";
             // 
             // ResetSpellColorItem
             // 
             this.ResetSpellColorItem.Name = "ResetSpellColorItem";
             this.ResetSpellColorItem.Size = new System.Drawing.Size(286, 22);
-            this.ResetSpellColorItem.Text = "スペルをこの配色で統一する";
+            this.ResetSpellColorItem.Text = "ResetSpellColor";
             // 
             // toolStripSeparator2
             // 
@@ -174,13 +174,13 @@
             // 
             this.ResetTelopFontItem.Name = "ResetTelopFontItem";
             this.ResetTelopFontItem.Size = new System.Drawing.Size(286, 22);
-            this.ResetTelopFontItem.Text = "テロップをこのフォントで統一する";
+            this.ResetTelopFontItem.Text = "ResetTelopFont";
             // 
             // ResetTelopColorItem
             // 
             this.ResetTelopColorItem.Name = "ResetTelopColorItem";
             this.ResetTelopColorItem.Size = new System.Drawing.Size(286, 22);
-            this.ResetTelopColorItem.Text = "テロップをこの配色で統一する";
+            this.ResetTelopColorItem.Text = "ResetTelopColor";
             // 
             // toolStripSeparator3
             // 
@@ -191,13 +191,13 @@
             // 
             this.LoadColorSetItem.Name = "LoadColorSetItem";
             this.LoadColorSetItem.Size = new System.Drawing.Size(286, 22);
-            this.LoadColorSetItem.Text = "配色を読み込む";
+            this.LoadColorSetItem.Text = "LoadColorSet";
             // 
             // SaveColorSetItem
             // 
             this.SaveColorSetItem.Name = "SaveColorSetItem";
             this.SaveColorSetItem.Size = new System.Drawing.Size(286, 22);
-            this.SaveColorSetItem.Text = "配色を保存する";
+            this.SaveColorSetItem.Text = "SaveColorSet";
             // 
             // BarSizeLabel
             // 
@@ -207,7 +207,7 @@
             this.BarSizeLabel.Name = "BarSizeLabel";
             this.BarSizeLabel.Size = new System.Drawing.Size(60, 12);
             this.BarSizeLabel.TabIndex = 2;
-            this.BarSizeLabel.Text = "ﾊﾞｰのｻｲｽﾞ";
+            this.BarSizeLabel.Text = "BarSize";
             this.BarSizeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // WidthNumericUpDown
@@ -256,7 +256,7 @@
             this.BarSizeXLabel.Name = "BarSizeXLabel";
             this.BarSizeXLabel.Size = new System.Drawing.Size(17, 12);
             this.BarSizeXLabel.TabIndex = 5;
-            this.BarSizeXLabel.Text = "×";
+            this.BarSizeXLabel.Text = "__×";
             // 
             // ColorDialog
             // 
@@ -277,18 +277,18 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 12);
             this.label3.TabIndex = 6;
-            this.label3.Text = "※右クリックで変更";
+            this.label3.Text = "ChangeByRightClicking";
             // 
             // SaveFileDialog
             // 
             this.SaveFileDialog.DefaultExt = "xml";
-            this.SaveFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
+            this.SaveFileDialog.Filter = Utility.Translate.Get("XmlFileFilter");
             this.SaveFileDialog.RestoreDirectory = true;
             // 
             // OpenFileDialog
             // 
             this.OpenFileDialog.DefaultExt = "xml";
-            this.OpenFileDialog.Filter = "XMLファイル (*.xml)|*.xml|全てのファイル (*.*)|*.*";
+            this.OpenFileDialog.Filter = Utility.Translate.Get("XmlFileFilter");
             this.OpenFileDialog.RestoreDirectory = true;
             // 
             // VisualSettingControl

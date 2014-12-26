@@ -200,7 +200,7 @@
             {
                 ActGlobals.oFormActMain.WriteExceptionLog(
                     ex,
-                    "ACT.SpecialSpellTimer Soundの再生で例外が発生しました。");
+                    Translate.Get("SoundError"));
             }
         }
 

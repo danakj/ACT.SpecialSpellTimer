@@ -110,7 +110,7 @@
                     {
                         ActGlobals.oFormActMain.WriteExceptionLog(
                         ex,
-                        "ACT.SpecialSpellTimer スペルタイマWindowのRefreshで例外が発生しました。");
+                        Translate.Get("SpellTimerRefreshError"));
                     }
                     finally
                     {

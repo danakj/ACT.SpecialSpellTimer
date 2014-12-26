@@ -80,7 +80,7 @@
                 {
                     ActGlobals.oFormActMain.WriteExceptionLog(
                         ex,
-                        "ACT.SpecialSpellTimer Assemblyの解決で例外が発生しました");
+                        Utility.Translate.Get("ACTAssemblyError"));
                 }
 
                 return null;
@@ -132,7 +132,7 @@
             {
                 ActGlobals.oFormActMain.WriteExceptionLog(
                     ex,
-                    "ACT.SpecialSpellTimer プラグインの初期化で例外が発生しました。");
+                    Utility.Translate.Get("ACTPluginStartError"));
 
                 this.PluginStatusLabel.Text = "Plugin Initialize Error";
             }
@@ -153,7 +153,7 @@
             {
                 ActGlobals.oFormActMain.WriteExceptionLog(
                     ex,
-                    "ACT.SpecialSpellTimer プラグインの終了で例外が発生しました。");
+                    Utility.Translate.Get("ACTPluginStopError"));
 
                 this.PluginStatusLabel.Text = "Plugin Exited Error";
             }
@@ -181,7 +181,7 @@
             SwitchVisibleButton = new Button();
             SwitchVisibleButton.Name = "SpecialSpellTimerSwitchVisibleButton";
             SwitchVisibleButton.Size = new Size(90, 24);
-            SwitchVisibleButton.Text = "スペスペ";
+            SwitchVisibleButton.Text = Utility.Translate.Get("SupeSupe");
             SwitchVisibleButton.TextAlign = ContentAlignment.MiddleCenter;
             SwitchVisibleButton.UseVisualStyleBackColor = true;
             SwitchVisibleButton.Click += (s, e) =>

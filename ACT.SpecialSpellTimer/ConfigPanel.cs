@@ -23,6 +23,15 @@
         {
             this.InitializeComponent();
 
+            Translate.TranslateControls(this);
+
+            this.ToolTip.SetToolTip(this.KeywordTextBox, Utility.Translate.Get("MatchingKeywordExplanationTooltip"));
+            this.ToolTip.SetToolTip(this.RegexEnabledCheckBox, Utility.Translate.Get("RegularExpressionExplanationTooltip"));
+            this.ToolTip.SetToolTip(this.TelopRegexEnabledCheckBox, Utility.Translate.Get("RegularExpressionExplanationTooltip"));
+            this.ToolTip.SetToolTip(this.TelopKeywordTextBox, Utility.Translate.Get("MatchingKeywordExplanationTooltip"));
+            this.ToolTip.SetToolTip(this.TelopMessageTextBox, Utility.Translate.Get("TelopMessageExplanationTooltip"));
+            this.ToolTip.SetToolTip(this.label46, Utility.Translate.Get("TelopMessageExplanationTooltip"));
+
             // 戦闘分析用のListViewのダブルバッファリングを有効にする
             typeof(ListView)
                 .GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic)
@@ -264,7 +273,7 @@
                 {
                     MessageBox.Show(
                         this,
-                        "パネル名を入力してください",
+                        Translate.Get("UpdateSpellPanelTitle"),
                         "ACT.SpecialSpellTimer",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Exclamation);
@@ -275,7 +284,7 @@
                 {
                     MessageBox.Show(
                         this,
-                        "スペル名を入力してください",
+                        Translate.Get("UpdateSpellNameTitle"),
                         "ACT.SpecialSpellTimer",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Exclamation);
@@ -608,7 +617,7 @@
         {
             if (MessageBox.Show(
                 this,
-                "全てのスペルを削除してよろしいですか？",
+                Translate.Get("SpellClearAllPrompt"),
                 "ACT.SpecialSpellTimer",
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Question,
