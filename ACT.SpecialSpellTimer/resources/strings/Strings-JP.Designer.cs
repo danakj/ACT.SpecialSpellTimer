@@ -1303,15 +1303,6 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to スペシャルスペルタイマ.
-        /// </summary>
-        internal static string SpecialSpellTimer {
-            get {
-                return ResourceManager.GetString("SpecialSpellTimer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ※スペックに合わせて設定してください.
         /// </summary>
         internal static string SpecsLabel {
@@ -1344,6 +1335,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string SpellTimerRefreshError {
             get {
                 return ResourceManager.GetString("SpellTimerRefreshError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to スペシャルスペルタイマ.
+        /// </summary>
+        internal static string SpellTimerTabTitle {
+            get {
+                return ResourceManager.GetString("SpellTimerTabTitle", resourceCulture);
             }
         }
         

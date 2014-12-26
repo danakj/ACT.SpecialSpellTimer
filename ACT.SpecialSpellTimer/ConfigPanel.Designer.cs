@@ -254,7 +254,7 @@
             this.SpecialSpellTabPage.Padding = new System.Windows.Forms.Padding(4);
             this.SpecialSpellTabPage.Size = new System.Drawing.Size(1584, 896);
             this.SpecialSpellTabPage.TabIndex = 0;
-            this.SpecialSpellTabPage.Text = "SpecialSpellTimer";
+            this.SpecialSpellTabPage.Text = "SpellTimerTabTitle";
             // 
             // DetailPanelGroupBox
             // 

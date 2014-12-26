@@ -210,7 +210,7 @@
     <comment>キャンセル</comment>
   </data>
   <data name="ClearAllButton" xml:space="preserve">
-    <value>Delete all</value>
+    <value>Delete All</value>
     <comment>全て削除</comment>
   </data>
   <data name="ClickThrough" xml:space="preserve">
@@ -577,8 +577,8 @@
     <value>▶</value>
     <comment>▶</comment>
   </data>
-  <data name="SpecialSpellTimer" xml:space="preserve">
-    <value>Special spell timer</value>
+  <data name="SpellTimerTabTitle" xml:space="preserve">
+    <value>Spell Timers</value>
     <comment>スペシャルスペルタイマ</comment>
   </data>
   <data name="SpecsLabel" xml:space="preserve">
