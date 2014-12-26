@@ -1096,7 +1096,7 @@
             // TelopTopNumericUpDown
             // 
             this.TelopTopNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.TelopTopNumericUpDown.Location = new System.Drawing.Point(875, 251);
+            this.TelopTopNumericUpDown.Location = new System.Drawing.Point(890, 250);
             this.TelopTopNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
             this.TelopTopNumericUpDown.Maximum = new decimal(new int[] {
             65535,
@@ -1116,7 +1116,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(851, 255);
+            this.label35.Location = new System.Drawing.Point(866, 254);
             this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(17, 17);
@@ -1126,7 +1126,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(728, 255);
+            this.label34.Location = new System.Drawing.Point(743, 254);
             this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(17, 17);
@@ -1136,7 +1136,7 @@
             // TelopLeftNumericUpDown
             // 
             this.TelopLeftNumericUpDown.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.TelopLeftNumericUpDown.Location = new System.Drawing.Point(752, 251);
+            this.TelopLeftNumericUpDown.Location = new System.Drawing.Point(767, 250);
             this.TelopLeftNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
             this.TelopLeftNumericUpDown.Maximum = new decimal(new int[] {
             65535,
