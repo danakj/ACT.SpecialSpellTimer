@@ -520,7 +520,7 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do not hide when completed.
+        ///   Looks up a localized string similar to Always show (even when completed).
         /// </summary>
         internal static string DontHideCheckBox {
             get {
@@ -543,6 +543,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string DRG {
             get {
                 return ResourceManager.GetString("DRG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        internal static string Duration {
+            get {
+                return ResourceManager.GetString("Duration", resourceCulture);
             }
         }
         
@@ -579,15 +588,6 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string ExportButton {
             get {
                 return ResourceManager.GetString("ExportButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Duration.
-        /// </summary>
-        internal static string FromSecondsLater {
-            get {
-                return ResourceManager.GetString("FromSecondsLater", resourceCulture);
             }
         }
         
@@ -1035,9 +1035,9 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         /// <summary>
         ///   Looks up a localized string similar to Use Regex.
         /// </summary>
-        internal static string RegexEnabledCheckBox {
+        internal static string RegexCheckBox {
             get {
-                return ResourceManager.GetString("RegexEnabledCheckBox", resourceCulture);
+                return ResourceManager.GetString("RegexCheckBox", resourceCulture);
             }
         }
         

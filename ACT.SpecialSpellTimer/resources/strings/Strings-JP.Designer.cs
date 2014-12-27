@@ -547,6 +547,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 秒後から.
+        /// </summary>
+        internal static string Duration {
+            get {
+                return ResourceManager.GetString("Duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 経過秒.
         /// </summary>
         internal static string ElapsedHeader {
@@ -579,15 +588,6 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string ExportButton {
             get {
                 return ResourceManager.GetString("ExportButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 秒後から.
-        /// </summary>
-        internal static string FromSecondsLater {
-            get {
-                return ResourceManager.GetString("FromSecondsLater", resourceCulture);
             }
         }
         

@@ -283,7 +283,7 @@
   </data>
   <data name="DontHideCheckBox" xml:space="preserve">
     <value>リキャスト後に消去しない</value>
-    <comment>Do not hide when completed</comment>
+    <comment>Always show (even when completed)</comment>
   </data>
   <data name="DownloadPrompt" xml:space="preserve">
     <value>ダウンロードしますか？</value>
@@ -309,7 +309,7 @@
     <value>Export</value>
     <comment>Export</comment>
   </data>
-  <data name="FromSecondsLater" xml:space="preserve">
+  <data name="Duration" xml:space="preserve">
     <value>秒後から</value>
     <comment>Duration</comment>
   </data>
@@ -767,7 +767,7 @@
   </data>
   <data name="AlwaysDisplayTelop" xml:space="preserve">
     <value>テロップを常に表示する</value>
-    <comment>Do not hide when complete</comment>
+    <comment>Always show (even when completed)</comment>
   </data>
   <data name="NumberHeader" xml:space="preserve">
     <value>No</value>

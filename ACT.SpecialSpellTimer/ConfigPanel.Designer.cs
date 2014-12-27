@@ -432,12 +432,12 @@
             // 
             this.RegexEnabledCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RegexEnabledCheckBox.AutoSize = true;
-            this.RegexEnabledCheckBox.Location = new System.Drawing.Point(941, 93);
+            this.RegexEnabledCheckBox.Location = new System.Drawing.Point(993, 93);
             this.RegexEnabledCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.RegexEnabledCheckBox.Name = "RegexEnabledCheckBox";
-            this.RegexEnabledCheckBox.Size = new System.Drawing.Size(184, 21);
+            this.RegexEnabledCheckBox.Size = new System.Drawing.Size(132, 21);
             this.RegexEnabledCheckBox.TabIndex = 4;
-            this.RegexEnabledCheckBox.Text = "RegexEnabledCheckBox";
+            this.RegexEnabledCheckBox.Text = "RegexCheckBox";
             this.RegexEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // DontHideCheckBox
@@ -1061,7 +1061,7 @@
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(128, 17);
             this.label39.TabIndex = 41;
-            this.label39.Text = "FromSecondsLater";
+            this.label39.Text = "Duration";
             // 
             // DisplayTimeNumericUpDown
             // 
@@ -1190,9 +1190,9 @@
             this.TelopRegexEnabledCheckBox.Location = new System.Drawing.Point(941, 127);
             this.TelopRegexEnabledCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.TelopRegexEnabledCheckBox.Name = "TelopRegexEnabledCheckBox";
-            this.TelopRegexEnabledCheckBox.Size = new System.Drawing.Size(184, 21);
+            this.TelopRegexEnabledCheckBox.Size = new System.Drawing.Size(132, 21);
             this.TelopRegexEnabledCheckBox.TabIndex = 4;
-            this.TelopRegexEnabledCheckBox.Text = "RegexEnabledCheckBox";
+            this.TelopRegexEnabledCheckBox.Text = "RegexCheckBox";
             this.TelopRegexEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // TelopDeleteButton

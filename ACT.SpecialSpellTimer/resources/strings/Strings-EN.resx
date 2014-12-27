@@ -282,7 +282,7 @@
     <comment>秒間表示する</comment>
   </data>
   <data name="DontHideCheckBox" xml:space="preserve">
-    <value>Do not hide when completed</value>
+    <value>Always show (even when completed)</value>
     <comment>リキャスト後に消去しない</comment>
   </data>
   <data name="DownloadPrompt" xml:space="preserve">
@@ -309,7 +309,7 @@
     <value>Export</value>
     <comment>Export</comment>
   </data>
-  <data name="FromSecondsLater" xml:space="preserve">
+  <data name="Duration" xml:space="preserve">
     <value>Duration</value>
     <comment>秒後から</comment>
   </data>
@@ -493,7 +493,7 @@
     <value>Recast time (seconds)</value>
     <comment>スペルのリキャスト時間(秒)</comment>
   </data>
-  <data name="RegexEnabledCheckBox" xml:space="preserve">
+  <data name="RegexCheckBox" xml:space="preserve">
     <value>Use Regex</value>
     <comment>正規表現ON</comment>
   </data>
@@ -763,7 +763,7 @@
   </data>
   <data name="AlwaysDisplayTelop" xml:space="preserve">
     <value>テロップを常に表示する</value>
-    <comment>Do not hide when complete</comment>
+    <comment>Always show (even when completed)</comment>
   </data>
   <data name="ChangeByRightClicking" xml:space="preserve">
     <value>Right click to edit</value>
