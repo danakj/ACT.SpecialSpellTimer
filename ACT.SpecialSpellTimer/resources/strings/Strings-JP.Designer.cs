@@ -1033,15 +1033,6 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 正規表現ON.
-        /// </summary>
-        internal static string RegexEnabledCheckBox {
-            get {
-                return ResourceManager.GetString("RegexEnabledCheckBox", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to 正規表現が無効でも部分一致は既定で有効となっています\n正規表現OFFでの部分一致のほうがパフォーマンスは向上します.
         /// </summary>
         internal static string RegularExpressionExplanationTooltip {
@@ -1497,6 +1488,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string UpdateTelopNameTitle {
             get {
                 return ResourceManager.GetString("UpdateTelopNameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 正規表現ON.
+        /// </summary>
+        internal static string UseRegex {
+            get {
+                return ResourceManager.GetString("UseRegex", resourceCulture);
             }
         }
         

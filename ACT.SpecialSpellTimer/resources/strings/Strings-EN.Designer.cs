@@ -1033,15 +1033,6 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use Regex.
-        /// </summary>
-        internal static string RegexCheckBox {
-            get {
-                return ResourceManager.GetString("RegexCheckBox", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Regular expression matching is disabled by default.\nPrefer partial string matching instead of regular expressions for better performance..
         /// </summary>
         internal static string RegularExpressionExplanationTooltip {
@@ -1497,6 +1488,15 @@ namespace ACT.SpecialSpellTimer.resources.strings {
         internal static string UpdateTelopNameTitle {
             get {
                 return ResourceManager.GetString("UpdateTelopNameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Regex.
+        /// </summary>
+        internal static string UseRegex {
+            get {
+                return ResourceManager.GetString("UseRegex", resourceCulture);
             }
         }
         

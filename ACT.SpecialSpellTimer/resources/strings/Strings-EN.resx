@@ -493,7 +493,7 @@
     <value>Recast time (seconds)</value>
     <comment>スペルのリキャスト時間(秒)</comment>
   </data>
-  <data name="RegexCheckBox" xml:space="preserve">
+  <data name="UseRegex" xml:space="preserve">
     <value>Use Regex</value>
     <comment>正規表現ON</comment>
   </data>

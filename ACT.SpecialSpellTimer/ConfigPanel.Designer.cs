@@ -432,12 +432,12 @@
             // 
             this.RegexEnabledCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RegexEnabledCheckBox.AutoSize = true;
-            this.RegexEnabledCheckBox.Location = new System.Drawing.Point(993, 93);
+            this.RegexEnabledCheckBox.Location = new System.Drawing.Point(1021, 94);
             this.RegexEnabledCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.RegexEnabledCheckBox.Name = "RegexEnabledCheckBox";
-            this.RegexEnabledCheckBox.Size = new System.Drawing.Size(132, 21);
+            this.RegexEnabledCheckBox.Size = new System.Drawing.Size(95, 21);
             this.RegexEnabledCheckBox.TabIndex = 4;
-            this.RegexEnabledCheckBox.Text = "RegexCheckBox";
+            this.RegexEnabledCheckBox.Text = "UseRegex";
             this.RegexEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // DontHideCheckBox
@@ -1059,7 +1059,7 @@
             this.label39.Location = new System.Drawing.Point(348, 160);
             this.label39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(128, 17);
+            this.label39.Size = new System.Drawing.Size(62, 17);
             this.label39.TabIndex = 41;
             this.label39.Text = "Duration";
             // 
@@ -1187,12 +1187,12 @@
             // 
             this.TelopRegexEnabledCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TelopRegexEnabledCheckBox.AutoSize = true;
-            this.TelopRegexEnabledCheckBox.Location = new System.Drawing.Point(941, 127);
+            this.TelopRegexEnabledCheckBox.Location = new System.Drawing.Point(1021, 127);
             this.TelopRegexEnabledCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.TelopRegexEnabledCheckBox.Name = "TelopRegexEnabledCheckBox";
-            this.TelopRegexEnabledCheckBox.Size = new System.Drawing.Size(132, 21);
+            this.TelopRegexEnabledCheckBox.Size = new System.Drawing.Size(95, 21);
             this.TelopRegexEnabledCheckBox.TabIndex = 4;
-            this.TelopRegexEnabledCheckBox.Text = "RegexCheckBox";
+            this.TelopRegexEnabledCheckBox.Text = "UseRegex";
             this.TelopRegexEnabledCheckBox.UseVisualStyleBackColor = true;
             // 
             // TelopDeleteButton
